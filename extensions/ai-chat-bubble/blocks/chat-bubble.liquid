@@ -1,0 +1,23 @@
+{% assign enabled = true %}
+{% comment %}
+  In production, you would fetch this value from a metafield or API.
+  For now, you can manually set enabled to true/false for testing.
+{% endcomment %}
+
+<div id="ai-chat-bubble-root"></div>
+
+<script>
+  // For development/testing - use localhost
+  // window.AI_APP_BACKEND_URL = "http://localhost:3000";
+  
+  // For production - use your Render deployment URL
+  window.AI_APP_BACKEND_URL = "https://your-app-name.onrender.com";
+</script>
+<script src="{{ 'embed.chat.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "AI Chat Bubble",
+  "target": "body"
+}
+{% endschema %}

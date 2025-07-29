@@ -1,0 +1,16 @@
+{
+  "name": "ai-chat-bubble-extension",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "predeploy": "rmdir /s /q src",
+    "deploy": "npm run build && npm run predeploy && cd ../.. && shopify app deploy"
+  },
+  "dependencies": {
+    "@shopify/polaris": "^12.27.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^7.0.6"
+  }
+}

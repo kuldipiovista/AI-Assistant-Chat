@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ai-assistant-chat
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SHOPIFY_SHOP
+        sync: false
+      - key: SHOPIFY_ADMIN_API_ACCESS_TOKEN
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false 
