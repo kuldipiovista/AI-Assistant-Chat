@@ -1,6 +1,6 @@
 export const action = async ({ request }) => {
   const CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "https://ai-assistant-chat-iczt.onrender.com",
+    "Access-Control-Allow-Origin": "https://kuldip-iovista-demo.myshopify.com",
     "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
     "Access-Control-Max-Age": "86400",
