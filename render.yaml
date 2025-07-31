@@ -13,7 +13,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: SHOPIFY_APP_URL
-        value: https://ai-assistant-chat.onrender.com
+        value: https://ai-assistant-chat-iczt.onrender.com
       - key: SHOPIFY_API_KEY
         sync: false
       - key: SHOPIFY_API_SECRET
