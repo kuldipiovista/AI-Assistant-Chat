@@ -8,7 +8,7 @@ services:
     name: ai-assistant-chat
     env: node
     buildCommand: npm install && npx prisma generate && npm run build
-    startCommand: npm run setup-db && npm start
+    startCommand: npx prisma db push --accept-data-loss && npm start
     envVars:
       - key: NODE_ENV
         value: production
