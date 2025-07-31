@@ -4,9 +4,11 @@ export const action = async ({ request }) => {
     "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
     "Access-Control-Max-Age": "86400",
+    "Access-Control-Allow-Credentials": "true",
     Vary: "Origin",
   };
 
+  // Handle preflight OPTIONS request
   if (request.method === "OPTIONS") {
     return new Response(null, { 
       status: 204, 
@@ -470,10 +472,33 @@ export const action = async ({ request }) => {
   });
 };
 
-export const loader = () => {
-  return new Response(JSON.stringify({ message: "POST only." }), {
-    status: 405,
-    headers: { "Content-Type": "application/json" },
+export const loader = ({ request }) => {
+  const CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "https://kuldip-iovista-demo.myshopify.com",
+    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+    "Access-Control-Max-Age": "86400",
+    "Access-Control-Allow-Credentials": "true",
+    Vary: "Origin",
+  };
+
+  // Handle preflight OPTIONS request
+  if (request.method === "OPTIONS") {
+    return new Response(null, { 
+      status: 204, 
+      headers: CORS_HEADERS
+    });
+  }
+
+  return new Response(JSON.stringify({ 
+    message: "AI Chat API is running. Use POST method to send messages.",
+    status: "ok"
+  }), {
+    status: 200,
+    headers: { 
+      ...CORS_HEADERS, 
+      "Content-Type": "application/json"
+    },
   });
 };
   
