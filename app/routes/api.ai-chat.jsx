@@ -77,6 +77,8 @@ export const action = async ({ request }) => {
     // Extract price information
     const priceMatch = lowerMessage.match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
     const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
+    
+    console.log("[DEBUG] Price extraction:", { lowerMessage, priceMatch, maxPrice });
 
     // Mock products based on keywords
     const mockProducts = [
@@ -121,23 +123,32 @@ export const action = async ({ request }) => {
       products = mockProducts;
     }
 
+    console.log("[DEBUG] Products after keyword filter:", products.length);
+
     // Apply price filter
     if (maxPrice) {
+      console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
       products = products.filter(product => {
         const price = parseFloat(product.priceRange.minVariantPrice.amount);
-        return price <= maxPrice;
+        // Convert price from cents to dollars for comparison
+        const priceInDollars = price / 100;
+        console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
+        return priceInDollars <= maxPrice;
       });
     }
+
+    console.log("[DEBUG] Final products count:", products.length);
 
     // Generate response based on results
     if (products.length > 0) {
       aiResponse = `I found ${products.length} product(s) that match your criteria:\n\n`;
       products.forEach(product => {
-        const price = product.priceRange.minVariantPrice.amount;
-        const comparePrice = product.compareAtPriceRange?.minVariantPrice?.amount;
-        const savings = comparePrice ? (parseFloat(comparePrice) - parseFloat(price)).toFixed(0) : null;
+        const priceInCents = parseFloat(product.priceRange.minVariantPrice.amount);
+        const priceInDollars = (priceInCents / 100).toFixed(2);
+        const comparePriceInCents = product.compareAtPriceRange?.minVariantPrice?.amount;
+        const savings = comparePriceInCents ? ((parseFloat(comparePriceInCents) - priceInCents) / 100).toFixed(2) : null;
         
-        aiResponse += `• ${product.title} - $${price}`;
+        aiResponse += `• ${product.title} - $${priceInDollars}`;
         if (savings) {
           aiResponse += ` (Save $${savings}!)`;
         }
