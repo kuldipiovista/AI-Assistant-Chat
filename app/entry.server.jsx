@@ -3,6 +3,7 @@ import { renderToPipeableStream } from "react-dom/server";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
+import { addDocumentResponseHeaders } from "./shopify.server";
 
 const ABORT_DELAY = 5000;
 
@@ -13,6 +14,9 @@ export default function handleRequest(
   remixContext,
   loadContext
 ) {
+  // Add Shopify document response headers
+  addDocumentResponseHeaders(request, responseHeaders);
+
   return isbot(request.headers.get("user-agent"))
     ? handleBot(
         request,
