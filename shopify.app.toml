@@ -3,7 +3,7 @@
 client_id = "eb60d2318ca93674525ab55b3adb253e"
 name = "AI Assistant Chat"
 handle = "ai-assistant-chat"
-application_url = "https://chitchat.iovistacommerce.com"
+application_url = "https://ai-assistant-chat-iczt.onrender.com"
 embedded = true
 
 [build]
@@ -26,7 +26,7 @@ api_version = "2025-07"
 scopes = "read_products,unauthenticated_read_product_inventory,unauthenticated_read_product_listings,unauthenticated_read_product_pickup_locations,unauthenticated_read_product_tags,write_products"
 
 [auth]
-redirect_urls = ["https://chitchat.iovistacommerce.com/auth/callback", "https://chitchat.iovistacommerce.com/auth/shopify/callback", "https://chitchat.iovistacommerce.com/api/auth/callback"]
+redirect_urls = ["https://ai-assistant-chat-iczt.onrender.com/auth/callback", "https://ai-assistant-chat-iczt.onrender.com/auth/shopify/callback", "https://ai-assistant-chat-iczt.onrender.com/api/auth/callback"]
 
 [pos]
 embedded = false
