@@ -1,37 +1,62 @@
 import { PassThrough } from "stream";
 import { renderToPipeableStream } from "react-dom/server";
-import { RemixServer } from "@remix-run/react";
 import { createReadableStreamFromReadable } from "@remix-run/node";
-import { isbot } from "isbot";
-import { addDocumentResponseHeaders } from "./shopify.server";
+import { RemixServer } from "@remix-run/react";
+import isbot from "isbot";
 
-export const streamTimeout = 5000;
+const ABORT_DELAY = 5000;
 
-export default async function handleRequest(
+export default function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
   remixContext,
+  loadContext
 ) {
-  addDocumentResponseHeaders(request, responseHeaders);
-  const userAgent = request.headers.get("user-agent");
-  const callbackName = isbot(userAgent ?? "") ? "onAllReady" : "onShellReady";
+  return isbot(request.headers.get("user-agent"))
+    ? handleBot(
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext
+      )
+    : handleBrowser(
+        request,
+        responseStatusCode,
+        responseHeaders,
+        remixContext
+      );
+}
 
+function handleBot(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext
+) {
   return new Promise((resolve, reject) => {
+    let shellRendered = false;
     const { pipe, abort } = renderToPipeableStream(
-      <RemixServer context={remixContext} url={request.url} />,
+      <RemixServer
+        context={remixContext}
+        url={request.url}
+        abortDelay={ABORT_DELAY}
+      />,
       {
-        [callbackName]: () => {
+        onAllReady() {
+          shellRendered = true;
           const body = new PassThrough();
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+
           resolve(
             new Response(stream, {
               headers: responseHeaders,
               status: responseStatusCode,
-            }),
+            })
           );
+
           pipe(body);
         },
         onShellError(error) {
@@ -39,13 +64,66 @@ export default async function handleRequest(
         },
         onError(error) {
           responseStatusCode = 500;
-          console.error(error);
+          // Log streaming rendering errors from inside the shell.  Don't log
+          // errors encountered during initial shell rendering since they'll
+          // reject and get logged in handleDocumentRequest.
+          if (shellRendered) {
+            console.error(error);
+          }
         },
-      },
+      }
     );
 
-    // Automatically timeout the React renderer after 6 seconds, which ensures
-    // React has enough time to flush down the rejected boundary contents
-    setTimeout(abort, streamTimeout + 1000);
+    setTimeout(abort, ABORT_DELAY);
+  });
+}
+
+function handleBrowser(
+  request,
+  responseStatusCode,
+  responseHeaders,
+  remixContext
+) {
+  return new Promise((resolve, reject) => {
+    let shellRendered = false;
+    const { pipe, abort } = renderToPipeableStream(
+      <RemixServer
+        context={remixContext}
+        url={request.url}
+        abortDelay={ABORT_DELAY}
+      />,
+      {
+        onShellReady() {
+          shellRendered = true;
+          const body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
+
+          responseHeaders.set("Content-Type", "text/html");
+
+          resolve(
+            new Response(stream, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            })
+          );
+
+          pipe(body);
+        },
+        onShellError(err) {
+          reject(err);
+        },
+        onError(error) {
+          responseStatusCode = 500;
+          // Log streaming rendering errors from inside the shell.  Don't log
+          // errors encountered during initial shell rendering since they'll
+          // reject and get logged in handleDocumentRequest.
+          if (shellRendered) {
+            console.error(error);
+          }
+        },
+      }
+    );
+
+    setTimeout(abort, ABORT_DELAY);
   });
 }
