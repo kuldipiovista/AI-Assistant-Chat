@@ -1,3 +1,5 @@
+import { authenticate } from "../shopify.server";
+
 // Function to extract keywords using AI (Gemini)
 async function extractKeywordsWithAI(message) {
   if (!process.env.GEMINI_API_KEY) {
@@ -74,80 +76,82 @@ function extractKeywordsFallback(message) {
   return { keywords, maxPrice };
 }
 
-// Mock products for now (since we can't authenticate with Shopify)
-function getMockProducts(keywords = [], maxPrice = null) {
-  const mockProducts = [
-    {
-      id: "gid://shopify/Product/1",
-      title: "The Collection Snowboard: Hydrogen",
-      handle: "collection-snowboard-hydrogen",
-      description: "Premium snowboard with hydrogen technology",
-      productType: "Snowboard",
-      tags: ["snowboard", "winter", "sports"],
-      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-hydrogen.jpg",
-      imageAlt: "Hydrogen Snowboard",
-      price: "60000", // $600.00 in cents
-      compareAtPrice: null,
-      variantTitle: "Default Title",
-      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-hydrogen",
-    },
-    {
-      id: "gid://shopify/Product/2",
-      title: "The Collection Snowboard: Liquid",
-      handle: "collection-snowboard-liquid",
-      description: "Advanced liquid technology snowboard",
-      productType: "Snowboard",
-      tags: ["snowboard", "winter", "sports"],
-      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-liquid.jpg",
-      imageAlt: "Liquid Snowboard",
-      price: "74995", // $749.95 in cents
-      compareAtPrice: null,
-      variantTitle: "Default Title",
-      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-liquid",
-    },
-    {
-      id: "gid://shopify/Product/3",
-      title: "The Collection Snowboard: Oxygen",
-      handle: "collection-snowboard-oxygen",
-      description: "High-performance oxygen-enhanced snowboard",
-      productType: "Snowboard",
-      tags: ["snowboard", "winter", "sports"],
-      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-oxygen.jpg",
-      imageAlt: "Oxygen Snowboard",
-      price: "102500", // $1025.00 in cents
-      compareAtPrice: null,
-      variantTitle: "Default Title",
-      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-oxygen",
+// Function to fetch real products from Shopify
+async function fetchShopifyProducts(keywords = [], maxPrice = null) {
+  try {
+    // Get shop domain and access token from environment
+    const shopDomain = process.env.SHOPIFY_SHOP || "kuldip-iovista-demo.myshopify.com";
+    const accessToken = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN;
+    
+    if (!accessToken) {
+      console.error("[DEBUG] No Shopify access token available");
+      return [];
     }
-  ];
 
-  // Filter by keywords if provided
-  let filteredProducts = mockProducts;
-  if (keywords.length > 0) {
-    filteredProducts = mockProducts.filter(product => 
-      keywords.some(keyword => 
-        product.title.toLowerCase().includes(keyword) ||
-        product.description.toLowerCase().includes(keyword) ||
-        product.productType.toLowerCase().includes(keyword) ||
-        product.tags.some(tag => tag.toLowerCase().includes(keyword))
-      )
-    );
-  }
+    // Build search query
+    let searchQuery = '';
+    if (keywords.length > 0) {
+      searchQuery = keywords.join(' ');
+    }
 
-  // Apply price filter if specified
-  if (maxPrice) {
-    console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
-    filteredProducts = filteredProducts.filter(product => {
-      const price = parseFloat(product.price);
-      // Convert price from cents to dollars for comparison
-      const priceInDollars = price / 100;
-      console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
-      return priceInDollars <= maxPrice;
+    console.log("[DEBUG] Fetching products with query:", searchQuery);
+
+    // Fetch products using REST API
+    const url = `https://${shopDomain}/admin/api/2024-01/products.json${searchQuery ? `?query=${encodeURIComponent(searchQuery)}` : ''}`;
+    
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-Shopify-Access-Token': accessToken,
+        'Content-Type': 'application/json',
+      }
     });
-  }
 
-  console.log("[DEBUG] Found products:", filteredProducts.length);
-  return filteredProducts;
+    if (!response.ok) {
+      throw new Error(`Shopify API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    let products = (data.products || []).map(product => {
+      const firstVariant = product.variants?.[0];
+      const firstImage = product.images?.[0];
+      
+      return {
+        id: product.id,
+        title: product.title,
+        handle: product.handle,
+        description: product.body_html || "",
+        productType: product.product_type || "",
+        tags: product.tags ? product.tags.split(',').map(tag => tag.trim()) : [],
+        image: firstImage?.src || "",
+        imageAlt: firstImage?.alt || "",
+        price: firstVariant?.price || "0",
+        compareAtPrice: firstVariant?.compare_at_price,
+        variantTitle: firstVariant?.title || "",
+        url: `https://${shopDomain}/products/${product.handle}`,
+      };
+    });
+
+    // Apply price filter if specified
+    if (maxPrice) {
+      console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
+      products = products.filter(product => {
+        const price = parseFloat(product.price);
+        // Convert price from cents to dollars for comparison
+        const priceInDollars = price / 100;
+        console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
+        return priceInDollars <= maxPrice;
+      });
+    }
+
+    console.log("[DEBUG] Found products:", products.length);
+    return products;
+
+  } catch (error) {
+    console.error("[DEBUG] Error fetching Shopify products:", error);
+    // Return empty array if there's an error
+    return [];
+  }
 }
 
 export const action = async ({ request }) => {
@@ -222,8 +226,8 @@ export const action = async ({ request }) => {
     console.log("[DEBUG] Extracted keywords:", keywords);
     console.log("[DEBUG] Max price:", maxPrice);
 
-    // Get products (using mock data for now)
-    const products = getMockProducts(keywords, maxPrice);
+    // Fetch real products from Shopify
+    const products = await fetchShopifyProducts(keywords, maxPrice);
 
     // Generate response based on results
     let aiResponse;
