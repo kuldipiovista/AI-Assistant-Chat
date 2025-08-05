@@ -16,7 +16,52 @@ export const action = async ({ request }) => {
   }
 
   try {
-    const { message } = await request.json();
+    // Validate request method
+    if (request.method !== "POST") {
+      return new Response(JSON.stringify({
+        error: "Method not allowed",
+        message: "Only POST requests are supported"
+      }), {
+        status: 405,
+        headers: { 
+          ...CORS_HEADERS, 
+          "Content-Type": "application/json"
+        },
+      });
+    }
+
+    // Parse request body
+    let message;
+    try {
+      const body = await request.json();
+      message = body.message;
+    } catch (parseError) {
+      console.error("[DEBUG] Failed to parse request body:", parseError);
+      return new Response(JSON.stringify({
+        error: "Invalid JSON",
+        message: "Request body must be valid JSON with a 'message' field"
+      }), {
+        status: 400,
+        headers: { 
+          ...CORS_HEADERS, 
+          "Content-Type": "application/json"
+        },
+      });
+    }
+
+    if (!message || typeof message !== 'string') {
+      return new Response(JSON.stringify({
+        error: "Missing message",
+        message: "Request must include a 'message' field"
+      }), {
+        status: 400,
+        headers: { 
+          ...CORS_HEADERS, 
+          "Content-Type": "application/json"
+        },
+      });
+    }
+
     console.log("[DEBUG] Received message:", message);
 
     // Simple keyword extraction without Gemini API
