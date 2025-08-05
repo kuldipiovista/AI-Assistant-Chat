@@ -14,7 +14,19 @@ async function extractKeywordsWithAI(message) {
       body: JSON.stringify({
         contents: [{
           parts: [{
-            text: `Extract product search keywords from this user query. Return only the keywords as a JSON array, no other text. Focus on product types, categories, features, and price-related terms. Query: "${message}"`
+            text: `Analyze this product search query and extract comprehensive search terms. Return a JSON object with: 
+            - "keywords": array of search terms (product types, features, brands, categories)
+            - "maxPrice": number (if price limit mentioned, otherwise null)
+            - "searchType": "specific" (if specific product mentioned) or "general" (if just "product" or general terms)
+            - "shouldApplyPriceFilter": boolean (true if user specifically asks for price filtering)
+            - "searchFields": array of fields to search in ["title", "tags", "vendor", "type", "description"]
+            
+            Query: "${message}"
+            
+            Examples:
+            - "snowboard under $800" → {"keywords": ["snowboard"], "maxPrice": 800, "searchType": "specific", "shouldApplyPriceFilter": true, "searchFields": ["title", "tags", "type"]}
+            - "product under $30" → {"keywords": [], "maxPrice": 30, "searchType": "general", "shouldApplyPriceFilter": true, "searchFields": ["title", "tags", "vendor", "type"]}
+            - "winter sports equipment" → {"keywords": ["winter", "sports", "equipment"], "maxPrice": null, "searchType": "specific", "shouldApplyPriceFilter": false, "searchFields": ["title", "tags", "type", "description"]}`
           }]
         }]
       })
@@ -29,26 +41,14 @@ async function extractKeywordsWithAI(message) {
     
     if (aiResponse) {
       try {
-        // Try to parse as JSON array
-        const keywords = JSON.parse(aiResponse);
-        if (Array.isArray(keywords)) {
-          console.log("[DEBUG] AI extracted keywords:", keywords);
-          // Extract price information from original message
-          const priceMatch = message.toLowerCase().match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
-          const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
-          return { keywords, maxPrice };
+        // Try to parse as JSON object
+        const parsed = JSON.parse(aiResponse);
+        if (parsed.keywords && typeof parsed.maxPrice !== 'undefined' && parsed.searchType && typeof parsed.shouldApplyPriceFilter !== 'undefined') {
+          console.log("[DEBUG] AI extracted search intent:", parsed);
+          return parsed;
         }
       } catch (parseError) {
-        // If not valid JSON, try to extract keywords from text
-        const keywords = aiResponse.toLowerCase()
-          .replace(/[^\w\s]/g, ' ')
-          .split(/\s+/)
-          .filter(word => word.length > 2 && !['the', 'and', 'or', 'for', 'with', 'under', 'below', 'above', 'over', 'product', 'products', 'show', 'find', 'search'].includes(word));
-        console.log("[DEBUG] AI extracted keywords (fallback):", keywords);
-        // Extract price information from original message
-        const priceMatch = message.toLowerCase().match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
-        const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
-        return { keywords, maxPrice };
+        console.error("[DEBUG] Failed to parse AI response as JSON:", parseError);
       }
     }
   } catch (error) {
@@ -71,21 +71,67 @@ function extractKeywordsFallback(message) {
   const priceMatch = lowerMessage.match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
   const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
 
-  return { keywords, maxPrice };
+  // Determine search type
+  const searchType = keywords.length > 0 ? "specific" : "general";
+  const shouldApplyPriceFilter = maxPrice !== null;
+  const searchFields = ["title", "tags", "vendor", "type", "description"];
+
+  return { keywords, maxPrice, searchType, shouldApplyPriceFilter, searchFields };
+}
+
+// Function to search products comprehensively
+function searchProducts(products, keywords, searchFields) {
+  if (keywords.length === 0) return products;
+  
+  return products.filter(product => {
+    return keywords.some(keyword => {
+      const lowerKeyword = keyword.toLowerCase();
+      
+      // Search in title
+      if (searchFields.includes("title") && product.title.toLowerCase().includes(lowerKeyword)) {
+        return true;
+      }
+      
+      // Search in tags
+      if (searchFields.includes("tags") && product.tags.some(tag => tag.toLowerCase().includes(lowerKeyword))) {
+        return true;
+      }
+      
+      // Search in vendor
+      if (searchFields.includes("vendor") && product.vendor && product.vendor.toLowerCase().includes(lowerKeyword)) {
+        return true;
+      }
+      
+      // Search in product type
+      if (searchFields.includes("type") && product.productType && product.productType.toLowerCase().includes(lowerKeyword)) {
+        return true;
+      }
+      
+      // Search in description
+      if (searchFields.includes("description") && product.description && product.description.toLowerCase().includes(lowerKeyword)) {
+        return true;
+      }
+      
+      return false;
+    });
+  });
 }
 
 // Function to get products (simplified for now)
-async function getProducts(keywords = [], maxPrice = null) {
+async function getProducts(searchIntent) {
   try {
-    // For now, return sample products that match the search
+    const { keywords, maxPrice, searchType, shouldApplyPriceFilter, searchFields } = searchIntent;
+    
+    // Sample products that match your store with comprehensive data
     const sampleProducts = [
       {
         id: "1",
         title: "The Collection Snowboard: Hydrogen",
         handle: "collection-snowboard-hydrogen",
-        description: "Premium snowboard with hydrogen technology",
+        description: "Premium snowboard with hydrogen technology for advanced riders",
         productType: "Snowboard",
-        tags: ["snowboard", "winter", "sports"],
+        vendor: "The Collection",
+        tags: ["snowboard", "winter", "sports", "hydrogen", "premium", "advanced"],
         image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-hydrogen.jpg",
         imageAlt: "Hydrogen Snowboard",
         price: "60000", // $600.00 in cents
@@ -97,13 +143,14 @@ async function getProducts(keywords = [], maxPrice = null) {
         id: "2",
         title: "The Collection Snowboard: Liquid",
         handle: "collection-snowboard-liquid",
-        description: "Advanced liquid technology snowboard",
+        description: "Advanced liquid technology snowboard for professional riders",
         productType: "Snowboard",
-        tags: ["snowboard", "winter", "sports"],
+        vendor: "The Collection",
+        tags: ["snowboard", "winter", "sports", "liquid", "professional", "advanced"],
         image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-liquid.jpg",
         imageAlt: "Liquid Snowboard",
         price: "74995", // $749.95 in cents
-        compareAtPrice: null,
+        compareAtPrice: "89995", // $899.95 in cents (on sale)
         variantTitle: "Default Title",
         url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-liquid",
       },
@@ -111,9 +158,10 @@ async function getProducts(keywords = [], maxPrice = null) {
         id: "3",
         title: "The Collection Snowboard: Oxygen",
         handle: "collection-snowboard-oxygen",
-        description: "High-performance oxygen-enhanced snowboard",
+        description: "High-performance oxygen-enhanced snowboard for extreme conditions",
         productType: "Snowboard",
-        tags: ["snowboard", "winter", "sports"],
+        vendor: "The Collection",
+        tags: ["snowboard", "winter", "sports", "oxygen", "performance", "extreme"],
         image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-oxygen.jpg",
         imageAlt: "Oxygen Snowboard",
         price: "102500", // $1025.00 in cents
@@ -123,21 +171,11 @@ async function getProducts(keywords = [], maxPrice = null) {
       }
     ];
 
-    // Filter by keywords if provided
-    let filteredProducts = sampleProducts;
-    if (keywords.length > 0) {
-      filteredProducts = sampleProducts.filter(product => 
-        keywords.some(keyword => 
-          product.title.toLowerCase().includes(keyword) ||
-          product.description.toLowerCase().includes(keyword) ||
-          product.productType.toLowerCase().includes(keyword) ||
-          product.tags.some(tag => tag.toLowerCase().includes(keyword))
-        )
-      );
-    }
+    // Comprehensive search across all fields
+    let filteredProducts = searchProducts(sampleProducts, keywords, searchFields);
 
-    // Apply price filter if specified
-    if (maxPrice) {
+    // Apply price filter only if user specifically asks for it
+    if (shouldApplyPriceFilter && maxPrice) {
       console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
       filteredProducts = filteredProducts.filter(product => {
         const price = parseFloat(product.price);
@@ -223,33 +261,27 @@ export const action = async ({ request }) => {
 
     console.log("[DEBUG] Received message:", message);
 
-    // Extract keywords and price using AI
-    const { keywords, maxPrice } = await extractKeywordsWithAI(message);
+    // Extract search intent using AI
+    const searchIntent = await extractKeywordsWithAI(message);
     
-    console.log("[DEBUG] Extracted keywords:", keywords);
-    console.log("[DEBUG] Max price:", maxPrice);
+    console.log("[DEBUG] Search intent:", searchIntent);
 
-    // Get products
-    const products = await getProducts(keywords, maxPrice);
+    // Get products based on search intent
+    const products = await getProducts(searchIntent);
 
     // Generate response based on results
     let aiResponse;
     if (products.length > 0) {
-      aiResponse = `I found ${products.length} product(s) that match your criteria:\n\n`;
-      products.forEach(product => {
-        const price = parseFloat(product.price);
-        const priceFormatted = (price / 100).toFixed(2); // Convert cents to dollars
-        const comparePrice = product.compareAtPrice ? parseFloat(product.compareAtPrice) : null;
-        const savings = comparePrice ? ((comparePrice - price) / 100).toFixed(2) : null;
-        
-        aiResponse += `• ${product.title} - $${priceFormatted}`;
-        if (savings) {
-          aiResponse += ` (Save $${savings}!)`;
-        }
-        aiResponse += '\n';
-      });
+      aiResponse = `I found ${products.length} product(s) that match your criteria:`;
     } else {
-      aiResponse = "I couldn't find any products matching your criteria. Try adjusting your search terms or price range.";
+      // Provide more helpful response based on search type
+      if (searchIntent.searchType === "general" && searchIntent.shouldApplyPriceFilter) {
+        aiResponse = `I couldn't find any products under $${searchIntent.maxPrice}. All our current products are priced higher. Would you like to see our full collection?`;
+      } else if (searchIntent.keywords.length > 0) {
+        aiResponse = `I couldn't find any products matching "${searchIntent.keywords.join(' ')}". Try searching for "snowboard" or browse our collection.`;
+      } else {
+        aiResponse = "I couldn't find any products matching your criteria. Try adjusting your search terms or browse our collection.";
+      }
     }
 
     console.log("[DEBUG] Generated response:", aiResponse);
