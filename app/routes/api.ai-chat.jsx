@@ -1,3 +1,177 @@
+import { authenticate } from "../shopify.server";
+
+// Function to extract keywords using AI (Gemini)
+async function extractKeywordsWithAI(message) {
+  if (!process.env.GEMINI_API_KEY) {
+    console.log("[DEBUG] No Gemini API key, using fallback keyword extraction");
+    return extractKeywordsFallback(message);
+  }
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: `Extract product search keywords from this user query. Return only the keywords as a JSON array, no other text. Focus on product types, categories, features, and price-related terms. Query: "${message}"`
+          }]
+        }]
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if (aiResponse) {
+      try {
+        // Try to parse as JSON array
+        const keywords = JSON.parse(aiResponse);
+        if (Array.isArray(keywords)) {
+          console.log("[DEBUG] AI extracted keywords:", keywords);
+          // Extract price information from original message
+          const priceMatch = message.toLowerCase().match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
+          const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
+          return { keywords, maxPrice };
+        }
+      } catch (parseError) {
+        // If not valid JSON, try to extract keywords from text
+        const keywords = aiResponse.toLowerCase()
+          .replace(/[^\w\s]/g, ' ')
+          .split(/\s+/)
+          .filter(word => word.length > 2 && !['the', 'and', 'or', 'for', 'with', 'under', 'below', 'above', 'over', 'product', 'products', 'show', 'find', 'search'].includes(word));
+        console.log("[DEBUG] AI extracted keywords (fallback):", keywords);
+        // Extract price information from original message
+        const priceMatch = message.toLowerCase().match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
+        const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
+        return { keywords, maxPrice };
+      }
+    }
+  } catch (error) {
+    console.error("[DEBUG] AI keyword extraction failed:", error);
+  }
+
+  return extractKeywordsFallback(message);
+}
+
+// Fallback keyword extraction
+function extractKeywordsFallback(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  // Extract keywords
+  const keywords = lowerMessage.split(/\s+/).filter(word => 
+    word.length > 2 && !['the', 'and', 'or', 'for', 'with', 'under', 'below', 'above', 'over', 'product', 'products', 'show', 'find', 'search'].includes(word)
+  );
+
+  // Extract price information
+  const priceMatch = lowerMessage.match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
+  const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
+
+  return { keywords, maxPrice };
+}
+
+// Function to fetch products from Shopify
+async function fetchShopifyProducts(shop, keywords = [], maxPrice = null) {
+  try {
+    const { admin } = await authenticate.admin(shop);
+    
+    // Build search query
+    let searchQuery = '';
+    if (keywords.length > 0) {
+      searchQuery = keywords.join(' ');
+    }
+
+    console.log("[DEBUG] Fetching products with query:", searchQuery);
+
+    const response = await admin.graphql(`#graphql
+      query($query: String, $first: Int!) {
+        products(first: $first, query: $query) {
+          edges {
+            node {
+              id
+              title
+              handle
+              description
+              productType
+              tags
+              images(first: 1) { 
+                edges { 
+                  node { 
+                    src 
+                    altText 
+                  } 
+                } 
+              }
+              variants(first: 10) { 
+                edges { 
+                  node { 
+                    price 
+                    compareAtPrice 
+                    title 
+                  } 
+                } 
+              }
+              onlineStoreUrl
+            }
+          }
+        }
+      }`,
+      { 
+        variables: { 
+          query: searchQuery,
+          first: 20
+        } 
+      }
+    );
+
+    const json = await response.json();
+    let products = (json.data.products.edges || []).map(({ node }) => {
+      const firstVariant = node.variants.edges[0]?.node;
+      const firstImage = node.images.edges[0]?.node;
+      
+      return {
+        id: node.id,
+        title: node.title,
+        handle: node.handle,
+        description: node.description,
+        productType: node.productType,
+        tags: node.tags,
+        image: firstImage?.src || "",
+        imageAlt: firstImage?.altText || "",
+        price: firstVariant?.price || "0",
+        compareAtPrice: firstVariant?.compareAtPrice,
+        variantTitle: firstVariant?.title || "",
+        url: node.onlineStoreUrl || `https://${shop}/products/${node.handle}`,
+      };
+    });
+
+    // Apply price filter if specified
+    if (maxPrice) {
+      console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
+      products = products.filter(product => {
+        const price = parseFloat(product.price);
+        // Convert price from cents to dollars for comparison
+        const priceInDollars = price / 100;
+        console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
+        return priceInDollars <= maxPrice;
+      });
+    }
+
+    console.log("[DEBUG] Found products:", products.length);
+    return products;
+
+  } catch (error) {
+    console.error("[DEBUG] Error fetching Shopify products:", error);
+    return [];
+  }
+}
+
 export const action = async ({ request }) => {
   const CORS_HEADERS = {
     "Access-Control-Allow-Origin": "https://kuldip-iovista-demo.myshopify.com",
@@ -64,91 +238,29 @@ export const action = async ({ request }) => {
 
     console.log("[DEBUG] Received message:", message);
 
-    // Simple keyword extraction without Gemini API
-    const lowerMessage = message.toLowerCase();
-    let aiResponse = "I understand you're looking for something. Let me help you find products!";
-    let products = [];
-
-    // Extract keywords and price information
-    const keywords = lowerMessage.split(/\s+/).filter(word => 
-      word.length > 2 && !['the', 'and', 'or', 'for', 'with', 'under', 'below', 'above', 'over'].includes(word)
-    );
-
-    // Extract price information
-    const priceMatch = lowerMessage.match(/(?:under|below|less than|up to)\s*[\$€£₹]?\s*(\d+,?\d*)/);
-    const maxPrice = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : null;
+    // Extract keywords and price using AI
+    const { keywords, maxPrice } = await extractKeywordsWithAI(message);
     
-    console.log("[DEBUG] Price extraction:", { lowerMessage, priceMatch, maxPrice });
+    console.log("[DEBUG] Extracted keywords:", keywords);
+    console.log("[DEBUG] Max price:", maxPrice);
 
-    // Mock products based on keywords
-    const mockProducts = [
-      {
-        id: "1",
-        title: "Wireless Bluetooth Speaker",
-        handle: "wireless-bluetooth-speaker",
-        priceRange: { minVariantPrice: { amount: "2999" } },
-        compareAtPriceRange: { minVariantPrice: { amount: "3999" } }
-      },
-      {
-        id: "2", 
-        title: "Smart Home Assistant",
-        handle: "smart-home-assistant",
-        priceRange: { minVariantPrice: { amount: "4999" } },
-        compareAtPriceRange: { minVariantPrice: { amount: "5999" } }
-      },
-      {
-        id: "3",
-        title: "Premium Headphones",
-        handle: "premium-headphones",
-        priceRange: { minVariantPrice: { amount: "1999" } },
-        compareAtPriceRange: { minVariantPrice: { amount: "2499" } }
-      },
-      {
-        id: "4",
-        title: "Smart Watch",
-        handle: "smart-watch",
-        priceRange: { minVariantPrice: { amount: "3999" } },
-        compareAtPriceRange: { minVariantPrice: { amount: "4999" } }
-      }
-    ];
-
-    // Filter products based on keywords and price
-    if (keywords.length > 0) {
-      products = mockProducts.filter(product => 
-        keywords.some(keyword => 
-          product.title.toLowerCase().includes(keyword)
-        )
-      );
-    } else {
-      products = mockProducts;
-    }
-
-    console.log("[DEBUG] Products after keyword filter:", products.length);
-
-    // Apply price filter
-    if (maxPrice) {
-      console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
-      products = products.filter(product => {
-        const price = parseFloat(product.priceRange.minVariantPrice.amount);
-        // Convert price from cents to dollars for comparison
-        const priceInDollars = price / 100;
-        console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
-        return priceInDollars <= maxPrice;
-      });
-    }
-
-    console.log("[DEBUG] Final products count:", products.length);
+    // Get shop domain from environment or use default
+    const shopDomain = process.env.SHOPIFY_SHOP || "kuldip-iovista-demo.myshopify.com";
+    
+    // Fetch real products from Shopify
+    const products = await fetchShopifyProducts(shopDomain, keywords, maxPrice);
 
     // Generate response based on results
+    let aiResponse;
     if (products.length > 0) {
       aiResponse = `I found ${products.length} product(s) that match your criteria:\n\n`;
       products.forEach(product => {
-        const priceInCents = parseFloat(product.priceRange.minVariantPrice.amount);
-        const priceInDollars = (priceInCents / 100).toFixed(2);
-        const comparePriceInCents = product.compareAtPriceRange?.minVariantPrice?.amount;
-        const savings = comparePriceInCents ? ((parseFloat(comparePriceInCents) - priceInCents) / 100).toFixed(2) : null;
+        const price = parseFloat(product.price);
+        const priceFormatted = (price / 100).toFixed(2); // Convert cents to dollars
+        const comparePrice = product.compareAtPrice ? parseFloat(product.compareAtPrice) : null;
+        const savings = comparePrice ? ((comparePrice - price) / 100).toFixed(2) : null;
         
-        aiResponse += `• ${product.title} - $${priceInDollars}`;
+        aiResponse += `• ${product.title} - $${priceFormatted}`;
         if (savings) {
           aiResponse += ` (Save $${savings}!)`;
         }
