@@ -17,7 +17,7 @@ if (
   delete process.env.HOST;
 }
 
-const host = new URL(process.env.SHOPIFY_APP_URL || "https://chitchat.iovistacommerce.com/")
+const host = new URL(process.env.SHOPIFY_APP_URL || "https://ai-assistant-chat-iczt.onrender.com/")
   .hostname;
 let hmrConfig;
 
@@ -32,7 +32,7 @@ if (host === "localhost") {
   hmrConfig = {
     protocol: "wss",
     host: host,
-    port: parseInt(process.env.FRONTEND_PORT) || 3000,
+    port: parseInt(process.env.FRONTEND_PORT) || 10000,
     clientPort: 443,
   };
 }
@@ -41,7 +41,7 @@ export default defineConfig({
   server: {
     // Allow your ngrok domain (or use a wildcard for all ngrok domains)
     allowedHosts: [
-      "chitchat.iovistacommerce.com",
+      "ai-assistant-chat-iczt.onrender.com",
       "localhost",
       "127.0.0.1",
       // ".ngrok-free.app" // Uncomment to allow all ngrok domains
@@ -49,7 +49,7 @@ export default defineConfig({
     cors: {
       preflightContinue: true,
     },
-    port: Number(process.env.PORT || 3000),
+    port: Number(process.env.PORT || 10000),
     host: "0.0.0.0", // Allow external connections
     hmr: hmrConfig,
     fs: {
