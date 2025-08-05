@@ -16,7 +16,7 @@ export default function ChatBubble() {
 
     try {
       // Fix double slash issue by ensuring proper URL construction
-      const baseUrl = window.AI_APP_BACKEND_URL || "https://chitchat.iovistacommerce.com";
+      const baseUrl = window.AI_APP_BACKEND_URL || "https://ai-assistant-chat-iczt.onrender.com";
       const API_URL = baseUrl.replace(/\/$/, "") + "/api/ai-chat";
       const resp = await fetch(API_URL, {
         method: "POST",
