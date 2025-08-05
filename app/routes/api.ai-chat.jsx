@@ -1,5 +1,3 @@
-import { authenticate } from "../shopify.server";
-
 // Function to extract keywords using AI (Gemini)
 async function extractKeywordsWithAI(message) {
   if (!process.env.GEMINI_API_KEY) {
@@ -76,100 +74,80 @@ function extractKeywordsFallback(message) {
   return { keywords, maxPrice };
 }
 
-// Function to fetch products from Shopify
-async function fetchShopifyProducts(shop, keywords = [], maxPrice = null) {
-  try {
-    const { admin } = await authenticate.admin(shop);
-    
-    // Build search query
-    let searchQuery = '';
-    if (keywords.length > 0) {
-      searchQuery = keywords.join(' ');
+// Mock products for now (since we can't authenticate with Shopify)
+function getMockProducts(keywords = [], maxPrice = null) {
+  const mockProducts = [
+    {
+      id: "gid://shopify/Product/1",
+      title: "The Collection Snowboard: Hydrogen",
+      handle: "collection-snowboard-hydrogen",
+      description: "Premium snowboard with hydrogen technology",
+      productType: "Snowboard",
+      tags: ["snowboard", "winter", "sports"],
+      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-hydrogen.jpg",
+      imageAlt: "Hydrogen Snowboard",
+      price: "60000", // $600.00 in cents
+      compareAtPrice: null,
+      variantTitle: "Default Title",
+      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-hydrogen",
+    },
+    {
+      id: "gid://shopify/Product/2",
+      title: "The Collection Snowboard: Liquid",
+      handle: "collection-snowboard-liquid",
+      description: "Advanced liquid technology snowboard",
+      productType: "Snowboard",
+      tags: ["snowboard", "winter", "sports"],
+      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-liquid.jpg",
+      imageAlt: "Liquid Snowboard",
+      price: "74995", // $749.95 in cents
+      compareAtPrice: null,
+      variantTitle: "Default Title",
+      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-liquid",
+    },
+    {
+      id: "gid://shopify/Product/3",
+      title: "The Collection Snowboard: Oxygen",
+      handle: "collection-snowboard-oxygen",
+      description: "High-performance oxygen-enhanced snowboard",
+      productType: "Snowboard",
+      tags: ["snowboard", "winter", "sports"],
+      image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-oxygen.jpg",
+      imageAlt: "Oxygen Snowboard",
+      price: "102500", // $1025.00 in cents
+      compareAtPrice: null,
+      variantTitle: "Default Title",
+      url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-oxygen",
     }
+  ];
 
-    console.log("[DEBUG] Fetching products with query:", searchQuery);
-
-    const response = await admin.graphql(`#graphql
-      query($query: String, $first: Int!) {
-        products(first: $first, query: $query) {
-          edges {
-            node {
-              id
-              title
-              handle
-              description
-              productType
-              tags
-              images(first: 1) { 
-                edges { 
-                  node { 
-                    src 
-                    altText 
-                  } 
-                } 
-              }
-              variants(first: 10) { 
-                edges { 
-                  node { 
-                    price 
-                    compareAtPrice 
-                    title 
-                  } 
-                } 
-              }
-              onlineStoreUrl
-            }
-          }
-        }
-      }`,
-      { 
-        variables: { 
-          query: searchQuery,
-          first: 20
-        } 
-      }
+  // Filter by keywords if provided
+  let filteredProducts = mockProducts;
+  if (keywords.length > 0) {
+    filteredProducts = mockProducts.filter(product => 
+      keywords.some(keyword => 
+        product.title.toLowerCase().includes(keyword) ||
+        product.description.toLowerCase().includes(keyword) ||
+        product.productType.toLowerCase().includes(keyword) ||
+        product.tags.some(tag => tag.toLowerCase().includes(keyword))
+      )
     );
-
-    const json = await response.json();
-    let products = (json.data.products.edges || []).map(({ node }) => {
-      const firstVariant = node.variants.edges[0]?.node;
-      const firstImage = node.images.edges[0]?.node;
-      
-      return {
-        id: node.id,
-        title: node.title,
-        handle: node.handle,
-        description: node.description,
-        productType: node.productType,
-        tags: node.tags,
-        image: firstImage?.src || "",
-        imageAlt: firstImage?.altText || "",
-        price: firstVariant?.price || "0",
-        compareAtPrice: firstVariant?.compareAtPrice,
-        variantTitle: firstVariant?.title || "",
-        url: node.onlineStoreUrl || `https://${shop}/products/${node.handle}`,
-      };
-    });
-
-    // Apply price filter if specified
-    if (maxPrice) {
-      console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
-      products = products.filter(product => {
-        const price = parseFloat(product.price);
-        // Convert price from cents to dollars for comparison
-        const priceInDollars = price / 100;
-        console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
-        return priceInDollars <= maxPrice;
-      });
-    }
-
-    console.log("[DEBUG] Found products:", products.length);
-    return products;
-
-  } catch (error) {
-    console.error("[DEBUG] Error fetching Shopify products:", error);
-    return [];
   }
+
+  // Apply price filter if specified
+  if (maxPrice) {
+    console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
+    filteredProducts = filteredProducts.filter(product => {
+      const price = parseFloat(product.price);
+      // Convert price from cents to dollars for comparison
+      const priceInDollars = price / 100;
+      console.log("[DEBUG] Product price check:", { title: product.title, price, priceInDollars, maxPrice, passes: priceInDollars <= maxPrice });
+      return priceInDollars <= maxPrice;
+    });
+  }
+
+  console.log("[DEBUG] Found products:", filteredProducts.length);
+  return filteredProducts;
 }
 
 export const action = async ({ request }) => {
@@ -244,11 +222,8 @@ export const action = async ({ request }) => {
     console.log("[DEBUG] Extracted keywords:", keywords);
     console.log("[DEBUG] Max price:", maxPrice);
 
-    // Get shop domain from environment or use default
-    const shopDomain = process.env.SHOPIFY_SHOP || "kuldip-iovista-demo.myshopify.com";
-    
-    // Fetch real products from Shopify
-    const products = await fetchShopifyProducts(shopDomain, keywords, maxPrice);
+    // Get products (using mock data for now)
+    const products = getMockProducts(keywords, maxPrice);
 
     // Generate response based on results
     let aiResponse;
