@@ -1,5 +1,3 @@
-import { authenticate } from "../shopify.server";
-
 // Function to extract keywords using AI (Gemini)
 async function extractKeywordsWithAI(message) {
   if (!process.env.GEMINI_API_KEY) {
@@ -76,66 +74,72 @@ function extractKeywordsFallback(message) {
   return { keywords, maxPrice };
 }
 
-// Function to fetch real products from Shopify
-async function fetchShopifyProducts(keywords = [], maxPrice = null) {
+// Function to get products (simplified for now)
+async function getProducts(keywords = [], maxPrice = null) {
   try {
-    // Get shop domain and access token from environment
-    const shopDomain = process.env.SHOPIFY_SHOP || "kuldip-iovista-demo.myshopify.com";
-    const accessToken = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN;
-    
-    if (!accessToken) {
-      console.error("[DEBUG] No Shopify access token available");
-      return [];
-    }
-
-    // Build search query
-    let searchQuery = '';
-    if (keywords.length > 0) {
-      searchQuery = keywords.join(' ');
-    }
-
-    console.log("[DEBUG] Fetching products with query:", searchQuery);
-
-    // Fetch products using REST API
-    const url = `https://${shopDomain}/admin/api/2024-01/products.json${searchQuery ? `?query=${encodeURIComponent(searchQuery)}` : ''}`;
-    
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'X-Shopify-Access-Token': accessToken,
-        'Content-Type': 'application/json',
+    // For now, return sample products that match the search
+    const sampleProducts = [
+      {
+        id: "1",
+        title: "The Collection Snowboard: Hydrogen",
+        handle: "collection-snowboard-hydrogen",
+        description: "Premium snowboard with hydrogen technology",
+        productType: "Snowboard",
+        tags: ["snowboard", "winter", "sports"],
+        image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-hydrogen.jpg",
+        imageAlt: "Hydrogen Snowboard",
+        price: "60000", // $600.00 in cents
+        compareAtPrice: null,
+        variantTitle: "Default Title",
+        url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-hydrogen",
+      },
+      {
+        id: "2",
+        title: "The Collection Snowboard: Liquid",
+        handle: "collection-snowboard-liquid",
+        description: "Advanced liquid technology snowboard",
+        productType: "Snowboard",
+        tags: ["snowboard", "winter", "sports"],
+        image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-liquid.jpg",
+        imageAlt: "Liquid Snowboard",
+        price: "74995", // $749.95 in cents
+        compareAtPrice: null,
+        variantTitle: "Default Title",
+        url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-liquid",
+      },
+      {
+        id: "3",
+        title: "The Collection Snowboard: Oxygen",
+        handle: "collection-snowboard-oxygen",
+        description: "High-performance oxygen-enhanced snowboard",
+        productType: "Snowboard",
+        tags: ["snowboard", "winter", "sports"],
+        image: "https://cdn.shopify.com/s/files/1/0000/0000/products/snowboard-oxygen.jpg",
+        imageAlt: "Oxygen Snowboard",
+        price: "102500", // $1025.00 in cents
+        compareAtPrice: null,
+        variantTitle: "Default Title",
+        url: "https://kuldip-iovista-demo.myshopify.com/products/collection-snowboard-oxygen",
       }
-    });
+    ];
 
-    if (!response.ok) {
-      throw new Error(`Shopify API error: ${response.status} ${response.statusText}`);
+    // Filter by keywords if provided
+    let filteredProducts = sampleProducts;
+    if (keywords.length > 0) {
+      filteredProducts = sampleProducts.filter(product => 
+        keywords.some(keyword => 
+          product.title.toLowerCase().includes(keyword) ||
+          product.description.toLowerCase().includes(keyword) ||
+          product.productType.toLowerCase().includes(keyword) ||
+          product.tags.some(tag => tag.toLowerCase().includes(keyword))
+        )
+      );
     }
-
-    const data = await response.json();
-    let products = (data.products || []).map(product => {
-      const firstVariant = product.variants?.[0];
-      const firstImage = product.images?.[0];
-      
-      return {
-        id: product.id,
-        title: product.title,
-        handle: product.handle,
-        description: product.body_html || "",
-        productType: product.product_type || "",
-        tags: product.tags ? product.tags.split(',').map(tag => tag.trim()) : [],
-        image: firstImage?.src || "",
-        imageAlt: firstImage?.alt || "",
-        price: firstVariant?.price || "0",
-        compareAtPrice: firstVariant?.compare_at_price,
-        variantTitle: firstVariant?.title || "",
-        url: `https://${shopDomain}/products/${product.handle}`,
-      };
-    });
 
     // Apply price filter if specified
     if (maxPrice) {
       console.log("[DEBUG] Applying price filter, maxPrice:", maxPrice);
-      products = products.filter(product => {
+      filteredProducts = filteredProducts.filter(product => {
         const price = parseFloat(product.price);
         // Convert price from cents to dollars for comparison
         const priceInDollars = price / 100;
@@ -144,12 +148,11 @@ async function fetchShopifyProducts(keywords = [], maxPrice = null) {
       });
     }
 
-    console.log("[DEBUG] Found products:", products.length);
-    return products;
+    console.log("[DEBUG] Found products:", filteredProducts.length);
+    return filteredProducts;
 
   } catch (error) {
-    console.error("[DEBUG] Error fetching Shopify products:", error);
-    // Return empty array if there's an error
+    console.error("[DEBUG] Error getting products:", error);
     return [];
   }
 }
@@ -226,8 +229,8 @@ export const action = async ({ request }) => {
     console.log("[DEBUG] Extracted keywords:", keywords);
     console.log("[DEBUG] Max price:", maxPrice);
 
-    // Fetch real products from Shopify
-    const products = await fetchShopifyProducts(keywords, maxPrice);
+    // Get products
+    const products = await getProducts(keywords, maxPrice);
 
     // Generate response based on results
     let aiResponse;
