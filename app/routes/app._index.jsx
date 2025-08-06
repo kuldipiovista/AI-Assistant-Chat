@@ -104,15 +104,15 @@ function getDefaultSettings() {
     widgetColor: "#5c6ac4",
     widgetSize: 56,
     voiceEnabled: true,
-    voiceLanguage: "en-US",
-    voiceTimeout: 5000,
+    voiceLanguage: process.env.VOICE_LANGUAGE || "en-US",
+    voiceTimeout: parseInt(process.env.VOICE_TIMEOUT) || 5000,
     showProductImages: true,
     showProductPrices: true,
     showComparePrices: true,
     maxProductsToShow: 5,
-    ollamaEnabled: true,
-    ollamaModel: "whisper",
-    ollamaEndpoint: "http://localhost:11434"
+    ollamaEnabled: process.env.OLLAMA_ENABLED === "true",
+    ollamaModel: process.env.OLLAMA_MODEL || "whisper",
+    ollamaEndpoint: process.env.OLLAMA_ENDPOINT || "http://localhost:11434"
   };
 }
 

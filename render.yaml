@@ -24,11 +24,34 @@ services:
         sync: false
       - key: SHOPIFY_ADMIN_API_ACCESS_TOKEN
         sync: false
-      - key: GEMINI_API_KEY
-        sync: false
       - key: SESSION_SECRET
         sync: false
       - key: DATABASE_URL
         fromDatabase:
           name: ai-assistant-chat-db
-          property: connectionString 
+          property: connectionString
+      # Ollama Configuration
+      - key: OLLAMA_ENABLED
+        value: "true"
+      - key: OLLAMA_ENDPOINT
+        value: "http://localhost:11434"
+      - key: OLLAMA_MODEL
+        value: "whisper"
+      - key: OLLAMA_FALLBACK_ENABLED
+        value: "true"
+      # Voice Search Configuration
+      - key: VOICE_SEARCH_ENABLED
+        value: "true"
+      - key: VOICE_LANGUAGE
+        value: "en-US"
+      - key: VOICE_TIMEOUT
+        value: "5000"
+      # Additional Environment Variables
+      - key: SHOP_CUSTOM_DOMAIN
+        sync: false
+      - key: FRONTEND_PORT
+        value: "10000"
+      - key: HMR_SERVER_PORT
+        value: "8002"
+      - key: PORT
+        value: "10000" 

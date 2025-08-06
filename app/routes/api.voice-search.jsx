@@ -5,14 +5,18 @@ async function processVoiceWithOllama(voiceInput) {
   try {
     console.log("[DEBUG] Processing voice with Ollama:", voiceInput);
     
-    // Call Ollama API locally for voice processing
-    const ollamaResponse = await fetch('http://localhost:11434/api/generate', {
+    // Get Ollama endpoint from environment variable
+    const ollamaEndpoint = process.env.OLLAMA_ENDPOINT || 'http://localhost:11434';
+    const ollamaModel = process.env.OLLAMA_MODEL || 'whisper';
+    
+    // Call Ollama API for voice processing
+    const ollamaResponse = await fetch(`${ollamaEndpoint}/api/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'whisper',
+        model: ollamaModel,
         prompt: `Convert this voice input to clear text for product search: "${voiceInput}"`,
         stream: false
       })
@@ -39,13 +43,17 @@ async function extractSearchIntentWithOllama(message) {
   try {
     console.log("[DEBUG] Extracting search intent with Ollama:", message);
     
-    const ollamaResponse = await fetch('http://localhost:11434/api/generate', {
+    // Get Ollama endpoint from environment variable
+    const ollamaEndpoint = process.env.OLLAMA_ENDPOINT || 'http://localhost:11434';
+    const ollamaModel = process.env.OLLAMA_MODEL || 'llama3.2';
+    
+    const ollamaResponse = await fetch(`${ollamaEndpoint}/api/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama3.2',
+        model: ollamaModel,
         prompt: `Analyze this product search query and extract search terms. Return a JSON object with:
         - "keywords": array of search terms (product types, features, brands, categories)
         - "maxPrice": number (if price limit mentioned, otherwise null)
