@@ -30,6 +30,9 @@ services:
         fromDatabase:
           name: ai-assistant-chat-db
           property: connectionString
+      # Build-time environment variable
+      - key: BUILD_MODE
+        value: "true"
       # Ollama Configuration
       - key: OLLAMA_ENABLED
         value: "true"

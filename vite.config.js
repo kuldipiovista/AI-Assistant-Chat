@@ -19,23 +19,6 @@ if (
 
 const host = new URL(process.env.SHOPIFY_APP_URL || "https://ai-assistant-chat-iczt.onrender.com/")
   .hostname;
-let hmrConfig;
-
-if (host === "localhost") {
-  hmrConfig = {
-    protocol: "ws",
-    host: "localhost",
-    port: 64999,
-    clientPort: 64999,
-  };
-} else {
-  hmrConfig = {
-    protocol: "wss",
-    host: host,
-    port: parseInt(process.env.FRONTEND_PORT) || 10000,
-    clientPort: 443,
-  };
-}
 
 export default defineConfig({
   server: {
@@ -51,7 +34,6 @@ export default defineConfig({
     },
     port: Number(process.env.PORT || 10000),
     host: "0.0.0.0", // Allow external connections
-    hmr: hmrConfig,
     fs: {
       // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
       allow: ["app", "node_modules"],
@@ -73,8 +55,15 @@ export default defineConfig({
   ],
   build: {
     assetsInlineLimit: 0,
+    rollupOptions: {
+      external: [],
+    },
   },
   optimizeDeps: {
     include: ["@shopify/app-bridge-react", "@shopify/polaris"],
+    exclude: [],
+  },
+  ssr: {
+    noExternal: ["@shopify/polaris"],
   },
 });

@@ -42,7 +42,8 @@ function createMockShopify() {
 // Initialize shopify app synchronously for now
 let shopify;
 
-if (hasRequiredEnvVars) {
+// Only try to initialize if we're not in build mode and have required env vars
+if (hasRequiredEnvVars && !process.env.BUILD_MODE) {
   try {
     shopify = shopifyApp({
       apiKey: process.env.SHOPIFY_API_KEY,
@@ -66,7 +67,7 @@ if (hasRequiredEnvVars) {
     shopify = createMockShopify();
   }
 } else {
-  console.warn("Missing required Shopify environment variables, using mock Shopify object");
+  console.warn("Missing required Shopify environment variables or in build mode, using mock Shopify object");
   shopify = createMockShopify();
 }
 
