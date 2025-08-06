@@ -8,16 +8,10 @@ import {
   TextField,
   Select,
   Checkbox,
-  ColorPicker,
-  RangeSlider,
   Banner,
   Stack,
   TextStyle,
-  Badge,
-  DataTable,
-  Modal,
-  TextContainer,
-  Heading
+  DataTable
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
 import { authenticate } from "../shopify.server";
@@ -125,8 +119,6 @@ function getDefaultSettings() {
 export default function VoiceSearchDashboard() {
   const [settings, setSettings] = useState(getDefaultSettings());
   const [isSaving, setIsSaving] = useState(false);
-  const [showTestModal, setShowTestModal] = useState(false);
-  const [testResults, setTestResults] = useState(null);
 
   const handleSave = useCallback(async () => {
     setIsSaving(true);
@@ -142,7 +134,6 @@ export default function VoiceSearchDashboard() {
       });
       
       if (response.ok) {
-        // Show success message
         console.log("Settings saved successfully");
       }
     } catch (error) {
@@ -151,34 +142,6 @@ export default function VoiceSearchDashboard() {
       setIsSaving(false);
     }
   }, [settings]);
-
-  const handleTestVoice = useCallback(async () => {
-    setShowTestModal(true);
-    setTestResults({ status: "testing", message: "Testing voice search..." });
-    
-    try {
-      const response = await fetch("/api/voice-search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          voiceInput: "test snowboard",
-          useOllama: settings.ollamaEnabled
-        })
-      });
-      
-      const data = await response.json();
-      setTestResults({
-        status: "success",
-        message: "Voice search test successful!",
-        data: data
-      });
-    } catch (error) {
-      setTestResults({
-        status: "error",
-        message: "Voice search test failed: " + error.message
-      });
-    }
-  }, [settings.ollamaEnabled]);
 
   const widgetSettingsRows = [
     ["Widget Enabled", settings.widgetEnabled ? "✅ Enabled" : "❌ Disabled"],
@@ -203,12 +166,6 @@ export default function VoiceSearchDashboard() {
         onAction: handleSave,
         loading: isSaving
       }}
-      secondaryActions={[
-        {
-          content: "Test Voice Search",
-          onAction: handleTestVoice
-        }
-      ]}
     >
       <Layout>
         {/* Widget Settings */}
@@ -240,14 +197,12 @@ export default function VoiceSearchDashboard() {
                 helpText="Enter hex color code (e.g., #5c6ac4)"
               />
               
-              <RangeSlider
-                label="Widget Size"
-                value={settings.widgetSize}
-                min={40}
-                max={80}
-                step={4}
-                onChange={(value) => setSettings({...settings, widgetSize: value})}
-                output
+              <TextField
+                label="Widget Size (px)"
+                type="number"
+                value={settings.widgetSize.toString()}
+                onChange={(value) => setSettings({...settings, widgetSize: parseInt(value) || 56})}
+                helpText="Size in pixels (40-80)"
               />
             </FormLayout>
           </Card>
@@ -385,34 +340,6 @@ export default function VoiceSearchDashboard() {
           </Banner>
         </Layout.Section>
       </Layout>
-
-      {/* Test Modal */}
-      <Modal
-        open={showTestModal}
-        onClose={() => setShowTestModal(false)}
-        title="Voice Search Test Results"
-        primaryAction={{
-          content: "Close",
-          onAction: () => setShowTestModal(false)
-        }}
-      >
-        <Modal.Section>
-          <TextContainer>
-            {testResults && (
-              <div>
-                <Heading>Test Status: {testResults.status}</Heading>
-                <p>{testResults.message}</p>
-                {testResults.data && (
-                  <div>
-                    <TextStyle variation="strong">Test Results:</TextStyle>
-                    <pre>{JSON.stringify(testResults.data, null, 2)}</pre>
-                  </div>
-                )}
-              </div>
-            )}
-          </TextContainer>
-        </Modal.Section>
-      </Modal>
     </Page>
   );
 }
