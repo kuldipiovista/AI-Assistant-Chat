@@ -9,7 +9,6 @@ import {
   Select,
   Checkbox,
   Banner,
-  Stack,
   TextStyle,
   DataTable
 } from "@shopify/polaris";
@@ -305,25 +304,23 @@ export default function VoiceSearchDashboard() {
         {/* Current Settings Summary */}
         <Layout.Section>
           <Card title="Current Settings Summary" sectioned>
-            <Stack vertical spacing="loose">
-              <div>
-                <TextStyle variation="strong">Widget Settings</TextStyle>
-                <DataTable
-                  columnContentTypes={['text', 'text']}
-                  headings={['Setting', 'Value']}
-                  rows={widgetSettingsRows}
-                />
-              </div>
-              
-              <div>
-                <TextStyle variation="strong">Voice Settings</TextStyle>
-                <DataTable
-                  columnContentTypes={['text', 'text']}
-                  headings={['Setting', 'Value']}
-                  rows={voiceSettingsRows}
-                />
-              </div>
-            </Stack>
+            <div>
+              <TextStyle variation="strong">Widget Settings</TextStyle>
+              <DataTable
+                columnContentTypes={['text', 'text']}
+                headings={['Setting', 'Value']}
+                rows={widgetSettingsRows}
+              />
+            </div>
+            
+            <div>
+              <TextStyle variation="strong">Voice Settings</TextStyle>
+              <DataTable
+                columnContentTypes={['text', 'text']}
+                headings={['Setting', 'Value']}
+                rows={voiceSettingsRows}
+              />
+            </div>
           </Card>
         </Layout.Section>
 

@@ -6,7 +6,6 @@ import {
   List,
   Page,
   Text,
-  BlockStack,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 
@@ -17,7 +16,7 @@ export default function AdditionalPage() {
       <Layout>
         <Layout.Section>
           <Card>
-            <BlockStack gap="300">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <Text as="p" variant="bodyMd">
                 The app template comes with an additional page which
                 demonstrates how to create multiple pages within app navigation
@@ -37,12 +36,12 @@ export default function AdditionalPage() {
                 link to it in the <Code>&lt;NavMenu&gt;</Code> component found
                 in <Code>app/routes/app.jsx</Code>.
               </Text>
-            </BlockStack>
+            </div>
           </Card>
         </Layout.Section>
         <Layout.Section variant="oneThird">
           <Card>
-            <BlockStack gap="200">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <Text as="h2" variant="headingMd">
                 Resources
               </Text>
@@ -57,7 +56,7 @@ export default function AdditionalPage() {
                   </Link>
                 </List.Item>
               </List>
-            </BlockStack>
+            </div>
           </Card>
         </Layout.Section>
       </Layout>
