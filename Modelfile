@@ -1,0 +1,17 @@
+FROM llama3.2
+
+# Set the model to use for speech recognition
+PARAMETER temperature 0.1
+PARAMETER top_p 0.9
+
+# System prompt for speech-to-text conversion
+SYSTEM """
+You are a speech-to-text converter. Convert the audio input to text accurately.
+Focus on product search queries like "product below $500" or "snowboard".
+Return only the transcribed text without any additional formatting.
+"""
+
+# Template for speech recognition
+TEMPLATE """
+{{.Input}}
+""" 

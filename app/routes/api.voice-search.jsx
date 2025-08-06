@@ -1,58 +1,89 @@
-// Function to extract keywords using AI (Gemini)
-async function extractKeywordsWithAI(message) {
-  if (!process.env.GEMINI_API_KEY) {
-    console.log("[DEBUG] No Gemini API key, using fallback keyword extraction");
-    return extractKeywordsFallback(message);
-  }
+import { json } from "@remix-run/node";
 
+// Function to call Ollama API for voice processing
+async function processVoiceWithOllama(voiceInput) {
   try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`, {
+    console.log("[DEBUG] Processing voice with Ollama:", voiceInput);
+    
+    // Call Ollama API locally for voice processing
+    const ollamaResponse = await fetch('http://localhost:11434/api/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `Analyze this product search query and extract comprehensive search terms. Return a JSON object with: 
-            - "keywords": array of search terms (product types, features, brands, categories)
-            - "maxPrice": number (if price limit mentioned, otherwise null)
-            - "searchType": "specific" (if specific product mentioned) or "general" (if just "product" or general terms)
-            - "shouldApplyPriceFilter": boolean (true if user specifically asks for price filtering)
-            - "searchFields": array of fields to search in ["title", "tags", "vendor", "type", "description"]
-            
-            Query: "${message}"
-            
-            Examples:
-            - "snowboard under $800" → {"keywords": ["snowboard"], "maxPrice": 800, "searchType": "specific", "shouldApplyPriceFilter": true, "searchFields": ["title", "tags", "type"]}
-            - "product under $30" → {"keywords": [], "maxPrice": 30, "searchType": "general", "shouldApplyPriceFilter": true, "searchFields": ["title", "tags", "vendor", "type"]}
-            - "winter sports equipment" → {"keywords": ["winter", "sports", "equipment"], "maxPrice": null, "searchType": "specific", "shouldApplyPriceFilter": false, "searchFields": ["title", "tags", "type", "description"]}`
-          }]
-        }]
+        model: 'whisper',
+        prompt: `Convert this voice input to clear text for product search: "${voiceInput}"`,
+        stream: false
       })
     });
 
-    if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+    if (!ollamaResponse.ok) {
+      throw new Error(`Ollama API error: ${ollamaResponse.status}`);
     }
 
-    const data = await response.json();
-    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const ollamaData = await ollamaResponse.json();
+    const processedText = ollamaData.response || voiceInput;
+    
+    console.log("[DEBUG] Ollama processed text:", processedText);
+    return processedText;
+  } catch (error) {
+    console.error("[DEBUG] Ollama processing failed:", error);
+    // Fallback to original voice input
+    return voiceInput;
+  }
+}
+
+// Function to extract search intent using Ollama
+async function extractSearchIntentWithOllama(message) {
+  try {
+    console.log("[DEBUG] Extracting search intent with Ollama:", message);
+    
+    const ollamaResponse = await fetch('http://localhost:11434/api/generate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama3.2',
+        prompt: `Analyze this product search query and extract search terms. Return a JSON object with:
+        - "keywords": array of search terms (product types, features, brands, categories)
+        - "maxPrice": number (if price limit mentioned, otherwise null)
+        - "searchType": "specific" (if specific product mentioned) or "general" (if just "product" or general terms)
+        - "shouldApplyPriceFilter": boolean (true if user specifically asks for price filtering)
+        - "searchFields": array of fields to search in ["title", "tags", "vendor", "type", "description"]
+        
+        Query: "${message}"
+        
+        Examples:
+        - "product below $500" → {"keywords": [], "maxPrice": 500, "searchType": "general", "shouldApplyPriceFilter": true, "searchFields": ["title", "tags", "vendor", "type"]}
+        - "snowboard" → {"keywords": ["snowboard"], "maxPrice": null, "searchType": "specific", "shouldApplyPriceFilter": false, "searchFields": ["title", "tags", "type"]}
+        - "winter sports equipment" → {"keywords": ["winter", "sports", "equipment"], "maxPrice": null, "searchType": "specific", "shouldApplyPriceFilter": false, "searchFields": ["title", "tags", "type", "description"]}`,
+        stream: false
+      })
+    });
+
+    if (!ollamaResponse.ok) {
+      throw new Error(`Ollama API error: ${ollamaResponse.status}`);
+    }
+
+    const ollamaData = await ollamaResponse.json();
+    const aiResponse = ollamaData.response;
     
     if (aiResponse) {
       try {
         // Try to parse as JSON object
         const parsed = JSON.parse(aiResponse);
         if (parsed.keywords && typeof parsed.maxPrice !== 'undefined' && parsed.searchType && typeof parsed.shouldApplyPriceFilter !== 'undefined') {
-          console.log("[DEBUG] AI extracted search intent:", parsed);
+          console.log("[DEBUG] Ollama extracted search intent:", parsed);
           return parsed;
         }
       } catch (parseError) {
-        console.error("[DEBUG] Failed to parse AI response as JSON:", parseError);
+        console.error("[DEBUG] Failed to parse Ollama response as JSON:", parseError);
       }
     }
   } catch (error) {
-    console.error("[DEBUG] AI keyword extraction failed:", error);
+    console.error("[DEBUG] Ollama search intent extraction failed:", error);
   }
 
   return extractKeywordsFallback(message);
@@ -98,17 +129,17 @@ function searchProducts(products, keywords, searchFields) {
       }
       
       // Search in vendor
-      if (searchFields.includes("vendor") && product.vendor && product.vendor.toLowerCase().includes(lowerKeyword)) {
+      if (searchFields.includes("vendor") && product.vendor.toLowerCase().includes(lowerKeyword)) {
         return true;
       }
       
-      // Search in product type
-      if (searchFields.includes("type") && product.productType && product.productType.toLowerCase().includes(lowerKeyword)) {
+      // Search in type
+      if (searchFields.includes("type") && product.productType.toLowerCase().includes(lowerKeyword)) {
         return true;
       }
       
       // Search in description
-      if (searchFields.includes("description") && product.description && product.description.toLowerCase().includes(lowerKeyword)) {
+      if (searchFields.includes("description") && product.description.toLowerCase().includes(lowerKeyword)) {
         return true;
       }
       
@@ -117,7 +148,7 @@ function searchProducts(products, keywords, searchFields) {
   });
 }
 
-// Function to get products (simplified for now)
+// Function to get products from Shopify backend
 async function getProducts(searchIntent) {
   try {
     const { keywords, maxPrice, searchType, shouldApplyPriceFilter, searchFields } = searchIntent;
@@ -217,130 +248,106 @@ export const action = async ({ request }) => {
     if (request.method !== "POST") {
       return new Response(JSON.stringify({
         error: "Method not allowed",
-        message: "Only POST requests are supported"
-      }), {
-        status: 405,
-        headers: { 
-          ...CORS_HEADERS, 
-          "Content-Type": "application/json"
-        },
+        message: "Only POST requests are allowed"
+      }), { 
+        status: 405, 
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
       });
     }
 
     // Parse request body
-    let message;
-    try {
-      const body = await request.json();
-      message = body.message;
-    } catch (parseError) {
-      console.error("[DEBUG] Failed to parse request body:", parseError);
-      return new Response(JSON.stringify({
-        error: "Invalid JSON",
-        message: "Request body must be valid JSON with a 'message' field"
-      }), {
-        status: 400,
-        headers: { 
-          ...CORS_HEADERS, 
-          "Content-Type": "application/json"
-        },
-      });
-    }
-
-    if (!message || typeof message !== 'string') {
-      return new Response(JSON.stringify({
-        error: "Missing message",
-        message: "Request must include a 'message' field"
-      }), {
-        status: 400,
-        headers: { 
-          ...CORS_HEADERS, 
-          "Content-Type": "application/json"
-        },
-      });
-    }
-
-    console.log("[DEBUG] Received message:", message);
-
-    // Extract search intent using AI
-    const searchIntent = await extractKeywordsWithAI(message);
+    const { voiceInput, useOllama } = await request.json();
     
+    if (!voiceInput) {
+      return new Response(JSON.stringify({
+        error: "Missing voice input",
+        message: "Voice input is required"
+      }), { 
+        status: 400, 
+        headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
+      });
+    }
+
+    console.log("[DEBUG] Received voice input:", voiceInput);
+    console.log("[DEBUG] Use Ollama:", useOllama);
+
+    // Process voice input with Ollama if requested
+    let processedInput = voiceInput;
+    if (useOllama) {
+      processedInput = await processVoiceWithOllama(voiceInput);
+    }
+
+    console.log("[DEBUG] Processed input:", processedInput);
+
+    // Extract search intent using Ollama
+    const searchIntent = await extractSearchIntentWithOllama(processedInput);
     console.log("[DEBUG] Search intent:", searchIntent);
 
-    // Get products based on search intent
-    const products = await getProducts(searchIntent);
+    // Get products
+    let products = await getProducts(searchIntent);
+
+    console.log("[DEBUG] Final products count:", products.length);
+    console.log("[DEBUG] Final products:", products);
 
     // Generate response based on results
     let aiResponse;
-    if (products.length > 0) {
-      aiResponse = `I found ${products.length} product(s) that match your criteria:`;
-    } else {
-      // Provide more helpful response based on search type
-      if (searchIntent.searchType === "general" && searchIntent.shouldApplyPriceFilter) {
-        aiResponse = `I couldn't find any products under $${searchIntent.maxPrice}. All our current products are priced higher. Would you like to see our full collection?`;
-      } else if (searchIntent.keywords.length > 0) {
-        aiResponse = `I couldn't find any products matching "${searchIntent.keywords.join(' ')}". Try searching for "snowboard" or browse our collection.`;
+    if (products.length === 0) {
+      if (searchIntent.searchType === "specific") {
+        aiResponse = `I couldn't find any ${searchIntent.keywords.join(", ")} products`;
+        if (searchIntent.maxPrice) {
+          aiResponse += ` under $${searchIntent.maxPrice}`;
+        }
+        aiResponse += `. Would you like to see our full collection?`;
       } else {
-        aiResponse = "I couldn't find any products matching your criteria. Try adjusting your search terms or browse our collection.";
+        aiResponse = `I couldn't find any products`;
+        if (searchIntent.maxPrice) {
+          aiResponse += ` under $${searchIntent.maxPrice}`;
+        }
+        aiResponse += `. All our current products are priced higher. Would you like to see our full collection?`;
       }
+    } else {
+      const productNames = products.map(p => p.title).join(", ");
+      aiResponse = `I found ${products.length} product(s) that match your voice search: ${productNames}. Here they are:`;
     }
 
     console.log("[DEBUG] Generated response:", aiResponse);
-    console.log("[DEBUG] Found products:", products.length);
 
     return new Response(JSON.stringify({
-      aiResponse: aiResponse,
-      products: products
-    }), {
-      status: 200,
-      headers: { 
-        ...CORS_HEADERS, 
-        "Content-Type": "application/json"
-      },
+      aiResponse,
+      products: products,
+      originalVoiceInput: voiceInput,
+      processedInput: processedInput
+    }), { 
+      status: 200, 
+      headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
     });
 
   } catch (error) {
-    console.error("[DEBUG] Error in AI chat:", error);
+    console.error("[DEBUG] Error in voice search:", error);
     return new Response(JSON.stringify({
-      aiResponse: "I'm sorry, I encountered an error while processing your request. Please try again.",
+      error: "Internal server error",
+      message: "Sorry, I encountered an error processing your voice request.",
       products: []
-    }), {
-      status: 500,
-      headers: { 
-        ...CORS_HEADERS, 
-        "Content-Type": "application/json"
-      },
+    }), { 
+      status: 500, 
+      headers: { ...CORS_HEADERS, "Content-Type": "application/json" }
     });
   }
 };
 
 export const loader = ({ request }) => {
-  const CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "https://kuldip-iovista-demo.myshopify.com",
-    "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
-    "Access-Control-Max-Age": "86400",
-    "Access-Control-Allow-Credentials": "true",
-  };
-
-  // Handle preflight OPTIONS request
-  if (request.method === "OPTIONS") {
-    return new Response(null, { 
-      status: 204, 
-      headers: CORS_HEADERS
-    });
-  }
-
-  return new Response(JSON.stringify({ 
-    message: "AI Chat API is ready",
-    timestamp: new Date().toISOString(),
-    status: "ready"
-  }), {
-    status: 200,
+  return new Response(JSON.stringify({
+    error: "Method not allowed",
+    message: "Only POST requests are allowed for voice search"
+  }), { 
+    status: 405, 
     headers: { 
-      ...CORS_HEADERS, 
-      "Content-Type": "application/json"
-    },
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://kuldip-iovista-demo.myshopify.com",
+      "Access-Control-Allow-Methods": "POST, OPTIONS, GET",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+      "Access-Control-Max-Age": "86400",
+      "Access-Control-Allow-Credentials": "true",
+    }
   });
-};
-  
-  
+}; 
