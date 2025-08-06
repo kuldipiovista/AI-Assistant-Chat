@@ -11,6 +11,8 @@
   let audioStream = null;
   let isInitialized = false;
   let hasMicrophoneAccess = false;
+  let recognitionAttempts = 0;
+  const maxRecognitionAttempts = 3;
   
   // Check if speech recognition is supported
   if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -41,6 +43,7 @@
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       console.log('[DEBUG] Voice recognized:', transcript);
+      recognitionAttempts = 0; // Reset attempts on success
       processVoiceInput(transcript);
     };
 
@@ -149,7 +152,7 @@
     }
   }
 
-  // Start listening
+  // Start listening with retry logic
   async function startListening() {
     try {
       // Initialize recognition if not already done
@@ -166,13 +169,18 @@
         return;
       }
 
-      // If we already have microphone access, start recognition directly
+      // If we already have microphone access, try to start recognition directly
       if (hasMicrophoneAccess && audioStream) {
         console.log('[DEBUG] Using existing microphone access');
         if (recognition && !isListening) {
-          recognition.start();
+          try {
+            recognition.start();
+            return;
+          } catch (error) {
+            console.error('[DEBUG] Error starting recognition with existing access:', error);
+            // Fall through to request new access
+          }
         }
-        return;
       }
 
       // Request microphone permission
@@ -190,50 +198,8 @@
       hasMicrophoneAccess = true;
       console.log('[DEBUG] Microphone access granted');
 
-      // Start speech recognition after ensuring audio is ready
-      setTimeout(() => {
-        if (recognition && !isListening) {
-          console.log('[DEBUG] Starting speech recognition...');
-          try {
-            recognition.start();
-          } catch (error) {
-            console.error('[DEBUG] Error starting recognition:', error);
-            // Try alternative approach for some browsers
-            if (window.webkitSpeechRecognition) {
-              recognition = new window.webkitSpeechRecognition();
-              recognition.continuous = false;
-              recognition.interimResults = false;
-              recognition.lang = 'en-US';
-              recognition.maxAlternatives = 1;
-              
-              recognition.onstart = () => {
-                console.log('[DEBUG] Voice recognition started (webkit)');
-                isListening = true;
-                updateBubbleUI();
-              };
-              
-              recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                console.log('[DEBUG] Voice recognized:', transcript);
-                processVoiceInput(transcript);
-              };
-              
-              recognition.onerror = (event) => {
-                console.error('[DEBUG] Speech recognition error (webkit):', event.error);
-                handleRecognitionError(event.error);
-              };
-              
-              recognition.onend = () => {
-                console.log('[DEBUG] Voice recognition ended (webkit)');
-                isListening = false;
-                updateBubbleUI();
-              };
-              
-              recognition.start();
-            }
-          }
-        }
-      }, 200);
+      // Try to start speech recognition with retry logic
+      await startRecognitionWithRetry();
       
     } catch (error) {
       console.error('[DEBUG] Microphone access error:', error);
@@ -241,10 +207,65 @@
       // Try to start recognition anyway (some browsers work without explicit permission)
       if (recognition && !isListening) {
         console.log('[DEBUG] Trying speech recognition without explicit permission...');
+        await startRecognitionWithRetry();
+      } else {
+        handleRecognitionError('audio-capture');
+      }
+    }
+  }
+
+  // Start recognition with retry logic
+  async function startRecognitionWithRetry() {
+    if (!recognition || isListening) return;
+
+    try {
+      console.log('[DEBUG] Starting speech recognition... (attempt ' + (recognitionAttempts + 1) + ')');
+      
+      // Add a small delay before starting
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      recognition.start();
+    } catch (error) {
+      console.error('[DEBUG] Error starting recognition:', error);
+      
+      // Try alternative approach for some browsers
+      if (window.webkitSpeechRecognition && recognitionAttempts < maxRecognitionAttempts) {
+        console.log('[DEBUG] Trying webkitSpeechRecognition fallback...');
+        
+        recognition = new window.webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        recognition.maxAlternatives = 1;
+        
+        recognition.onstart = () => {
+          console.log('[DEBUG] Voice recognition started (webkit)');
+          isListening = true;
+          updateBubbleUI();
+        };
+        
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          console.log('[DEBUG] Voice recognized:', transcript);
+          recognitionAttempts = 0;
+          processVoiceInput(transcript);
+        };
+        
+        recognition.onerror = (event) => {
+          console.error('[DEBUG] Speech recognition error (webkit):', event.error);
+          handleRecognitionError(event.error);
+        };
+        
+        recognition.onend = () => {
+          console.log('[DEBUG] Voice recognition ended (webkit)');
+          isListening = false;
+          updateBubbleUI();
+        };
+        
         try {
           recognition.start();
-        } catch (recognitionError) {
-          console.error('[DEBUG] Recognition start error:', recognitionError);
+        } catch (webkitError) {
+          console.error('[DEBUG] Webkit recognition also failed:', webkitError);
           handleRecognitionError('audio-capture');
         }
       } else {
@@ -260,9 +281,22 @@
     }
   }
 
-  // Handle recognition errors
+  // Handle recognition errors with retry logic
   function handleRecognitionError(error) {
     console.error('[DEBUG] Recognition error:', error);
+    
+    recognitionAttempts++;
+    
+    // Try to retry if we haven't exceeded max attempts
+    if (recognitionAttempts < maxRecognitionAttempts && (error === 'audio-capture' || error === 'no-speech')) {
+      console.log('[DEBUG] Retrying recognition... (attempt ' + (recognitionAttempts + 1) + ')');
+      setTimeout(() => {
+        if (!isListening) {
+          startRecognitionWithRetry();
+        }
+      }, 1000);
+      return;
+    }
     
     let message = 'Sorry, I couldn\'t understand your voice. Please try again.';
     

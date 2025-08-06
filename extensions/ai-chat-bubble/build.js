@@ -19,6 +19,8 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
   let audioStream = null;
   let isInitialized = false;
   let hasMicrophoneAccess = false;
+  let recognitionAttempts = 0;
+  const maxRecognitionAttempts = 3;
   
   // Check if speech recognition is supported
   if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -49,6 +51,7 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       console.log('[DEBUG] Voice recognized:', transcript);
+      recognitionAttempts = 0; // Reset attempts on success
       processVoiceInput(transcript);
     };
 
@@ -157,7 +160,7 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
     }
   }
 
-  // Start listening
+  // Start listening with fallback to text input
   async function startListening() {
     try {
       // Initialize recognition if not already done
@@ -170,94 +173,33 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
       console.log('[DEBUG] Current permission status:', permissionStatus);
 
       if (permissionStatus === 'denied') {
-        showErrorModal('Microphone access is denied. Please enable it in your browser settings and refresh the page.');
+        showTextInputModal('Microphone access is denied. Please enter your search term manually:');
         return;
       }
 
-      // If we already have microphone access, start recognition directly
-      if (hasMicrophoneAccess && audioStream) {
-        console.log('[DEBUG] Using existing microphone access');
-        if (recognition && !isListening) {
-          recognition.start();
-        }
-        return;
-      }
-
-      // Request microphone permission
-      console.log('[DEBUG] Requesting microphone access...');
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true
-        } 
-      });
-
-      // Store stream for cleanup
-      audioStream = stream;
-      hasMicrophoneAccess = true;
-      console.log('[DEBUG] Microphone access granted');
-
-      // Start speech recognition after ensuring audio is ready
-      setTimeout(() => {
-        if (recognition && !isListening) {
-          console.log('[DEBUG] Starting speech recognition...');
-          try {
-            recognition.start();
-          } catch (error) {
-            console.error('[DEBUG] Error starting recognition:', error);
-            // Try alternative approach for some browsers
-            if (window.webkitSpeechRecognition) {
-              recognition = new window.webkitSpeechRecognition();
-              recognition.continuous = false;
-              recognition.interimResults = false;
-              recognition.lang = 'en-US';
-              recognition.maxAlternatives = 1;
-              
-              recognition.onstart = () => {
-                console.log('[DEBUG] Voice recognition started (webkit)');
-                isListening = true;
-                updateBubbleUI();
-              };
-              
-              recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                console.log('[DEBUG] Voice recognized:', transcript);
-                processVoiceInput(transcript);
-              };
-              
-              recognition.onerror = (event) => {
-                console.error('[DEBUG] Speech recognition error (webkit):', event.error);
-                handleRecognitionError(event.error);
-              };
-              
-              recognition.onend = () => {
-                console.log('[DEBUG] Voice recognition ended (webkit)');
-                isListening = false;
-                updateBubbleUI();
-              };
-              
-              recognition.start();
-            }
-          }
-        }
-      }, 200);
+      // Try to start speech recognition
+      await startRecognitionWithRetry();
       
     } catch (error) {
       console.error('[DEBUG] Microphone access error:', error);
+      showTextInputModal('Voice recognition is not available. Please enter your search term manually:');
+    }
+  }
+
+  // Start recognition with retry logic
+  async function startRecognitionWithRetry() {
+    if (!recognition || isListening) return;
+
+    try {
+      console.log('[DEBUG] Starting speech recognition... (attempt ' + (recognitionAttempts + 1) + ')');
       
-      // Try to start recognition anyway (some browsers work without explicit permission)
-      if (recognition && !isListening) {
-        console.log('[DEBUG] Trying speech recognition without explicit permission...');
-        try {
-          recognition.start();
-        } catch (recognitionError) {
-          console.error('[DEBUG] Recognition start error:', recognitionError);
-          handleRecognitionError('audio-capture');
-        }
-      } else {
-        handleRecognitionError('audio-capture');
-      }
+      // Add a small delay before starting
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      recognition.start();
+    } catch (error) {
+      console.error('[DEBUG] Error starting recognition:', error);
+      showTextInputModal('Voice recognition failed. Please enter your search term manually:');
     }
   }
 
@@ -268,34 +210,173 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
     }
   }
 
-  // Handle recognition errors
+  // Handle recognition errors with fallback to text input
   function handleRecognitionError(error) {
     console.error('[DEBUG] Recognition error:', error);
     
-    let message = 'Sorry, I couldn\\'t understand your voice. Please try again.';
+    recognitionAttempts++;
     
-    switch (error) {
-      case 'audio-capture':
-        message = 'Microphone access is required. Please allow microphone access in your browser settings and try again.';
-        break;
-      case 'not-allowed':
-        message = 'Microphone access denied. Please enable it in your browser settings and refresh the page.';
-        break;
-      case 'no-speech':
-        message = 'No speech detected. Please try speaking again.';
-        break;
-      case 'network':
-        message = 'Network error. Please check your connection and try again.';
-        break;
-      case 'aborted':
-        message = 'Voice recognition was interrupted. Please try again.';
-        break;
-      case 'service-not-allowed':
-        message = 'Voice recognition service not allowed. Please check your browser settings.';
-        break;
+    // Try to retry if we haven't exceeded max attempts
+    if (recognitionAttempts < maxRecognitionAttempts && (error === 'audio-capture' || error === 'no-speech')) {
+      console.log('[DEBUG] Retrying recognition... (attempt ' + (recognitionAttempts + 1) + ')');
+      setTimeout(() => {
+        if (!isListening) {
+          startRecognitionWithRetry();
+        }
+      }, 1000);
+      return;
     }
+    
+    // If all attempts failed, show text input as fallback
+    if (error === 'audio-capture') {
+      showTextInputModal('Voice recognition is not working properly. Please enter your search term manually:');
+    } else {
+      let message = 'Sorry, I couldn\\'t understand your voice. Please try again.';
+      
+      switch (error) {
+        case 'not-allowed':
+          message = 'Microphone access denied. Please enable it in your browser settings and refresh the page.';
+          break;
+        case 'no-speech':
+          message = 'No speech detected. Please try speaking again.';
+          break;
+        case 'network':
+          message = 'Network error. Please check your connection and try again.';
+          break;
+        case 'aborted':
+          message = 'Voice recognition was interrupted. Please try again.';
+          break;
+        case 'service-not-allowed':
+          message = 'Voice recognition service not allowed. Please check your browser settings.';
+          break;
+      }
 
-    showErrorModal(message);
+      showErrorModal(message);
+    }
+  }
+
+  // Show text input modal as fallback
+  function showTextInputModal(message) {
+    hideAllModals();
+    
+    const modal = document.createElement('div');
+    modal.id = 'voice-text-input-modal';
+    modal.style.cssText = \`
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+    \`;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = \`
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    \`;
+
+    const title = document.createElement('h3');
+    title.textContent = 'Voice Product Search';
+    title.style.cssText = \`
+      margin: 0 0 20px 0;
+      color: #333;
+    \`;
+
+    const messageText = document.createElement('p');
+    messageText.textContent = message;
+    messageText.style.cssText = \`
+      margin: 0 0 20px 0;
+      color: #666;
+    \`;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Enter your search term...';
+    input.style.cssText = \`
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 0 0 20px 0;
+      font-size: 14px;
+    \`;
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.cssText = \`
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    \`;
+
+    const searchButton = document.createElement('button');
+    searchButton.textContent = 'Search';
+    searchButton.style.cssText = \`
+      background: #008060;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    \`;
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.style.cssText = \`
+      background: #666;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    \`;
+
+    // Handle search
+    const handleSearch = () => {
+      const searchTerm = input.value.trim();
+      if (searchTerm) {
+        modal.remove();
+        processVoiceInput(searchTerm);
+      }
+    };
+
+    searchButton.addEventListener('click', handleSearch);
+    cancelButton.addEventListener('click', () => modal.remove());
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    });
+
+    buttonContainer.appendChild(searchButton);
+    buttonContainer.appendChild(cancelButton);
+
+    modalContent.appendChild(title);
+    modalContent.appendChild(messageText);
+    modalContent.appendChild(input);
+    modalContent.appendChild(buttonContainer);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Focus on input
+    setTimeout(() => input.focus(), 100);
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    });
   }
 
   // Process voice input
@@ -304,7 +385,7 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
       console.log('[DEBUG] Processing voice input:', transcript);
       
       // Show loading state
-      showLoadingModal('Processing your voice input...');
+      showLoadingModal('Processing your search...');
       
       // Send to voice search API
       const response = await fetch('/api/voice-search', {
@@ -357,13 +438,13 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
           }
         }, 2000);
       } else {
-        showErrorModal('Sorry, I couldn\\'t process your voice input. Please try again.');
+        showErrorModal('Sorry, I couldn\\'t process your search. Please try again.');
       }
 
     } catch (error) {
       console.error('[DEBUG] Error processing voice input:', error);
       hideLoadingModal();
-      showErrorModal('Sorry, there was an error processing your voice input. Please try again.');
+      showErrorModal('Sorry, there was an error processing your search. Please try again.');
     }
   }
 
@@ -489,7 +570,7 @@ const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
 
   // Hide all modals
   function hideAllModals() {
-    const modals = ['voice-error-modal', 'voice-loading-modal', 'voice-success-modal'];
+    const modals = ['voice-error-modal', 'voice-loading-modal', 'voice-success-modal', 'voice-text-input-modal'];
     modals.forEach(id => {
       const modal = document.getElementById(id);
       if (modal) {
