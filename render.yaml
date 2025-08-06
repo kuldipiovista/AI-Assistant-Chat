@@ -7,7 +7,7 @@ services:
   - type: web
     name: ai-assistant-chat
     env: node
-    buildCommand: npm ci --legacy-peer-deps && npm run build:render
+    buildCommand: npm install --legacy-peer-deps && npm run build
     startCommand: npx prisma generate && npx prisma db push --accept-data-loss && npm start
     envVars:
       - key: NODE_ENV
@@ -60,13 +60,4 @@ services:
         value: "10000"
       # Build-time Environment Variables
       - key: HOST
-        value: "https://ai-assistant-chat-iczt.onrender.com"
-    buildFilter:
-      paths:
-        - app/**
-        - package.json
-        - package-lock.json
-        - vite.config.js
-        - remix.config.js
-        - tsconfig.json
-        - prisma/** 
+        value: "https://ai-assistant-chat-iczt.onrender.com" 

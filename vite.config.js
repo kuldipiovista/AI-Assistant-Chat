@@ -20,10 +20,7 @@ if (
 export default defineConfig({
   server: {
     port: Number(process.env.PORT || 10000),
-    host: "0.0.0.0", // Allow external connections
-    fs: {
-      allow: ["app", "node_modules"],
-    },
+    host: "0.0.0.0",
   },
   plugins: [
     remix({
@@ -41,13 +38,9 @@ export default defineConfig({
   ],
   build: {
     assetsInlineLimit: 0,
-    rollupOptions: {
-      external: [],
-    },
   },
   optimizeDeps: {
-    include: ["@shopify/app-bridge-react", "@shopify/polaris"],
-    exclude: [],
+    disabled: true,
   },
   ssr: {
     noExternal: ["@shopify/polaris"],
