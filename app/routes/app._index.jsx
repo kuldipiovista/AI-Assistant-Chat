@@ -1,11 +1,4 @@
 import { json } from "@remix-run/node";
-import {
-  Page,
-  Layout,
-  Card,
-  Button,
-  Text
-} from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
 
 export const loader = async ({ request }) => {
@@ -15,15 +8,28 @@ export const loader = async ({ request }) => {
 
 export default function VoiceSearchDashboard() {
   return (
-    <Page title="Voice Search Settings">
-      <Layout>
-        <Layout.Section>
-          <Card title="Widget Settings" sectioned>
-            <Text>Voice search widget configuration</Text>
-            <Button>Save Settings</Button>
-          </Card>
-        </Layout.Section>
-      </Layout>
-    </Page>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>Voice Search Settings</h1>
+      <div style={{ 
+        border: '1px solid #ccc', 
+        borderRadius: '8px', 
+        padding: '20px', 
+        marginBottom: '20px',
+        backgroundColor: '#f9f9f9'
+      }}>
+        <h2>Widget Settings</h2>
+        <p>Voice search widget configuration</p>
+        <button style={{
+          backgroundColor: '#007cba',
+          color: 'white',
+          border: 'none',
+          padding: '10px 20px',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}>
+          Save Settings
+        </button>
+      </div>
+    </div>
   );
 }

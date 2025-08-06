@@ -42,7 +42,4 @@ export default defineConfig({
   optimizeDeps: {
     disabled: true,
   },
-  ssr: {
-    noExternal: ["@shopify/polaris"],
-  },
 });
