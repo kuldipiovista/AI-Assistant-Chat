@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "build:voice-chat": "vite build",
+    "build:voice-chat": "node build.js",
     "predeploy": "rmdir /s /q src",
     "deploy": "npm run build:voice-chat && npm run build && npm run predeploy && cd ../.. && shopify app deploy"
   },

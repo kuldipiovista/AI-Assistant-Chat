@@ -14,10 +14,11 @@ export default defineConfig({
         format: "iife",
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
+          'react-dom': 'ReactDOM',
+          '@shopify/polaris': 'Polaris'
         }
       },
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', '@shopify/polaris'],
     },
     lib: false,
     minify: false, // Keep readable for debugging

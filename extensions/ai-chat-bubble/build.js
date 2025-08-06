@@ -1,4 +1,12 @@
-// Simple vanilla JavaScript voice chat bubble
+const fs = require('fs');
+const path = require('path');
+
+// Read the React component
+const reactComponentPath = path.join(__dirname, 'src/embed.chat.jsx');
+const outputPath = path.join(__dirname, 'assets/embed.chat.js');
+
+// Plain JavaScript version of the voice chat bubble
+const plainJavaScript = `// Simple vanilla JavaScript voice chat bubble
 // No React or Polaris dependencies
 
 (function() {
@@ -54,7 +62,7 @@
   function createVoiceBubble() {
     const bubble = document.createElement('div');
     bubble.id = 'voice-chat-bubble';
-    bubble.style.cssText = `
+    bubble.style.cssText = \`
       position: fixed;
       bottom: 20px;
       right: 20px;
@@ -70,17 +78,17 @@
       justify-content: center;
       transition: all 0.3s ease;
       border: 3px solid white;
-    `;
+    \`;
 
     const icon = document.createElement('div');
     icon.id = 'voice-bubble-icon';
     icon.innerHTML = '🎤';
-    icon.style.cssText = `
+    icon.style.cssText = \`
       font-size: 24px;
       color: white;
       user-select: none;
       transition: all 0.3s ease;
-    `;
+    \`;
 
     bubble.appendChild(icon);
     document.body.appendChild(bubble);
@@ -172,7 +180,7 @@
   function handleRecognitionError(error) {
     console.error('[DEBUG] Recognition error:', error);
     
-    let message = 'Sorry, I couldn\'t understand your voice. Please try again.';
+    let message = 'Sorry, I couldn\\'t understand your voice. Please try again.';
     
     switch (error) {
       case 'audio-capture':
@@ -210,7 +218,7 @@
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(\`HTTP error! status: \${response.status}\`);
       }
 
       const result = await response.json();
@@ -219,7 +227,7 @@
       // Handle the result (e.g., redirect to search results)
       if (result.success && result.searchQuery) {
         // Redirect to search results
-        window.location.href = `/search?q=${encodeURIComponent(result.searchQuery)}`;
+        window.location.href = \`/search?q=\${encodeURIComponent(result.searchQuery)}\`;
       }
 
     } catch (error) {
@@ -239,7 +247,7 @@
     // Create modal
     const modal = document.createElement('div');
     modal.id = 'voice-error-modal';
-    modal.style.cssText = `
+    modal.style.cssText = \`
       position: fixed;
       top: 0;
       left: 0;
@@ -250,42 +258,42 @@
       align-items: center;
       justify-content: center;
       z-index: 10001;
-    `;
+    \`;
 
     const modalContent = document.createElement('div');
-    modalContent.style.cssText = `
+    modalContent.style.cssText = \`
       background: white;
       padding: 30px;
       border-radius: 8px;
       max-width: 400px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    `;
+    \`;
 
     const title = document.createElement('h3');
     title.textContent = 'Voice Product Search';
-    title.style.cssText = `
+    title.style.cssText = \`
       margin: 0 0 20px 0;
       color: #333;
-    `;
+    \`;
 
     const errorMessage = document.createElement('p');
     errorMessage.textContent = message;
-    errorMessage.style.cssText = `
+    errorMessage.style.cssText = \`
       margin: 0 0 20px 0;
       color: #d82c0d;
-    `;
+    \`;
 
     const icon = document.createElement('div');
     icon.innerHTML = '🎤';
-    icon.style.cssText = `
+    icon.style.cssText = \`
       font-size: 40px;
       margin: 20px 0;
-    `;
+    \`;
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Close';
-    closeButton.style.cssText = `
+    closeButton.style.cssText = \`
       background: #008060;
       color: white;
       border: none;
@@ -293,7 +301,7 @@
       border-radius: 4px;
       cursor: pointer;
       font-size: 14px;
-    `;
+    \`;
 
     closeButton.addEventListener('click', () => {
       modal.remove();
@@ -317,13 +325,13 @@
   // Add CSS animations
   function addStyles() {
     const style = document.createElement('style');
-    style.textContent = `
+    style.textContent = \`
       @keyframes pulse {
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
         100% { transform: scale(1); }
       }
-    `;
+    \`;
     document.head.appendChild(style);
   }
 
@@ -345,4 +353,8 @@
     init();
   }
 
-})();
+})();`;
+
+// Write the plain JavaScript to the output file
+fs.writeFileSync(outputPath, plainJavaScript);
+console.log('✅ Built plain JavaScript version of embed.chat.js'); 
