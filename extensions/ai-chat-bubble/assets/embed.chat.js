@@ -10,6 +10,7 @@
   let recognition = null;
   let audioStream = null;
   let isInitialized = false;
+  let hasMicrophoneAccess = false;
   
   // Check if speech recognition is supported
   if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -55,6 +56,18 @@
     };
 
     isInitialized = true;
+  }
+
+  // Check microphone permission status
+  async function checkMicrophonePermission() {
+    try {
+      const permission = await navigator.permissions.query({ name: 'microphone' });
+      console.log('[DEBUG] Microphone permission status:', permission.state);
+      return permission.state;
+    } catch (error) {
+      console.log('[DEBUG] Could not check permission status:', error);
+      return 'unknown';
+    }
   }
 
   // Create voice chat bubble
@@ -144,16 +157,25 @@
         initializeRecognition();
       }
 
-      // Check if we already have microphone access
-      if (audioStream) {
-        // We already have access, start recognition directly
-        if (recognition) {
+      // Check current permission status
+      const permissionStatus = await checkMicrophonePermission();
+      console.log('[DEBUG] Current permission status:', permissionStatus);
+
+      if (permissionStatus === 'denied') {
+        showErrorModal('Microphone access is denied. Please enable it in your browser settings and refresh the page.');
+        return;
+      }
+
+      // If we already have microphone access, start recognition directly
+      if (hasMicrophoneAccess && audioStream) {
+        console.log('[DEBUG] Using existing microphone access');
+        if (recognition && !isListening) {
           recognition.start();
         }
         return;
       }
 
-      // Request microphone permission first
+      // Request microphone permission
       console.log('[DEBUG] Requesting microphone access...');
       const stream = await navigator.mediaDevices.getUserMedia({ 
         audio: {
@@ -165,15 +187,53 @@
 
       // Store stream for cleanup
       audioStream = stream;
+      hasMicrophoneAccess = true;
       console.log('[DEBUG] Microphone access granted');
 
-      // Start speech recognition after a short delay to ensure audio is ready
+      // Start speech recognition after ensuring audio is ready
       setTimeout(() => {
         if (recognition && !isListening) {
           console.log('[DEBUG] Starting speech recognition...');
-          recognition.start();
+          try {
+            recognition.start();
+          } catch (error) {
+            console.error('[DEBUG] Error starting recognition:', error);
+            // Try alternative approach for some browsers
+            if (window.webkitSpeechRecognition) {
+              recognition = new window.webkitSpeechRecognition();
+              recognition.continuous = false;
+              recognition.interimResults = false;
+              recognition.lang = 'en-US';
+              recognition.maxAlternatives = 1;
+              
+              recognition.onstart = () => {
+                console.log('[DEBUG] Voice recognition started (webkit)');
+                isListening = true;
+                updateBubbleUI();
+              };
+              
+              recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                console.log('[DEBUG] Voice recognized:', transcript);
+                processVoiceInput(transcript);
+              };
+              
+              recognition.onerror = (event) => {
+                console.error('[DEBUG] Speech recognition error (webkit):', event.error);
+                handleRecognitionError(event.error);
+              };
+              
+              recognition.onend = () => {
+                console.log('[DEBUG] Voice recognition ended (webkit)');
+                isListening = false;
+                updateBubbleUI();
+              };
+              
+              recognition.start();
+            }
+          }
         }
-      }, 100);
+      }, 200);
       
     } catch (error) {
       console.error('[DEBUG] Microphone access error:', error);
@@ -181,7 +241,12 @@
       // Try to start recognition anyway (some browsers work without explicit permission)
       if (recognition && !isListening) {
         console.log('[DEBUG] Trying speech recognition without explicit permission...');
-        recognition.start();
+        try {
+          recognition.start();
+        } catch (recognitionError) {
+          console.error('[DEBUG] Recognition start error:', recognitionError);
+          handleRecognitionError('audio-capture');
+        }
       } else {
         handleRecognitionError('audio-capture');
       }
@@ -193,9 +258,6 @@
     if (recognition && isListening) {
       recognition.stop();
     }
-    
-    // Don't stop the audio stream immediately, keep it for reuse
-    // Only stop it when the page is unloaded
   }
 
   // Handle recognition errors
@@ -233,6 +295,9 @@
     try {
       console.log('[DEBUG] Processing voice input:', transcript);
       
+      // Show loading state
+      showLoadingModal('Processing your voice input...');
+      
       // Send to voice search API
       const response = await fetch('/api/voice-search', {
         method: 'POST',
@@ -252,27 +317,191 @@
       const result = await response.json();
       console.log('[DEBUG] Voice search result:', result);
 
-      // Handle the result (e.g., redirect to search results)
+      // Hide loading modal
+      hideLoadingModal();
+
+      // Handle the result
       if (result.success && result.searchQuery) {
-        // Redirect to search results
-        window.location.href = `/search?q=${encodeURIComponent(result.searchQuery)}`;
+        // Show success message
+        showSuccessModal(`Searching for: "${result.searchQuery}"`);
+        
+        // Redirect to search results after a short delay
+        setTimeout(() => {
+          // Try to find the search form on the page
+          const searchForm = document.querySelector('form[action*="search"]') || 
+                           document.querySelector('input[name="q"]') ||
+                           document.querySelector('.search-form');
+          
+          if (searchForm) {
+            // If there's a search form, submit it
+            const searchInput = searchForm.querySelector('input[name="q"]') || 
+                              searchForm.querySelector('input[type="text"]');
+            if (searchInput) {
+              searchInput.value = result.searchQuery;
+              searchForm.submit();
+            } else {
+              // Fallback: redirect to search URL
+              window.location.href = `/search?q=${encodeURIComponent(result.searchQuery)}`;
+            }
+          } else {
+            // Fallback: redirect to search URL
+            window.location.href = `/search?q=${encodeURIComponent(result.searchQuery)}`;
+          }
+        }, 2000);
+      } else {
+        showErrorModal('Sorry, I couldn\'t process your voice input. Please try again.');
       }
 
     } catch (error) {
       console.error('[DEBUG] Error processing voice input:', error);
+      hideLoadingModal();
       showErrorModal('Sorry, there was an error processing your voice input. Please try again.');
+    }
+  }
+
+  // Show loading modal
+  function showLoadingModal(message) {
+    hideAllModals();
+    
+    const modal = document.createElement('div');
+    modal.id = 'voice-loading-modal';
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+    `;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    `;
+
+    const title = document.createElement('h3');
+    title.textContent = 'Voice Product Search';
+    title.style.cssText = `
+      margin: 0 0 20px 0;
+      color: #333;
+    `;
+
+    const loadingMessage = document.createElement('p');
+    loadingMessage.textContent = message;
+    loadingMessage.style.cssText = `
+      margin: 0 0 20px 0;
+      color: #666;
+    `;
+
+    const spinner = document.createElement('div');
+    spinner.innerHTML = '⏳';
+    spinner.style.cssText = `
+      font-size: 40px;
+      margin: 20px 0;
+      animation: spin 1s linear infinite;
+    `;
+
+    modalContent.appendChild(title);
+    modalContent.appendChild(loadingMessage);
+    modalContent.appendChild(spinner);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+  }
+
+  // Show success modal
+  function showSuccessModal(message) {
+    hideAllModals();
+    
+    const modal = document.createElement('div');
+    modal.id = 'voice-success-modal';
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10001;
+    `;
+
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    `;
+
+    const title = document.createElement('h3');
+    title.textContent = 'Voice Product Search';
+    title.style.cssText = `
+      margin: 0 0 20px 0;
+      color: #333;
+    `;
+
+    const successMessage = document.createElement('p');
+    successMessage.textContent = message;
+    successMessage.style.cssText = `
+      margin: 0 0 20px 0;
+      color: #008060;
+    `;
+
+    const icon = document.createElement('div');
+    icon.innerHTML = '✅';
+    icon.style.cssText = `
+      font-size: 40px;
+      margin: 20px 0;
+    `;
+
+    modalContent.appendChild(title);
+    modalContent.appendChild(successMessage);
+    modalContent.appendChild(icon);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+      modal.remove();
+    }, 3000);
+  }
+
+  // Hide all modals
+  function hideAllModals() {
+    const modals = ['voice-error-modal', 'voice-loading-modal', 'voice-success-modal'];
+    modals.forEach(id => {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.remove();
+      }
+    });
+  }
+
+  // Hide loading modal
+  function hideLoadingModal() {
+    const modal = document.getElementById('voice-loading-modal');
+    if (modal) {
+      modal.remove();
     }
   }
 
   // Show error modal
   function showErrorModal(message) {
-    // Remove existing modal if any
-    const existingModal = document.getElementById('voice-error-modal');
-    if (existingModal) {
-      existingModal.remove();
-    }
-
-    // Create modal
+    hideAllModals();
+    
     const modal = document.createElement('div');
     modal.id = 'voice-error-modal';
     modal.style.cssText = `
@@ -358,6 +587,11 @@
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
         100% { transform: scale(1); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     `;
     document.head.appendChild(style);
