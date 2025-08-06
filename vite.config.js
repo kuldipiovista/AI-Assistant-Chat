@@ -17,25 +17,11 @@ if (
   delete process.env.HOST;
 }
 
-const host = new URL(process.env.SHOPIFY_APP_URL || "https://ai-assistant-chat-iczt.onrender.com/")
-  .hostname;
-
 export default defineConfig({
   server: {
-    // Allow your ngrok domain (or use a wildcard for all ngrok domains)
-    allowedHosts: [
-      "ai-assistant-chat-iczt.onrender.com",
-      "localhost",
-      "127.0.0.1",
-      // ".ngrok-free.app" // Uncomment to allow all ngrok domains
-    ],
-    cors: {
-      preflightContinue: true,
-    },
     port: Number(process.env.PORT || 10000),
     host: "0.0.0.0", // Allow external connections
     fs: {
-      // See https://vitejs.dev/config/server-options.html#server-fs-allow for more information
       allow: ["app", "node_modules"],
     },
   },

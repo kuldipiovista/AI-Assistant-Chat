@@ -7,7 +7,7 @@ services:
   - type: web
     name: ai-assistant-chat
     env: node
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --legacy-peer-deps && npm run build:render
     startCommand: npx prisma generate && npx prisma db push --accept-data-loss && npm start
     envVars:
       - key: NODE_ENV
