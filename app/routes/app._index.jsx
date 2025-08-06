@@ -9,7 +9,6 @@ import {
   BlockStack,
   FormLayout,
   TextField,
-  Select,
   Checkbox,
   Banner,
   DataTable
