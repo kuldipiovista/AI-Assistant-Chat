@@ -1,11 +1,24 @@
 import { useState } from "react";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import {
+  AppProvider as PolarisAppProvider,
+  Button,
+  Card,
+  FormLayout,
+  Page,
+  Text,
+  TextField,
+} from "@shopify/polaris";
+import polarisTranslations from "@shopify/polaris/locales/en.json";
+import polarisStyles from "@shopify/polaris/build/esm/styles.css?url";
 import { login } from "../../shopify.server";
 import { loginErrorMessage } from "./error.server";
 
+export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
+
 export const loader = async ({ request }) => {
   const errors = loginErrorMessage(await login(request));
-  return { errors };
+  return { errors, polarisTranslations };
 };
 
 export const action = async ({ request }) => {
@@ -20,75 +33,29 @@ export default function Auth() {
   const { errors } = actionData || loaderData;
 
   return (
-    <div style={{ 
-      padding: '20px', 
-      fontFamily: 'Arial, sans-serif',
-      maxWidth: '400px',
-      margin: '0 auto',
-      marginTop: '50px'
-    }}>
-      <div style={{ 
-        border: '1px solid #ccc', 
-        borderRadius: '8px', 
-        padding: '30px',
-        backgroundColor: '#f9f9f9'
-      }}>
-        <h2 style={{ marginTop: 0, marginBottom: '20px' }}>Log in</h2>
-        <Form method="post">
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ 
-              display: 'block', 
-              marginBottom: '5px',
-              fontWeight: 'bold'
-            }}>
-              Shop domain
-            </label>
-            <input
-              type="text"
-              name="shop"
-              value={shop}
-              onChange={(e) => setShop(e.target.value)}
-              autoComplete="on"
-              style={{
-                width: '100%',
-                padding: '10px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                fontSize: '14px'
-              }}
-              placeholder="example.myshopify.com"
-            />
-            {errors?.shop && (
-              <p style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>
-                {errors.shop}
-              </p>
-            )}
-            <p style={{ 
-              fontSize: '12px', 
-              color: '#666', 
-              marginTop: '5px',
-              marginBottom: 0
-            }}>
-              example.myshopify.com
-            </p>
-          </div>
-          <button
-            type="submit"
-            style={{
-              backgroundColor: '#007cba',
-              color: 'white',
-              border: 'none',
-              padding: '12px 24px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              width: '100%'
-            }}
-          >
-            Log in
-          </button>
-        </Form>
-      </div>
-    </div>
+    <PolarisAppProvider i18n={loaderData.polarisTranslations}>
+      <Page>
+        <Card>
+          <Form method="post">
+            <FormLayout>
+              <Text variant="headingMd" as="h2">
+                Log in
+              </Text>
+              <TextField
+                type="text"
+                name="shop"
+                label="Shop domain"
+                helpText="example.myshopify.com"
+                value={shop}
+                onChange={setShop}
+                autoComplete="on"
+                error={errors.shop}
+              />
+              <Button submit>Log in</Button>
+            </FormLayout>
+          </Form>
+        </Card>
+      </Page>
+    </PolarisAppProvider>
   );
 }

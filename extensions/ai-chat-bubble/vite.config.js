@@ -12,8 +12,17 @@ export default defineConfig({
       output: {
         entryFileNames: "embed.chat.js",
         format: "iife",
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
       },
+      external: ['react', 'react-dom'],
     },
     lib: false,
+    minify: false, // Keep readable for debugging
+  },
+  define: {
+    global: 'globalThis',
   },
 });

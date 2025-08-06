@@ -1,40 +1,7731 @@
-(function(){"use strict";function Lo(T){return T&&T.__esModule&&Object.prototype.hasOwnProperty.call(T,"default")?T.default:T}var Ll={exports:{}},jn={},Tl={exports:{}},M={};/**
- * @license React
- * react.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */var To;function Da(){if(To)return M;To=1;var T=Symbol.for("react.element"),$=Symbol.for("react.portal"),m=Symbol.for("react.fragment"),ze=Symbol.for("react.strict_mode"),ge=Symbol.for("react.profiler"),xe=Symbol.for("react.provider"),ce=Symbol.for("react.context"),ee=Symbol.for("react.forward_ref"),B=Symbol.for("react.suspense"),we=Symbol.for("react.memo"),pe=Symbol.for("react.lazy"),X=Symbol.iterator;function K(c){return c===null||typeof c!="object"?null:(c=X&&c[X]||c["@@iterator"],typeof c=="function"?c:null)}var Ne={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}},Oe=Object.assign,j={};function z(c,v,O){this.props=c,this.context=v,this.refs=j,this.updater=O||Ne}z.prototype.isReactComponent={},z.prototype.setState=function(c,v){if(typeof c!="object"&&typeof c!="function"&&c!=null)throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");this.updater.enqueueSetState(this,c,v,"setState")},z.prototype.forceUpdate=function(c){this.updater.enqueueForceUpdate(this,c,"forceUpdate")};function se(){}se.prototype=z.prototype;function ue(c,v,O){this.props=c,this.context=v,this.refs=j,this.updater=O||Ne}var Le=ue.prototype=new se;Le.constructor=ue,Oe(Le,z.prototype),Le.isPureReactComponent=!0;var me=Array.isArray,tt=Object.prototype.hasOwnProperty,Te={current:null},Me={key:!0,ref:!0,__self:!0,__source:!0};function Ge(c,v,O){var I,U={},A=null,Y=null;if(v!=null)for(I in v.ref!==void 0&&(Y=v.ref),v.key!==void 0&&(A=""+v.key),v)tt.call(v,I)&&!Me.hasOwnProperty(I)&&(U[I]=v[I]);var H=arguments.length-2;if(H===1)U.children=O;else if(1<H){for(var q=Array(H),He=0;He<H;He++)q[He]=arguments[He+2];U.children=q}if(c&&c.defaultProps)for(I in H=c.defaultProps,H)U[I]===void 0&&(U[I]=H[I]);return{$$typeof:T,type:c,key:A,ref:Y,props:U,_owner:Te.current}}function Pt(c,v){return{$$typeof:T,type:c.type,key:v,ref:c.ref,props:c.props,_owner:c._owner}}function yt(c){return typeof c=="object"&&c!==null&&c.$$typeof===T}function Kt(c){var v={"=":"=0",":":"=2"};return"$"+c.replace(/[=:]/g,function(O){return v[O]})}var ct=/\/+/g;function $e(c,v){return typeof c=="object"&&c!==null&&c.key!=null?Kt(""+c.key):v.toString(36)}function nt(c,v,O,I,U){var A=typeof c;(A==="undefined"||A==="boolean")&&(c=null);var Y=!1;if(c===null)Y=!0;else switch(A){case"string":case"number":Y=!0;break;case"object":switch(c.$$typeof){case T:case $:Y=!0}}if(Y)return Y=c,U=U(Y),c=I===""?"."+$e(Y,0):I,me(U)?(O="",c!=null&&(O=c.replace(ct,"$&/")+"/"),nt(U,v,O,"",function(He){return He})):U!=null&&(yt(U)&&(U=Pt(U,O+(!U.key||Y&&Y.key===U.key?"":(""+U.key).replace(ct,"$&/")+"/")+c)),v.push(U)),1;if(Y=0,I=I===""?".":I+":",me(c))for(var H=0;H<c.length;H++){A=c[H];var q=I+$e(A,H);Y+=nt(A,v,O,q,U)}else if(q=K(c),typeof q=="function")for(c=q.call(c),H=0;!(A=c.next()).done;)A=A.value,q=I+$e(A,H++),Y+=nt(A,v,O,q,U);else if(A==="object")throw v=String(c),Error("Objects are not valid as a React child (found: "+(v==="[object Object]"?"object with keys {"+Object.keys(c).join(", ")+"}":v)+"). If you meant to render a collection of children, use an array instead.");return Y}function ft(c,v,O){if(c==null)return c;var I=[],U=0;return nt(c,I,"","",function(A){return v.call(O,A,U++)}),I}function Ie(c){if(c._status===-1){var v=c._result;v=v(),v.then(function(O){(c._status===0||c._status===-1)&&(c._status=1,c._result=O)},function(O){(c._status===0||c._status===-1)&&(c._status=2,c._result=O)}),c._status===-1&&(c._status=0,c._result=v)}if(c._status===1)return c._result.default;throw c._result}var re={current:null},S={transition:null},R={ReactCurrentDispatcher:re,ReactCurrentBatchConfig:S,ReactCurrentOwner:Te};function E(){throw Error("act(...) is not supported in production builds of React.")}return M.Children={map:ft,forEach:function(c,v,O){ft(c,function(){v.apply(this,arguments)},O)},count:function(c){var v=0;return ft(c,function(){v++}),v},toArray:function(c){return ft(c,function(v){return v})||[]},only:function(c){if(!yt(c))throw Error("React.Children.only expected to receive a single React element child.");return c}},M.Component=z,M.Fragment=m,M.Profiler=ge,M.PureComponent=ue,M.StrictMode=ze,M.Suspense=B,M.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=R,M.act=E,M.cloneElement=function(c,v,O){if(c==null)throw Error("React.cloneElement(...): The argument must be a React element, but you passed "+c+".");var I=Oe({},c.props),U=c.key,A=c.ref,Y=c._owner;if(v!=null){if(v.ref!==void 0&&(A=v.ref,Y=Te.current),v.key!==void 0&&(U=""+v.key),c.type&&c.type.defaultProps)var H=c.type.defaultProps;for(q in v)tt.call(v,q)&&!Me.hasOwnProperty(q)&&(I[q]=v[q]===void 0&&H!==void 0?H[q]:v[q])}var q=arguments.length-2;if(q===1)I.children=O;else if(1<q){H=Array(q);for(var He=0;He<q;He++)H[He]=arguments[He+2];I.children=H}return{$$typeof:T,type:c.type,key:U,ref:A,props:I,_owner:Y}},M.createContext=function(c){return c={$$typeof:ce,_currentValue:c,_currentValue2:c,_threadCount:0,Provider:null,Consumer:null,_defaultValue:null,_globalName:null},c.Provider={$$typeof:xe,_context:c},c.Consumer=c},M.createElement=Ge,M.createFactory=function(c){var v=Ge.bind(null,c);return v.type=c,v},M.createRef=function(){return{current:null}},M.forwardRef=function(c){return{$$typeof:ee,render:c}},M.isValidElement=yt,M.lazy=function(c){return{$$typeof:pe,_payload:{_status:-1,_result:c},_init:Ie}},M.memo=function(c,v){return{$$typeof:we,type:c,compare:v===void 0?null:v}},M.startTransition=function(c){var v=S.transition;S.transition={};try{c()}finally{S.transition=v}},M.unstable_act=E,M.useCallback=function(c,v){return re.current.useCallback(c,v)},M.useContext=function(c){return re.current.useContext(c)},M.useDebugValue=function(){},M.useDeferredValue=function(c){return re.current.useDeferredValue(c)},M.useEffect=function(c,v){return re.current.useEffect(c,v)},M.useId=function(){return re.current.useId()},M.useImperativeHandle=function(c,v,O){return re.current.useImperativeHandle(c,v,O)},M.useInsertionEffect=function(c,v){return re.current.useInsertionEffect(c,v)},M.useLayoutEffect=function(c,v){return re.current.useLayoutEffect(c,v)},M.useMemo=function(c,v){return re.current.useMemo(c,v)},M.useReducer=function(c,v,O){return re.current.useReducer(c,v,O)},M.useRef=function(c){return re.current.useRef(c)},M.useState=function(c){return re.current.useState(c)},M.useSyncExternalStore=function(c,v,O){return re.current.useSyncExternalStore(c,v,O)},M.useTransition=function(){return re.current.useTransition()},M.version="18.3.1",M}var Ro;function Rl(){return Ro||(Ro=1,Tl.exports=Da()),Tl.exports}/**
- * @license React
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */var Do;function ja(){if(Do)return jn;Do=1;var T=Rl(),$=Symbol.for("react.element"),m=Symbol.for("react.fragment"),ze=Object.prototype.hasOwnProperty,ge=T.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,xe={key:!0,ref:!0,__self:!0,__source:!0};function ce(ee,B,we){var pe,X={},K=null,Ne=null;we!==void 0&&(K=""+we),B.key!==void 0&&(K=""+B.key),B.ref!==void 0&&(Ne=B.ref);for(pe in B)ze.call(B,pe)&&!xe.hasOwnProperty(pe)&&(X[pe]=B[pe]);if(ee&&ee.defaultProps)for(pe in B=ee.defaultProps,B)X[pe]===void 0&&(X[pe]=B[pe]);return{$$typeof:$,type:ee,key:K,ref:Ne,props:X,_owner:ge.current}}return jn.Fragment=m,jn.jsx=ce,jn.jsxs=ce,jn}var jo;function Oa(){return jo||(jo=1,Ll.exports=ja()),Ll.exports}var Q=Oa(),on=Rl();const Ma=Lo(on);var Dl={exports:{}},je={},jl={exports:{}},Ol={};/**
- * @license React
- * scheduler.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */var Oo;function Ia(){return Oo||(Oo=1,function(T){function $(S,R){var E=S.length;S.push(R);e:for(;0<E;){var c=E-1>>>1,v=S[c];if(0<ge(v,R))S[c]=R,S[E]=v,E=c;else break e}}function m(S){return S.length===0?null:S[0]}function ze(S){if(S.length===0)return null;var R=S[0],E=S.pop();if(E!==R){S[0]=E;e:for(var c=0,v=S.length,O=v>>>1;c<O;){var I=2*(c+1)-1,U=S[I],A=I+1,Y=S[A];if(0>ge(U,E))A<v&&0>ge(Y,U)?(S[c]=Y,S[A]=E,c=A):(S[c]=U,S[I]=E,c=I);else if(A<v&&0>ge(Y,E))S[c]=Y,S[A]=E,c=A;else break e}}return R}function ge(S,R){var E=S.sortIndex-R.sortIndex;return E!==0?E:S.id-R.id}if(typeof performance=="object"&&typeof performance.now=="function"){var xe=performance;T.unstable_now=function(){return xe.now()}}else{var ce=Date,ee=ce.now();T.unstable_now=function(){return ce.now()-ee}}var B=[],we=[],pe=1,X=null,K=3,Ne=!1,Oe=!1,j=!1,z=typeof setTimeout=="function"?setTimeout:null,se=typeof clearTimeout=="function"?clearTimeout:null,ue=typeof setImmediate<"u"?setImmediate:null;typeof navigator<"u"&&navigator.scheduling!==void 0&&navigator.scheduling.isInputPending!==void 0&&navigator.scheduling.isInputPending.bind(navigator.scheduling);function Le(S){for(var R=m(we);R!==null;){if(R.callback===null)ze(we);else if(R.startTime<=S)ze(we),R.sortIndex=R.expirationTime,$(B,R);else break;R=m(we)}}function me(S){if(j=!1,Le(S),!Oe)if(m(B)!==null)Oe=!0,Ie(tt);else{var R=m(we);R!==null&&re(me,R.startTime-S)}}function tt(S,R){Oe=!1,j&&(j=!1,se(Ge),Ge=-1),Ne=!0;var E=K;try{for(Le(R),X=m(B);X!==null&&(!(X.expirationTime>R)||S&&!Kt());){var c=X.callback;if(typeof c=="function"){X.callback=null,K=X.priorityLevel;var v=c(X.expirationTime<=R);R=T.unstable_now(),typeof v=="function"?X.callback=v:X===m(B)&&ze(B),Le(R)}else ze(B);X=m(B)}if(X!==null)var O=!0;else{var I=m(we);I!==null&&re(me,I.startTime-R),O=!1}return O}finally{X=null,K=E,Ne=!1}}var Te=!1,Me=null,Ge=-1,Pt=5,yt=-1;function Kt(){return!(T.unstable_now()-yt<Pt)}function ct(){if(Me!==null){var S=T.unstable_now();yt=S;var R=!0;try{R=Me(!0,S)}finally{R?$e():(Te=!1,Me=null)}}else Te=!1}var $e;if(typeof ue=="function")$e=function(){ue(ct)};else if(typeof MessageChannel<"u"){var nt=new MessageChannel,ft=nt.port2;nt.port1.onmessage=ct,$e=function(){ft.postMessage(null)}}else $e=function(){z(ct,0)};function Ie(S){Me=S,Te||(Te=!0,$e())}function re(S,R){Ge=z(function(){S(T.unstable_now())},R)}T.unstable_IdlePriority=5,T.unstable_ImmediatePriority=1,T.unstable_LowPriority=4,T.unstable_NormalPriority=3,T.unstable_Profiling=null,T.unstable_UserBlockingPriority=2,T.unstable_cancelCallback=function(S){S.callback=null},T.unstable_continueExecution=function(){Oe||Ne||(Oe=!0,Ie(tt))},T.unstable_forceFrameRate=function(S){0>S||125<S?console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"):Pt=0<S?Math.floor(1e3/S):5},T.unstable_getCurrentPriorityLevel=function(){return K},T.unstable_getFirstCallbackNode=function(){return m(B)},T.unstable_next=function(S){switch(K){case 1:case 2:case 3:var R=3;break;default:R=K}var E=K;K=R;try{return S()}finally{K=E}},T.unstable_pauseExecution=function(){},T.unstable_requestPaint=function(){},T.unstable_runWithPriority=function(S,R){switch(S){case 1:case 2:case 3:case 4:case 5:break;default:S=3}var E=K;K=S;try{return R()}finally{K=E}},T.unstable_scheduleCallback=function(S,R,E){var c=T.unstable_now();switch(typeof E=="object"&&E!==null?(E=E.delay,E=typeof E=="number"&&0<E?c+E:c):E=c,S){case 1:var v=-1;break;case 2:v=250;break;case 5:v=1073741823;break;case 4:v=1e4;break;default:v=5e3}return v=E+v,S={id:pe++,callback:R,priorityLevel:S,startTime:E,expirationTime:v,sortIndex:-1},E>c?(S.sortIndex=E,$(we,S),m(B)===null&&S===m(we)&&(j?(se(Ge),Ge=-1):j=!0,re(me,E-c))):(S.sortIndex=v,$(B,S),Oe||Ne||(Oe=!0,Ie(tt))),S},T.unstable_shouldYield=Kt,T.unstable_wrapCallback=function(S){var R=K;return function(){var E=K;K=R;try{return S.apply(this,arguments)}finally{K=E}}}}(Ol)),Ol}var Mo;function Fa(){return Mo||(Mo=1,jl.exports=Ia()),jl.exports}/**
- * @license React
- * react-dom.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */var Io;function Ua(){if(Io)return je;Io=1;var T=Rl(),$=Fa();function m(e){for(var t="https://reactjs.org/docs/error-decoder.html?invariant="+e,n=1;n<arguments.length;n++)t+="&args[]="+encodeURIComponent(arguments[n]);return"Minified React error #"+e+"; visit "+t+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings."}var ze=new Set,ge={};function xe(e,t){ce(e,t),ce(e+"Capture",t)}function ce(e,t){for(ge[e]=t,e=0;e<t.length;e++)ze.add(t[e])}var ee=!(typeof window>"u"||typeof window.document>"u"||typeof window.document.createElement>"u"),B=Object.prototype.hasOwnProperty,we=/^[:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD][:A-Z_a-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\-.0-9\u00B7\u0300-\u036F\u203F-\u2040]*$/,pe={},X={};function K(e){return B.call(X,e)?!0:B.call(pe,e)?!1:we.test(e)?X[e]=!0:(pe[e]=!0,!1)}function Ne(e,t,n,r){if(n!==null&&n.type===0)return!1;switch(typeof t){case"function":case"symbol":return!0;case"boolean":return r?!1:n!==null?!n.acceptsBooleans:(e=e.toLowerCase().slice(0,5),e!=="data-"&&e!=="aria-");default:return!1}}function Oe(e,t,n,r){if(t===null||typeof t>"u"||Ne(e,t,n,r))return!0;if(r)return!1;if(n!==null)switch(n.type){case 3:return!t;case 4:return t===!1;case 5:return isNaN(t);case 6:return isNaN(t)||1>t}return!1}function j(e,t,n,r,l,u,o){this.acceptsBooleans=t===2||t===3||t===4,this.attributeName=r,this.attributeNamespace=l,this.mustUseProperty=n,this.propertyName=e,this.type=t,this.sanitizeURL=u,this.removeEmptyString=o}var z={};"children dangerouslySetInnerHTML defaultValue defaultChecked innerHTML suppressContentEditableWarning suppressHydrationWarning style".split(" ").forEach(function(e){z[e]=new j(e,0,!1,e,null,!1,!1)}),[["acceptCharset","accept-charset"],["className","class"],["htmlFor","for"],["httpEquiv","http-equiv"]].forEach(function(e){var t=e[0];z[t]=new j(t,1,!1,e[1],null,!1,!1)}),["contentEditable","draggable","spellCheck","value"].forEach(function(e){z[e]=new j(e,2,!1,e.toLowerCase(),null,!1,!1)}),["autoReverse","externalResourcesRequired","focusable","preserveAlpha"].forEach(function(e){z[e]=new j(e,2,!1,e,null,!1,!1)}),"allowFullScreen async autoFocus autoPlay controls default defer disabled disablePictureInPicture disableRemotePlayback formNoValidate hidden loop noModule noValidate open playsInline readOnly required reversed scoped seamless itemScope".split(" ").forEach(function(e){z[e]=new j(e,3,!1,e.toLowerCase(),null,!1,!1)}),["checked","multiple","muted","selected"].forEach(function(e){z[e]=new j(e,3,!0,e,null,!1,!1)}),["capture","download"].forEach(function(e){z[e]=new j(e,4,!1,e,null,!1,!1)}),["cols","rows","size","span"].forEach(function(e){z[e]=new j(e,6,!1,e,null,!1,!1)}),["rowSpan","start"].forEach(function(e){z[e]=new j(e,5,!1,e.toLowerCase(),null,!1,!1)});var se=/[\-:]([a-z])/g;function ue(e){return e[1].toUpperCase()}"accent-height alignment-baseline arabic-form baseline-shift cap-height clip-path clip-rule color-interpolation color-interpolation-filters color-profile color-rendering dominant-baseline enable-background fill-opacity fill-rule flood-color flood-opacity font-family font-size font-size-adjust font-stretch font-style font-variant font-weight glyph-name glyph-orientation-horizontal glyph-orientation-vertical horiz-adv-x horiz-origin-x image-rendering letter-spacing lighting-color marker-end marker-mid marker-start overline-position overline-thickness paint-order panose-1 pointer-events rendering-intent shape-rendering stop-color stop-opacity strikethrough-position strikethrough-thickness stroke-dasharray stroke-dashoffset stroke-linecap stroke-linejoin stroke-miterlimit stroke-opacity stroke-width text-anchor text-decoration text-rendering underline-position underline-thickness unicode-bidi unicode-range units-per-em v-alphabetic v-hanging v-ideographic v-mathematical vector-effect vert-adv-y vert-origin-x vert-origin-y word-spacing writing-mode xmlns:xlink x-height".split(" ").forEach(function(e){var t=e.replace(se,ue);z[t]=new j(t,1,!1,e,null,!1,!1)}),"xlink:actuate xlink:arcrole xlink:role xlink:show xlink:title xlink:type".split(" ").forEach(function(e){var t=e.replace(se,ue);z[t]=new j(t,1,!1,e,"http://www.w3.org/1999/xlink",!1,!1)}),["xml:base","xml:lang","xml:space"].forEach(function(e){var t=e.replace(se,ue);z[t]=new j(t,1,!1,e,"http://www.w3.org/XML/1998/namespace",!1,!1)}),["tabIndex","crossOrigin"].forEach(function(e){z[e]=new j(e,1,!1,e.toLowerCase(),null,!1,!1)}),z.xlinkHref=new j("xlinkHref",1,!1,"xlink:href","http://www.w3.org/1999/xlink",!0,!1),["src","href","action","formAction"].forEach(function(e){z[e]=new j(e,1,!1,e.toLowerCase(),null,!0,!0)});function Le(e,t,n,r){var l=z.hasOwnProperty(t)?z[t]:null;(l!==null?l.type!==0:r||!(2<t.length)||t[0]!=="o"&&t[0]!=="O"||t[1]!=="n"&&t[1]!=="N")&&(Oe(t,n,l,r)&&(n=null),r||l===null?K(t)&&(n===null?e.removeAttribute(t):e.setAttribute(t,""+n)):l.mustUseProperty?e[l.propertyName]=n===null?l.type===3?!1:"":n:(t=l.attributeName,r=l.attributeNamespace,n===null?e.removeAttribute(t):(l=l.type,n=l===3||l===4&&n===!0?"":""+n,r?e.setAttributeNS(r,t,n):e.setAttribute(t,n))))}var me=T.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,tt=Symbol.for("react.element"),Te=Symbol.for("react.portal"),Me=Symbol.for("react.fragment"),Ge=Symbol.for("react.strict_mode"),Pt=Symbol.for("react.profiler"),yt=Symbol.for("react.provider"),Kt=Symbol.for("react.context"),ct=Symbol.for("react.forward_ref"),$e=Symbol.for("react.suspense"),nt=Symbol.for("react.suspense_list"),ft=Symbol.for("react.memo"),Ie=Symbol.for("react.lazy"),re=Symbol.for("react.offscreen"),S=Symbol.iterator;function R(e){return e===null||typeof e!="object"?null:(e=S&&e[S]||e["@@iterator"],typeof e=="function"?e:null)}var E=Object.assign,c;function v(e){if(c===void 0)try{throw Error()}catch(n){var t=n.stack.trim().match(/\n( *(at )?)/);c=t&&t[1]||""}return`
-`+c+e}var O=!1;function I(e,t){if(!e||O)return"";O=!0;var n=Error.prepareStackTrace;Error.prepareStackTrace=void 0;try{if(t)if(t=function(){throw Error()},Object.defineProperty(t.prototype,"props",{set:function(){throw Error()}}),typeof Reflect=="object"&&Reflect.construct){try{Reflect.construct(t,[])}catch(p){var r=p}Reflect.construct(e,[],t)}else{try{t.call()}catch(p){r=p}e.call(t.prototype)}else{try{throw Error()}catch(p){r=p}e()}}catch(p){if(p&&r&&typeof p.stack=="string"){for(var l=p.stack.split(`
-`),u=r.stack.split(`
-`),o=l.length-1,i=u.length-1;1<=o&&0<=i&&l[o]!==u[i];)i--;for(;1<=o&&0<=i;o--,i--)if(l[o]!==u[i]){if(o!==1||i!==1)do if(o--,i--,0>i||l[o]!==u[i]){var s=`
-`+l[o].replace(" at new "," at ");return e.displayName&&s.includes("<anonymous>")&&(s=s.replace("<anonymous>",e.displayName)),s}while(1<=o&&0<=i);break}}}finally{O=!1,Error.prepareStackTrace=n}return(e=e?e.displayName||e.name:"")?v(e):""}function U(e){switch(e.tag){case 5:return v(e.type);case 16:return v("Lazy");case 13:return v("Suspense");case 19:return v("SuspenseList");case 0:case 2:case 15:return e=I(e.type,!1),e;case 11:return e=I(e.type.render,!1),e;case 1:return e=I(e.type,!0),e;default:return""}}function A(e){if(e==null)return null;if(typeof e=="function")return e.displayName||e.name||null;if(typeof e=="string")return e;switch(e){case Me:return"Fragment";case Te:return"Portal";case Pt:return"Profiler";case Ge:return"StrictMode";case $e:return"Suspense";case nt:return"SuspenseList"}if(typeof e=="object")switch(e.$$typeof){case Kt:return(e.displayName||"Context")+".Consumer";case yt:return(e._context.displayName||"Context")+".Provider";case ct:var t=e.render;return e=e.displayName,e||(e=t.displayName||t.name||"",e=e!==""?"ForwardRef("+e+")":"ForwardRef"),e;case ft:return t=e.displayName||null,t!==null?t:A(e.type)||"Memo";case Ie:t=e._payload,e=e._init;try{return A(e(t))}catch{}}return null}function Y(e){var t=e.type;switch(e.tag){case 24:return"Cache";case 9:return(t.displayName||"Context")+".Consumer";case 10:return(t._context.displayName||"Context")+".Provider";case 18:return"DehydratedFragment";case 11:return e=t.render,e=e.displayName||e.name||"",t.displayName||(e!==""?"ForwardRef("+e+")":"ForwardRef");case 7:return"Fragment";case 5:return t;case 4:return"Portal";case 3:return"Root";case 6:return"Text";case 16:return A(t);case 8:return t===Ge?"StrictMode":"Mode";case 22:return"Offscreen";case 12:return"Profiler";case 21:return"Scope";case 13:return"Suspense";case 19:return"SuspenseList";case 25:return"TracingMarker";case 1:case 0:case 17:case 2:case 14:case 15:if(typeof t=="function")return t.displayName||t.name||null;if(typeof t=="string")return t}return null}function H(e){switch(typeof e){case"boolean":case"number":case"string":case"undefined":return e;case"object":return e;default:return""}}function q(e){var t=e.type;return(e=e.nodeName)&&e.toLowerCase()==="input"&&(t==="checkbox"||t==="radio")}function He(e){var t=q(e)?"checked":"value",n=Object.getOwnPropertyDescriptor(e.constructor.prototype,t),r=""+e[t];if(!e.hasOwnProperty(t)&&typeof n<"u"&&typeof n.get=="function"&&typeof n.set=="function"){var l=n.get,u=n.set;return Object.defineProperty(e,t,{configurable:!0,get:function(){return l.call(this)},set:function(o){r=""+o,u.call(this,o)}}),Object.defineProperty(e,t,{enumerable:n.enumerable}),{getValue:function(){return r},setValue:function(o){r=""+o},stopTracking:function(){e._valueTracker=null,delete e[t]}}}}function wr(e){e._valueTracker||(e._valueTracker=He(e))}function Uo(e){if(!e)return!1;var t=e._valueTracker;if(!t)return!0;var n=t.getValue(),r="";return e&&(r=q(e)?e.checked?"true":"false":e.value),e=r,e!==n?(t.setValue(e),!0):!1}function Sr(e){if(e=e||(typeof document<"u"?document:void 0),typeof e>"u")return null;try{return e.activeElement||e.body}catch{return e.body}}function Ml(e,t){var n=t.checked;return E({},t,{defaultChecked:void 0,defaultValue:void 0,value:void 0,checked:n??e._wrapperState.initialChecked})}function Ao(e,t){var n=t.defaultValue==null?"":t.defaultValue,r=t.checked!=null?t.checked:t.defaultChecked;n=H(t.value!=null?t.value:n),e._wrapperState={initialChecked:r,initialValue:n,controlled:t.type==="checkbox"||t.type==="radio"?t.checked!=null:t.value!=null}}function Vo(e,t){t=t.checked,t!=null&&Le(e,"checked",t,!1)}function Il(e,t){Vo(e,t);var n=H(t.value),r=t.type;if(n!=null)r==="number"?(n===0&&e.value===""||e.value!=n)&&(e.value=""+n):e.value!==""+n&&(e.value=""+n);else if(r==="submit"||r==="reset"){e.removeAttribute("value");return}t.hasOwnProperty("value")?Fl(e,t.type,n):t.hasOwnProperty("defaultValue")&&Fl(e,t.type,H(t.defaultValue)),t.checked==null&&t.defaultChecked!=null&&(e.defaultChecked=!!t.defaultChecked)}function Bo(e,t,n){if(t.hasOwnProperty("value")||t.hasOwnProperty("defaultValue")){var r=t.type;if(!(r!=="submit"&&r!=="reset"||t.value!==void 0&&t.value!==null))return;t=""+e._wrapperState.initialValue,n||t===e.value||(e.value=t),e.defaultValue=t}n=e.name,n!==""&&(e.name=""),e.defaultChecked=!!e._wrapperState.initialChecked,n!==""&&(e.name=n)}function Fl(e,t,n){(t!=="number"||Sr(e.ownerDocument)!==e)&&(n==null?e.defaultValue=""+e._wrapperState.initialValue:e.defaultValue!==""+n&&(e.defaultValue=""+n))}var On=Array.isArray;function sn(e,t,n,r){if(e=e.options,t){t={};for(var l=0;l<n.length;l++)t["$"+n[l]]=!0;for(n=0;n<e.length;n++)l=t.hasOwnProperty("$"+e[n].value),e[n].selected!==l&&(e[n].selected=l),l&&r&&(e[n].defaultSelected=!0)}else{for(n=""+H(n),t=null,l=0;l<e.length;l++){if(e[l].value===n){e[l].selected=!0,r&&(e[l].defaultSelected=!0);return}t!==null||e[l].disabled||(t=e[l])}t!==null&&(t.selected=!0)}}function Ul(e,t){if(t.dangerouslySetInnerHTML!=null)throw Error(m(91));return E({},t,{value:void 0,defaultValue:void 0,children:""+e._wrapperState.initialValue})}function $o(e,t){var n=t.value;if(n==null){if(n=t.children,t=t.defaultValue,n!=null){if(t!=null)throw Error(m(92));if(On(n)){if(1<n.length)throw Error(m(93));n=n[0]}t=n}t==null&&(t=""),n=t}e._wrapperState={initialValue:H(n)}}function Ho(e,t){var n=H(t.value),r=H(t.defaultValue);n!=null&&(n=""+n,n!==e.value&&(e.value=n),t.defaultValue==null&&e.defaultValue!==n&&(e.defaultValue=n)),r!=null&&(e.defaultValue=""+r)}function Wo(e){var t=e.textContent;t===e._wrapperState.initialValue&&t!==""&&t!==null&&(e.value=t)}function Qo(e){switch(e){case"svg":return"http://www.w3.org/2000/svg";case"math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}function Al(e,t){return e==null||e==="http://www.w3.org/1999/xhtml"?Qo(t):e==="http://www.w3.org/2000/svg"&&t==="foreignObject"?"http://www.w3.org/1999/xhtml":e}var kr,Ko=function(e){return typeof MSApp<"u"&&MSApp.execUnsafeLocalFunction?function(t,n,r,l){MSApp.execUnsafeLocalFunction(function(){return e(t,n,r,l)})}:e}(function(e,t){if(e.namespaceURI!=="http://www.w3.org/2000/svg"||"innerHTML"in e)e.innerHTML=t;else{for(kr=kr||document.createElement("div"),kr.innerHTML="<svg>"+t.valueOf().toString()+"</svg>",t=kr.firstChild;e.firstChild;)e.removeChild(e.firstChild);for(;t.firstChild;)e.appendChild(t.firstChild)}});function Mn(e,t){if(t){var n=e.firstChild;if(n&&n===e.lastChild&&n.nodeType===3){n.nodeValue=t;return}}e.textContent=t}var In={animationIterationCount:!0,aspectRatio:!0,borderImageOutset:!0,borderImageSlice:!0,borderImageWidth:!0,boxFlex:!0,boxFlexGroup:!0,boxOrdinalGroup:!0,columnCount:!0,columns:!0,flex:!0,flexGrow:!0,flexPositive:!0,flexShrink:!0,flexNegative:!0,flexOrder:!0,gridArea:!0,gridRow:!0,gridRowEnd:!0,gridRowSpan:!0,gridRowStart:!0,gridColumn:!0,gridColumnEnd:!0,gridColumnSpan:!0,gridColumnStart:!0,fontWeight:!0,lineClamp:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,tabSize:!0,widows:!0,zIndex:!0,zoom:!0,fillOpacity:!0,floodOpacity:!0,stopOpacity:!0,strokeDasharray:!0,strokeDashoffset:!0,strokeMiterlimit:!0,strokeOpacity:!0,strokeWidth:!0},Ha=["Webkit","ms","Moz","O"];Object.keys(In).forEach(function(e){Ha.forEach(function(t){t=t+e.charAt(0).toUpperCase()+e.substring(1),In[t]=In[e]})});function Yo(e,t,n){return t==null||typeof t=="boolean"||t===""?"":n||typeof t!="number"||t===0||In.hasOwnProperty(e)&&In[e]?(""+t).trim():t+"px"}function Go(e,t){e=e.style;for(var n in t)if(t.hasOwnProperty(n)){var r=n.indexOf("--")===0,l=Yo(n,t[n],r);n==="float"&&(n="cssFloat"),r?e.setProperty(n,l):e[n]=l}}var Wa=E({menuitem:!0},{area:!0,base:!0,br:!0,col:!0,embed:!0,hr:!0,img:!0,input:!0,keygen:!0,link:!0,meta:!0,param:!0,source:!0,track:!0,wbr:!0});function Vl(e,t){if(t){if(Wa[e]&&(t.children!=null||t.dangerouslySetInnerHTML!=null))throw Error(m(137,e));if(t.dangerouslySetInnerHTML!=null){if(t.children!=null)throw Error(m(60));if(typeof t.dangerouslySetInnerHTML!="object"||!("__html"in t.dangerouslySetInnerHTML))throw Error(m(61))}if(t.style!=null&&typeof t.style!="object")throw Error(m(62))}}function Bl(e,t){if(e.indexOf("-")===-1)return typeof t.is=="string";switch(e){case"annotation-xml":case"color-profile":case"font-face":case"font-face-src":case"font-face-uri":case"font-face-format":case"font-face-name":case"missing-glyph":return!1;default:return!0}}var $l=null;function Hl(e){return e=e.target||e.srcElement||window,e.correspondingUseElement&&(e=e.correspondingUseElement),e.nodeType===3?e.parentNode:e}var Wl=null,an=null,cn=null;function Xo(e){if(e=lr(e)){if(typeof Wl!="function")throw Error(m(280));var t=e.stateNode;t&&(t=Wr(t),Wl(e.stateNode,e.type,t))}}function Zo(e){an?cn?cn.push(e):cn=[e]:an=e}function Jo(){if(an){var e=an,t=cn;if(cn=an=null,Xo(e),t)for(e=0;e<t.length;e++)Xo(t[e])}}function qo(e,t){return e(t)}function bo(){}var Ql=!1;function ei(e,t,n){if(Ql)return e(t,n);Ql=!0;try{return qo(e,t,n)}finally{Ql=!1,(an!==null||cn!==null)&&(bo(),Jo())}}function Fn(e,t){var n=e.stateNode;if(n===null)return null;var r=Wr(n);if(r===null)return null;n=r[t];e:switch(t){case"onClick":case"onClickCapture":case"onDoubleClick":case"onDoubleClickCapture":case"onMouseDown":case"onMouseDownCapture":case"onMouseMove":case"onMouseMoveCapture":case"onMouseUp":case"onMouseUpCapture":case"onMouseEnter":(r=!r.disabled)||(e=e.type,r=!(e==="button"||e==="input"||e==="select"||e==="textarea")),e=!r;break e;default:e=!1}if(e)return null;if(n&&typeof n!="function")throw Error(m(231,t,typeof n));return n}var Kl=!1;if(ee)try{var Un={};Object.defineProperty(Un,"passive",{get:function(){Kl=!0}}),window.addEventListener("test",Un,Un),window.removeEventListener("test",Un,Un)}catch{Kl=!1}function Qa(e,t,n,r,l,u,o,i,s){var p=Array.prototype.slice.call(arguments,3);try{t.apply(n,p)}catch(y){this.onError(y)}}var An=!1,xr=null,Er=!1,Yl=null,Ka={onError:function(e){An=!0,xr=e}};function Ya(e,t,n,r,l,u,o,i,s){An=!1,xr=null,Qa.apply(Ka,arguments)}function Ga(e,t,n,r,l,u,o,i,s){if(Ya.apply(this,arguments),An){if(An){var p=xr;An=!1,xr=null}else throw Error(m(198));Er||(Er=!0,Yl=p)}}function Yt(e){var t=e,n=e;if(e.alternate)for(;t.return;)t=t.return;else{e=t;do t=e,(t.flags&4098)!==0&&(n=t.return),e=t.return;while(e)}return t.tag===3?n:null}function ti(e){if(e.tag===13){var t=e.memoizedState;if(t===null&&(e=e.alternate,e!==null&&(t=e.memoizedState)),t!==null)return t.dehydrated}return null}function ni(e){if(Yt(e)!==e)throw Error(m(188))}function Xa(e){var t=e.alternate;if(!t){if(t=Yt(e),t===null)throw Error(m(188));return t!==e?null:e}for(var n=e,r=t;;){var l=n.return;if(l===null)break;var u=l.alternate;if(u===null){if(r=l.return,r!==null){n=r;continue}break}if(l.child===u.child){for(u=l.child;u;){if(u===n)return ni(l),e;if(u===r)return ni(l),t;u=u.sibling}throw Error(m(188))}if(n.return!==r.return)n=l,r=u;else{for(var o=!1,i=l.child;i;){if(i===n){o=!0,n=l,r=u;break}if(i===r){o=!0,r=l,n=u;break}i=i.sibling}if(!o){for(i=u.child;i;){if(i===n){o=!0,n=u,r=l;break}if(i===r){o=!0,r=u,n=l;break}i=i.sibling}if(!o)throw Error(m(189))}}if(n.alternate!==r)throw Error(m(190))}if(n.tag!==3)throw Error(m(188));return n.stateNode.current===n?e:t}function ri(e){return e=Xa(e),e!==null?li(e):null}function li(e){if(e.tag===5||e.tag===6)return e;for(e=e.child;e!==null;){var t=li(e);if(t!==null)return t;e=e.sibling}return null}var ui=$.unstable_scheduleCallback,oi=$.unstable_cancelCallback,Za=$.unstable_shouldYield,Ja=$.unstable_requestPaint,oe=$.unstable_now,qa=$.unstable_getCurrentPriorityLevel,Gl=$.unstable_ImmediatePriority,ii=$.unstable_UserBlockingPriority,_r=$.unstable_NormalPriority,ba=$.unstable_LowPriority,si=$.unstable_IdlePriority,Cr=null,dt=null;function ec(e){if(dt&&typeof dt.onCommitFiberRoot=="function")try{dt.onCommitFiberRoot(Cr,e,void 0,(e.current.flags&128)===128)}catch{}}var rt=Math.clz32?Math.clz32:rc,tc=Math.log,nc=Math.LN2;function rc(e){return e>>>=0,e===0?32:31-(tc(e)/nc|0)|0}var Pr=64,zr=4194304;function Vn(e){switch(e&-e){case 1:return 1;case 2:return 2;case 4:return 4;case 8:return 8;case 16:return 16;case 32:return 32;case 64:case 128:case 256:case 512:case 1024:case 2048:case 4096:case 8192:case 16384:case 32768:case 65536:case 131072:case 262144:case 524288:case 1048576:case 2097152:return e&4194240;case 4194304:case 8388608:case 16777216:case 33554432:case 67108864:return e&130023424;case 134217728:return 134217728;case 268435456:return 268435456;case 536870912:return 536870912;case 1073741824:return 1073741824;default:return e}}function Nr(e,t){var n=e.pendingLanes;if(n===0)return 0;var r=0,l=e.suspendedLanes,u=e.pingedLanes,o=n&268435455;if(o!==0){var i=o&~l;i!==0?r=Vn(i):(u&=o,u!==0&&(r=Vn(u)))}else o=n&~l,o!==0?r=Vn(o):u!==0&&(r=Vn(u));if(r===0)return 0;if(t!==0&&t!==r&&(t&l)===0&&(l=r&-r,u=t&-t,l>=u||l===16&&(u&4194240)!==0))return t;if((r&4)!==0&&(r|=n&16),t=e.entangledLanes,t!==0)for(e=e.entanglements,t&=r;0<t;)n=31-rt(t),l=1<<n,r|=e[n],t&=~l;return r}function lc(e,t){switch(e){case 1:case 2:case 4:return t+250;case 8:case 16:case 32:case 64:case 128:case 256:case 512:case 1024:case 2048:case 4096:case 8192:case 16384:case 32768:case 65536:case 131072:case 262144:case 524288:case 1048576:case 2097152:return t+5e3;case 4194304:case 8388608:case 16777216:case 33554432:case 67108864:return-1;case 134217728:case 268435456:case 536870912:case 1073741824:return-1;default:return-1}}function uc(e,t){for(var n=e.suspendedLanes,r=e.pingedLanes,l=e.expirationTimes,u=e.pendingLanes;0<u;){var o=31-rt(u),i=1<<o,s=l[o];s===-1?((i&n)===0||(i&r)!==0)&&(l[o]=lc(i,t)):s<=t&&(e.expiredLanes|=i),u&=~i}}function Xl(e){return e=e.pendingLanes&-1073741825,e!==0?e:e&1073741824?1073741824:0}function ai(){var e=Pr;return Pr<<=1,(Pr&4194240)===0&&(Pr=64),e}function Zl(e){for(var t=[],n=0;31>n;n++)t.push(e);return t}function Bn(e,t,n){e.pendingLanes|=t,t!==536870912&&(e.suspendedLanes=0,e.pingedLanes=0),e=e.eventTimes,t=31-rt(t),e[t]=n}function oc(e,t){var n=e.pendingLanes&~t;e.pendingLanes=t,e.suspendedLanes=0,e.pingedLanes=0,e.expiredLanes&=t,e.mutableReadLanes&=t,e.entangledLanes&=t,t=e.entanglements;var r=e.eventTimes;for(e=e.expirationTimes;0<n;){var l=31-rt(n),u=1<<l;t[l]=0,r[l]=-1,e[l]=-1,n&=~u}}function Jl(e,t){var n=e.entangledLanes|=t;for(e=e.entanglements;n;){var r=31-rt(n),l=1<<r;l&t|e[r]&t&&(e[r]|=t),n&=~l}}var W=0;function ci(e){return e&=-e,1<e?4<e?(e&268435455)!==0?16:536870912:4:1}var fi,ql,di,pi,mi,bl=!1,Lr=[],zt=null,Nt=null,Lt=null,$n=new Map,Hn=new Map,Tt=[],ic="mousedown mouseup touchcancel touchend touchstart auxclick dblclick pointercancel pointerdown pointerup dragend dragstart drop compositionend compositionstart keydown keypress keyup input textInput copy cut paste click change contextmenu reset submit".split(" ");function hi(e,t){switch(e){case"focusin":case"focusout":zt=null;break;case"dragenter":case"dragleave":Nt=null;break;case"mouseover":case"mouseout":Lt=null;break;case"pointerover":case"pointerout":$n.delete(t.pointerId);break;case"gotpointercapture":case"lostpointercapture":Hn.delete(t.pointerId)}}function Wn(e,t,n,r,l,u){return e===null||e.nativeEvent!==u?(e={blockedOn:t,domEventName:n,eventSystemFlags:r,nativeEvent:u,targetContainers:[l]},t!==null&&(t=lr(t),t!==null&&ql(t)),e):(e.eventSystemFlags|=r,t=e.targetContainers,l!==null&&t.indexOf(l)===-1&&t.push(l),e)}function sc(e,t,n,r,l){switch(t){case"focusin":return zt=Wn(zt,e,t,n,r,l),!0;case"dragenter":return Nt=Wn(Nt,e,t,n,r,l),!0;case"mouseover":return Lt=Wn(Lt,e,t,n,r,l),!0;case"pointerover":var u=l.pointerId;return $n.set(u,Wn($n.get(u)||null,e,t,n,r,l)),!0;case"gotpointercapture":return u=l.pointerId,Hn.set(u,Wn(Hn.get(u)||null,e,t,n,r,l)),!0}return!1}function vi(e){var t=Gt(e.target);if(t!==null){var n=Yt(t);if(n!==null){if(t=n.tag,t===13){if(t=ti(n),t!==null){e.blockedOn=t,mi(e.priority,function(){di(n)});return}}else if(t===3&&n.stateNode.current.memoizedState.isDehydrated){e.blockedOn=n.tag===3?n.stateNode.containerInfo:null;return}}}e.blockedOn=null}function Tr(e){if(e.blockedOn!==null)return!1;for(var t=e.targetContainers;0<t.length;){var n=tu(e.domEventName,e.eventSystemFlags,t[0],e.nativeEvent);if(n===null){n=e.nativeEvent;var r=new n.constructor(n.type,n);$l=r,n.target.dispatchEvent(r),$l=null}else return t=lr(n),t!==null&&ql(t),e.blockedOn=n,!1;t.shift()}return!0}function yi(e,t,n){Tr(e)&&n.delete(t)}function ac(){bl=!1,zt!==null&&Tr(zt)&&(zt=null),Nt!==null&&Tr(Nt)&&(Nt=null),Lt!==null&&Tr(Lt)&&(Lt=null),$n.forEach(yi),Hn.forEach(yi)}function Qn(e,t){e.blockedOn===t&&(e.blockedOn=null,bl||(bl=!0,$.unstable_scheduleCallback($.unstable_NormalPriority,ac)))}function Kn(e){function t(l){return Qn(l,e)}if(0<Lr.length){Qn(Lr[0],e);for(var n=1;n<Lr.length;n++){var r=Lr[n];r.blockedOn===e&&(r.blockedOn=null)}}for(zt!==null&&Qn(zt,e),Nt!==null&&Qn(Nt,e),Lt!==null&&Qn(Lt,e),$n.forEach(t),Hn.forEach(t),n=0;n<Tt.length;n++)r=Tt[n],r.blockedOn===e&&(r.blockedOn=null);for(;0<Tt.length&&(n=Tt[0],n.blockedOn===null);)vi(n),n.blockedOn===null&&Tt.shift()}var fn=me.ReactCurrentBatchConfig,Rr=!0;function cc(e,t,n,r){var l=W,u=fn.transition;fn.transition=null;try{W=1,eu(e,t,n,r)}finally{W=l,fn.transition=u}}function fc(e,t,n,r){var l=W,u=fn.transition;fn.transition=null;try{W=4,eu(e,t,n,r)}finally{W=l,fn.transition=u}}function eu(e,t,n,r){if(Rr){var l=tu(e,t,n,r);if(l===null)gu(e,t,r,Dr,n),hi(e,r);else if(sc(l,e,t,n,r))r.stopPropagation();else if(hi(e,r),t&4&&-1<ic.indexOf(e)){for(;l!==null;){var u=lr(l);if(u!==null&&fi(u),u=tu(e,t,n,r),u===null&&gu(e,t,r,Dr,n),u===l)break;l=u}l!==null&&r.stopPropagation()}else gu(e,t,r,null,n)}}var Dr=null;function tu(e,t,n,r){if(Dr=null,e=Hl(r),e=Gt(e),e!==null)if(t=Yt(e),t===null)e=null;else if(n=t.tag,n===13){if(e=ti(t),e!==null)return e;e=null}else if(n===3){if(t.stateNode.current.memoizedState.isDehydrated)return t.tag===3?t.stateNode.containerInfo:null;e=null}else t!==e&&(e=null);return Dr=e,null}function gi(e){switch(e){case"cancel":case"click":case"close":case"contextmenu":case"copy":case"cut":case"auxclick":case"dblclick":case"dragend":case"dragstart":case"drop":case"focusin":case"focusout":case"input":case"invalid":case"keydown":case"keypress":case"keyup":case"mousedown":case"mouseup":case"paste":case"pause":case"play":case"pointercancel":case"pointerdown":case"pointerup":case"ratechange":case"reset":case"resize":case"seeked":case"submit":case"touchcancel":case"touchend":case"touchstart":case"volumechange":case"change":case"selectionchange":case"textInput":case"compositionstart":case"compositionend":case"compositionupdate":case"beforeblur":case"afterblur":case"beforeinput":case"blur":case"fullscreenchange":case"focus":case"hashchange":case"popstate":case"select":case"selectstart":return 1;case"drag":case"dragenter":case"dragexit":case"dragleave":case"dragover":case"mousemove":case"mouseout":case"mouseover":case"pointermove":case"pointerout":case"pointerover":case"scroll":case"toggle":case"touchmove":case"wheel":case"mouseenter":case"mouseleave":case"pointerenter":case"pointerleave":return 4;case"message":switch(qa()){case Gl:return 1;case ii:return 4;case _r:case ba:return 16;case si:return 536870912;default:return 16}default:return 16}}var Rt=null,nu=null,jr=null;function wi(){if(jr)return jr;var e,t=nu,n=t.length,r,l="value"in Rt?Rt.value:Rt.textContent,u=l.length;for(e=0;e<n&&t[e]===l[e];e++);var o=n-e;for(r=1;r<=o&&t[n-r]===l[u-r];r++);return jr=l.slice(e,1<r?1-r:void 0)}function Or(e){var t=e.keyCode;return"charCode"in e?(e=e.charCode,e===0&&t===13&&(e=13)):e=t,e===10&&(e=13),32<=e||e===13?e:0}function Mr(){return!0}function Si(){return!1}function We(e){function t(n,r,l,u,o){this._reactName=n,this._targetInst=l,this.type=r,this.nativeEvent=u,this.target=o,this.currentTarget=null;for(var i in e)e.hasOwnProperty(i)&&(n=e[i],this[i]=n?n(u):u[i]);return this.isDefaultPrevented=(u.defaultPrevented!=null?u.defaultPrevented:u.returnValue===!1)?Mr:Si,this.isPropagationStopped=Si,this}return E(t.prototype,{preventDefault:function(){this.defaultPrevented=!0;var n=this.nativeEvent;n&&(n.preventDefault?n.preventDefault():typeof n.returnValue!="unknown"&&(n.returnValue=!1),this.isDefaultPrevented=Mr)},stopPropagation:function(){var n=this.nativeEvent;n&&(n.stopPropagation?n.stopPropagation():typeof n.cancelBubble!="unknown"&&(n.cancelBubble=!0),this.isPropagationStopped=Mr)},persist:function(){},isPersistent:Mr}),t}var dn={eventPhase:0,bubbles:0,cancelable:0,timeStamp:function(e){return e.timeStamp||Date.now()},defaultPrevented:0,isTrusted:0},ru=We(dn),Yn=E({},dn,{view:0,detail:0}),dc=We(Yn),lu,uu,Gn,Ir=E({},Yn,{screenX:0,screenY:0,clientX:0,clientY:0,pageX:0,pageY:0,ctrlKey:0,shiftKey:0,altKey:0,metaKey:0,getModifierState:iu,button:0,buttons:0,relatedTarget:function(e){return e.relatedTarget===void 0?e.fromElement===e.srcElement?e.toElement:e.fromElement:e.relatedTarget},movementX:function(e){return"movementX"in e?e.movementX:(e!==Gn&&(Gn&&e.type==="mousemove"?(lu=e.screenX-Gn.screenX,uu=e.screenY-Gn.screenY):uu=lu=0,Gn=e),lu)},movementY:function(e){return"movementY"in e?e.movementY:uu}}),ki=We(Ir),pc=E({},Ir,{dataTransfer:0}),mc=We(pc),hc=E({},Yn,{relatedTarget:0}),ou=We(hc),vc=E({},dn,{animationName:0,elapsedTime:0,pseudoElement:0}),yc=We(vc),gc=E({},dn,{clipboardData:function(e){return"clipboardData"in e?e.clipboardData:window.clipboardData}}),wc=We(gc),Sc=E({},dn,{data:0}),xi=We(Sc),kc={Esc:"Escape",Spacebar:" ",Left:"ArrowLeft",Up:"ArrowUp",Right:"ArrowRight",Down:"ArrowDown",Del:"Delete",Win:"OS",Menu:"ContextMenu",Apps:"ContextMenu",Scroll:"ScrollLock",MozPrintableKey:"Unidentified"},xc={8:"Backspace",9:"Tab",12:"Clear",13:"Enter",16:"Shift",17:"Control",18:"Alt",19:"Pause",20:"CapsLock",27:"Escape",32:" ",33:"PageUp",34:"PageDown",35:"End",36:"Home",37:"ArrowLeft",38:"ArrowUp",39:"ArrowRight",40:"ArrowDown",45:"Insert",46:"Delete",112:"F1",113:"F2",114:"F3",115:"F4",116:"F5",117:"F6",118:"F7",119:"F8",120:"F9",121:"F10",122:"F11",123:"F12",144:"NumLock",145:"ScrollLock",224:"Meta"},Ec={Alt:"altKey",Control:"ctrlKey",Meta:"metaKey",Shift:"shiftKey"};function _c(e){var t=this.nativeEvent;return t.getModifierState?t.getModifierState(e):(e=Ec[e])?!!t[e]:!1}function iu(){return _c}var Cc=E({},Yn,{key:function(e){if(e.key){var t=kc[e.key]||e.key;if(t!=="Unidentified")return t}return e.type==="keypress"?(e=Or(e),e===13?"Enter":String.fromCharCode(e)):e.type==="keydown"||e.type==="keyup"?xc[e.keyCode]||"Unidentified":""},code:0,location:0,ctrlKey:0,shiftKey:0,altKey:0,metaKey:0,repeat:0,locale:0,getModifierState:iu,charCode:function(e){return e.type==="keypress"?Or(e):0},keyCode:function(e){return e.type==="keydown"||e.type==="keyup"?e.keyCode:0},which:function(e){return e.type==="keypress"?Or(e):e.type==="keydown"||e.type==="keyup"?e.keyCode:0}}),Pc=We(Cc),zc=E({},Ir,{pointerId:0,width:0,height:0,pressure:0,tangentialPressure:0,tiltX:0,tiltY:0,twist:0,pointerType:0,isPrimary:0}),Ei=We(zc),Nc=E({},Yn,{touches:0,targetTouches:0,changedTouches:0,altKey:0,metaKey:0,ctrlKey:0,shiftKey:0,getModifierState:iu}),Lc=We(Nc),Tc=E({},dn,{propertyName:0,elapsedTime:0,pseudoElement:0}),Rc=We(Tc),Dc=E({},Ir,{deltaX:function(e){return"deltaX"in e?e.deltaX:"wheelDeltaX"in e?-e.wheelDeltaX:0},deltaY:function(e){return"deltaY"in e?e.deltaY:"wheelDeltaY"in e?-e.wheelDeltaY:"wheelDelta"in e?-e.wheelDelta:0},deltaZ:0,deltaMode:0}),jc=We(Dc),Oc=[9,13,27,32],su=ee&&"CompositionEvent"in window,Xn=null;ee&&"documentMode"in document&&(Xn=document.documentMode);var Mc=ee&&"TextEvent"in window&&!Xn,_i=ee&&(!su||Xn&&8<Xn&&11>=Xn),Ci=" ",Pi=!1;function zi(e,t){switch(e){case"keyup":return Oc.indexOf(t.keyCode)!==-1;case"keydown":return t.keyCode!==229;case"keypress":case"mousedown":case"focusout":return!0;default:return!1}}function Ni(e){return e=e.detail,typeof e=="object"&&"data"in e?e.data:null}var pn=!1;function Ic(e,t){switch(e){case"compositionend":return Ni(t);case"keypress":return t.which!==32?null:(Pi=!0,Ci);case"textInput":return e=t.data,e===Ci&&Pi?null:e;default:return null}}function Fc(e,t){if(pn)return e==="compositionend"||!su&&zi(e,t)?(e=wi(),jr=nu=Rt=null,pn=!1,e):null;switch(e){case"paste":return null;case"keypress":if(!(t.ctrlKey||t.altKey||t.metaKey)||t.ctrlKey&&t.altKey){if(t.char&&1<t.char.length)return t.char;if(t.which)return String.fromCharCode(t.which)}return null;case"compositionend":return _i&&t.locale!=="ko"?null:t.data;default:return null}}var Uc={color:!0,date:!0,datetime:!0,"datetime-local":!0,email:!0,month:!0,number:!0,password:!0,range:!0,search:!0,tel:!0,text:!0,time:!0,url:!0,week:!0};function Li(e){var t=e&&e.nodeName&&e.nodeName.toLowerCase();return t==="input"?!!Uc[e.type]:t==="textarea"}function Ti(e,t,n,r){Zo(r),t=Br(t,"onChange"),0<t.length&&(n=new ru("onChange","change",null,n,r),e.push({event:n,listeners:t}))}var Zn=null,Jn=null;function Ac(e){Gi(e,0)}function Fr(e){var t=gn(e);if(Uo(t))return e}function Vc(e,t){if(e==="change")return t}var Ri=!1;if(ee){var au;if(ee){var cu="oninput"in document;if(!cu){var Di=document.createElement("div");Di.setAttribute("oninput","return;"),cu=typeof Di.oninput=="function"}au=cu}else au=!1;Ri=au&&(!document.documentMode||9<document.documentMode)}function ji(){Zn&&(Zn.detachEvent("onpropertychange",Oi),Jn=Zn=null)}function Oi(e){if(e.propertyName==="value"&&Fr(Jn)){var t=[];Ti(t,Jn,e,Hl(e)),ei(Ac,t)}}function Bc(e,t,n){e==="focusin"?(ji(),Zn=t,Jn=n,Zn.attachEvent("onpropertychange",Oi)):e==="focusout"&&ji()}function $c(e){if(e==="selectionchange"||e==="keyup"||e==="keydown")return Fr(Jn)}function Hc(e,t){if(e==="click")return Fr(t)}function Wc(e,t){if(e==="input"||e==="change")return Fr(t)}function Qc(e,t){return e===t&&(e!==0||1/e===1/t)||e!==e&&t!==t}var lt=typeof Object.is=="function"?Object.is:Qc;function qn(e,t){if(lt(e,t))return!0;if(typeof e!="object"||e===null||typeof t!="object"||t===null)return!1;var n=Object.keys(e),r=Object.keys(t);if(n.length!==r.length)return!1;for(r=0;r<n.length;r++){var l=n[r];if(!B.call(t,l)||!lt(e[l],t[l]))return!1}return!0}function Mi(e){for(;e&&e.firstChild;)e=e.firstChild;return e}function Ii(e,t){var n=Mi(e);e=0;for(var r;n;){if(n.nodeType===3){if(r=e+n.textContent.length,e<=t&&r>=t)return{node:n,offset:t-e};e=r}e:{for(;n;){if(n.nextSibling){n=n.nextSibling;break e}n=n.parentNode}n=void 0}n=Mi(n)}}function Fi(e,t){return e&&t?e===t?!0:e&&e.nodeType===3?!1:t&&t.nodeType===3?Fi(e,t.parentNode):"contains"in e?e.contains(t):e.compareDocumentPosition?!!(e.compareDocumentPosition(t)&16):!1:!1}function Ui(){for(var e=window,t=Sr();t instanceof e.HTMLIFrameElement;){try{var n=typeof t.contentWindow.location.href=="string"}catch{n=!1}if(n)e=t.contentWindow;else break;t=Sr(e.document)}return t}function fu(e){var t=e&&e.nodeName&&e.nodeName.toLowerCase();return t&&(t==="input"&&(e.type==="text"||e.type==="search"||e.type==="tel"||e.type==="url"||e.type==="password")||t==="textarea"||e.contentEditable==="true")}function Kc(e){var t=Ui(),n=e.focusedElem,r=e.selectionRange;if(t!==n&&n&&n.ownerDocument&&Fi(n.ownerDocument.documentElement,n)){if(r!==null&&fu(n)){if(t=r.start,e=r.end,e===void 0&&(e=t),"selectionStart"in n)n.selectionStart=t,n.selectionEnd=Math.min(e,n.value.length);else if(e=(t=n.ownerDocument||document)&&t.defaultView||window,e.getSelection){e=e.getSelection();var l=n.textContent.length,u=Math.min(r.start,l);r=r.end===void 0?u:Math.min(r.end,l),!e.extend&&u>r&&(l=r,r=u,u=l),l=Ii(n,u);var o=Ii(n,r);l&&o&&(e.rangeCount!==1||e.anchorNode!==l.node||e.anchorOffset!==l.offset||e.focusNode!==o.node||e.focusOffset!==o.offset)&&(t=t.createRange(),t.setStart(l.node,l.offset),e.removeAllRanges(),u>r?(e.addRange(t),e.extend(o.node,o.offset)):(t.setEnd(o.node,o.offset),e.addRange(t)))}}for(t=[],e=n;e=e.parentNode;)e.nodeType===1&&t.push({element:e,left:e.scrollLeft,top:e.scrollTop});for(typeof n.focus=="function"&&n.focus(),n=0;n<t.length;n++)e=t[n],e.element.scrollLeft=e.left,e.element.scrollTop=e.top}}var Yc=ee&&"documentMode"in document&&11>=document.documentMode,mn=null,du=null,bn=null,pu=!1;function Ai(e,t,n){var r=n.window===n?n.document:n.nodeType===9?n:n.ownerDocument;pu||mn==null||mn!==Sr(r)||(r=mn,"selectionStart"in r&&fu(r)?r={start:r.selectionStart,end:r.selectionEnd}:(r=(r.ownerDocument&&r.ownerDocument.defaultView||window).getSelection(),r={anchorNode:r.anchorNode,anchorOffset:r.anchorOffset,focusNode:r.focusNode,focusOffset:r.focusOffset}),bn&&qn(bn,r)||(bn=r,r=Br(du,"onSelect"),0<r.length&&(t=new ru("onSelect","select",null,t,n),e.push({event:t,listeners:r}),t.target=mn)))}function Ur(e,t){var n={};return n[e.toLowerCase()]=t.toLowerCase(),n["Webkit"+e]="webkit"+t,n["Moz"+e]="moz"+t,n}var hn={animationend:Ur("Animation","AnimationEnd"),animationiteration:Ur("Animation","AnimationIteration"),animationstart:Ur("Animation","AnimationStart"),transitionend:Ur("Transition","TransitionEnd")},mu={},Vi={};ee&&(Vi=document.createElement("div").style,"AnimationEvent"in window||(delete hn.animationend.animation,delete hn.animationiteration.animation,delete hn.animationstart.animation),"TransitionEvent"in window||delete hn.transitionend.transition);function Ar(e){if(mu[e])return mu[e];if(!hn[e])return e;var t=hn[e],n;for(n in t)if(t.hasOwnProperty(n)&&n in Vi)return mu[e]=t[n];return e}var Bi=Ar("animationend"),$i=Ar("animationiteration"),Hi=Ar("animationstart"),Wi=Ar("transitionend"),Qi=new Map,Ki="abort auxClick cancel canPlay canPlayThrough click close contextMenu copy cut drag dragEnd dragEnter dragExit dragLeave dragOver dragStart drop durationChange emptied encrypted ended error gotPointerCapture input invalid keyDown keyPress keyUp load loadedData loadedMetadata loadStart lostPointerCapture mouseDown mouseMove mouseOut mouseOver mouseUp paste pause play playing pointerCancel pointerDown pointerMove pointerOut pointerOver pointerUp progress rateChange reset resize seeked seeking stalled submit suspend timeUpdate touchCancel touchEnd touchStart volumeChange scroll toggle touchMove waiting wheel".split(" ");function Dt(e,t){Qi.set(e,t),xe(t,[e])}for(var hu=0;hu<Ki.length;hu++){var vu=Ki[hu],Gc=vu.toLowerCase(),Xc=vu[0].toUpperCase()+vu.slice(1);Dt(Gc,"on"+Xc)}Dt(Bi,"onAnimationEnd"),Dt($i,"onAnimationIteration"),Dt(Hi,"onAnimationStart"),Dt("dblclick","onDoubleClick"),Dt("focusin","onFocus"),Dt("focusout","onBlur"),Dt(Wi,"onTransitionEnd"),ce("onMouseEnter",["mouseout","mouseover"]),ce("onMouseLeave",["mouseout","mouseover"]),ce("onPointerEnter",["pointerout","pointerover"]),ce("onPointerLeave",["pointerout","pointerover"]),xe("onChange","change click focusin focusout input keydown keyup selectionchange".split(" ")),xe("onSelect","focusout contextmenu dragend focusin keydown keyup mousedown mouseup selectionchange".split(" ")),xe("onBeforeInput",["compositionend","keypress","textInput","paste"]),xe("onCompositionEnd","compositionend focusout keydown keypress keyup mousedown".split(" ")),xe("onCompositionStart","compositionstart focusout keydown keypress keyup mousedown".split(" ")),xe("onCompositionUpdate","compositionupdate focusout keydown keypress keyup mousedown".split(" "));var er="abort canplay canplaythrough durationchange emptied encrypted ended error loadeddata loadedmetadata loadstart pause play playing progress ratechange resize seeked seeking stalled suspend timeupdate volumechange waiting".split(" "),Zc=new Set("cancel close invalid load scroll toggle".split(" ").concat(er));function Yi(e,t,n){var r=e.type||"unknown-event";e.currentTarget=n,Ga(r,t,void 0,e),e.currentTarget=null}function Gi(e,t){t=(t&4)!==0;for(var n=0;n<e.length;n++){var r=e[n],l=r.event;r=r.listeners;e:{var u=void 0;if(t)for(var o=r.length-1;0<=o;o--){var i=r[o],s=i.instance,p=i.currentTarget;if(i=i.listener,s!==u&&l.isPropagationStopped())break e;Yi(l,i,p),u=s}else for(o=0;o<r.length;o++){if(i=r[o],s=i.instance,p=i.currentTarget,i=i.listener,s!==u&&l.isPropagationStopped())break e;Yi(l,i,p),u=s}}}if(Er)throw e=Yl,Er=!1,Yl=null,e}function Z(e,t){var n=t[_u];n===void 0&&(n=t[_u]=new Set);var r=e+"__bubble";n.has(r)||(Xi(t,e,2,!1),n.add(r))}function yu(e,t,n){var r=0;t&&(r|=4),Xi(n,e,r,t)}var Vr="_reactListening"+Math.random().toString(36).slice(2);function tr(e){if(!e[Vr]){e[Vr]=!0,ze.forEach(function(n){n!=="selectionchange"&&(Zc.has(n)||yu(n,!1,e),yu(n,!0,e))});var t=e.nodeType===9?e:e.ownerDocument;t===null||t[Vr]||(t[Vr]=!0,yu("selectionchange",!1,t))}}function Xi(e,t,n,r){switch(gi(t)){case 1:var l=cc;break;case 4:l=fc;break;default:l=eu}n=l.bind(null,t,n,e),l=void 0,!Kl||t!=="touchstart"&&t!=="touchmove"&&t!=="wheel"||(l=!0),r?l!==void 0?e.addEventListener(t,n,{capture:!0,passive:l}):e.addEventListener(t,n,!0):l!==void 0?e.addEventListener(t,n,{passive:l}):e.addEventListener(t,n,!1)}function gu(e,t,n,r,l){var u=r;if((t&1)===0&&(t&2)===0&&r!==null)e:for(;;){if(r===null)return;var o=r.tag;if(o===3||o===4){var i=r.stateNode.containerInfo;if(i===l||i.nodeType===8&&i.parentNode===l)break;if(o===4)for(o=r.return;o!==null;){var s=o.tag;if((s===3||s===4)&&(s=o.stateNode.containerInfo,s===l||s.nodeType===8&&s.parentNode===l))return;o=o.return}for(;i!==null;){if(o=Gt(i),o===null)return;if(s=o.tag,s===5||s===6){r=u=o;continue e}i=i.parentNode}}r=r.return}ei(function(){var p=u,y=Hl(n),g=[];e:{var h=Qi.get(e);if(h!==void 0){var k=ru,_=e;switch(e){case"keypress":if(Or(n)===0)break e;case"keydown":case"keyup":k=Pc;break;case"focusin":_="focus",k=ou;break;case"focusout":_="blur",k=ou;break;case"beforeblur":case"afterblur":k=ou;break;case"click":if(n.button===2)break e;case"auxclick":case"dblclick":case"mousedown":case"mousemove":case"mouseup":case"mouseout":case"mouseover":case"contextmenu":k=ki;break;case"drag":case"dragend":case"dragenter":case"dragexit":case"dragleave":case"dragover":case"dragstart":case"drop":k=mc;break;case"touchcancel":case"touchend":case"touchmove":case"touchstart":k=Lc;break;case Bi:case $i:case Hi:k=yc;break;case Wi:k=Rc;break;case"scroll":k=dc;break;case"wheel":k=jc;break;case"copy":case"cut":case"paste":k=wc;break;case"gotpointercapture":case"lostpointercapture":case"pointercancel":case"pointerdown":case"pointermove":case"pointerout":case"pointerover":case"pointerup":k=Ei}var C=(t&4)!==0,ie=!C&&e==="scroll",f=C?h!==null?h+"Capture":null:h;C=[];for(var a=p,d;a!==null;){d=a;var w=d.stateNode;if(d.tag===5&&w!==null&&(d=w,f!==null&&(w=Fn(a,f),w!=null&&C.push(nr(a,w,d)))),ie)break;a=a.return}0<C.length&&(h=new k(h,_,null,n,y),g.push({event:h,listeners:C}))}}if((t&7)===0){e:{if(h=e==="mouseover"||e==="pointerover",k=e==="mouseout"||e==="pointerout",h&&n!==$l&&(_=n.relatedTarget||n.fromElement)&&(Gt(_)||_[gt]))break e;if((k||h)&&(h=y.window===y?y:(h=y.ownerDocument)?h.defaultView||h.parentWindow:window,k?(_=n.relatedTarget||n.toElement,k=p,_=_?Gt(_):null,_!==null&&(ie=Yt(_),_!==ie||_.tag!==5&&_.tag!==6)&&(_=null)):(k=null,_=p),k!==_)){if(C=ki,w="onMouseLeave",f="onMouseEnter",a="mouse",(e==="pointerout"||e==="pointerover")&&(C=Ei,w="onPointerLeave",f="onPointerEnter",a="pointer"),ie=k==null?h:gn(k),d=_==null?h:gn(_),h=new C(w,a+"leave",k,n,y),h.target=ie,h.relatedTarget=d,w=null,Gt(y)===p&&(C=new C(f,a+"enter",_,n,y),C.target=d,C.relatedTarget=ie,w=C),ie=w,k&&_)t:{for(C=k,f=_,a=0,d=C;d;d=vn(d))a++;for(d=0,w=f;w;w=vn(w))d++;for(;0<a-d;)C=vn(C),a--;for(;0<d-a;)f=vn(f),d--;for(;a--;){if(C===f||f!==null&&C===f.alternate)break t;C=vn(C),f=vn(f)}C=null}else C=null;k!==null&&Zi(g,h,k,C,!1),_!==null&&ie!==null&&Zi(g,ie,_,C,!0)}}e:{if(h=p?gn(p):window,k=h.nodeName&&h.nodeName.toLowerCase(),k==="select"||k==="input"&&h.type==="file")var P=Vc;else if(Li(h))if(Ri)P=Wc;else{P=$c;var N=Bc}else(k=h.nodeName)&&k.toLowerCase()==="input"&&(h.type==="checkbox"||h.type==="radio")&&(P=Hc);if(P&&(P=P(e,p))){Ti(g,P,n,y);break e}N&&N(e,h,p),e==="focusout"&&(N=h._wrapperState)&&N.controlled&&h.type==="number"&&Fl(h,"number",h.value)}switch(N=p?gn(p):window,e){case"focusin":(Li(N)||N.contentEditable==="true")&&(mn=N,du=p,bn=null);break;case"focusout":bn=du=mn=null;break;case"mousedown":pu=!0;break;case"contextmenu":case"mouseup":case"dragend":pu=!1,Ai(g,n,y);break;case"selectionchange":if(Yc)break;case"keydown":case"keyup":Ai(g,n,y)}var L;if(su)e:{switch(e){case"compositionstart":var D="onCompositionStart";break e;case"compositionend":D="onCompositionEnd";break e;case"compositionupdate":D="onCompositionUpdate";break e}D=void 0}else pn?zi(e,n)&&(D="onCompositionEnd"):e==="keydown"&&n.keyCode===229&&(D="onCompositionStart");D&&(_i&&n.locale!=="ko"&&(pn||D!=="onCompositionStart"?D==="onCompositionEnd"&&pn&&(L=wi()):(Rt=y,nu="value"in Rt?Rt.value:Rt.textContent,pn=!0)),N=Br(p,D),0<N.length&&(D=new xi(D,e,null,n,y),g.push({event:D,listeners:N}),L?D.data=L:(L=Ni(n),L!==null&&(D.data=L)))),(L=Mc?Ic(e,n):Fc(e,n))&&(p=Br(p,"onBeforeInput"),0<p.length&&(y=new xi("onBeforeInput","beforeinput",null,n,y),g.push({event:y,listeners:p}),y.data=L))}Gi(g,t)})}function nr(e,t,n){return{instance:e,listener:t,currentTarget:n}}function Br(e,t){for(var n=t+"Capture",r=[];e!==null;){var l=e,u=l.stateNode;l.tag===5&&u!==null&&(l=u,u=Fn(e,n),u!=null&&r.unshift(nr(e,u,l)),u=Fn(e,t),u!=null&&r.push(nr(e,u,l))),e=e.return}return r}function vn(e){if(e===null)return null;do e=e.return;while(e&&e.tag!==5);return e||null}function Zi(e,t,n,r,l){for(var u=t._reactName,o=[];n!==null&&n!==r;){var i=n,s=i.alternate,p=i.stateNode;if(s!==null&&s===r)break;i.tag===5&&p!==null&&(i=p,l?(s=Fn(n,u),s!=null&&o.unshift(nr(n,s,i))):l||(s=Fn(n,u),s!=null&&o.push(nr(n,s,i)))),n=n.return}o.length!==0&&e.push({event:t,listeners:o})}var Jc=/\r\n?/g,qc=/\u0000|\uFFFD/g;function Ji(e){return(typeof e=="string"?e:""+e).replace(Jc,`
-`).replace(qc,"")}function $r(e,t,n){if(t=Ji(t),Ji(e)!==t&&n)throw Error(m(425))}function Hr(){}var wu=null,Su=null;function ku(e,t){return e==="textarea"||e==="noscript"||typeof t.children=="string"||typeof t.children=="number"||typeof t.dangerouslySetInnerHTML=="object"&&t.dangerouslySetInnerHTML!==null&&t.dangerouslySetInnerHTML.__html!=null}var xu=typeof setTimeout=="function"?setTimeout:void 0,bc=typeof clearTimeout=="function"?clearTimeout:void 0,qi=typeof Promise=="function"?Promise:void 0,ef=typeof queueMicrotask=="function"?queueMicrotask:typeof qi<"u"?function(e){return qi.resolve(null).then(e).catch(tf)}:xu;function tf(e){setTimeout(function(){throw e})}function Eu(e,t){var n=t,r=0;do{var l=n.nextSibling;if(e.removeChild(n),l&&l.nodeType===8)if(n=l.data,n==="/$"){if(r===0){e.removeChild(l),Kn(t);return}r--}else n!=="$"&&n!=="$?"&&n!=="$!"||r++;n=l}while(n);Kn(t)}function jt(e){for(;e!=null;e=e.nextSibling){var t=e.nodeType;if(t===1||t===3)break;if(t===8){if(t=e.data,t==="$"||t==="$!"||t==="$?")break;if(t==="/$")return null}}return e}function bi(e){e=e.previousSibling;for(var t=0;e;){if(e.nodeType===8){var n=e.data;if(n==="$"||n==="$!"||n==="$?"){if(t===0)return e;t--}else n==="/$"&&t++}e=e.previousSibling}return null}var yn=Math.random().toString(36).slice(2),pt="__reactFiber$"+yn,rr="__reactProps$"+yn,gt="__reactContainer$"+yn,_u="__reactEvents$"+yn,nf="__reactListeners$"+yn,rf="__reactHandles$"+yn;function Gt(e){var t=e[pt];if(t)return t;for(var n=e.parentNode;n;){if(t=n[gt]||n[pt]){if(n=t.alternate,t.child!==null||n!==null&&n.child!==null)for(e=bi(e);e!==null;){if(n=e[pt])return n;e=bi(e)}return t}e=n,n=e.parentNode}return null}function lr(e){return e=e[pt]||e[gt],!e||e.tag!==5&&e.tag!==6&&e.tag!==13&&e.tag!==3?null:e}function gn(e){if(e.tag===5||e.tag===6)return e.stateNode;throw Error(m(33))}function Wr(e){return e[rr]||null}var Cu=[],wn=-1;function Ot(e){return{current:e}}function J(e){0>wn||(e.current=Cu[wn],Cu[wn]=null,wn--)}function G(e,t){wn++,Cu[wn]=e.current,e.current=t}var Mt={},Ee=Ot(Mt),Fe=Ot(!1),Xt=Mt;function Sn(e,t){var n=e.type.contextTypes;if(!n)return Mt;var r=e.stateNode;if(r&&r.__reactInternalMemoizedUnmaskedChildContext===t)return r.__reactInternalMemoizedMaskedChildContext;var l={},u;for(u in n)l[u]=t[u];return r&&(e=e.stateNode,e.__reactInternalMemoizedUnmaskedChildContext=t,e.__reactInternalMemoizedMaskedChildContext=l),l}function Ue(e){return e=e.childContextTypes,e!=null}function Qr(){J(Fe),J(Ee)}function es(e,t,n){if(Ee.current!==Mt)throw Error(m(168));G(Ee,t),G(Fe,n)}function ts(e,t,n){var r=e.stateNode;if(t=t.childContextTypes,typeof r.getChildContext!="function")return n;r=r.getChildContext();for(var l in r)if(!(l in t))throw Error(m(108,Y(e)||"Unknown",l));return E({},n,r)}function Kr(e){return e=(e=e.stateNode)&&e.__reactInternalMemoizedMergedChildContext||Mt,Xt=Ee.current,G(Ee,e),G(Fe,Fe.current),!0}function ns(e,t,n){var r=e.stateNode;if(!r)throw Error(m(169));n?(e=ts(e,t,Xt),r.__reactInternalMemoizedMergedChildContext=e,J(Fe),J(Ee),G(Ee,e)):J(Fe),G(Fe,n)}var wt=null,Yr=!1,Pu=!1;function rs(e){wt===null?wt=[e]:wt.push(e)}function lf(e){Yr=!0,rs(e)}function It(){if(!Pu&&wt!==null){Pu=!0;var e=0,t=W;try{var n=wt;for(W=1;e<n.length;e++){var r=n[e];do r=r(!0);while(r!==null)}wt=null,Yr=!1}catch(l){throw wt!==null&&(wt=wt.slice(e+1)),ui(Gl,It),l}finally{W=t,Pu=!1}}return null}var kn=[],xn=0,Gr=null,Xr=0,Xe=[],Ze=0,Zt=null,St=1,kt="";function Jt(e,t){kn[xn++]=Xr,kn[xn++]=Gr,Gr=e,Xr=t}function ls(e,t,n){Xe[Ze++]=St,Xe[Ze++]=kt,Xe[Ze++]=Zt,Zt=e;var r=St;e=kt;var l=32-rt(r)-1;r&=~(1<<l),n+=1;var u=32-rt(t)+l;if(30<u){var o=l-l%5;u=(r&(1<<o)-1).toString(32),r>>=o,l-=o,St=1<<32-rt(t)+l|n<<l|r,kt=u+e}else St=1<<u|n<<l|r,kt=e}function zu(e){e.return!==null&&(Jt(e,1),ls(e,1,0))}function Nu(e){for(;e===Gr;)Gr=kn[--xn],kn[xn]=null,Xr=kn[--xn],kn[xn]=null;for(;e===Zt;)Zt=Xe[--Ze],Xe[Ze]=null,kt=Xe[--Ze],Xe[Ze]=null,St=Xe[--Ze],Xe[Ze]=null}var Qe=null,Ke=null,b=!1,ut=null;function us(e,t){var n=et(5,null,null,0);n.elementType="DELETED",n.stateNode=t,n.return=e,t=e.deletions,t===null?(e.deletions=[n],e.flags|=16):t.push(n)}function os(e,t){switch(e.tag){case 5:var n=e.type;return t=t.nodeType!==1||n.toLowerCase()!==t.nodeName.toLowerCase()?null:t,t!==null?(e.stateNode=t,Qe=e,Ke=jt(t.firstChild),!0):!1;case 6:return t=e.pendingProps===""||t.nodeType!==3?null:t,t!==null?(e.stateNode=t,Qe=e,Ke=null,!0):!1;case 13:return t=t.nodeType!==8?null:t,t!==null?(n=Zt!==null?{id:St,overflow:kt}:null,e.memoizedState={dehydrated:t,treeContext:n,retryLane:1073741824},n=et(18,null,null,0),n.stateNode=t,n.return=e,e.child=n,Qe=e,Ke=null,!0):!1;default:return!1}}function Lu(e){return(e.mode&1)!==0&&(e.flags&128)===0}function Tu(e){if(b){var t=Ke;if(t){var n=t;if(!os(e,t)){if(Lu(e))throw Error(m(418));t=jt(n.nextSibling);var r=Qe;t&&os(e,t)?us(r,n):(e.flags=e.flags&-4097|2,b=!1,Qe=e)}}else{if(Lu(e))throw Error(m(418));e.flags=e.flags&-4097|2,b=!1,Qe=e}}}function is(e){for(e=e.return;e!==null&&e.tag!==5&&e.tag!==3&&e.tag!==13;)e=e.return;Qe=e}function Zr(e){if(e!==Qe)return!1;if(!b)return is(e),b=!0,!1;var t;if((t=e.tag!==3)&&!(t=e.tag!==5)&&(t=e.type,t=t!=="head"&&t!=="body"&&!ku(e.type,e.memoizedProps)),t&&(t=Ke)){if(Lu(e))throw ss(),Error(m(418));for(;t;)us(e,t),t=jt(t.nextSibling)}if(is(e),e.tag===13){if(e=e.memoizedState,e=e!==null?e.dehydrated:null,!e)throw Error(m(317));e:{for(e=e.nextSibling,t=0;e;){if(e.nodeType===8){var n=e.data;if(n==="/$"){if(t===0){Ke=jt(e.nextSibling);break e}t--}else n!=="$"&&n!=="$!"&&n!=="$?"||t++}e=e.nextSibling}Ke=null}}else Ke=Qe?jt(e.stateNode.nextSibling):null;return!0}function ss(){for(var e=Ke;e;)e=jt(e.nextSibling)}function En(){Ke=Qe=null,b=!1}function Ru(e){ut===null?ut=[e]:ut.push(e)}var uf=me.ReactCurrentBatchConfig;function ur(e,t,n){if(e=n.ref,e!==null&&typeof e!="function"&&typeof e!="object"){if(n._owner){if(n=n._owner,n){if(n.tag!==1)throw Error(m(309));var r=n.stateNode}if(!r)throw Error(m(147,e));var l=r,u=""+e;return t!==null&&t.ref!==null&&typeof t.ref=="function"&&t.ref._stringRef===u?t.ref:(t=function(o){var i=l.refs;o===null?delete i[u]:i[u]=o},t._stringRef=u,t)}if(typeof e!="string")throw Error(m(284));if(!n._owner)throw Error(m(290,e))}return e}function Jr(e,t){throw e=Object.prototype.toString.call(t),Error(m(31,e==="[object Object]"?"object with keys {"+Object.keys(t).join(", ")+"}":e))}function as(e){var t=e._init;return t(e._payload)}function cs(e){function t(f,a){if(e){var d=f.deletions;d===null?(f.deletions=[a],f.flags|=16):d.push(a)}}function n(f,a){if(!e)return null;for(;a!==null;)t(f,a),a=a.sibling;return null}function r(f,a){for(f=new Map;a!==null;)a.key!==null?f.set(a.key,a):f.set(a.index,a),a=a.sibling;return f}function l(f,a){return f=Wt(f,a),f.index=0,f.sibling=null,f}function u(f,a,d){return f.index=d,e?(d=f.alternate,d!==null?(d=d.index,d<a?(f.flags|=2,a):d):(f.flags|=2,a)):(f.flags|=1048576,a)}function o(f){return e&&f.alternate===null&&(f.flags|=2),f}function i(f,a,d,w){return a===null||a.tag!==6?(a=Eo(d,f.mode,w),a.return=f,a):(a=l(a,d),a.return=f,a)}function s(f,a,d,w){var P=d.type;return P===Me?y(f,a,d.props.children,w,d.key):a!==null&&(a.elementType===P||typeof P=="object"&&P!==null&&P.$$typeof===Ie&&as(P)===a.type)?(w=l(a,d.props),w.ref=ur(f,a,d),w.return=f,w):(w=kl(d.type,d.key,d.props,null,f.mode,w),w.ref=ur(f,a,d),w.return=f,w)}function p(f,a,d,w){return a===null||a.tag!==4||a.stateNode.containerInfo!==d.containerInfo||a.stateNode.implementation!==d.implementation?(a=_o(d,f.mode,w),a.return=f,a):(a=l(a,d.children||[]),a.return=f,a)}function y(f,a,d,w,P){return a===null||a.tag!==7?(a=un(d,f.mode,w,P),a.return=f,a):(a=l(a,d),a.return=f,a)}function g(f,a,d){if(typeof a=="string"&&a!==""||typeof a=="number")return a=Eo(""+a,f.mode,d),a.return=f,a;if(typeof a=="object"&&a!==null){switch(a.$$typeof){case tt:return d=kl(a.type,a.key,a.props,null,f.mode,d),d.ref=ur(f,null,a),d.return=f,d;case Te:return a=_o(a,f.mode,d),a.return=f,a;case Ie:var w=a._init;return g(f,w(a._payload),d)}if(On(a)||R(a))return a=un(a,f.mode,d,null),a.return=f,a;Jr(f,a)}return null}function h(f,a,d,w){var P=a!==null?a.key:null;if(typeof d=="string"&&d!==""||typeof d=="number")return P!==null?null:i(f,a,""+d,w);if(typeof d=="object"&&d!==null){switch(d.$$typeof){case tt:return d.key===P?s(f,a,d,w):null;case Te:return d.key===P?p(f,a,d,w):null;case Ie:return P=d._init,h(f,a,P(d._payload),w)}if(On(d)||R(d))return P!==null?null:y(f,a,d,w,null);Jr(f,d)}return null}function k(f,a,d,w,P){if(typeof w=="string"&&w!==""||typeof w=="number")return f=f.get(d)||null,i(a,f,""+w,P);if(typeof w=="object"&&w!==null){switch(w.$$typeof){case tt:return f=f.get(w.key===null?d:w.key)||null,s(a,f,w,P);case Te:return f=f.get(w.key===null?d:w.key)||null,p(a,f,w,P);case Ie:var N=w._init;return k(f,a,d,N(w._payload),P)}if(On(w)||R(w))return f=f.get(d)||null,y(a,f,w,P,null);Jr(a,w)}return null}function _(f,a,d,w){for(var P=null,N=null,L=a,D=a=0,ye=null;L!==null&&D<d.length;D++){L.index>D?(ye=L,L=null):ye=L.sibling;var V=h(f,L,d[D],w);if(V===null){L===null&&(L=ye);break}e&&L&&V.alternate===null&&t(f,L),a=u(V,a,D),N===null?P=V:N.sibling=V,N=V,L=ye}if(D===d.length)return n(f,L),b&&Jt(f,D),P;if(L===null){for(;D<d.length;D++)L=g(f,d[D],w),L!==null&&(a=u(L,a,D),N===null?P=L:N.sibling=L,N=L);return b&&Jt(f,D),P}for(L=r(f,L);D<d.length;D++)ye=k(L,f,D,d[D],w),ye!==null&&(e&&ye.alternate!==null&&L.delete(ye.key===null?D:ye.key),a=u(ye,a,D),N===null?P=ye:N.sibling=ye,N=ye);return e&&L.forEach(function(Qt){return t(f,Qt)}),b&&Jt(f,D),P}function C(f,a,d,w){var P=R(d);if(typeof P!="function")throw Error(m(150));if(d=P.call(d),d==null)throw Error(m(151));for(var N=P=null,L=a,D=a=0,ye=null,V=d.next();L!==null&&!V.done;D++,V=d.next()){L.index>D?(ye=L,L=null):ye=L.sibling;var Qt=h(f,L,V.value,w);if(Qt===null){L===null&&(L=ye);break}e&&L&&Qt.alternate===null&&t(f,L),a=u(Qt,a,D),N===null?P=Qt:N.sibling=Qt,N=Qt,L=ye}if(V.done)return n(f,L),b&&Jt(f,D),P;if(L===null){for(;!V.done;D++,V=d.next())V=g(f,V.value,w),V!==null&&(a=u(V,a,D),N===null?P=V:N.sibling=V,N=V);return b&&Jt(f,D),P}for(L=r(f,L);!V.done;D++,V=d.next())V=k(L,f,D,V.value,w),V!==null&&(e&&V.alternate!==null&&L.delete(V.key===null?D:V.key),a=u(V,a,D),N===null?P=V:N.sibling=V,N=V);return e&&L.forEach(function(Af){return t(f,Af)}),b&&Jt(f,D),P}function ie(f,a,d,w){if(typeof d=="object"&&d!==null&&d.type===Me&&d.key===null&&(d=d.props.children),typeof d=="object"&&d!==null){switch(d.$$typeof){case tt:e:{for(var P=d.key,N=a;N!==null;){if(N.key===P){if(P=d.type,P===Me){if(N.tag===7){n(f,N.sibling),a=l(N,d.props.children),a.return=f,f=a;break e}}else if(N.elementType===P||typeof P=="object"&&P!==null&&P.$$typeof===Ie&&as(P)===N.type){n(f,N.sibling),a=l(N,d.props),a.ref=ur(f,N,d),a.return=f,f=a;break e}n(f,N);break}else t(f,N);N=N.sibling}d.type===Me?(a=un(d.props.children,f.mode,w,d.key),a.return=f,f=a):(w=kl(d.type,d.key,d.props,null,f.mode,w),w.ref=ur(f,a,d),w.return=f,f=w)}return o(f);case Te:e:{for(N=d.key;a!==null;){if(a.key===N)if(a.tag===4&&a.stateNode.containerInfo===d.containerInfo&&a.stateNode.implementation===d.implementation){n(f,a.sibling),a=l(a,d.children||[]),a.return=f,f=a;break e}else{n(f,a);break}else t(f,a);a=a.sibling}a=_o(d,f.mode,w),a.return=f,f=a}return o(f);case Ie:return N=d._init,ie(f,a,N(d._payload),w)}if(On(d))return _(f,a,d,w);if(R(d))return C(f,a,d,w);Jr(f,d)}return typeof d=="string"&&d!==""||typeof d=="number"?(d=""+d,a!==null&&a.tag===6?(n(f,a.sibling),a=l(a,d),a.return=f,f=a):(n(f,a),a=Eo(d,f.mode,w),a.return=f,f=a),o(f)):n(f,a)}return ie}var _n=cs(!0),fs=cs(!1),qr=Ot(null),br=null,Cn=null,Du=null;function ju(){Du=Cn=br=null}function Ou(e){var t=qr.current;J(qr),e._currentValue=t}function Mu(e,t,n){for(;e!==null;){var r=e.alternate;if((e.childLanes&t)!==t?(e.childLanes|=t,r!==null&&(r.childLanes|=t)):r!==null&&(r.childLanes&t)!==t&&(r.childLanes|=t),e===n)break;e=e.return}}function Pn(e,t){br=e,Du=Cn=null,e=e.dependencies,e!==null&&e.firstContext!==null&&((e.lanes&t)!==0&&(Ae=!0),e.firstContext=null)}function Je(e){var t=e._currentValue;if(Du!==e)if(e={context:e,memoizedValue:t,next:null},Cn===null){if(br===null)throw Error(m(308));Cn=e,br.dependencies={lanes:0,firstContext:e}}else Cn=Cn.next=e;return t}var qt=null;function Iu(e){qt===null?qt=[e]:qt.push(e)}function ds(e,t,n,r){var l=t.interleaved;return l===null?(n.next=n,Iu(t)):(n.next=l.next,l.next=n),t.interleaved=n,xt(e,r)}function xt(e,t){e.lanes|=t;var n=e.alternate;for(n!==null&&(n.lanes|=t),n=e,e=e.return;e!==null;)e.childLanes|=t,n=e.alternate,n!==null&&(n.childLanes|=t),n=e,e=e.return;return n.tag===3?n.stateNode:null}var Ft=!1;function Fu(e){e.updateQueue={baseState:e.memoizedState,firstBaseUpdate:null,lastBaseUpdate:null,shared:{pending:null,interleaved:null,lanes:0},effects:null}}function ps(e,t){e=e.updateQueue,t.updateQueue===e&&(t.updateQueue={baseState:e.baseState,firstBaseUpdate:e.firstBaseUpdate,lastBaseUpdate:e.lastBaseUpdate,shared:e.shared,effects:e.effects})}function Et(e,t){return{eventTime:e,lane:t,tag:0,payload:null,callback:null,next:null}}function Ut(e,t,n){var r=e.updateQueue;if(r===null)return null;if(r=r.shared,(F&2)!==0){var l=r.pending;return l===null?t.next=t:(t.next=l.next,l.next=t),r.pending=t,xt(e,n)}return l=r.interleaved,l===null?(t.next=t,Iu(r)):(t.next=l.next,l.next=t),r.interleaved=t,xt(e,n)}function el(e,t,n){if(t=t.updateQueue,t!==null&&(t=t.shared,(n&4194240)!==0)){var r=t.lanes;r&=e.pendingLanes,n|=r,t.lanes=n,Jl(e,n)}}function ms(e,t){var n=e.updateQueue,r=e.alternate;if(r!==null&&(r=r.updateQueue,n===r)){var l=null,u=null;if(n=n.firstBaseUpdate,n!==null){do{var o={eventTime:n.eventTime,lane:n.lane,tag:n.tag,payload:n.payload,callback:n.callback,next:null};u===null?l=u=o:u=u.next=o,n=n.next}while(n!==null);u===null?l=u=t:u=u.next=t}else l=u=t;n={baseState:r.baseState,firstBaseUpdate:l,lastBaseUpdate:u,shared:r.shared,effects:r.effects},e.updateQueue=n;return}e=n.lastBaseUpdate,e===null?n.firstBaseUpdate=t:e.next=t,n.lastBaseUpdate=t}function tl(e,t,n,r){var l=e.updateQueue;Ft=!1;var u=l.firstBaseUpdate,o=l.lastBaseUpdate,i=l.shared.pending;if(i!==null){l.shared.pending=null;var s=i,p=s.next;s.next=null,o===null?u=p:o.next=p,o=s;var y=e.alternate;y!==null&&(y=y.updateQueue,i=y.lastBaseUpdate,i!==o&&(i===null?y.firstBaseUpdate=p:i.next=p,y.lastBaseUpdate=s))}if(u!==null){var g=l.baseState;o=0,y=p=s=null,i=u;do{var h=i.lane,k=i.eventTime;if((r&h)===h){y!==null&&(y=y.next={eventTime:k,lane:0,tag:i.tag,payload:i.payload,callback:i.callback,next:null});e:{var _=e,C=i;switch(h=t,k=n,C.tag){case 1:if(_=C.payload,typeof _=="function"){g=_.call(k,g,h);break e}g=_;break e;case 3:_.flags=_.flags&-65537|128;case 0:if(_=C.payload,h=typeof _=="function"?_.call(k,g,h):_,h==null)break e;g=E({},g,h);break e;case 2:Ft=!0}}i.callback!==null&&i.lane!==0&&(e.flags|=64,h=l.effects,h===null?l.effects=[i]:h.push(i))}else k={eventTime:k,lane:h,tag:i.tag,payload:i.payload,callback:i.callback,next:null},y===null?(p=y=k,s=g):y=y.next=k,o|=h;if(i=i.next,i===null){if(i=l.shared.pending,i===null)break;h=i,i=h.next,h.next=null,l.lastBaseUpdate=h,l.shared.pending=null}}while(!0);if(y===null&&(s=g),l.baseState=s,l.firstBaseUpdate=p,l.lastBaseUpdate=y,t=l.shared.interleaved,t!==null){l=t;do o|=l.lane,l=l.next;while(l!==t)}else u===null&&(l.shared.lanes=0);tn|=o,e.lanes=o,e.memoizedState=g}}function hs(e,t,n){if(e=t.effects,t.effects=null,e!==null)for(t=0;t<e.length;t++){var r=e[t],l=r.callback;if(l!==null){if(r.callback=null,r=n,typeof l!="function")throw Error(m(191,l));l.call(r)}}}var or={},mt=Ot(or),ir=Ot(or),sr=Ot(or);function bt(e){if(e===or)throw Error(m(174));return e}function Uu(e,t){switch(G(sr,t),G(ir,e),G(mt,or),e=t.nodeType,e){case 9:case 11:t=(t=t.documentElement)?t.namespaceURI:Al(null,"");break;default:e=e===8?t.parentNode:t,t=e.namespaceURI||null,e=e.tagName,t=Al(t,e)}J(mt),G(mt,t)}function zn(){J(mt),J(ir),J(sr)}function vs(e){bt(sr.current);var t=bt(mt.current),n=Al(t,e.type);t!==n&&(G(ir,e),G(mt,n))}function Au(e){ir.current===e&&(J(mt),J(ir))}var te=Ot(0);function nl(e){for(var t=e;t!==null;){if(t.tag===13){var n=t.memoizedState;if(n!==null&&(n=n.dehydrated,n===null||n.data==="$?"||n.data==="$!"))return t}else if(t.tag===19&&t.memoizedProps.revealOrder!==void 0){if((t.flags&128)!==0)return t}else if(t.child!==null){t.child.return=t,t=t.child;continue}if(t===e)break;for(;t.sibling===null;){if(t.return===null||t.return===e)return null;t=t.return}t.sibling.return=t.return,t=t.sibling}return null}var Vu=[];function Bu(){for(var e=0;e<Vu.length;e++)Vu[e]._workInProgressVersionPrimary=null;Vu.length=0}var rl=me.ReactCurrentDispatcher,$u=me.ReactCurrentBatchConfig,en=0,ne=null,fe=null,he=null,ll=!1,ar=!1,cr=0,of=0;function _e(){throw Error(m(321))}function Hu(e,t){if(t===null)return!1;for(var n=0;n<t.length&&n<e.length;n++)if(!lt(e[n],t[n]))return!1;return!0}function Wu(e,t,n,r,l,u){if(en=u,ne=t,t.memoizedState=null,t.updateQueue=null,t.lanes=0,rl.current=e===null||e.memoizedState===null?ff:df,e=n(r,l),ar){u=0;do{if(ar=!1,cr=0,25<=u)throw Error(m(301));u+=1,he=fe=null,t.updateQueue=null,rl.current=pf,e=n(r,l)}while(ar)}if(rl.current=il,t=fe!==null&&fe.next!==null,en=0,he=fe=ne=null,ll=!1,t)throw Error(m(300));return e}function Qu(){var e=cr!==0;return cr=0,e}function ht(){var e={memoizedState:null,baseState:null,baseQueue:null,queue:null,next:null};return he===null?ne.memoizedState=he=e:he=he.next=e,he}function qe(){if(fe===null){var e=ne.alternate;e=e!==null?e.memoizedState:null}else e=fe.next;var t=he===null?ne.memoizedState:he.next;if(t!==null)he=t,fe=e;else{if(e===null)throw Error(m(310));fe=e,e={memoizedState:fe.memoizedState,baseState:fe.baseState,baseQueue:fe.baseQueue,queue:fe.queue,next:null},he===null?ne.memoizedState=he=e:he=he.next=e}return he}function fr(e,t){return typeof t=="function"?t(e):t}function Ku(e){var t=qe(),n=t.queue;if(n===null)throw Error(m(311));n.lastRenderedReducer=e;var r=fe,l=r.baseQueue,u=n.pending;if(u!==null){if(l!==null){var o=l.next;l.next=u.next,u.next=o}r.baseQueue=l=u,n.pending=null}if(l!==null){u=l.next,r=r.baseState;var i=o=null,s=null,p=u;do{var y=p.lane;if((en&y)===y)s!==null&&(s=s.next={lane:0,action:p.action,hasEagerState:p.hasEagerState,eagerState:p.eagerState,next:null}),r=p.hasEagerState?p.eagerState:e(r,p.action);else{var g={lane:y,action:p.action,hasEagerState:p.hasEagerState,eagerState:p.eagerState,next:null};s===null?(i=s=g,o=r):s=s.next=g,ne.lanes|=y,tn|=y}p=p.next}while(p!==null&&p!==u);s===null?o=r:s.next=i,lt(r,t.memoizedState)||(Ae=!0),t.memoizedState=r,t.baseState=o,t.baseQueue=s,n.lastRenderedState=r}if(e=n.interleaved,e!==null){l=e;do u=l.lane,ne.lanes|=u,tn|=u,l=l.next;while(l!==e)}else l===null&&(n.lanes=0);return[t.memoizedState,n.dispatch]}function Yu(e){var t=qe(),n=t.queue;if(n===null)throw Error(m(311));n.lastRenderedReducer=e;var r=n.dispatch,l=n.pending,u=t.memoizedState;if(l!==null){n.pending=null;var o=l=l.next;do u=e(u,o.action),o=o.next;while(o!==l);lt(u,t.memoizedState)||(Ae=!0),t.memoizedState=u,t.baseQueue===null&&(t.baseState=u),n.lastRenderedState=u}return[u,r]}function ys(){}function gs(e,t){var n=ne,r=qe(),l=t(),u=!lt(r.memoizedState,l);if(u&&(r.memoizedState=l,Ae=!0),r=r.queue,Gu(ks.bind(null,n,r,e),[e]),r.getSnapshot!==t||u||he!==null&&he.memoizedState.tag&1){if(n.flags|=2048,dr(9,Ss.bind(null,n,r,l,t),void 0,null),ve===null)throw Error(m(349));(en&30)!==0||ws(n,t,l)}return l}function ws(e,t,n){e.flags|=16384,e={getSnapshot:t,value:n},t=ne.updateQueue,t===null?(t={lastEffect:null,stores:null},ne.updateQueue=t,t.stores=[e]):(n=t.stores,n===null?t.stores=[e]:n.push(e))}function Ss(e,t,n,r){t.value=n,t.getSnapshot=r,xs(t)&&Es(e)}function ks(e,t,n){return n(function(){xs(t)&&Es(e)})}function xs(e){var t=e.getSnapshot;e=e.value;try{var n=t();return!lt(e,n)}catch{return!0}}function Es(e){var t=xt(e,1);t!==null&&at(t,e,1,-1)}function _s(e){var t=ht();return typeof e=="function"&&(e=e()),t.memoizedState=t.baseState=e,e={pending:null,interleaved:null,lanes:0,dispatch:null,lastRenderedReducer:fr,lastRenderedState:e},t.queue=e,e=e.dispatch=cf.bind(null,ne,e),[t.memoizedState,e]}function dr(e,t,n,r){return e={tag:e,create:t,destroy:n,deps:r,next:null},t=ne.updateQueue,t===null?(t={lastEffect:null,stores:null},ne.updateQueue=t,t.lastEffect=e.next=e):(n=t.lastEffect,n===null?t.lastEffect=e.next=e:(r=n.next,n.next=e,e.next=r,t.lastEffect=e)),e}function Cs(){return qe().memoizedState}function ul(e,t,n,r){var l=ht();ne.flags|=e,l.memoizedState=dr(1|t,n,void 0,r===void 0?null:r)}function ol(e,t,n,r){var l=qe();r=r===void 0?null:r;var u=void 0;if(fe!==null){var o=fe.memoizedState;if(u=o.destroy,r!==null&&Hu(r,o.deps)){l.memoizedState=dr(t,n,u,r);return}}ne.flags|=e,l.memoizedState=dr(1|t,n,u,r)}function Ps(e,t){return ul(8390656,8,e,t)}function Gu(e,t){return ol(2048,8,e,t)}function zs(e,t){return ol(4,2,e,t)}function Ns(e,t){return ol(4,4,e,t)}function Ls(e,t){if(typeof t=="function")return e=e(),t(e),function(){t(null)};if(t!=null)return e=e(),t.current=e,function(){t.current=null}}function Ts(e,t,n){return n=n!=null?n.concat([e]):null,ol(4,4,Ls.bind(null,t,e),n)}function Xu(){}function Rs(e,t){var n=qe();t=t===void 0?null:t;var r=n.memoizedState;return r!==null&&t!==null&&Hu(t,r[1])?r[0]:(n.memoizedState=[e,t],e)}function Ds(e,t){var n=qe();t=t===void 0?null:t;var r=n.memoizedState;return r!==null&&t!==null&&Hu(t,r[1])?r[0]:(e=e(),n.memoizedState=[e,t],e)}function js(e,t,n){return(en&21)===0?(e.baseState&&(e.baseState=!1,Ae=!0),e.memoizedState=n):(lt(n,t)||(n=ai(),ne.lanes|=n,tn|=n,e.baseState=!0),t)}function sf(e,t){var n=W;W=n!==0&&4>n?n:4,e(!0);var r=$u.transition;$u.transition={};try{e(!1),t()}finally{W=n,$u.transition=r}}function Os(){return qe().memoizedState}function af(e,t,n){var r=$t(e);if(n={lane:r,action:n,hasEagerState:!1,eagerState:null,next:null},Ms(e))Is(t,n);else if(n=ds(e,t,n,r),n!==null){var l=De();at(n,e,r,l),Fs(n,t,r)}}function cf(e,t,n){var r=$t(e),l={lane:r,action:n,hasEagerState:!1,eagerState:null,next:null};if(Ms(e))Is(t,l);else{var u=e.alternate;if(e.lanes===0&&(u===null||u.lanes===0)&&(u=t.lastRenderedReducer,u!==null))try{var o=t.lastRenderedState,i=u(o,n);if(l.hasEagerState=!0,l.eagerState=i,lt(i,o)){var s=t.interleaved;s===null?(l.next=l,Iu(t)):(l.next=s.next,s.next=l),t.interleaved=l;return}}catch{}finally{}n=ds(e,t,l,r),n!==null&&(l=De(),at(n,e,r,l),Fs(n,t,r))}}function Ms(e){var t=e.alternate;return e===ne||t!==null&&t===ne}function Is(e,t){ar=ll=!0;var n=e.pending;n===null?t.next=t:(t.next=n.next,n.next=t),e.pending=t}function Fs(e,t,n){if((n&4194240)!==0){var r=t.lanes;r&=e.pendingLanes,n|=r,t.lanes=n,Jl(e,n)}}var il={readContext:Je,useCallback:_e,useContext:_e,useEffect:_e,useImperativeHandle:_e,useInsertionEffect:_e,useLayoutEffect:_e,useMemo:_e,useReducer:_e,useRef:_e,useState:_e,useDebugValue:_e,useDeferredValue:_e,useTransition:_e,useMutableSource:_e,useSyncExternalStore:_e,useId:_e,unstable_isNewReconciler:!1},ff={readContext:Je,useCallback:function(e,t){return ht().memoizedState=[e,t===void 0?null:t],e},useContext:Je,useEffect:Ps,useImperativeHandle:function(e,t,n){return n=n!=null?n.concat([e]):null,ul(4194308,4,Ls.bind(null,t,e),n)},useLayoutEffect:function(e,t){return ul(4194308,4,e,t)},useInsertionEffect:function(e,t){return ul(4,2,e,t)},useMemo:function(e,t){var n=ht();return t=t===void 0?null:t,e=e(),n.memoizedState=[e,t],e},useReducer:function(e,t,n){var r=ht();return t=n!==void 0?n(t):t,r.memoizedState=r.baseState=t,e={pending:null,interleaved:null,lanes:0,dispatch:null,lastRenderedReducer:e,lastRenderedState:t},r.queue=e,e=e.dispatch=af.bind(null,ne,e),[r.memoizedState,e]},useRef:function(e){var t=ht();return e={current:e},t.memoizedState=e},useState:_s,useDebugValue:Xu,useDeferredValue:function(e){return ht().memoizedState=e},useTransition:function(){var e=_s(!1),t=e[0];return e=sf.bind(null,e[1]),ht().memoizedState=e,[t,e]},useMutableSource:function(){},useSyncExternalStore:function(e,t,n){var r=ne,l=ht();if(b){if(n===void 0)throw Error(m(407));n=n()}else{if(n=t(),ve===null)throw Error(m(349));(en&30)!==0||ws(r,t,n)}l.memoizedState=n;var u={value:n,getSnapshot:t};return l.queue=u,Ps(ks.bind(null,r,u,e),[e]),r.flags|=2048,dr(9,Ss.bind(null,r,u,n,t),void 0,null),n},useId:function(){var e=ht(),t=ve.identifierPrefix;if(b){var n=kt,r=St;n=(r&~(1<<32-rt(r)-1)).toString(32)+n,t=":"+t+"R"+n,n=cr++,0<n&&(t+="H"+n.toString(32)),t+=":"}else n=of++,t=":"+t+"r"+n.toString(32)+":";return e.memoizedState=t},unstable_isNewReconciler:!1},df={readContext:Je,useCallback:Rs,useContext:Je,useEffect:Gu,useImperativeHandle:Ts,useInsertionEffect:zs,useLayoutEffect:Ns,useMemo:Ds,useReducer:Ku,useRef:Cs,useState:function(){return Ku(fr)},useDebugValue:Xu,useDeferredValue:function(e){var t=qe();return js(t,fe.memoizedState,e)},useTransition:function(){var e=Ku(fr)[0],t=qe().memoizedState;return[e,t]},useMutableSource:ys,useSyncExternalStore:gs,useId:Os,unstable_isNewReconciler:!1},pf={readContext:Je,useCallback:Rs,useContext:Je,useEffect:Gu,useImperativeHandle:Ts,useInsertionEffect:zs,useLayoutEffect:Ns,useMemo:Ds,useReducer:Yu,useRef:Cs,useState:function(){return Yu(fr)},useDebugValue:Xu,useDeferredValue:function(e){var t=qe();return fe===null?t.memoizedState=e:js(t,fe.memoizedState,e)},useTransition:function(){var e=Yu(fr)[0],t=qe().memoizedState;return[e,t]},useMutableSource:ys,useSyncExternalStore:gs,useId:Os,unstable_isNewReconciler:!1};function ot(e,t){if(e&&e.defaultProps){t=E({},t),e=e.defaultProps;for(var n in e)t[n]===void 0&&(t[n]=e[n]);return t}return t}function Zu(e,t,n,r){t=e.memoizedState,n=n(r,t),n=n==null?t:E({},t,n),e.memoizedState=n,e.lanes===0&&(e.updateQueue.baseState=n)}var sl={isMounted:function(e){return(e=e._reactInternals)?Yt(e)===e:!1},enqueueSetState:function(e,t,n){e=e._reactInternals;var r=De(),l=$t(e),u=Et(r,l);u.payload=t,n!=null&&(u.callback=n),t=Ut(e,u,l),t!==null&&(at(t,e,l,r),el(t,e,l))},enqueueReplaceState:function(e,t,n){e=e._reactInternals;var r=De(),l=$t(e),u=Et(r,l);u.tag=1,u.payload=t,n!=null&&(u.callback=n),t=Ut(e,u,l),t!==null&&(at(t,e,l,r),el(t,e,l))},enqueueForceUpdate:function(e,t){e=e._reactInternals;var n=De(),r=$t(e),l=Et(n,r);l.tag=2,t!=null&&(l.callback=t),t=Ut(e,l,r),t!==null&&(at(t,e,r,n),el(t,e,r))}};function Us(e,t,n,r,l,u,o){return e=e.stateNode,typeof e.shouldComponentUpdate=="function"?e.shouldComponentUpdate(r,u,o):t.prototype&&t.prototype.isPureReactComponent?!qn(n,r)||!qn(l,u):!0}function As(e,t,n){var r=!1,l=Mt,u=t.contextType;return typeof u=="object"&&u!==null?u=Je(u):(l=Ue(t)?Xt:Ee.current,r=t.contextTypes,u=(r=r!=null)?Sn(e,l):Mt),t=new t(n,u),e.memoizedState=t.state!==null&&t.state!==void 0?t.state:null,t.updater=sl,e.stateNode=t,t._reactInternals=e,r&&(e=e.stateNode,e.__reactInternalMemoizedUnmaskedChildContext=l,e.__reactInternalMemoizedMaskedChildContext=u),t}function Vs(e,t,n,r){e=t.state,typeof t.componentWillReceiveProps=="function"&&t.componentWillReceiveProps(n,r),typeof t.UNSAFE_componentWillReceiveProps=="function"&&t.UNSAFE_componentWillReceiveProps(n,r),t.state!==e&&sl.enqueueReplaceState(t,t.state,null)}function Ju(e,t,n,r){var l=e.stateNode;l.props=n,l.state=e.memoizedState,l.refs={},Fu(e);var u=t.contextType;typeof u=="object"&&u!==null?l.context=Je(u):(u=Ue(t)?Xt:Ee.current,l.context=Sn(e,u)),l.state=e.memoizedState,u=t.getDerivedStateFromProps,typeof u=="function"&&(Zu(e,t,u,n),l.state=e.memoizedState),typeof t.getDerivedStateFromProps=="function"||typeof l.getSnapshotBeforeUpdate=="function"||typeof l.UNSAFE_componentWillMount!="function"&&typeof l.componentWillMount!="function"||(t=l.state,typeof l.componentWillMount=="function"&&l.componentWillMount(),typeof l.UNSAFE_componentWillMount=="function"&&l.UNSAFE_componentWillMount(),t!==l.state&&sl.enqueueReplaceState(l,l.state,null),tl(e,n,l,r),l.state=e.memoizedState),typeof l.componentDidMount=="function"&&(e.flags|=4194308)}function Nn(e,t){try{var n="",r=t;do n+=U(r),r=r.return;while(r);var l=n}catch(u){l=`
-Error generating stack: `+u.message+`
-`+u.stack}return{value:e,source:t,stack:l,digest:null}}function qu(e,t,n){return{value:e,source:null,stack:n??null,digest:t??null}}function bu(e,t){try{console.error(t.value)}catch(n){setTimeout(function(){throw n})}}var mf=typeof WeakMap=="function"?WeakMap:Map;function Bs(e,t,n){n=Et(-1,n),n.tag=3,n.payload={element:null};var r=t.value;return n.callback=function(){hl||(hl=!0,ho=r),bu(e,t)},n}function $s(e,t,n){n=Et(-1,n),n.tag=3;var r=e.type.getDerivedStateFromError;if(typeof r=="function"){var l=t.value;n.payload=function(){return r(l)},n.callback=function(){bu(e,t)}}var u=e.stateNode;return u!==null&&typeof u.componentDidCatch=="function"&&(n.callback=function(){bu(e,t),typeof r!="function"&&(Vt===null?Vt=new Set([this]):Vt.add(this));var o=t.stack;this.componentDidCatch(t.value,{componentStack:o!==null?o:""})}),n}function Hs(e,t,n){var r=e.pingCache;if(r===null){r=e.pingCache=new mf;var l=new Set;r.set(t,l)}else l=r.get(t),l===void 0&&(l=new Set,r.set(t,l));l.has(n)||(l.add(n),e=Nf.bind(null,e,t,n),t.then(e,e))}function Ws(e){do{var t;if((t=e.tag===13)&&(t=e.memoizedState,t=t!==null?t.dehydrated!==null:!0),t)return e;e=e.return}while(e!==null);return null}function Qs(e,t,n,r,l){return(e.mode&1)===0?(e===t?e.flags|=65536:(e.flags|=128,n.flags|=131072,n.flags&=-52805,n.tag===1&&(n.alternate===null?n.tag=17:(t=Et(-1,1),t.tag=2,Ut(n,t,1))),n.lanes|=1),e):(e.flags|=65536,e.lanes=l,e)}var hf=me.ReactCurrentOwner,Ae=!1;function Re(e,t,n,r){t.child=e===null?fs(t,null,n,r):_n(t,e.child,n,r)}function Ks(e,t,n,r,l){n=n.render;var u=t.ref;return Pn(t,l),r=Wu(e,t,n,r,u,l),n=Qu(),e!==null&&!Ae?(t.updateQueue=e.updateQueue,t.flags&=-2053,e.lanes&=~l,_t(e,t,l)):(b&&n&&zu(t),t.flags|=1,Re(e,t,r,l),t.child)}function Ys(e,t,n,r,l){if(e===null){var u=n.type;return typeof u=="function"&&!xo(u)&&u.defaultProps===void 0&&n.compare===null&&n.defaultProps===void 0?(t.tag=15,t.type=u,Gs(e,t,u,r,l)):(e=kl(n.type,null,r,t,t.mode,l),e.ref=t.ref,e.return=t,t.child=e)}if(u=e.child,(e.lanes&l)===0){var o=u.memoizedProps;if(n=n.compare,n=n!==null?n:qn,n(o,r)&&e.ref===t.ref)return _t(e,t,l)}return t.flags|=1,e=Wt(u,r),e.ref=t.ref,e.return=t,t.child=e}function Gs(e,t,n,r,l){if(e!==null){var u=e.memoizedProps;if(qn(u,r)&&e.ref===t.ref)if(Ae=!1,t.pendingProps=r=u,(e.lanes&l)!==0)(e.flags&131072)!==0&&(Ae=!0);else return t.lanes=e.lanes,_t(e,t,l)}return eo(e,t,n,r,l)}function Xs(e,t,n){var r=t.pendingProps,l=r.children,u=e!==null?e.memoizedState:null;if(r.mode==="hidden")if((t.mode&1)===0)t.memoizedState={baseLanes:0,cachePool:null,transitions:null},G(Tn,Ye),Ye|=n;else{if((n&1073741824)===0)return e=u!==null?u.baseLanes|n:n,t.lanes=t.childLanes=1073741824,t.memoizedState={baseLanes:e,cachePool:null,transitions:null},t.updateQueue=null,G(Tn,Ye),Ye|=e,null;t.memoizedState={baseLanes:0,cachePool:null,transitions:null},r=u!==null?u.baseLanes:n,G(Tn,Ye),Ye|=r}else u!==null?(r=u.baseLanes|n,t.memoizedState=null):r=n,G(Tn,Ye),Ye|=r;return Re(e,t,l,n),t.child}function Zs(e,t){var n=t.ref;(e===null&&n!==null||e!==null&&e.ref!==n)&&(t.flags|=512,t.flags|=2097152)}function eo(e,t,n,r,l){var u=Ue(n)?Xt:Ee.current;return u=Sn(t,u),Pn(t,l),n=Wu(e,t,n,r,u,l),r=Qu(),e!==null&&!Ae?(t.updateQueue=e.updateQueue,t.flags&=-2053,e.lanes&=~l,_t(e,t,l)):(b&&r&&zu(t),t.flags|=1,Re(e,t,n,l),t.child)}function Js(e,t,n,r,l){if(Ue(n)){var u=!0;Kr(t)}else u=!1;if(Pn(t,l),t.stateNode===null)cl(e,t),As(t,n,r),Ju(t,n,r,l),r=!0;else if(e===null){var o=t.stateNode,i=t.memoizedProps;o.props=i;var s=o.context,p=n.contextType;typeof p=="object"&&p!==null?p=Je(p):(p=Ue(n)?Xt:Ee.current,p=Sn(t,p));var y=n.getDerivedStateFromProps,g=typeof y=="function"||typeof o.getSnapshotBeforeUpdate=="function";g||typeof o.UNSAFE_componentWillReceiveProps!="function"&&typeof o.componentWillReceiveProps!="function"||(i!==r||s!==p)&&Vs(t,o,r,p),Ft=!1;var h=t.memoizedState;o.state=h,tl(t,r,o,l),s=t.memoizedState,i!==r||h!==s||Fe.current||Ft?(typeof y=="function"&&(Zu(t,n,y,r),s=t.memoizedState),(i=Ft||Us(t,n,i,r,h,s,p))?(g||typeof o.UNSAFE_componentWillMount!="function"&&typeof o.componentWillMount!="function"||(typeof o.componentWillMount=="function"&&o.componentWillMount(),typeof o.UNSAFE_componentWillMount=="function"&&o.UNSAFE_componentWillMount()),typeof o.componentDidMount=="function"&&(t.flags|=4194308)):(typeof o.componentDidMount=="function"&&(t.flags|=4194308),t.memoizedProps=r,t.memoizedState=s),o.props=r,o.state=s,o.context=p,r=i):(typeof o.componentDidMount=="function"&&(t.flags|=4194308),r=!1)}else{o=t.stateNode,ps(e,t),i=t.memoizedProps,p=t.type===t.elementType?i:ot(t.type,i),o.props=p,g=t.pendingProps,h=o.context,s=n.contextType,typeof s=="object"&&s!==null?s=Je(s):(s=Ue(n)?Xt:Ee.current,s=Sn(t,s));var k=n.getDerivedStateFromProps;(y=typeof k=="function"||typeof o.getSnapshotBeforeUpdate=="function")||typeof o.UNSAFE_componentWillReceiveProps!="function"&&typeof o.componentWillReceiveProps!="function"||(i!==g||h!==s)&&Vs(t,o,r,s),Ft=!1,h=t.memoizedState,o.state=h,tl(t,r,o,l);var _=t.memoizedState;i!==g||h!==_||Fe.current||Ft?(typeof k=="function"&&(Zu(t,n,k,r),_=t.memoizedState),(p=Ft||Us(t,n,p,r,h,_,s)||!1)?(y||typeof o.UNSAFE_componentWillUpdate!="function"&&typeof o.componentWillUpdate!="function"||(typeof o.componentWillUpdate=="function"&&o.componentWillUpdate(r,_,s),typeof o.UNSAFE_componentWillUpdate=="function"&&o.UNSAFE_componentWillUpdate(r,_,s)),typeof o.componentDidUpdate=="function"&&(t.flags|=4),typeof o.getSnapshotBeforeUpdate=="function"&&(t.flags|=1024)):(typeof o.componentDidUpdate!="function"||i===e.memoizedProps&&h===e.memoizedState||(t.flags|=4),typeof o.getSnapshotBeforeUpdate!="function"||i===e.memoizedProps&&h===e.memoizedState||(t.flags|=1024),t.memoizedProps=r,t.memoizedState=_),o.props=r,o.state=_,o.context=s,r=p):(typeof o.componentDidUpdate!="function"||i===e.memoizedProps&&h===e.memoizedState||(t.flags|=4),typeof o.getSnapshotBeforeUpdate!="function"||i===e.memoizedProps&&h===e.memoizedState||(t.flags|=1024),r=!1)}return to(e,t,n,r,u,l)}function to(e,t,n,r,l,u){Zs(e,t);var o=(t.flags&128)!==0;if(!r&&!o)return l&&ns(t,n,!1),_t(e,t,u);r=t.stateNode,hf.current=t;var i=o&&typeof n.getDerivedStateFromError!="function"?null:r.render();return t.flags|=1,e!==null&&o?(t.child=_n(t,e.child,null,u),t.child=_n(t,null,i,u)):Re(e,t,i,u),t.memoizedState=r.state,l&&ns(t,n,!0),t.child}function qs(e){var t=e.stateNode;t.pendingContext?es(e,t.pendingContext,t.pendingContext!==t.context):t.context&&es(e,t.context,!1),Uu(e,t.containerInfo)}function bs(e,t,n,r,l){return En(),Ru(l),t.flags|=256,Re(e,t,n,r),t.child}var no={dehydrated:null,treeContext:null,retryLane:0};function ro(e){return{baseLanes:e,cachePool:null,transitions:null}}function ea(e,t,n){var r=t.pendingProps,l=te.current,u=!1,o=(t.flags&128)!==0,i;if((i=o)||(i=e!==null&&e.memoizedState===null?!1:(l&2)!==0),i?(u=!0,t.flags&=-129):(e===null||e.memoizedState!==null)&&(l|=1),G(te,l&1),e===null)return Tu(t),e=t.memoizedState,e!==null&&(e=e.dehydrated,e!==null)?((t.mode&1)===0?t.lanes=1:e.data==="$!"?t.lanes=8:t.lanes=1073741824,null):(o=r.children,e=r.fallback,u?(r=t.mode,u=t.child,o={mode:"hidden",children:o},(r&1)===0&&u!==null?(u.childLanes=0,u.pendingProps=o):u=xl(o,r,0,null),e=un(e,r,n,null),u.return=t,e.return=t,u.sibling=e,t.child=u,t.child.memoizedState=ro(n),t.memoizedState=no,e):lo(t,o));if(l=e.memoizedState,l!==null&&(i=l.dehydrated,i!==null))return vf(e,t,o,r,i,l,n);if(u){u=r.fallback,o=t.mode,l=e.child,i=l.sibling;var s={mode:"hidden",children:r.children};return(o&1)===0&&t.child!==l?(r=t.child,r.childLanes=0,r.pendingProps=s,t.deletions=null):(r=Wt(l,s),r.subtreeFlags=l.subtreeFlags&14680064),i!==null?u=Wt(i,u):(u=un(u,o,n,null),u.flags|=2),u.return=t,r.return=t,r.sibling=u,t.child=r,r=u,u=t.child,o=e.child.memoizedState,o=o===null?ro(n):{baseLanes:o.baseLanes|n,cachePool:null,transitions:o.transitions},u.memoizedState=o,u.childLanes=e.childLanes&~n,t.memoizedState=no,r}return u=e.child,e=u.sibling,r=Wt(u,{mode:"visible",children:r.children}),(t.mode&1)===0&&(r.lanes=n),r.return=t,r.sibling=null,e!==null&&(n=t.deletions,n===null?(t.deletions=[e],t.flags|=16):n.push(e)),t.child=r,t.memoizedState=null,r}function lo(e,t){return t=xl({mode:"visible",children:t},e.mode,0,null),t.return=e,e.child=t}function al(e,t,n,r){return r!==null&&Ru(r),_n(t,e.child,null,n),e=lo(t,t.pendingProps.children),e.flags|=2,t.memoizedState=null,e}function vf(e,t,n,r,l,u,o){if(n)return t.flags&256?(t.flags&=-257,r=qu(Error(m(422))),al(e,t,o,r)):t.memoizedState!==null?(t.child=e.child,t.flags|=128,null):(u=r.fallback,l=t.mode,r=xl({mode:"visible",children:r.children},l,0,null),u=un(u,l,o,null),u.flags|=2,r.return=t,u.return=t,r.sibling=u,t.child=r,(t.mode&1)!==0&&_n(t,e.child,null,o),t.child.memoizedState=ro(o),t.memoizedState=no,u);if((t.mode&1)===0)return al(e,t,o,null);if(l.data==="$!"){if(r=l.nextSibling&&l.nextSibling.dataset,r)var i=r.dgst;return r=i,u=Error(m(419)),r=qu(u,r,void 0),al(e,t,o,r)}if(i=(o&e.childLanes)!==0,Ae||i){if(r=ve,r!==null){switch(o&-o){case 4:l=2;break;case 16:l=8;break;case 64:case 128:case 256:case 512:case 1024:case 2048:case 4096:case 8192:case 16384:case 32768:case 65536:case 131072:case 262144:case 524288:case 1048576:case 2097152:case 4194304:case 8388608:case 16777216:case 33554432:case 67108864:l=32;break;case 536870912:l=268435456;break;default:l=0}l=(l&(r.suspendedLanes|o))!==0?0:l,l!==0&&l!==u.retryLane&&(u.retryLane=l,xt(e,l),at(r,e,l,-1))}return ko(),r=qu(Error(m(421))),al(e,t,o,r)}return l.data==="$?"?(t.flags|=128,t.child=e.child,t=Lf.bind(null,e),l._reactRetry=t,null):(e=u.treeContext,Ke=jt(l.nextSibling),Qe=t,b=!0,ut=null,e!==null&&(Xe[Ze++]=St,Xe[Ze++]=kt,Xe[Ze++]=Zt,St=e.id,kt=e.overflow,Zt=t),t=lo(t,r.children),t.flags|=4096,t)}function ta(e,t,n){e.lanes|=t;var r=e.alternate;r!==null&&(r.lanes|=t),Mu(e.return,t,n)}function uo(e,t,n,r,l){var u=e.memoizedState;u===null?e.memoizedState={isBackwards:t,rendering:null,renderingStartTime:0,last:r,tail:n,tailMode:l}:(u.isBackwards=t,u.rendering=null,u.renderingStartTime=0,u.last=r,u.tail=n,u.tailMode=l)}function na(e,t,n){var r=t.pendingProps,l=r.revealOrder,u=r.tail;if(Re(e,t,r.children,n),r=te.current,(r&2)!==0)r=r&1|2,t.flags|=128;else{if(e!==null&&(e.flags&128)!==0)e:for(e=t.child;e!==null;){if(e.tag===13)e.memoizedState!==null&&ta(e,n,t);else if(e.tag===19)ta(e,n,t);else if(e.child!==null){e.child.return=e,e=e.child;continue}if(e===t)break e;for(;e.sibling===null;){if(e.return===null||e.return===t)break e;e=e.return}e.sibling.return=e.return,e=e.sibling}r&=1}if(G(te,r),(t.mode&1)===0)t.memoizedState=null;else switch(l){case"forwards":for(n=t.child,l=null;n!==null;)e=n.alternate,e!==null&&nl(e)===null&&(l=n),n=n.sibling;n=l,n===null?(l=t.child,t.child=null):(l=n.sibling,n.sibling=null),uo(t,!1,l,n,u);break;case"backwards":for(n=null,l=t.child,t.child=null;l!==null;){if(e=l.alternate,e!==null&&nl(e)===null){t.child=l;break}e=l.sibling,l.sibling=n,n=l,l=e}uo(t,!0,n,null,u);break;case"together":uo(t,!1,null,null,void 0);break;default:t.memoizedState=null}return t.child}function cl(e,t){(t.mode&1)===0&&e!==null&&(e.alternate=null,t.alternate=null,t.flags|=2)}function _t(e,t,n){if(e!==null&&(t.dependencies=e.dependencies),tn|=t.lanes,(n&t.childLanes)===0)return null;if(e!==null&&t.child!==e.child)throw Error(m(153));if(t.child!==null){for(e=t.child,n=Wt(e,e.pendingProps),t.child=n,n.return=t;e.sibling!==null;)e=e.sibling,n=n.sibling=Wt(e,e.pendingProps),n.return=t;n.sibling=null}return t.child}function yf(e,t,n){switch(t.tag){case 3:qs(t),En();break;case 5:vs(t);break;case 1:Ue(t.type)&&Kr(t);break;case 4:Uu(t,t.stateNode.containerInfo);break;case 10:var r=t.type._context,l=t.memoizedProps.value;G(qr,r._currentValue),r._currentValue=l;break;case 13:if(r=t.memoizedState,r!==null)return r.dehydrated!==null?(G(te,te.current&1),t.flags|=128,null):(n&t.child.childLanes)!==0?ea(e,t,n):(G(te,te.current&1),e=_t(e,t,n),e!==null?e.sibling:null);G(te,te.current&1);break;case 19:if(r=(n&t.childLanes)!==0,(e.flags&128)!==0){if(r)return na(e,t,n);t.flags|=128}if(l=t.memoizedState,l!==null&&(l.rendering=null,l.tail=null,l.lastEffect=null),G(te,te.current),r)break;return null;case 22:case 23:return t.lanes=0,Xs(e,t,n)}return _t(e,t,n)}var ra,oo,la,ua;ra=function(e,t){for(var n=t.child;n!==null;){if(n.tag===5||n.tag===6)e.appendChild(n.stateNode);else if(n.tag!==4&&n.child!==null){n.child.return=n,n=n.child;continue}if(n===t)break;for(;n.sibling===null;){if(n.return===null||n.return===t)return;n=n.return}n.sibling.return=n.return,n=n.sibling}},oo=function(){},la=function(e,t,n,r){var l=e.memoizedProps;if(l!==r){e=t.stateNode,bt(mt.current);var u=null;switch(n){case"input":l=Ml(e,l),r=Ml(e,r),u=[];break;case"select":l=E({},l,{value:void 0}),r=E({},r,{value:void 0}),u=[];break;case"textarea":l=Ul(e,l),r=Ul(e,r),u=[];break;default:typeof l.onClick!="function"&&typeof r.onClick=="function"&&(e.onclick=Hr)}Vl(n,r);var o;n=null;for(p in l)if(!r.hasOwnProperty(p)&&l.hasOwnProperty(p)&&l[p]!=null)if(p==="style"){var i=l[p];for(o in i)i.hasOwnProperty(o)&&(n||(n={}),n[o]="")}else p!=="dangerouslySetInnerHTML"&&p!=="children"&&p!=="suppressContentEditableWarning"&&p!=="suppressHydrationWarning"&&p!=="autoFocus"&&(ge.hasOwnProperty(p)?u||(u=[]):(u=u||[]).push(p,null));for(p in r){var s=r[p];if(i=l?.[p],r.hasOwnProperty(p)&&s!==i&&(s!=null||i!=null))if(p==="style")if(i){for(o in i)!i.hasOwnProperty(o)||s&&s.hasOwnProperty(o)||(n||(n={}),n[o]="");for(o in s)s.hasOwnProperty(o)&&i[o]!==s[o]&&(n||(n={}),n[o]=s[o])}else n||(u||(u=[]),u.push(p,n)),n=s;else p==="dangerouslySetInnerHTML"?(s=s?s.__html:void 0,i=i?i.__html:void 0,s!=null&&i!==s&&(u=u||[]).push(p,s)):p==="children"?typeof s!="string"&&typeof s!="number"||(u=u||[]).push(p,""+s):p!=="suppressContentEditableWarning"&&p!=="suppressHydrationWarning"&&(ge.hasOwnProperty(p)?(s!=null&&p==="onScroll"&&Z("scroll",e),u||i===s||(u=[])):(u=u||[]).push(p,s))}n&&(u=u||[]).push("style",n);var p=u;(t.updateQueue=p)&&(t.flags|=4)}},ua=function(e,t,n,r){n!==r&&(t.flags|=4)};function pr(e,t){if(!b)switch(e.tailMode){case"hidden":t=e.tail;for(var n=null;t!==null;)t.alternate!==null&&(n=t),t=t.sibling;n===null?e.tail=null:n.sibling=null;break;case"collapsed":n=e.tail;for(var r=null;n!==null;)n.alternate!==null&&(r=n),n=n.sibling;r===null?t||e.tail===null?e.tail=null:e.tail.sibling=null:r.sibling=null}}function Ce(e){var t=e.alternate!==null&&e.alternate.child===e.child,n=0,r=0;if(t)for(var l=e.child;l!==null;)n|=l.lanes|l.childLanes,r|=l.subtreeFlags&14680064,r|=l.flags&14680064,l.return=e,l=l.sibling;else for(l=e.child;l!==null;)n|=l.lanes|l.childLanes,r|=l.subtreeFlags,r|=l.flags,l.return=e,l=l.sibling;return e.subtreeFlags|=r,e.childLanes=n,t}function gf(e,t,n){var r=t.pendingProps;switch(Nu(t),t.tag){case 2:case 16:case 15:case 0:case 11:case 7:case 8:case 12:case 9:case 14:return Ce(t),null;case 1:return Ue(t.type)&&Qr(),Ce(t),null;case 3:return r=t.stateNode,zn(),J(Fe),J(Ee),Bu(),r.pendingContext&&(r.context=r.pendingContext,r.pendingContext=null),(e===null||e.child===null)&&(Zr(t)?t.flags|=4:e===null||e.memoizedState.isDehydrated&&(t.flags&256)===0||(t.flags|=1024,ut!==null&&(go(ut),ut=null))),oo(e,t),Ce(t),null;case 5:Au(t);var l=bt(sr.current);if(n=t.type,e!==null&&t.stateNode!=null)la(e,t,n,r,l),e.ref!==t.ref&&(t.flags|=512,t.flags|=2097152);else{if(!r){if(t.stateNode===null)throw Error(m(166));return Ce(t),null}if(e=bt(mt.current),Zr(t)){r=t.stateNode,n=t.type;var u=t.memoizedProps;switch(r[pt]=t,r[rr]=u,e=(t.mode&1)!==0,n){case"dialog":Z("cancel",r),Z("close",r);break;case"iframe":case"object":case"embed":Z("load",r);break;case"video":case"audio":for(l=0;l<er.length;l++)Z(er[l],r);break;case"source":Z("error",r);break;case"img":case"image":case"link":Z("error",r),Z("load",r);break;case"details":Z("toggle",r);break;case"input":Ao(r,u),Z("invalid",r);break;case"select":r._wrapperState={wasMultiple:!!u.multiple},Z("invalid",r);break;case"textarea":$o(r,u),Z("invalid",r)}Vl(n,u),l=null;for(var o in u)if(u.hasOwnProperty(o)){var i=u[o];o==="children"?typeof i=="string"?r.textContent!==i&&(u.suppressHydrationWarning!==!0&&$r(r.textContent,i,e),l=["children",i]):typeof i=="number"&&r.textContent!==""+i&&(u.suppressHydrationWarning!==!0&&$r(r.textContent,i,e),l=["children",""+i]):ge.hasOwnProperty(o)&&i!=null&&o==="onScroll"&&Z("scroll",r)}switch(n){case"input":wr(r),Bo(r,u,!0);break;case"textarea":wr(r),Wo(r);break;case"select":case"option":break;default:typeof u.onClick=="function"&&(r.onclick=Hr)}r=l,t.updateQueue=r,r!==null&&(t.flags|=4)}else{o=l.nodeType===9?l:l.ownerDocument,e==="http://www.w3.org/1999/xhtml"&&(e=Qo(n)),e==="http://www.w3.org/1999/xhtml"?n==="script"?(e=o.createElement("div"),e.innerHTML="<script><\/script>",e=e.removeChild(e.firstChild)):typeof r.is=="string"?e=o.createElement(n,{is:r.is}):(e=o.createElement(n),n==="select"&&(o=e,r.multiple?o.multiple=!0:r.size&&(o.size=r.size))):e=o.createElementNS(e,n),e[pt]=t,e[rr]=r,ra(e,t,!1,!1),t.stateNode=e;e:{switch(o=Bl(n,r),n){case"dialog":Z("cancel",e),Z("close",e),l=r;break;case"iframe":case"object":case"embed":Z("load",e),l=r;break;case"video":case"audio":for(l=0;l<er.length;l++)Z(er[l],e);l=r;break;case"source":Z("error",e),l=r;break;case"img":case"image":case"link":Z("error",e),Z("load",e),l=r;break;case"details":Z("toggle",e),l=r;break;case"input":Ao(e,r),l=Ml(e,r),Z("invalid",e);break;case"option":l=r;break;case"select":e._wrapperState={wasMultiple:!!r.multiple},l=E({},r,{value:void 0}),Z("invalid",e);break;case"textarea":$o(e,r),l=Ul(e,r),Z("invalid",e);break;default:l=r}Vl(n,l),i=l;for(u in i)if(i.hasOwnProperty(u)){var s=i[u];u==="style"?Go(e,s):u==="dangerouslySetInnerHTML"?(s=s?s.__html:void 0,s!=null&&Ko(e,s)):u==="children"?typeof s=="string"?(n!=="textarea"||s!=="")&&Mn(e,s):typeof s=="number"&&Mn(e,""+s):u!=="suppressContentEditableWarning"&&u!=="suppressHydrationWarning"&&u!=="autoFocus"&&(ge.hasOwnProperty(u)?s!=null&&u==="onScroll"&&Z("scroll",e):s!=null&&Le(e,u,s,o))}switch(n){case"input":wr(e),Bo(e,r,!1);break;case"textarea":wr(e),Wo(e);break;case"option":r.value!=null&&e.setAttribute("value",""+H(r.value));break;case"select":e.multiple=!!r.multiple,u=r.value,u!=null?sn(e,!!r.multiple,u,!1):r.defaultValue!=null&&sn(e,!!r.multiple,r.defaultValue,!0);break;default:typeof l.onClick=="function"&&(e.onclick=Hr)}switch(n){case"button":case"input":case"select":case"textarea":r=!!r.autoFocus;break e;case"img":r=!0;break e;default:r=!1}}r&&(t.flags|=4)}t.ref!==null&&(t.flags|=512,t.flags|=2097152)}return Ce(t),null;case 6:if(e&&t.stateNode!=null)ua(e,t,e.memoizedProps,r);else{if(typeof r!="string"&&t.stateNode===null)throw Error(m(166));if(n=bt(sr.current),bt(mt.current),Zr(t)){if(r=t.stateNode,n=t.memoizedProps,r[pt]=t,(u=r.nodeValue!==n)&&(e=Qe,e!==null))switch(e.tag){case 3:$r(r.nodeValue,n,(e.mode&1)!==0);break;case 5:e.memoizedProps.suppressHydrationWarning!==!0&&$r(r.nodeValue,n,(e.mode&1)!==0)}u&&(t.flags|=4)}else r=(n.nodeType===9?n:n.ownerDocument).createTextNode(r),r[pt]=t,t.stateNode=r}return Ce(t),null;case 13:if(J(te),r=t.memoizedState,e===null||e.memoizedState!==null&&e.memoizedState.dehydrated!==null){if(b&&Ke!==null&&(t.mode&1)!==0&&(t.flags&128)===0)ss(),En(),t.flags|=98560,u=!1;else if(u=Zr(t),r!==null&&r.dehydrated!==null){if(e===null){if(!u)throw Error(m(318));if(u=t.memoizedState,u=u!==null?u.dehydrated:null,!u)throw Error(m(317));u[pt]=t}else En(),(t.flags&128)===0&&(t.memoizedState=null),t.flags|=4;Ce(t),u=!1}else ut!==null&&(go(ut),ut=null),u=!0;if(!u)return t.flags&65536?t:null}return(t.flags&128)!==0?(t.lanes=n,t):(r=r!==null,r!==(e!==null&&e.memoizedState!==null)&&r&&(t.child.flags|=8192,(t.mode&1)!==0&&(e===null||(te.current&1)!==0?de===0&&(de=3):ko())),t.updateQueue!==null&&(t.flags|=4),Ce(t),null);case 4:return zn(),oo(e,t),e===null&&tr(t.stateNode.containerInfo),Ce(t),null;case 10:return Ou(t.type._context),Ce(t),null;case 17:return Ue(t.type)&&Qr(),Ce(t),null;case 19:if(J(te),u=t.memoizedState,u===null)return Ce(t),null;if(r=(t.flags&128)!==0,o=u.rendering,o===null)if(r)pr(u,!1);else{if(de!==0||e!==null&&(e.flags&128)!==0)for(e=t.child;e!==null;){if(o=nl(e),o!==null){for(t.flags|=128,pr(u,!1),r=o.updateQueue,r!==null&&(t.updateQueue=r,t.flags|=4),t.subtreeFlags=0,r=n,n=t.child;n!==null;)u=n,e=r,u.flags&=14680066,o=u.alternate,o===null?(u.childLanes=0,u.lanes=e,u.child=null,u.subtreeFlags=0,u.memoizedProps=null,u.memoizedState=null,u.updateQueue=null,u.dependencies=null,u.stateNode=null):(u.childLanes=o.childLanes,u.lanes=o.lanes,u.child=o.child,u.subtreeFlags=0,u.deletions=null,u.memoizedProps=o.memoizedProps,u.memoizedState=o.memoizedState,u.updateQueue=o.updateQueue,u.type=o.type,e=o.dependencies,u.dependencies=e===null?null:{lanes:e.lanes,firstContext:e.firstContext}),n=n.sibling;return G(te,te.current&1|2),t.child}e=e.sibling}u.tail!==null&&oe()>Rn&&(t.flags|=128,r=!0,pr(u,!1),t.lanes=4194304)}else{if(!r)if(e=nl(o),e!==null){if(t.flags|=128,r=!0,n=e.updateQueue,n!==null&&(t.updateQueue=n,t.flags|=4),pr(u,!0),u.tail===null&&u.tailMode==="hidden"&&!o.alternate&&!b)return Ce(t),null}else 2*oe()-u.renderingStartTime>Rn&&n!==1073741824&&(t.flags|=128,r=!0,pr(u,!1),t.lanes=4194304);u.isBackwards?(o.sibling=t.child,t.child=o):(n=u.last,n!==null?n.sibling=o:t.child=o,u.last=o)}return u.tail!==null?(t=u.tail,u.rendering=t,u.tail=t.sibling,u.renderingStartTime=oe(),t.sibling=null,n=te.current,G(te,r?n&1|2:n&1),t):(Ce(t),null);case 22:case 23:return So(),r=t.memoizedState!==null,e!==null&&e.memoizedState!==null!==r&&(t.flags|=8192),r&&(t.mode&1)!==0?(Ye&1073741824)!==0&&(Ce(t),t.subtreeFlags&6&&(t.flags|=8192)):Ce(t),null;case 24:return null;case 25:return null}throw Error(m(156,t.tag))}function wf(e,t){switch(Nu(t),t.tag){case 1:return Ue(t.type)&&Qr(),e=t.flags,e&65536?(t.flags=e&-65537|128,t):null;case 3:return zn(),J(Fe),J(Ee),Bu(),e=t.flags,(e&65536)!==0&&(e&128)===0?(t.flags=e&-65537|128,t):null;case 5:return Au(t),null;case 13:if(J(te),e=t.memoizedState,e!==null&&e.dehydrated!==null){if(t.alternate===null)throw Error(m(340));En()}return e=t.flags,e&65536?(t.flags=e&-65537|128,t):null;case 19:return J(te),null;case 4:return zn(),null;case 10:return Ou(t.type._context),null;case 22:case 23:return So(),null;case 24:return null;default:return null}}var fl=!1,Pe=!1,Sf=typeof WeakSet=="function"?WeakSet:Set,x=null;function Ln(e,t){var n=e.ref;if(n!==null)if(typeof n=="function")try{n(null)}catch(r){le(e,t,r)}else n.current=null}function io(e,t,n){try{n()}catch(r){le(e,t,r)}}var oa=!1;function kf(e,t){if(wu=Rr,e=Ui(),fu(e)){if("selectionStart"in e)var n={start:e.selectionStart,end:e.selectionEnd};else e:{n=(n=e.ownerDocument)&&n.defaultView||window;var r=n.getSelection&&n.getSelection();if(r&&r.rangeCount!==0){n=r.anchorNode;var l=r.anchorOffset,u=r.focusNode;r=r.focusOffset;try{n.nodeType,u.nodeType}catch{n=null;break e}var o=0,i=-1,s=-1,p=0,y=0,g=e,h=null;t:for(;;){for(var k;g!==n||l!==0&&g.nodeType!==3||(i=o+l),g!==u||r!==0&&g.nodeType!==3||(s=o+r),g.nodeType===3&&(o+=g.nodeValue.length),(k=g.firstChild)!==null;)h=g,g=k;for(;;){if(g===e)break t;if(h===n&&++p===l&&(i=o),h===u&&++y===r&&(s=o),(k=g.nextSibling)!==null)break;g=h,h=g.parentNode}g=k}n=i===-1||s===-1?null:{start:i,end:s}}else n=null}n=n||{start:0,end:0}}else n=null;for(Su={focusedElem:e,selectionRange:n},Rr=!1,x=t;x!==null;)if(t=x,e=t.child,(t.subtreeFlags&1028)!==0&&e!==null)e.return=t,x=e;else for(;x!==null;){t=x;try{var _=t.alternate;if((t.flags&1024)!==0)switch(t.tag){case 0:case 11:case 15:break;case 1:if(_!==null){var C=_.memoizedProps,ie=_.memoizedState,f=t.stateNode,a=f.getSnapshotBeforeUpdate(t.elementType===t.type?C:ot(t.type,C),ie);f.__reactInternalSnapshotBeforeUpdate=a}break;case 3:var d=t.stateNode.containerInfo;d.nodeType===1?d.textContent="":d.nodeType===9&&d.documentElement&&d.removeChild(d.documentElement);break;case 5:case 6:case 4:case 17:break;default:throw Error(m(163))}}catch(w){le(t,t.return,w)}if(e=t.sibling,e!==null){e.return=t.return,x=e;break}x=t.return}return _=oa,oa=!1,_}function mr(e,t,n){var r=t.updateQueue;if(r=r!==null?r.lastEffect:null,r!==null){var l=r=r.next;do{if((l.tag&e)===e){var u=l.destroy;l.destroy=void 0,u!==void 0&&io(t,n,u)}l=l.next}while(l!==r)}}function dl(e,t){if(t=t.updateQueue,t=t!==null?t.lastEffect:null,t!==null){var n=t=t.next;do{if((n.tag&e)===e){var r=n.create;n.destroy=r()}n=n.next}while(n!==t)}}function so(e){var t=e.ref;if(t!==null){var n=e.stateNode;switch(e.tag){case 5:e=n;break;default:e=n}typeof t=="function"?t(e):t.current=e}}function ia(e){var t=e.alternate;t!==null&&(e.alternate=null,ia(t)),e.child=null,e.deletions=null,e.sibling=null,e.tag===5&&(t=e.stateNode,t!==null&&(delete t[pt],delete t[rr],delete t[_u],delete t[nf],delete t[rf])),e.stateNode=null,e.return=null,e.dependencies=null,e.memoizedProps=null,e.memoizedState=null,e.pendingProps=null,e.stateNode=null,e.updateQueue=null}function sa(e){return e.tag===5||e.tag===3||e.tag===4}function aa(e){e:for(;;){for(;e.sibling===null;){if(e.return===null||sa(e.return))return null;e=e.return}for(e.sibling.return=e.return,e=e.sibling;e.tag!==5&&e.tag!==6&&e.tag!==18;){if(e.flags&2||e.child===null||e.tag===4)continue e;e.child.return=e,e=e.child}if(!(e.flags&2))return e.stateNode}}function ao(e,t,n){var r=e.tag;if(r===5||r===6)e=e.stateNode,t?n.nodeType===8?n.parentNode.insertBefore(e,t):n.insertBefore(e,t):(n.nodeType===8?(t=n.parentNode,t.insertBefore(e,n)):(t=n,t.appendChild(e)),n=n._reactRootContainer,n!=null||t.onclick!==null||(t.onclick=Hr));else if(r!==4&&(e=e.child,e!==null))for(ao(e,t,n),e=e.sibling;e!==null;)ao(e,t,n),e=e.sibling}function co(e,t,n){var r=e.tag;if(r===5||r===6)e=e.stateNode,t?n.insertBefore(e,t):n.appendChild(e);else if(r!==4&&(e=e.child,e!==null))for(co(e,t,n),e=e.sibling;e!==null;)co(e,t,n),e=e.sibling}var Se=null,it=!1;function At(e,t,n){for(n=n.child;n!==null;)ca(e,t,n),n=n.sibling}function ca(e,t,n){if(dt&&typeof dt.onCommitFiberUnmount=="function")try{dt.onCommitFiberUnmount(Cr,n)}catch{}switch(n.tag){case 5:Pe||Ln(n,t);case 6:var r=Se,l=it;Se=null,At(e,t,n),Se=r,it=l,Se!==null&&(it?(e=Se,n=n.stateNode,e.nodeType===8?e.parentNode.removeChild(n):e.removeChild(n)):Se.removeChild(n.stateNode));break;case 18:Se!==null&&(it?(e=Se,n=n.stateNode,e.nodeType===8?Eu(e.parentNode,n):e.nodeType===1&&Eu(e,n),Kn(e)):Eu(Se,n.stateNode));break;case 4:r=Se,l=it,Se=n.stateNode.containerInfo,it=!0,At(e,t,n),Se=r,it=l;break;case 0:case 11:case 14:case 15:if(!Pe&&(r=n.updateQueue,r!==null&&(r=r.lastEffect,r!==null))){l=r=r.next;do{var u=l,o=u.destroy;u=u.tag,o!==void 0&&((u&2)!==0||(u&4)!==0)&&io(n,t,o),l=l.next}while(l!==r)}At(e,t,n);break;case 1:if(!Pe&&(Ln(n,t),r=n.stateNode,typeof r.componentWillUnmount=="function"))try{r.props=n.memoizedProps,r.state=n.memoizedState,r.componentWillUnmount()}catch(i){le(n,t,i)}At(e,t,n);break;case 21:At(e,t,n);break;case 22:n.mode&1?(Pe=(r=Pe)||n.memoizedState!==null,At(e,t,n),Pe=r):At(e,t,n);break;default:At(e,t,n)}}function fa(e){var t=e.updateQueue;if(t!==null){e.updateQueue=null;var n=e.stateNode;n===null&&(n=e.stateNode=new Sf),t.forEach(function(r){var l=Tf.bind(null,e,r);n.has(r)||(n.add(r),r.then(l,l))})}}function st(e,t){var n=t.deletions;if(n!==null)for(var r=0;r<n.length;r++){var l=n[r];try{var u=e,o=t,i=o;e:for(;i!==null;){switch(i.tag){case 5:Se=i.stateNode,it=!1;break e;case 3:Se=i.stateNode.containerInfo,it=!0;break e;case 4:Se=i.stateNode.containerInfo,it=!0;break e}i=i.return}if(Se===null)throw Error(m(160));ca(u,o,l),Se=null,it=!1;var s=l.alternate;s!==null&&(s.return=null),l.return=null}catch(p){le(l,t,p)}}if(t.subtreeFlags&12854)for(t=t.child;t!==null;)da(t,e),t=t.sibling}function da(e,t){var n=e.alternate,r=e.flags;switch(e.tag){case 0:case 11:case 14:case 15:if(st(t,e),vt(e),r&4){try{mr(3,e,e.return),dl(3,e)}catch(C){le(e,e.return,C)}try{mr(5,e,e.return)}catch(C){le(e,e.return,C)}}break;case 1:st(t,e),vt(e),r&512&&n!==null&&Ln(n,n.return);break;case 5:if(st(t,e),vt(e),r&512&&n!==null&&Ln(n,n.return),e.flags&32){var l=e.stateNode;try{Mn(l,"")}catch(C){le(e,e.return,C)}}if(r&4&&(l=e.stateNode,l!=null)){var u=e.memoizedProps,o=n!==null?n.memoizedProps:u,i=e.type,s=e.updateQueue;if(e.updateQueue=null,s!==null)try{i==="input"&&u.type==="radio"&&u.name!=null&&Vo(l,u),Bl(i,o);var p=Bl(i,u);for(o=0;o<s.length;o+=2){var y=s[o],g=s[o+1];y==="style"?Go(l,g):y==="dangerouslySetInnerHTML"?Ko(l,g):y==="children"?Mn(l,g):Le(l,y,g,p)}switch(i){case"input":Il(l,u);break;case"textarea":Ho(l,u);break;case"select":var h=l._wrapperState.wasMultiple;l._wrapperState.wasMultiple=!!u.multiple;var k=u.value;k!=null?sn(l,!!u.multiple,k,!1):h!==!!u.multiple&&(u.defaultValue!=null?sn(l,!!u.multiple,u.defaultValue,!0):sn(l,!!u.multiple,u.multiple?[]:"",!1))}l[rr]=u}catch(C){le(e,e.return,C)}}break;case 6:if(st(t,e),vt(e),r&4){if(e.stateNode===null)throw Error(m(162));l=e.stateNode,u=e.memoizedProps;try{l.nodeValue=u}catch(C){le(e,e.return,C)}}break;case 3:if(st(t,e),vt(e),r&4&&n!==null&&n.memoizedState.isDehydrated)try{Kn(t.containerInfo)}catch(C){le(e,e.return,C)}break;case 4:st(t,e),vt(e);break;case 13:st(t,e),vt(e),l=e.child,l.flags&8192&&(u=l.memoizedState!==null,l.stateNode.isHidden=u,!u||l.alternate!==null&&l.alternate.memoizedState!==null||(mo=oe())),r&4&&fa(e);break;case 22:if(y=n!==null&&n.memoizedState!==null,e.mode&1?(Pe=(p=Pe)||y,st(t,e),Pe=p):st(t,e),vt(e),r&8192){if(p=e.memoizedState!==null,(e.stateNode.isHidden=p)&&!y&&(e.mode&1)!==0)for(x=e,y=e.child;y!==null;){for(g=x=y;x!==null;){switch(h=x,k=h.child,h.tag){case 0:case 11:case 14:case 15:mr(4,h,h.return);break;case 1:Ln(h,h.return);var _=h.stateNode;if(typeof _.componentWillUnmount=="function"){r=h,n=h.return;try{t=r,_.props=t.memoizedProps,_.state=t.memoizedState,_.componentWillUnmount()}catch(C){le(r,n,C)}}break;case 5:Ln(h,h.return);break;case 22:if(h.memoizedState!==null){ha(g);continue}}k!==null?(k.return=h,x=k):ha(g)}y=y.sibling}e:for(y=null,g=e;;){if(g.tag===5){if(y===null){y=g;try{l=g.stateNode,p?(u=l.style,typeof u.setProperty=="function"?u.setProperty("display","none","important"):u.display="none"):(i=g.stateNode,s=g.memoizedProps.style,o=s!=null&&s.hasOwnProperty("display")?s.display:null,i.style.display=Yo("display",o))}catch(C){le(e,e.return,C)}}}else if(g.tag===6){if(y===null)try{g.stateNode.nodeValue=p?"":g.memoizedProps}catch(C){le(e,e.return,C)}}else if((g.tag!==22&&g.tag!==23||g.memoizedState===null||g===e)&&g.child!==null){g.child.return=g,g=g.child;continue}if(g===e)break e;for(;g.sibling===null;){if(g.return===null||g.return===e)break e;y===g&&(y=null),g=g.return}y===g&&(y=null),g.sibling.return=g.return,g=g.sibling}}break;case 19:st(t,e),vt(e),r&4&&fa(e);break;case 21:break;default:st(t,e),vt(e)}}function vt(e){var t=e.flags;if(t&2){try{e:{for(var n=e.return;n!==null;){if(sa(n)){var r=n;break e}n=n.return}throw Error(m(160))}switch(r.tag){case 5:var l=r.stateNode;r.flags&32&&(Mn(l,""),r.flags&=-33);var u=aa(e);co(e,u,l);break;case 3:case 4:var o=r.stateNode.containerInfo,i=aa(e);ao(e,i,o);break;default:throw Error(m(161))}}catch(s){le(e,e.return,s)}e.flags&=-3}t&4096&&(e.flags&=-4097)}function xf(e,t,n){x=e,pa(e)}function pa(e,t,n){for(var r=(e.mode&1)!==0;x!==null;){var l=x,u=l.child;if(l.tag===22&&r){var o=l.memoizedState!==null||fl;if(!o){var i=l.alternate,s=i!==null&&i.memoizedState!==null||Pe;i=fl;var p=Pe;if(fl=o,(Pe=s)&&!p)for(x=l;x!==null;)o=x,s=o.child,o.tag===22&&o.memoizedState!==null?va(l):s!==null?(s.return=o,x=s):va(l);for(;u!==null;)x=u,pa(u),u=u.sibling;x=l,fl=i,Pe=p}ma(e)}else(l.subtreeFlags&8772)!==0&&u!==null?(u.return=l,x=u):ma(e)}}function ma(e){for(;x!==null;){var t=x;if((t.flags&8772)!==0){var n=t.alternate;try{if((t.flags&8772)!==0)switch(t.tag){case 0:case 11:case 15:Pe||dl(5,t);break;case 1:var r=t.stateNode;if(t.flags&4&&!Pe)if(n===null)r.componentDidMount();else{var l=t.elementType===t.type?n.memoizedProps:ot(t.type,n.memoizedProps);r.componentDidUpdate(l,n.memoizedState,r.__reactInternalSnapshotBeforeUpdate)}var u=t.updateQueue;u!==null&&hs(t,u,r);break;case 3:var o=t.updateQueue;if(o!==null){if(n=null,t.child!==null)switch(t.child.tag){case 5:n=t.child.stateNode;break;case 1:n=t.child.stateNode}hs(t,o,n)}break;case 5:var i=t.stateNode;if(n===null&&t.flags&4){n=i;var s=t.memoizedProps;switch(t.type){case"button":case"input":case"select":case"textarea":s.autoFocus&&n.focus();break;case"img":s.src&&(n.src=s.src)}}break;case 6:break;case 4:break;case 12:break;case 13:if(t.memoizedState===null){var p=t.alternate;if(p!==null){var y=p.memoizedState;if(y!==null){var g=y.dehydrated;g!==null&&Kn(g)}}}break;case 19:case 17:case 21:case 22:case 23:case 25:break;default:throw Error(m(163))}Pe||t.flags&512&&so(t)}catch(h){le(t,t.return,h)}}if(t===e){x=null;break}if(n=t.sibling,n!==null){n.return=t.return,x=n;break}x=t.return}}function ha(e){for(;x!==null;){var t=x;if(t===e){x=null;break}var n=t.sibling;if(n!==null){n.return=t.return,x=n;break}x=t.return}}function va(e){for(;x!==null;){var t=x;try{switch(t.tag){case 0:case 11:case 15:var n=t.return;try{dl(4,t)}catch(s){le(t,n,s)}break;case 1:var r=t.stateNode;if(typeof r.componentDidMount=="function"){var l=t.return;try{r.componentDidMount()}catch(s){le(t,l,s)}}var u=t.return;try{so(t)}catch(s){le(t,u,s)}break;case 5:var o=t.return;try{so(t)}catch(s){le(t,o,s)}}}catch(s){le(t,t.return,s)}if(t===e){x=null;break}var i=t.sibling;if(i!==null){i.return=t.return,x=i;break}x=t.return}}var Ef=Math.ceil,pl=me.ReactCurrentDispatcher,fo=me.ReactCurrentOwner,be=me.ReactCurrentBatchConfig,F=0,ve=null,ae=null,ke=0,Ye=0,Tn=Ot(0),de=0,hr=null,tn=0,ml=0,po=0,vr=null,Ve=null,mo=0,Rn=1/0,Ct=null,hl=!1,ho=null,Vt=null,vl=!1,Bt=null,yl=0,yr=0,vo=null,gl=-1,wl=0;function De(){return(F&6)!==0?oe():gl!==-1?gl:gl=oe()}function $t(e){return(e.mode&1)===0?1:(F&2)!==0&&ke!==0?ke&-ke:uf.transition!==null?(wl===0&&(wl=ai()),wl):(e=W,e!==0||(e=window.event,e=e===void 0?16:gi(e.type)),e)}function at(e,t,n,r){if(50<yr)throw yr=0,vo=null,Error(m(185));Bn(e,n,r),((F&2)===0||e!==ve)&&(e===ve&&((F&2)===0&&(ml|=n),de===4&&Ht(e,ke)),Be(e,r),n===1&&F===0&&(t.mode&1)===0&&(Rn=oe()+500,Yr&&It()))}function Be(e,t){var n=e.callbackNode;uc(e,t);var r=Nr(e,e===ve?ke:0);if(r===0)n!==null&&oi(n),e.callbackNode=null,e.callbackPriority=0;else if(t=r&-r,e.callbackPriority!==t){if(n!=null&&oi(n),t===1)e.tag===0?lf(ga.bind(null,e)):rs(ga.bind(null,e)),ef(function(){(F&6)===0&&It()}),n=null;else{switch(ci(r)){case 1:n=Gl;break;case 4:n=ii;break;case 16:n=_r;break;case 536870912:n=si;break;default:n=_r}n=Pa(n,ya.bind(null,e))}e.callbackPriority=t,e.callbackNode=n}}function ya(e,t){if(gl=-1,wl=0,(F&6)!==0)throw Error(m(327));var n=e.callbackNode;if(Dn()&&e.callbackNode!==n)return null;var r=Nr(e,e===ve?ke:0);if(r===0)return null;if((r&30)!==0||(r&e.expiredLanes)!==0||t)t=Sl(e,r);else{t=r;var l=F;F|=2;var u=Sa();(ve!==e||ke!==t)&&(Ct=null,Rn=oe()+500,rn(e,t));do try{Pf();break}catch(i){wa(e,i)}while(!0);ju(),pl.current=u,F=l,ae!==null?t=0:(ve=null,ke=0,t=de)}if(t!==0){if(t===2&&(l=Xl(e),l!==0&&(r=l,t=yo(e,l))),t===1)throw n=hr,rn(e,0),Ht(e,r),Be(e,oe()),n;if(t===6)Ht(e,r);else{if(l=e.current.alternate,(r&30)===0&&!_f(l)&&(t=Sl(e,r),t===2&&(u=Xl(e),u!==0&&(r=u,t=yo(e,u))),t===1))throw n=hr,rn(e,0),Ht(e,r),Be(e,oe()),n;switch(e.finishedWork=l,e.finishedLanes=r,t){case 0:case 1:throw Error(m(345));case 2:ln(e,Ve,Ct);break;case 3:if(Ht(e,r),(r&130023424)===r&&(t=mo+500-oe(),10<t)){if(Nr(e,0)!==0)break;if(l=e.suspendedLanes,(l&r)!==r){De(),e.pingedLanes|=e.suspendedLanes&l;break}e.timeoutHandle=xu(ln.bind(null,e,Ve,Ct),t);break}ln(e,Ve,Ct);break;case 4:if(Ht(e,r),(r&4194240)===r)break;for(t=e.eventTimes,l=-1;0<r;){var o=31-rt(r);u=1<<o,o=t[o],o>l&&(l=o),r&=~u}if(r=l,r=oe()-r,r=(120>r?120:480>r?480:1080>r?1080:1920>r?1920:3e3>r?3e3:4320>r?4320:1960*Ef(r/1960))-r,10<r){e.timeoutHandle=xu(ln.bind(null,e,Ve,Ct),r);break}ln(e,Ve,Ct);break;case 5:ln(e,Ve,Ct);break;default:throw Error(m(329))}}}return Be(e,oe()),e.callbackNode===n?ya.bind(null,e):null}function yo(e,t){var n=vr;return e.current.memoizedState.isDehydrated&&(rn(e,t).flags|=256),e=Sl(e,t),e!==2&&(t=Ve,Ve=n,t!==null&&go(t)),e}function go(e){Ve===null?Ve=e:Ve.push.apply(Ve,e)}function _f(e){for(var t=e;;){if(t.flags&16384){var n=t.updateQueue;if(n!==null&&(n=n.stores,n!==null))for(var r=0;r<n.length;r++){var l=n[r],u=l.getSnapshot;l=l.value;try{if(!lt(u(),l))return!1}catch{return!1}}}if(n=t.child,t.subtreeFlags&16384&&n!==null)n.return=t,t=n;else{if(t===e)break;for(;t.sibling===null;){if(t.return===null||t.return===e)return!0;t=t.return}t.sibling.return=t.return,t=t.sibling}}return!0}function Ht(e,t){for(t&=~po,t&=~ml,e.suspendedLanes|=t,e.pingedLanes&=~t,e=e.expirationTimes;0<t;){var n=31-rt(t),r=1<<n;e[n]=-1,t&=~r}}function ga(e){if((F&6)!==0)throw Error(m(327));Dn();var t=Nr(e,0);if((t&1)===0)return Be(e,oe()),null;var n=Sl(e,t);if(e.tag!==0&&n===2){var r=Xl(e);r!==0&&(t=r,n=yo(e,r))}if(n===1)throw n=hr,rn(e,0),Ht(e,t),Be(e,oe()),n;if(n===6)throw Error(m(345));return e.finishedWork=e.current.alternate,e.finishedLanes=t,ln(e,Ve,Ct),Be(e,oe()),null}function wo(e,t){var n=F;F|=1;try{return e(t)}finally{F=n,F===0&&(Rn=oe()+500,Yr&&It())}}function nn(e){Bt!==null&&Bt.tag===0&&(F&6)===0&&Dn();var t=F;F|=1;var n=be.transition,r=W;try{if(be.transition=null,W=1,e)return e()}finally{W=r,be.transition=n,F=t,(F&6)===0&&It()}}function So(){Ye=Tn.current,J(Tn)}function rn(e,t){e.finishedWork=null,e.finishedLanes=0;var n=e.timeoutHandle;if(n!==-1&&(e.timeoutHandle=-1,bc(n)),ae!==null)for(n=ae.return;n!==null;){var r=n;switch(Nu(r),r.tag){case 1:r=r.type.childContextTypes,r!=null&&Qr();break;case 3:zn(),J(Fe),J(Ee),Bu();break;case 5:Au(r);break;case 4:zn();break;case 13:J(te);break;case 19:J(te);break;case 10:Ou(r.type._context);break;case 22:case 23:So()}n=n.return}if(ve=e,ae=e=Wt(e.current,null),ke=Ye=t,de=0,hr=null,po=ml=tn=0,Ve=vr=null,qt!==null){for(t=0;t<qt.length;t++)if(n=qt[t],r=n.interleaved,r!==null){n.interleaved=null;var l=r.next,u=n.pending;if(u!==null){var o=u.next;u.next=l,r.next=o}n.pending=r}qt=null}return e}function wa(e,t){do{var n=ae;try{if(ju(),rl.current=il,ll){for(var r=ne.memoizedState;r!==null;){var l=r.queue;l!==null&&(l.pending=null),r=r.next}ll=!1}if(en=0,he=fe=ne=null,ar=!1,cr=0,fo.current=null,n===null||n.return===null){de=1,hr=t,ae=null;break}e:{var u=e,o=n.return,i=n,s=t;if(t=ke,i.flags|=32768,s!==null&&typeof s=="object"&&typeof s.then=="function"){var p=s,y=i,g=y.tag;if((y.mode&1)===0&&(g===0||g===11||g===15)){var h=y.alternate;h?(y.updateQueue=h.updateQueue,y.memoizedState=h.memoizedState,y.lanes=h.lanes):(y.updateQueue=null,y.memoizedState=null)}var k=Ws(o);if(k!==null){k.flags&=-257,Qs(k,o,i,u,t),k.mode&1&&Hs(u,p,t),t=k,s=p;var _=t.updateQueue;if(_===null){var C=new Set;C.add(s),t.updateQueue=C}else _.add(s);break e}else{if((t&1)===0){Hs(u,p,t),ko();break e}s=Error(m(426))}}else if(b&&i.mode&1){var ie=Ws(o);if(ie!==null){(ie.flags&65536)===0&&(ie.flags|=256),Qs(ie,o,i,u,t),Ru(Nn(s,i));break e}}u=s=Nn(s,i),de!==4&&(de=2),vr===null?vr=[u]:vr.push(u),u=o;do{switch(u.tag){case 3:u.flags|=65536,t&=-t,u.lanes|=t;var f=Bs(u,s,t);ms(u,f);break e;case 1:i=s;var a=u.type,d=u.stateNode;if((u.flags&128)===0&&(typeof a.getDerivedStateFromError=="function"||d!==null&&typeof d.componentDidCatch=="function"&&(Vt===null||!Vt.has(d)))){u.flags|=65536,t&=-t,u.lanes|=t;var w=$s(u,i,t);ms(u,w);break e}}u=u.return}while(u!==null)}xa(n)}catch(P){t=P,ae===n&&n!==null&&(ae=n=n.return);continue}break}while(!0)}function Sa(){var e=pl.current;return pl.current=il,e===null?il:e}function ko(){(de===0||de===3||de===2)&&(de=4),ve===null||(tn&268435455)===0&&(ml&268435455)===0||Ht(ve,ke)}function Sl(e,t){var n=F;F|=2;var r=Sa();(ve!==e||ke!==t)&&(Ct=null,rn(e,t));do try{Cf();break}catch(l){wa(e,l)}while(!0);if(ju(),F=n,pl.current=r,ae!==null)throw Error(m(261));return ve=null,ke=0,de}function Cf(){for(;ae!==null;)ka(ae)}function Pf(){for(;ae!==null&&!Za();)ka(ae)}function ka(e){var t=Ca(e.alternate,e,Ye);e.memoizedProps=e.pendingProps,t===null?xa(e):ae=t,fo.current=null}function xa(e){var t=e;do{var n=t.alternate;if(e=t.return,(t.flags&32768)===0){if(n=gf(n,t,Ye),n!==null){ae=n;return}}else{if(n=wf(n,t),n!==null){n.flags&=32767,ae=n;return}if(e!==null)e.flags|=32768,e.subtreeFlags=0,e.deletions=null;else{de=6,ae=null;return}}if(t=t.sibling,t!==null){ae=t;return}ae=t=e}while(t!==null);de===0&&(de=5)}function ln(e,t,n){var r=W,l=be.transition;try{be.transition=null,W=1,zf(e,t,n,r)}finally{be.transition=l,W=r}return null}function zf(e,t,n,r){do Dn();while(Bt!==null);if((F&6)!==0)throw Error(m(327));n=e.finishedWork;var l=e.finishedLanes;if(n===null)return null;if(e.finishedWork=null,e.finishedLanes=0,n===e.current)throw Error(m(177));e.callbackNode=null,e.callbackPriority=0;var u=n.lanes|n.childLanes;if(oc(e,u),e===ve&&(ae=ve=null,ke=0),(n.subtreeFlags&2064)===0&&(n.flags&2064)===0||vl||(vl=!0,Pa(_r,function(){return Dn(),null})),u=(n.flags&15990)!==0,(n.subtreeFlags&15990)!==0||u){u=be.transition,be.transition=null;var o=W;W=1;var i=F;F|=4,fo.current=null,kf(e,n),da(n,e),Kc(Su),Rr=!!wu,Su=wu=null,e.current=n,xf(n),Ja(),F=i,W=o,be.transition=u}else e.current=n;if(vl&&(vl=!1,Bt=e,yl=l),u=e.pendingLanes,u===0&&(Vt=null),ec(n.stateNode),Be(e,oe()),t!==null)for(r=e.onRecoverableError,n=0;n<t.length;n++)l=t[n],r(l.value,{componentStack:l.stack,digest:l.digest});if(hl)throw hl=!1,e=ho,ho=null,e;return(yl&1)!==0&&e.tag!==0&&Dn(),u=e.pendingLanes,(u&1)!==0?e===vo?yr++:(yr=0,vo=e):yr=0,It(),null}function Dn(){if(Bt!==null){var e=ci(yl),t=be.transition,n=W;try{if(be.transition=null,W=16>e?16:e,Bt===null)var r=!1;else{if(e=Bt,Bt=null,yl=0,(F&6)!==0)throw Error(m(331));var l=F;for(F|=4,x=e.current;x!==null;){var u=x,o=u.child;if((x.flags&16)!==0){var i=u.deletions;if(i!==null){for(var s=0;s<i.length;s++){var p=i[s];for(x=p;x!==null;){var y=x;switch(y.tag){case 0:case 11:case 15:mr(8,y,u)}var g=y.child;if(g!==null)g.return=y,x=g;else for(;x!==null;){y=x;var h=y.sibling,k=y.return;if(ia(y),y===p){x=null;break}if(h!==null){h.return=k,x=h;break}x=k}}}var _=u.alternate;if(_!==null){var C=_.child;if(C!==null){_.child=null;do{var ie=C.sibling;C.sibling=null,C=ie}while(C!==null)}}x=u}}if((u.subtreeFlags&2064)!==0&&o!==null)o.return=u,x=o;else e:for(;x!==null;){if(u=x,(u.flags&2048)!==0)switch(u.tag){case 0:case 11:case 15:mr(9,u,u.return)}var f=u.sibling;if(f!==null){f.return=u.return,x=f;break e}x=u.return}}var a=e.current;for(x=a;x!==null;){o=x;var d=o.child;if((o.subtreeFlags&2064)!==0&&d!==null)d.return=o,x=d;else e:for(o=a;x!==null;){if(i=x,(i.flags&2048)!==0)try{switch(i.tag){case 0:case 11:case 15:dl(9,i)}}catch(P){le(i,i.return,P)}if(i===o){x=null;break e}var w=i.sibling;if(w!==null){w.return=i.return,x=w;break e}x=i.return}}if(F=l,It(),dt&&typeof dt.onPostCommitFiberRoot=="function")try{dt.onPostCommitFiberRoot(Cr,e)}catch{}r=!0}return r}finally{W=n,be.transition=t}}return!1}function Ea(e,t,n){t=Nn(n,t),t=Bs(e,t,1),e=Ut(e,t,1),t=De(),e!==null&&(Bn(e,1,t),Be(e,t))}function le(e,t,n){if(e.tag===3)Ea(e,e,n);else for(;t!==null;){if(t.tag===3){Ea(t,e,n);break}else if(t.tag===1){var r=t.stateNode;if(typeof t.type.getDerivedStateFromError=="function"||typeof r.componentDidCatch=="function"&&(Vt===null||!Vt.has(r))){e=Nn(n,e),e=$s(t,e,1),t=Ut(t,e,1),e=De(),t!==null&&(Bn(t,1,e),Be(t,e));break}}t=t.return}}function Nf(e,t,n){var r=e.pingCache;r!==null&&r.delete(t),t=De(),e.pingedLanes|=e.suspendedLanes&n,ve===e&&(ke&n)===n&&(de===4||de===3&&(ke&130023424)===ke&&500>oe()-mo?rn(e,0):po|=n),Be(e,t)}function _a(e,t){t===0&&((e.mode&1)===0?t=1:(t=zr,zr<<=1,(zr&130023424)===0&&(zr=4194304)));var n=De();e=xt(e,t),e!==null&&(Bn(e,t,n),Be(e,n))}function Lf(e){var t=e.memoizedState,n=0;t!==null&&(n=t.retryLane),_a(e,n)}function Tf(e,t){var n=0;switch(e.tag){case 13:var r=e.stateNode,l=e.memoizedState;l!==null&&(n=l.retryLane);break;case 19:r=e.stateNode;break;default:throw Error(m(314))}r!==null&&r.delete(t),_a(e,n)}var Ca;Ca=function(e,t,n){if(e!==null)if(e.memoizedProps!==t.pendingProps||Fe.current)Ae=!0;else{if((e.lanes&n)===0&&(t.flags&128)===0)return Ae=!1,yf(e,t,n);Ae=(e.flags&131072)!==0}else Ae=!1,b&&(t.flags&1048576)!==0&&ls(t,Xr,t.index);switch(t.lanes=0,t.tag){case 2:var r=t.type;cl(e,t),e=t.pendingProps;var l=Sn(t,Ee.current);Pn(t,n),l=Wu(null,t,r,e,l,n);var u=Qu();return t.flags|=1,typeof l=="object"&&l!==null&&typeof l.render=="function"&&l.$$typeof===void 0?(t.tag=1,t.memoizedState=null,t.updateQueue=null,Ue(r)?(u=!0,Kr(t)):u=!1,t.memoizedState=l.state!==null&&l.state!==void 0?l.state:null,Fu(t),l.updater=sl,t.stateNode=l,l._reactInternals=t,Ju(t,r,e,n),t=to(null,t,r,!0,u,n)):(t.tag=0,b&&u&&zu(t),Re(null,t,l,n),t=t.child),t;case 16:r=t.elementType;e:{switch(cl(e,t),e=t.pendingProps,l=r._init,r=l(r._payload),t.type=r,l=t.tag=Df(r),e=ot(r,e),l){case 0:t=eo(null,t,r,e,n);break e;case 1:t=Js(null,t,r,e,n);break e;case 11:t=Ks(null,t,r,e,n);break e;case 14:t=Ys(null,t,r,ot(r.type,e),n);break e}throw Error(m(306,r,""))}return t;case 0:return r=t.type,l=t.pendingProps,l=t.elementType===r?l:ot(r,l),eo(e,t,r,l,n);case 1:return r=t.type,l=t.pendingProps,l=t.elementType===r?l:ot(r,l),Js(e,t,r,l,n);case 3:e:{if(qs(t),e===null)throw Error(m(387));r=t.pendingProps,u=t.memoizedState,l=u.element,ps(e,t),tl(t,r,null,n);var o=t.memoizedState;if(r=o.element,u.isDehydrated)if(u={element:r,isDehydrated:!1,cache:o.cache,pendingSuspenseBoundaries:o.pendingSuspenseBoundaries,transitions:o.transitions},t.updateQueue.baseState=u,t.memoizedState=u,t.flags&256){l=Nn(Error(m(423)),t),t=bs(e,t,r,n,l);break e}else if(r!==l){l=Nn(Error(m(424)),t),t=bs(e,t,r,n,l);break e}else for(Ke=jt(t.stateNode.containerInfo.firstChild),Qe=t,b=!0,ut=null,n=fs(t,null,r,n),t.child=n;n;)n.flags=n.flags&-3|4096,n=n.sibling;else{if(En(),r===l){t=_t(e,t,n);break e}Re(e,t,r,n)}t=t.child}return t;case 5:return vs(t),e===null&&Tu(t),r=t.type,l=t.pendingProps,u=e!==null?e.memoizedProps:null,o=l.children,ku(r,l)?o=null:u!==null&&ku(r,u)&&(t.flags|=32),Zs(e,t),Re(e,t,o,n),t.child;case 6:return e===null&&Tu(t),null;case 13:return ea(e,t,n);case 4:return Uu(t,t.stateNode.containerInfo),r=t.pendingProps,e===null?t.child=_n(t,null,r,n):Re(e,t,r,n),t.child;case 11:return r=t.type,l=t.pendingProps,l=t.elementType===r?l:ot(r,l),Ks(e,t,r,l,n);case 7:return Re(e,t,t.pendingProps,n),t.child;case 8:return Re(e,t,t.pendingProps.children,n),t.child;case 12:return Re(e,t,t.pendingProps.children,n),t.child;case 10:e:{if(r=t.type._context,l=t.pendingProps,u=t.memoizedProps,o=l.value,G(qr,r._currentValue),r._currentValue=o,u!==null)if(lt(u.value,o)){if(u.children===l.children&&!Fe.current){t=_t(e,t,n);break e}}else for(u=t.child,u!==null&&(u.return=t);u!==null;){var i=u.dependencies;if(i!==null){o=u.child;for(var s=i.firstContext;s!==null;){if(s.context===r){if(u.tag===1){s=Et(-1,n&-n),s.tag=2;var p=u.updateQueue;if(p!==null){p=p.shared;var y=p.pending;y===null?s.next=s:(s.next=y.next,y.next=s),p.pending=s}}u.lanes|=n,s=u.alternate,s!==null&&(s.lanes|=n),Mu(u.return,n,t),i.lanes|=n;break}s=s.next}}else if(u.tag===10)o=u.type===t.type?null:u.child;else if(u.tag===18){if(o=u.return,o===null)throw Error(m(341));o.lanes|=n,i=o.alternate,i!==null&&(i.lanes|=n),Mu(o,n,t),o=u.sibling}else o=u.child;if(o!==null)o.return=u;else for(o=u;o!==null;){if(o===t){o=null;break}if(u=o.sibling,u!==null){u.return=o.return,o=u;break}o=o.return}u=o}Re(e,t,l.children,n),t=t.child}return t;case 9:return l=t.type,r=t.pendingProps.children,Pn(t,n),l=Je(l),r=r(l),t.flags|=1,Re(e,t,r,n),t.child;case 14:return r=t.type,l=ot(r,t.pendingProps),l=ot(r.type,l),Ys(e,t,r,l,n);case 15:return Gs(e,t,t.type,t.pendingProps,n);case 17:return r=t.type,l=t.pendingProps,l=t.elementType===r?l:ot(r,l),cl(e,t),t.tag=1,Ue(r)?(e=!0,Kr(t)):e=!1,Pn(t,n),As(t,r,l),Ju(t,r,l,n),to(null,t,r,!0,e,n);case 19:return na(e,t,n);case 22:return Xs(e,t,n)}throw Error(m(156,t.tag))};function Pa(e,t){return ui(e,t)}function Rf(e,t,n,r){this.tag=e,this.key=n,this.sibling=this.child=this.return=this.stateNode=this.type=this.elementType=null,this.index=0,this.ref=null,this.pendingProps=t,this.dependencies=this.memoizedState=this.updateQueue=this.memoizedProps=null,this.mode=r,this.subtreeFlags=this.flags=0,this.deletions=null,this.childLanes=this.lanes=0,this.alternate=null}function et(e,t,n,r){return new Rf(e,t,n,r)}function xo(e){return e=e.prototype,!(!e||!e.isReactComponent)}function Df(e){if(typeof e=="function")return xo(e)?1:0;if(e!=null){if(e=e.$$typeof,e===ct)return 11;if(e===ft)return 14}return 2}function Wt(e,t){var n=e.alternate;return n===null?(n=et(e.tag,t,e.key,e.mode),n.elementType=e.elementType,n.type=e.type,n.stateNode=e.stateNode,n.alternate=e,e.alternate=n):(n.pendingProps=t,n.type=e.type,n.flags=0,n.subtreeFlags=0,n.deletions=null),n.flags=e.flags&14680064,n.childLanes=e.childLanes,n.lanes=e.lanes,n.child=e.child,n.memoizedProps=e.memoizedProps,n.memoizedState=e.memoizedState,n.updateQueue=e.updateQueue,t=e.dependencies,n.dependencies=t===null?null:{lanes:t.lanes,firstContext:t.firstContext},n.sibling=e.sibling,n.index=e.index,n.ref=e.ref,n}function kl(e,t,n,r,l,u){var o=2;if(r=e,typeof e=="function")xo(e)&&(o=1);else if(typeof e=="string")o=5;else e:switch(e){case Me:return un(n.children,l,u,t);case Ge:o=8,l|=8;break;case Pt:return e=et(12,n,t,l|2),e.elementType=Pt,e.lanes=u,e;case $e:return e=et(13,n,t,l),e.elementType=$e,e.lanes=u,e;case nt:return e=et(19,n,t,l),e.elementType=nt,e.lanes=u,e;case re:return xl(n,l,u,t);default:if(typeof e=="object"&&e!==null)switch(e.$$typeof){case yt:o=10;break e;case Kt:o=9;break e;case ct:o=11;break e;case ft:o=14;break e;case Ie:o=16,r=null;break e}throw Error(m(130,e==null?e:typeof e,""))}return t=et(o,n,t,l),t.elementType=e,t.type=r,t.lanes=u,t}function un(e,t,n,r){return e=et(7,e,r,t),e.lanes=n,e}function xl(e,t,n,r){return e=et(22,e,r,t),e.elementType=re,e.lanes=n,e.stateNode={isHidden:!1},e}function Eo(e,t,n){return e=et(6,e,null,t),e.lanes=n,e}function _o(e,t,n){return t=et(4,e.children!==null?e.children:[],e.key,t),t.lanes=n,t.stateNode={containerInfo:e.containerInfo,pendingChildren:null,implementation:e.implementation},t}function jf(e,t,n,r,l){this.tag=t,this.containerInfo=e,this.finishedWork=this.pingCache=this.current=this.pendingChildren=null,this.timeoutHandle=-1,this.callbackNode=this.pendingContext=this.context=null,this.callbackPriority=0,this.eventTimes=Zl(0),this.expirationTimes=Zl(-1),this.entangledLanes=this.finishedLanes=this.mutableReadLanes=this.expiredLanes=this.pingedLanes=this.suspendedLanes=this.pendingLanes=0,this.entanglements=Zl(0),this.identifierPrefix=r,this.onRecoverableError=l,this.mutableSourceEagerHydrationData=null}function Co(e,t,n,r,l,u,o,i,s){return e=new jf(e,t,n,i,s),t===1?(t=1,u===!0&&(t|=8)):t=0,u=et(3,null,null,t),e.current=u,u.stateNode=e,u.memoizedState={element:r,isDehydrated:n,cache:null,transitions:null,pendingSuspenseBoundaries:null},Fu(u),e}function Of(e,t,n){var r=3<arguments.length&&arguments[3]!==void 0?arguments[3]:null;return{$$typeof:Te,key:r==null?null:""+r,children:e,containerInfo:t,implementation:n}}function za(e){if(!e)return Mt;e=e._reactInternals;e:{if(Yt(e)!==e||e.tag!==1)throw Error(m(170));var t=e;do{switch(t.tag){case 3:t=t.stateNode.context;break e;case 1:if(Ue(t.type)){t=t.stateNode.__reactInternalMemoizedMergedChildContext;break e}}t=t.return}while(t!==null);throw Error(m(171))}if(e.tag===1){var n=e.type;if(Ue(n))return ts(e,n,t)}return t}function Na(e,t,n,r,l,u,o,i,s){return e=Co(n,r,!0,e,l,u,o,i,s),e.context=za(null),n=e.current,r=De(),l=$t(n),u=Et(r,l),u.callback=t??null,Ut(n,u,l),e.current.lanes=l,Bn(e,l,r),Be(e,r),e}function El(e,t,n,r){var l=t.current,u=De(),o=$t(l);return n=za(n),t.context===null?t.context=n:t.pendingContext=n,t=Et(u,o),t.payload={element:e},r=r===void 0?null:r,r!==null&&(t.callback=r),e=Ut(l,t,o),e!==null&&(at(e,l,o,u),el(e,l,o)),o}function _l(e){if(e=e.current,!e.child)return null;switch(e.child.tag){case 5:return e.child.stateNode;default:return e.child.stateNode}}function La(e,t){if(e=e.memoizedState,e!==null&&e.dehydrated!==null){var n=e.retryLane;e.retryLane=n!==0&&n<t?n:t}}function Po(e,t){La(e,t),(e=e.alternate)&&La(e,t)}function Mf(){return null}var Ta=typeof reportError=="function"?reportError:function(e){console.error(e)};function zo(e){this._internalRoot=e}Cl.prototype.render=zo.prototype.render=function(e){var t=this._internalRoot;if(t===null)throw Error(m(409));El(e,t,null,null)},Cl.prototype.unmount=zo.prototype.unmount=function(){var e=this._internalRoot;if(e!==null){this._internalRoot=null;var t=e.containerInfo;nn(function(){El(null,e,null,null)}),t[gt]=null}};function Cl(e){this._internalRoot=e}Cl.prototype.unstable_scheduleHydration=function(e){if(e){var t=pi();e={blockedOn:null,target:e,priority:t};for(var n=0;n<Tt.length&&t!==0&&t<Tt[n].priority;n++);Tt.splice(n,0,e),n===0&&vi(e)}};function No(e){return!(!e||e.nodeType!==1&&e.nodeType!==9&&e.nodeType!==11)}function Pl(e){return!(!e||e.nodeType!==1&&e.nodeType!==9&&e.nodeType!==11&&(e.nodeType!==8||e.nodeValue!==" react-mount-point-unstable "))}function Ra(){}function If(e,t,n,r,l){if(l){if(typeof r=="function"){var u=r;r=function(){var p=_l(o);u.call(p)}}var o=Na(t,r,e,0,null,!1,!1,"",Ra);return e._reactRootContainer=o,e[gt]=o.current,tr(e.nodeType===8?e.parentNode:e),nn(),o}for(;l=e.lastChild;)e.removeChild(l);if(typeof r=="function"){var i=r;r=function(){var p=_l(s);i.call(p)}}var s=Co(e,0,!1,null,null,!1,!1,"",Ra);return e._reactRootContainer=s,e[gt]=s.current,tr(e.nodeType===8?e.parentNode:e),nn(function(){El(t,s,n,r)}),s}function zl(e,t,n,r,l){var u=n._reactRootContainer;if(u){var o=u;if(typeof l=="function"){var i=l;l=function(){var s=_l(o);i.call(s)}}El(t,o,e,l)}else o=If(n,t,e,l,r);return _l(o)}fi=function(e){switch(e.tag){case 3:var t=e.stateNode;if(t.current.memoizedState.isDehydrated){var n=Vn(t.pendingLanes);n!==0&&(Jl(t,n|1),Be(t,oe()),(F&6)===0&&(Rn=oe()+500,It()))}break;case 13:nn(function(){var r=xt(e,1);if(r!==null){var l=De();at(r,e,1,l)}}),Po(e,1)}},ql=function(e){if(e.tag===13){var t=xt(e,134217728);if(t!==null){var n=De();at(t,e,134217728,n)}Po(e,134217728)}},di=function(e){if(e.tag===13){var t=$t(e),n=xt(e,t);if(n!==null){var r=De();at(n,e,t,r)}Po(e,t)}},pi=function(){return W},mi=function(e,t){var n=W;try{return W=e,t()}finally{W=n}},Wl=function(e,t,n){switch(t){case"input":if(Il(e,n),t=n.name,n.type==="radio"&&t!=null){for(n=e;n.parentNode;)n=n.parentNode;for(n=n.querySelectorAll("input[name="+JSON.stringify(""+t)+'][type="radio"]'),t=0;t<n.length;t++){var r=n[t];if(r!==e&&r.form===e.form){var l=Wr(r);if(!l)throw Error(m(90));Uo(r),Il(r,l)}}}break;case"textarea":Ho(e,n);break;case"select":t=n.value,t!=null&&sn(e,!!n.multiple,t,!1)}},qo=wo,bo=nn;var Ff={usingClientEntryPoint:!1,Events:[lr,gn,Wr,Zo,Jo,wo]},gr={findFiberByHostInstance:Gt,bundleType:0,version:"18.3.1",rendererPackageName:"react-dom"},Uf={bundleType:gr.bundleType,version:gr.version,rendererPackageName:gr.rendererPackageName,rendererConfig:gr.rendererConfig,overrideHookState:null,overrideHookStateDeletePath:null,overrideHookStateRenamePath:null,overrideProps:null,overridePropsDeletePath:null,overridePropsRenamePath:null,setErrorHandler:null,setSuspenseHandler:null,scheduleUpdate:null,currentDispatcherRef:me.ReactCurrentDispatcher,findHostInstanceByFiber:function(e){return e=ri(e),e===null?null:e.stateNode},findFiberByHostInstance:gr.findFiberByHostInstance||Mf,findHostInstancesForRefresh:null,scheduleRefresh:null,scheduleRoot:null,setRefreshHandler:null,getCurrentFiber:null,reconcilerVersion:"18.3.1-next-f1338f8080-20240426"};if(typeof __REACT_DEVTOOLS_GLOBAL_HOOK__<"u"){var Nl=__REACT_DEVTOOLS_GLOBAL_HOOK__;if(!Nl.isDisabled&&Nl.supportsFiber)try{Cr=Nl.inject(Uf),dt=Nl}catch{}}return je.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED=Ff,je.createPortal=function(e,t){var n=2<arguments.length&&arguments[2]!==void 0?arguments[2]:null;if(!No(t))throw Error(m(200));return Of(e,t,null,n)},je.createRoot=function(e,t){if(!No(e))throw Error(m(299));var n=!1,r="",l=Ta;return t!=null&&(t.unstable_strictMode===!0&&(n=!0),t.identifierPrefix!==void 0&&(r=t.identifierPrefix),t.onRecoverableError!==void 0&&(l=t.onRecoverableError)),t=Co(e,1,!1,null,null,n,!1,r,l),e[gt]=t.current,tr(e.nodeType===8?e.parentNode:e),new zo(t)},je.findDOMNode=function(e){if(e==null)return null;if(e.nodeType===1)return e;var t=e._reactInternals;if(t===void 0)throw typeof e.render=="function"?Error(m(188)):(e=Object.keys(e).join(","),Error(m(268,e)));return e=ri(t),e=e===null?null:e.stateNode,e},je.flushSync=function(e){return nn(e)},je.hydrate=function(e,t,n){if(!Pl(t))throw Error(m(200));return zl(null,e,t,!0,n)},je.hydrateRoot=function(e,t,n){if(!No(e))throw Error(m(405));var r=n!=null&&n.hydratedSources||null,l=!1,u="",o=Ta;if(n!=null&&(n.unstable_strictMode===!0&&(l=!0),n.identifierPrefix!==void 0&&(u=n.identifierPrefix),n.onRecoverableError!==void 0&&(o=n.onRecoverableError)),t=Na(t,null,e,1,n??null,l,!1,u,o),e[gt]=t.current,tr(e),r)for(e=0;e<r.length;e++)n=r[e],l=n._getVersion,l=l(n._source),t.mutableSourceEagerHydrationData==null?t.mutableSourceEagerHydrationData=[n,l]:t.mutableSourceEagerHydrationData.push(n,l);return new Cl(t)},je.render=function(e,t,n){if(!Pl(t))throw Error(m(200));return zl(null,e,t,!1,n)},je.unmountComponentAtNode=function(e){if(!Pl(e))throw Error(m(40));return e._reactRootContainer?(nn(function(){zl(null,null,e,!1,function(){e._reactRootContainer=null,e[gt]=null})}),!0):!1},je.unstable_batchedUpdates=wo,je.unstable_renderSubtreeIntoContainer=function(e,t,n,r){if(!Pl(n))throw Error(m(200));if(e==null||e._reactInternals===void 0)throw Error(m(38));return zl(e,t,n,!1,r)},je.version="18.3.1-next-f1338f8080-20240426",je}var Fo;function Aa(){if(Fo)return Dl.exports;Fo=1;function T(){if(!(typeof __REACT_DEVTOOLS_GLOBAL_HOOK__>"u"||typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE!="function"))try{__REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(T)}catch($){console.error($)}}return T(),Dl.exports=Ua(),Dl.exports}var Va=Aa();const Ba=Lo(Va);function $a(){const[T,$]=on.useState(!1),[m,ze]=on.useState([]),[ge,xe]=on.useState(!1),[ce,ee]=on.useState(!1),[B,we]=on.useState(null),pe=()=>{if(!B){const j=window.SpeechRecognition||window.webkitSpeechRecognition;if(j){const z=new j;z.continuous=!1,z.interimResults=!1,z.lang="en-US",z.onstart=()=>{ee(!0),console.log("[DEBUG] Voice recognition started")},z.onresult=async se=>{const ue=se.results[0][0].transcript;console.log("[DEBUG] Voice transcript:",ue),ee(!1),await K(ue)},z.onerror=se=>{console.error("[DEBUG] Speech recognition error:",se.error),ee(!1),ze(ue=>[...ue,{from:"ai",text:"Sorry, I couldn't understand your voice. Please try again."}])},z.onend=()=>{ee(!1),console.log("[DEBUG] Voice recognition ended")},we(z)}}},X=()=>{B?B.start():pe()},K=async j=>{xe(!0);try{const se=(window.AI_APP_BACKEND_URL||"https://ai-assistant-chat-iczt.onrender.com").replace(/\/$/,"")+"/api/voice-search";console.log("[DEBUG] Sending voice request to:",se);const ue=await fetch(se,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({voiceInput:j,useOllama:!0})});if(!ue.ok)throw new Error("Network response was not ok");const Le=await ue.json();console.log("[DEBUG] Voice API Response:",Le),ze(me=>[...me,{from:"user",text:`Voice: "${j}"`},{from:"ai",text:Le.aiResponse,products:Le.products||[]}])}catch(z){console.error("[DEBUG] Voice API Error:",z),ze(se=>[...se,{from:"user",text:`Voice: "${j}"`},{from:"ai",text:"Sorry, there was a problem processing your voice request."}])}finally{xe(!1)}},Ne=j=>`$${(parseFloat(j)/100).toFixed(2)}`,Oe=({products:j})=>!j||j.length===0?null:Q.jsx("div",{style:{marginTop:"8px"},children:j.map((z,se)=>Q.jsx("div",{style:{background:"#f8f9fa",borderRadius:"8px",padding:"12px",marginBottom:"8px",border:"1px solid #e9ecef"},children:Q.jsxs("a",{href:z.url,target:"_blank",rel:"noopener noreferrer",style:{display:"flex",textDecoration:"none",color:"inherit",gap:"12px"},children:[Q.jsxs("div",{style:{width:"60px",height:"60px",background:"#f0f0f0",borderRadius:"6px",flexShrink:0,overflow:"hidden",display:"flex",alignItems:"center",justifyContent:"center"},children:[z.image?Q.jsx("img",{src:z.image,alt:z.imageAlt||z.title,style:{width:"100%",height:"100%",objectFit:"cover"},onError:ue=>{ue.target.style.display="none",ue.target.nextSibling.style.display="flex"}}):null,Q.jsx("div",{style:{display:z.image?"none":"flex",alignItems:"center",justifyContent:"center",width:"100%",height:"100%",fontSize:"16px",color:"#666"},children:"📦"})]}),Q.jsxs("div",{style:{flex:1},children:[Q.jsx("div",{style:{fontSize:"13px",fontWeight:"bold",marginBottom:"4px",lineHeight:"1.2"},children:z.title}),Q.jsxs("div",{style:{fontSize:"12px",color:"#666"},children:[Ne(z.price),z.compareAtPrice&&parseFloat(z.compareAtPrice)>parseFloat(z.price)&&Q.jsx("span",{style:{textDecoration:"line-through",color:"#999",marginLeft:"6px"},children:Ne(z.compareAtPrice)})]})]})]})},se))});return Q.jsxs("div",{style:{position:"fixed",bottom:45,right:24,zIndex:9999},children:[!T&&Q.jsx("button",{style:{borderRadius:"50%",width:56,height:56,background:"#5c6ac4",color:"#fff",border:"none",fontSize:28,cursor:"pointer"},onClick:()=>$(!0),"aria-label":"Open voice chat",children:"🎤"}),T&&Q.jsxs("div",{style:{width:320,background:"#fff",borderRadius:12,boxShadow:"0 2px 16px rgba(0,0,0,0.15)",padding:16},children:[Q.jsxs("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"},children:[Q.jsx("strong",{children:"Voice Product Search"}),Q.jsx("button",{onClick:()=>$(!1),style:{background:"none",border:"none",fontSize:20,cursor:"pointer"},children:"×"})]}),Q.jsxs("div",{style:{maxHeight:400,overflowY:"auto",margin:"12px 0"},children:[m.length===0&&Q.jsxs("div",{style:{color:"#888",textAlign:"center",padding:"20px"},children:[Q.jsx("div",{style:{fontSize:"24px",marginBottom:"8px"},children:"🎤"}),Q.jsx("div",{children:"Click the microphone to search products by voice!"}),Q.jsx("div",{style:{fontSize:"12px",marginTop:"8px",color:"#999"},children:'Try: "product below $500" or "snowboard"'})]}),m.map((j,z)=>Q.jsx("div",{style:{textAlign:j.from==="user"?"right":"left",margin:"6px 0"},children:Q.jsxs("div",{style:{background:j.from==="user"?"#e3eafe":"#f4f6f8",borderRadius:8,padding:"6px 10px",display:"inline-block",maxWidth:"280px",wordWrap:"break-word"},children:[j.text,j.products&&Q.jsx(Oe,{products:j.products})]})},z)),ge&&Q.jsx("div",{style:{color:"#888"},children:"Processing voice request..."}),ce&&Q.jsx("div",{style:{color:"#5c6ac4",textAlign:"center",padding:"10px",background:"#f0f4ff",borderRadius:"8px",margin:"8px 0"},children:"🎤 Listening... Speak now!"})]}),Q.jsx("div",{style:{display:"flex",justifyContent:"center",gap:8},children:Q.jsx("button",{onClick:X,disabled:ge||ce,style:{background:ce?"#ff4444":"#5c6ac4",color:"#fff",border:"none",borderRadius:"50%",width:"48px",height:"48px",fontSize:"20px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"},"aria-label":"Start voice search",children:ce?"⏹️":"🎤"})})]})]})}(function(){function T(){const $=document.getElementById("ai-chat-bubble-root");$?(console.log("[DEBUG] Initializing voice chat bubble..."),Ba.render(Ma.createElement($a),$)):(console.log("[DEBUG] Waiting for root element..."),setTimeout(T,100))}T(),document.readyState==="loading"&&document.addEventListener("DOMContentLoaded",T)})()})();
+(function(React2, ReactDOM2) {
+  "use strict";
+  function getDefaultExportFromCjs(x) {
+    return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+  }
+  var jsxRuntime = { exports: {} };
+  var reactJsxRuntime_production_min = {};
+  /**
+   * @license React
+   * react-jsx-runtime.production.min.js
+   *
+   * Copyright (c) Facebook, Inc. and its affiliates.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   */
+  var hasRequiredReactJsxRuntime_production_min;
+  function requireReactJsxRuntime_production_min() {
+    if (hasRequiredReactJsxRuntime_production_min) return reactJsxRuntime_production_min;
+    hasRequiredReactJsxRuntime_production_min = 1;
+    var f = React2, k = Symbol.for("react.element"), l = Symbol.for("react.fragment"), m = Object.prototype.hasOwnProperty, n = f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, p = { key: true, ref: true, __self: true, __source: true };
+    function q(c, a, g) {
+      var b, d = {}, e = null, h = null;
+      void 0 !== g && (e = "" + g);
+      void 0 !== a.key && (e = "" + a.key);
+      void 0 !== a.ref && (h = a.ref);
+      for (b in a) m.call(a, b) && !p.hasOwnProperty(b) && (d[b] = a[b]);
+      if (c && c.defaultProps) for (b in a = c.defaultProps, a) void 0 === d[b] && (d[b] = a[b]);
+      return { $$typeof: k, type: c, key: e, ref: h, props: d, _owner: n.current };
+    }
+    reactJsxRuntime_production_min.Fragment = l;
+    reactJsxRuntime_production_min.jsx = q;
+    reactJsxRuntime_production_min.jsxs = q;
+    return reactJsxRuntime_production_min;
+  }
+  var hasRequiredJsxRuntime;
+  function requireJsxRuntime() {
+    if (hasRequiredJsxRuntime) return jsxRuntime.exports;
+    hasRequiredJsxRuntime = 1;
+    {
+      jsxRuntime.exports = requireReactJsxRuntime_production_min();
+    }
+    return jsxRuntime.exports;
+  }
+  var jsxRuntimeExports = requireJsxRuntime();
+  var client = {};
+  var hasRequiredClient;
+  function requireClient() {
+    if (hasRequiredClient) return client;
+    hasRequiredClient = 1;
+    var m = ReactDOM2;
+    {
+      client.createRoot = m.createRoot;
+      client.hydrateRoot = m.hydrateRoot;
+    }
+    return client;
+  }
+  var clientExports = requireClient();
+  let Key;
+  (function(Key2) {
+    Key2[Key2["Backspace"] = 8] = "Backspace";
+    Key2[Key2["Tab"] = 9] = "Tab";
+    Key2[Key2["Enter"] = 13] = "Enter";
+    Key2[Key2["Shift"] = 16] = "Shift";
+    Key2[Key2["Ctrl"] = 17] = "Ctrl";
+    Key2[Key2["Alt"] = 18] = "Alt";
+    Key2[Key2["Pause"] = 19] = "Pause";
+    Key2[Key2["CapsLock"] = 20] = "CapsLock";
+    Key2[Key2["Escape"] = 27] = "Escape";
+    Key2[Key2["Space"] = 32] = "Space";
+    Key2[Key2["PageUp"] = 33] = "PageUp";
+    Key2[Key2["PageDown"] = 34] = "PageDown";
+    Key2[Key2["End"] = 35] = "End";
+    Key2[Key2["Home"] = 36] = "Home";
+    Key2[Key2["LeftArrow"] = 37] = "LeftArrow";
+    Key2[Key2["UpArrow"] = 38] = "UpArrow";
+    Key2[Key2["RightArrow"] = 39] = "RightArrow";
+    Key2[Key2["DownArrow"] = 40] = "DownArrow";
+    Key2[Key2["Insert"] = 45] = "Insert";
+    Key2[Key2["Delete"] = 46] = "Delete";
+    Key2[Key2["Key0"] = 48] = "Key0";
+    Key2[Key2["Key1"] = 49] = "Key1";
+    Key2[Key2["Key2"] = 50] = "Key2";
+    Key2[Key2["Key3"] = 51] = "Key3";
+    Key2[Key2["Key4"] = 52] = "Key4";
+    Key2[Key2["Key5"] = 53] = "Key5";
+    Key2[Key2["Key6"] = 54] = "Key6";
+    Key2[Key2["Key7"] = 55] = "Key7";
+    Key2[Key2["Key8"] = 56] = "Key8";
+    Key2[Key2["Key9"] = 57] = "Key9";
+    Key2[Key2["KeyA"] = 65] = "KeyA";
+    Key2[Key2["KeyB"] = 66] = "KeyB";
+    Key2[Key2["KeyC"] = 67] = "KeyC";
+    Key2[Key2["KeyD"] = 68] = "KeyD";
+    Key2[Key2["KeyE"] = 69] = "KeyE";
+    Key2[Key2["KeyF"] = 70] = "KeyF";
+    Key2[Key2["KeyG"] = 71] = "KeyG";
+    Key2[Key2["KeyH"] = 72] = "KeyH";
+    Key2[Key2["KeyI"] = 73] = "KeyI";
+    Key2[Key2["KeyJ"] = 74] = "KeyJ";
+    Key2[Key2["KeyK"] = 75] = "KeyK";
+    Key2[Key2["KeyL"] = 76] = "KeyL";
+    Key2[Key2["KeyM"] = 77] = "KeyM";
+    Key2[Key2["KeyN"] = 78] = "KeyN";
+    Key2[Key2["KeyO"] = 79] = "KeyO";
+    Key2[Key2["KeyP"] = 80] = "KeyP";
+    Key2[Key2["KeyQ"] = 81] = "KeyQ";
+    Key2[Key2["KeyR"] = 82] = "KeyR";
+    Key2[Key2["KeyS"] = 83] = "KeyS";
+    Key2[Key2["KeyT"] = 84] = "KeyT";
+    Key2[Key2["KeyU"] = 85] = "KeyU";
+    Key2[Key2["KeyV"] = 86] = "KeyV";
+    Key2[Key2["KeyW"] = 87] = "KeyW";
+    Key2[Key2["KeyX"] = 88] = "KeyX";
+    Key2[Key2["KeyY"] = 89] = "KeyY";
+    Key2[Key2["KeyZ"] = 90] = "KeyZ";
+    Key2[Key2["LeftMeta"] = 91] = "LeftMeta";
+    Key2[Key2["RightMeta"] = 92] = "RightMeta";
+    Key2[Key2["Select"] = 93] = "Select";
+    Key2[Key2["Numpad0"] = 96] = "Numpad0";
+    Key2[Key2["Numpad1"] = 97] = "Numpad1";
+    Key2[Key2["Numpad2"] = 98] = "Numpad2";
+    Key2[Key2["Numpad3"] = 99] = "Numpad3";
+    Key2[Key2["Numpad4"] = 100] = "Numpad4";
+    Key2[Key2["Numpad5"] = 101] = "Numpad5";
+    Key2[Key2["Numpad6"] = 102] = "Numpad6";
+    Key2[Key2["Numpad7"] = 103] = "Numpad7";
+    Key2[Key2["Numpad8"] = 104] = "Numpad8";
+    Key2[Key2["Numpad9"] = 105] = "Numpad9";
+    Key2[Key2["Multiply"] = 106] = "Multiply";
+    Key2[Key2["Add"] = 107] = "Add";
+    Key2[Key2["Subtract"] = 109] = "Subtract";
+    Key2[Key2["Decimal"] = 110] = "Decimal";
+    Key2[Key2["Divide"] = 111] = "Divide";
+    Key2[Key2["F1"] = 112] = "F1";
+    Key2[Key2["F2"] = 113] = "F2";
+    Key2[Key2["F3"] = 114] = "F3";
+    Key2[Key2["F4"] = 115] = "F4";
+    Key2[Key2["F5"] = 116] = "F5";
+    Key2[Key2["F6"] = 117] = "F6";
+    Key2[Key2["F7"] = 118] = "F7";
+    Key2[Key2["F8"] = 119] = "F8";
+    Key2[Key2["F9"] = 120] = "F9";
+    Key2[Key2["F10"] = 121] = "F10";
+    Key2[Key2["F11"] = 122] = "F11";
+    Key2[Key2["F12"] = 123] = "F12";
+    Key2[Key2["NumLock"] = 144] = "NumLock";
+    Key2[Key2["ScrollLock"] = 145] = "ScrollLock";
+    Key2[Key2["Semicolon"] = 186] = "Semicolon";
+    Key2[Key2["Equals"] = 187] = "Equals";
+    Key2[Key2["Comma"] = 188] = "Comma";
+    Key2[Key2["Dash"] = 189] = "Dash";
+    Key2[Key2["Period"] = 190] = "Period";
+    Key2[Key2["ForwardSlash"] = 191] = "ForwardSlash";
+    Key2[Key2["GraveAccent"] = 192] = "GraveAccent";
+    Key2[Key2["OpenBracket"] = 219] = "OpenBracket";
+    Key2[Key2["BackSlash"] = 220] = "BackSlash";
+    Key2[Key2["CloseBracket"] = 221] = "CloseBracket";
+    Key2[Key2["SingleQuote"] = 222] = "SingleQuote";
+  })(Key || (Key = {}));
+  const scrollable = {
+    props: {
+      "data-polaris-scrollable": true
+    },
+    selector: "[data-polaris-scrollable]"
+  };
+  const unstyled = {
+    props: {
+      "data-polaris-unstyled": true
+    }
+  };
+  const dataPolarisTopBar = {
+    selector: "[data-polaris-top-bar]"
+  };
+  const portal = {
+    selector: "[data-portal-id]"
+  };
+  var breakpointsAliases = ["xs", "sm", "md", "lg", "xl"];
+  var breakpoints = {
+    "breakpoints-xs": {
+      value: "0px",
+      description: "Commonly used for sizing containers (e.g. max-width). See below for media query usage."
+    },
+    "breakpoints-sm": {
+      value: "490px",
+      description: "Commonly used for sizing containers (e.g. max-width). See below for media query usage."
+    },
+    "breakpoints-md": {
+      value: "768px",
+      description: "Commonly used for sizing containers (e.g. max-width). See below for media query usage."
+    },
+    "breakpoints-lg": {
+      value: "1040px",
+      description: "Commonly used for sizing containers (e.g. max-width). See below for media query usage."
+    },
+    "breakpoints-xl": {
+      value: "1440px",
+      description: "Commonly used for sizing containers (e.g. max-width). See below for media query usage."
+    }
+  };
+  function _iterableToArrayLimit(arr, i) {
+    var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+    if (null != _i) {
+      var _s, _e, _x, _r, _arr = [], _n = true, _d = false;
+      try {
+        if (_x = (_i = _i.call(arr)).next, 0 === i) ;
+        else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = true) ;
+      } catch (err) {
+        _d = true, _e = err;
+      } finally {
+        try {
+          if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return;
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+      return _arr;
+    }
+  }
+  function _taggedTemplateLiteralLoose(strings, raw) {
+    if (!raw) {
+      raw = strings.slice(0);
+    }
+    strings.raw = raw;
+    return strings;
+  }
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var _templateObject;
+  var BASE_FONT_SIZE = 16;
+  var UNIT_PX = "px";
+  var UNIT_EM = "em";
+  var UNIT_REM = "rem";
+  var DIGIT_REGEX = new RegExp(String.raw(_templateObject || (_templateObject = _taggedTemplateLiteralLoose(["-?d+(?:.d+|d*)"], ["-?\\d+(?:\\.\\d+|\\d*)"]))));
+  var UNIT_REGEX = new RegExp(UNIT_PX + "|" + UNIT_EM + "|" + UNIT_REM);
+  function getUnit(value) {
+    if (value === void 0) {
+      value = "";
+    }
+    var unit = value.match(new RegExp(DIGIT_REGEX.source + "(" + UNIT_REGEX.source + ")"));
+    return unit && unit[1];
+  }
+  function toPx(value) {
+    if (value === void 0) {
+      value = "";
+    }
+    var unit = getUnit(value);
+    if (!unit) return value;
+    if (unit === UNIT_PX) {
+      return value;
+    }
+    if (unit === UNIT_EM || unit === UNIT_REM) {
+      return "" + parseFloat(value) * BASE_FONT_SIZE + UNIT_PX;
+    }
+  }
+  function toEm(value, fontSize) {
+    if (value === void 0) {
+      value = "";
+    }
+    if (fontSize === void 0) {
+      fontSize = BASE_FONT_SIZE;
+    }
+    var unit = getUnit(value);
+    if (!unit) return value;
+    if (unit === UNIT_EM) {
+      return value;
+    }
+    if (unit === UNIT_PX) {
+      return "" + parseFloat(value) / fontSize + UNIT_EM;
+    }
+    if (unit === UNIT_REM) {
+      return "" + parseFloat(value) * BASE_FONT_SIZE / fontSize + UNIT_EM;
+    }
+  }
+  function toRem(value) {
+    if (value === void 0) {
+      value = "";
+    }
+    var unit = getUnit(value);
+    if (!unit) return value;
+    if (unit === UNIT_REM) {
+      return value;
+    }
+    if (unit === UNIT_EM) {
+      return "" + parseFloat(value) + UNIT_REM;
+    }
+    if (unit === UNIT_PX) {
+      return "" + parseFloat(value) / BASE_FONT_SIZE + UNIT_REM;
+    }
+  }
+  function rem(value) {
+    return value.replace(new RegExp(DIGIT_REGEX.source + "(" + UNIT_PX + ")", "g"), function(px) {
+      var _toRem;
+      return (_toRem = toRem(px)) != null ? _toRem : px;
+    });
+  }
+  function tokenGroupToRems(metaTokenGroup) {
+    return Object.fromEntries(
+      Object.entries(metaTokenGroup).map(function(_ref) {
+        var _ref2 = _slicedToArray(_ref, 2), tokenName = _ref2[0], tokenProperties = _ref2[1];
+        return [tokenName, Object.assign(Object.assign({}, tokenProperties), {}, {
+          value: rem(tokenProperties.value)
+        })];
+      })
+      // We loose the `metaTokenGroup` inference after transforming the object with
+      // `Object.fromEntries()` and `Object.entries()`. Thus, we cast the result
+      // back to `T` since we are simply converting the `value` from px to rem.
+    );
+  }
+  function createVarName(tokenName) {
+    return "--p-" + tokenName;
+  }
+  function createVar$1(tokenName) {
+    return "var(" + createVarName(tokenName) + ")";
+  }
+  function getTokenNames(theme) {
+    return Object.values(theme).flatMap(function(tokenGroup) {
+      return Object.keys(tokenGroup);
+    });
+  }
+  function getMediaConditions(breakpoints2) {
+    var breakpointEntries = Object.entries(breakpoints2);
+    var lastBreakpointIndex = breakpointEntries.length - 1;
+    return Object.fromEntries(breakpointEntries.map(function(entry, index) {
+      var _ref3 = entry, _ref4 = _slicedToArray(_ref3, 2), breakpointsTokenName = _ref4[0], breakpoint = _ref4[1];
+      var upMediaCondition = getUpMediaCondition(breakpoint);
+      var downMediaCondition = getDownMediaCondition(breakpoint);
+      var onlyMediaCondition = index === lastBreakpointIndex ? upMediaCondition : upMediaCondition + " and " + getDownMediaCondition(breakpointEntries[index + 1][1]);
+      return [breakpointsTokenName, {
+        // Media condition for the current breakpoint and up
+        up: upMediaCondition,
+        // Media condition for current breakpoint and down
+        down: downMediaCondition,
+        // Media condition for only the current breakpoint
+        only: onlyMediaCondition
+      }];
+    }));
+  }
+  function getUpMediaCondition(breakpoint) {
+    return "(min-width: " + toEm(breakpoint) + ")";
+  }
+  function getDownMediaCondition(breakpoint) {
+    var _toPx2;
+    var offsetBreakpoint = parseFloat((_toPx2 = toPx(breakpoint)) != null ? _toPx2 : "") - 0.04;
+    return "(max-width: " + toEm(offsetBreakpoint + "px") + ")";
+  }
+  var tokenGroupNamesToRems = ["border", "breakpoints", "font", "height", "shadow", "space", "text", "width"];
+  function createMetaThemeBase(metaTheme) {
+    return Object.fromEntries(Object.entries(metaTheme).map(function(_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2), tokenGroupName = _ref6[0], tokenGroup = _ref6[1];
+      return [tokenGroupName, tokenGroupNamesToRems.includes(tokenGroupName) ? tokenGroupToRems(tokenGroup) : tokenGroup];
+    }));
+  }
+  var cjs;
+  var hasRequiredCjs;
+  function requireCjs() {
+    if (hasRequiredCjs) return cjs;
+    hasRequiredCjs = 1;
+    var isMergeableObject = function isMergeableObject2(value) {
+      return isNonNullObject(value) && !isSpecial(value);
+    };
+    function isNonNullObject(value) {
+      return !!value && typeof value === "object";
+    }
+    function isSpecial(value) {
+      var stringValue = Object.prototype.toString.call(value);
+      return stringValue === "[object RegExp]" || stringValue === "[object Date]" || isReactElement(value);
+    }
+    var canUseSymbol = typeof Symbol === "function" && Symbol.for;
+    var REACT_ELEMENT_TYPE = canUseSymbol ? Symbol.for("react.element") : 60103;
+    function isReactElement(value) {
+      return value.$$typeof === REACT_ELEMENT_TYPE;
+    }
+    function emptyTarget(val) {
+      return Array.isArray(val) ? [] : {};
+    }
+    function cloneUnlessOtherwiseSpecified(value, options) {
+      return options.clone !== false && options.isMergeableObject(value) ? deepmerge2(emptyTarget(value), value, options) : value;
+    }
+    function defaultArrayMerge(target, source, options) {
+      return target.concat(source).map(function(element) {
+        return cloneUnlessOtherwiseSpecified(element, options);
+      });
+    }
+    function getMergeFunction(key, options) {
+      if (!options.customMerge) {
+        return deepmerge2;
+      }
+      var customMerge = options.customMerge(key);
+      return typeof customMerge === "function" ? customMerge : deepmerge2;
+    }
+    function getEnumerableOwnPropertySymbols(target) {
+      return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(target).filter(function(symbol) {
+        return Object.propertyIsEnumerable.call(target, symbol);
+      }) : [];
+    }
+    function getKeys(target) {
+      return Object.keys(target).concat(getEnumerableOwnPropertySymbols(target));
+    }
+    function propertyIsOnObject(object, property) {
+      try {
+        return property in object;
+      } catch (_) {
+        return false;
+      }
+    }
+    function propertyIsUnsafe(target, key) {
+      return propertyIsOnObject(target, key) && !(Object.hasOwnProperty.call(target, key) && Object.propertyIsEnumerable.call(target, key));
+    }
+    function mergeObject(target, source, options) {
+      var destination = {};
+      if (options.isMergeableObject(target)) {
+        getKeys(target).forEach(function(key) {
+          destination[key] = cloneUnlessOtherwiseSpecified(target[key], options);
+        });
+      }
+      getKeys(source).forEach(function(key) {
+        if (propertyIsUnsafe(target, key)) {
+          return;
+        }
+        if (propertyIsOnObject(target, key) && options.isMergeableObject(source[key])) {
+          destination[key] = getMergeFunction(key, options)(target[key], source[key], options);
+        } else {
+          destination[key] = cloneUnlessOtherwiseSpecified(source[key], options);
+        }
+      });
+      return destination;
+    }
+    function deepmerge2(target, source, options) {
+      options = options || {};
+      options.arrayMerge = options.arrayMerge || defaultArrayMerge;
+      options.isMergeableObject = options.isMergeableObject || isMergeableObject;
+      options.cloneUnlessOtherwiseSpecified = cloneUnlessOtherwiseSpecified;
+      var sourceIsArray = Array.isArray(source);
+      var targetIsArray = Array.isArray(target);
+      var sourceAndTargetTypesMatch = sourceIsArray === targetIsArray;
+      if (!sourceAndTargetTypesMatch) {
+        return cloneUnlessOtherwiseSpecified(source, options);
+      } else if (sourceIsArray) {
+        return options.arrayMerge(target, source, options);
+      } else {
+        return mergeObject(target, source, options);
+      }
+    }
+    deepmerge2.all = function deepmergeAll(array, options) {
+      if (!Array.isArray(array)) {
+        throw new Error("first argument should be an array");
+      }
+      return array.reduce(function(prev, next) {
+        return deepmerge2(prev, next, options);
+      }, {});
+    };
+    var deepmerge_1 = deepmerge2;
+    cjs = deepmerge_1;
+    return cjs;
+  }
+  var cjsExports = requireCjs();
+  const deepmerge = /* @__PURE__ */ getDefaultExportFromCjs(cjsExports);
+  var size = {
+    "0": "0px",
+    "0165": "0.66px",
+    "025": "1px",
+    "050": "2px",
+    "100": "4px",
+    "150": "6px",
+    "200": "8px",
+    "275": "11px",
+    "300": "12px",
+    "325": "13px",
+    "350": "14px",
+    "400": "16px",
+    "450": "18px",
+    "500": "20px",
+    "550": "22px",
+    "600": "24px",
+    "700": "28px",
+    "750": "30px",
+    "800": "32px",
+    "900": "36px",
+    "1000": "40px",
+    "1200": "48px",
+    "1600": "64px",
+    "2000": "80px",
+    "2400": "96px",
+    "2800": "112px",
+    "3200": "128px"
+  };
+  var border = {
+    "border-radius-0": {
+      value: size[0]
+    },
+    "border-radius-050": {
+      value: size["050"]
+    },
+    "border-radius-100": {
+      value: size[100]
+    },
+    "border-radius-150": {
+      value: size[150]
+    },
+    "border-radius-200": {
+      value: size[200]
+    },
+    "border-radius-300": {
+      value: size[300]
+    },
+    "border-radius-400": {
+      value: size[400]
+    },
+    "border-radius-500": {
+      value: size[500]
+    },
+    "border-radius-750": {
+      value: size[750]
+    },
+    "border-radius-full": {
+      value: "9999px"
+    },
+    "border-width-0": {
+      value: size["0"]
+    },
+    "border-width-0165": {
+      value: size["0165"]
+    },
+    "border-width-025": {
+      value: size["025"]
+    },
+    "border-width-050": {
+      value: size["050"]
+    },
+    "border-width-100": {
+      value: size[100]
+    }
+  };
+  var gray = {
+    1: "rgba(255, 255, 255, 1)",
+    2: "rgba(253, 253, 253, 1)",
+    3: "rgba(250, 250, 250, 1)",
+    4: "rgba(247, 247, 247, 1)",
+    5: "rgba(243, 243, 243, 1)",
+    6: "rgba(241, 241, 241, 1)",
+    7: "rgba(235, 235, 235, 1)",
+    8: "rgba(227, 227, 227, 1)",
+    9: "rgba(212, 212, 212, 1)",
+    10: "rgba(204, 204, 204, 1)",
+    11: "rgba(181, 181, 181, 1)",
+    12: "rgba(138, 138, 138, 1)",
+    13: "rgba(97, 97, 97, 1)",
+    14: "rgba(74, 74, 74, 1)",
+    15: "rgba(48, 48, 48, 1)",
+    16: "rgba(26, 26, 26, 1)"
+  };
+  var azure = {
+    "3": "rgba(234, 244, 255, 1)",
+    "4": "rgba(224, 240, 255, 1)",
+    "5": "rgba(213, 235, 255, 1)",
+    "6": "rgba(202, 230, 255, 1)",
+    "8": "rgba(168, 216, 255, 1)",
+    "9": "rgba(145, 208, 255, 1)",
+    "10": "rgba(81, 192, 255, 1)",
+    "11": "rgba(0, 148, 213, 1)",
+    "12": "rgba(0, 124, 180, 1)",
+    "15": "rgba(0, 58, 90, 1)",
+    "16": "rgba(0, 33, 51, 1)"
+  };
+  var blue = {
+    "1": "rgba(252, 253, 255, 1)",
+    "3": "rgba(240, 242, 255, 1)",
+    "4": "rgba(234, 237, 255, 1)",
+    "5": "rgba(226, 231, 255, 1)",
+    "7": "rgba(213, 220, 255, 1)",
+    "8": "rgba(197, 208, 255, 1)",
+    "13": "rgba(0, 91, 211, 1)",
+    "14": "rgba(0, 66, 153, 1)",
+    "15": "rgba(0, 46, 106, 1)"
+  };
+  var green = {
+    "1": "rgba(248, 255, 251, 1)",
+    "3": "rgba(205, 254, 225, 1)",
+    "4": "rgba(180, 254, 210, 1)",
+    "5": "rgba(146, 254, 194, 1)",
+    "7": "rgba(56, 250, 163, 1)",
+    "12": "rgba(41, 132, 90, 1)",
+    "13": "rgba(19, 111, 69, 1)",
+    "14": "rgba(12, 81, 50, 1)",
+    "15": "rgba(8, 61, 37, 1)",
+    "16": "rgba(9, 42, 27, 1)"
+  };
+  var lime = {
+    "9": "rgba(37, 232, 43, 1)",
+    "15": "rgba(3, 61, 5, 1)"
+  };
+  var magenta = {
+    "3": "rgba(253, 239, 253, 1)",
+    "12": "rgba(197, 48, 197, 1)"
+  };
+  var orange = {
+    "3": "rgba(255, 241, 227, 1)",
+    "4": "rgba(255, 235, 213, 1)",
+    "5": "rgba(255, 228, 198, 1)",
+    "7": "rgba(255, 214, 164, 1)",
+    "8": "rgba(255, 200, 121, 1)",
+    "9": "rgba(255, 184, 0, 1)",
+    "10": "rgba(229, 165, 0, 1)",
+    "11": "rgba(178, 132, 0, 1)",
+    "12": "rgba(149, 111, 0, 1)",
+    "14": "rgba(94, 66, 0, 1)",
+    "15": "rgba(65, 45, 0, 1)",
+    "16": "rgba(37, 26, 0, 1)"
+  };
+  var purple = {
+    "1": "rgba(253, 253, 255, 1)",
+    "2": "rgba(248, 247, 255, 1)",
+    "3": "rgba(243, 241, 255, 1)",
+    "5": "rgba(233, 229, 255, 1)",
+    "6": "rgba(228, 222, 255, 1)",
+    "7": "rgba(223, 217, 255, 1)",
+    "11": "rgba(148, 116, 255, 1)",
+    "12": "rgba(128, 81, 255, 1)",
+    "13": "rgba(113, 38, 255, 1)",
+    "14": "rgba(87, 0, 209, 1)"
+  };
+  var red = {
+    "1": "rgba(255, 251, 251, 1)",
+    "4": "rgba(254, 233, 232, 1)",
+    "5": "rgba(254, 226, 225, 1)",
+    "6": "rgba(254, 218, 217, 1)",
+    "7": "rgba(254, 211, 209, 1)",
+    "8": "rgba(254, 195, 193, 1)",
+    "11": "rgba(239, 77, 47, 1)",
+    "12": "rgba(229, 28, 0, 1)",
+    "13": "rgba(181, 38, 11, 1)",
+    "14": "rgba(142, 31, 11, 1)",
+    "15": "rgba(95, 21, 7, 1)",
+    "16": "rgba(47, 10, 4, 1)"
+  };
+  var rose = {
+    "2": "rgba(255, 246, 248, 1)",
+    "11": "rgba(253, 75, 146, 1)"
+  };
+  var teal = {
+    "9": "rgba(44, 224, 212, 1)",
+    "15": "rgba(3, 60, 57, 1)"
+  };
+  var yellow = {
+    "2": "rgba(255, 248, 219, 1)",
+    "3": "rgba(255, 244, 191, 1)",
+    "4": "rgba(255, 239, 157, 1)",
+    "5": "rgba(255, 235, 120, 1)",
+    "6": "rgba(255, 230, 0, 1)",
+    "8": "rgba(234, 211, 0, 1)",
+    "9": "rgba(225, 203, 0, 1)",
+    "11": "rgba(153, 138, 0, 1)",
+    "12": "rgba(130, 117, 0, 1)",
+    "14": "rgba(79, 71, 0, 1)",
+    "15": "rgba(51, 46, 0, 1)",
+    "16": "rgba(31, 28, 0, 1)"
+  };
+  var blackAlpha = {
+    1: "rgba(0, 0, 0, 0)",
+    3: "rgba(0, 0, 0, 0.02)",
+    5: "rgba(0, 0, 0, 0.05)",
+    6: "rgba(0, 0, 0, 0.06)",
+    7: "rgba(0, 0, 0, 0.08)",
+    8: "rgba(0, 0, 0, 0.11)",
+    9: "rgba(0, 0, 0, 0.17)",
+    10: "rgba(0, 0, 0, 0.20)",
+    14: "rgba(0, 0, 0, 0.71)",
+    15: "rgba(0, 0, 0, 0.81)"
+  };
+  var whiteAlpha = {
+    4: "rgba(255, 255, 255, 0.03)",
+    8: "rgba(255, 255, 255, 0.11)",
+    9: "rgba(255, 255, 255, 0.17)",
+    10: "rgba(255, 255, 255, 0.20)",
+    11: "rgba(255, 255, 255, 0.28)"
+  };
+  var color = {
+    "color-scheme": {
+      value: "light"
+    },
+    "color-bg": {
+      value: gray[6],
+      description: "The default background color of the admin."
+    },
+    "color-bg-inverse": {
+      value: gray[16],
+      description: "Use for high contrast page or component backgrounds."
+    },
+    "color-bg-surface": {
+      value: gray[1],
+      description: "The background color for elements with the highest level of prominence, like a card."
+    },
+    "color-bg-surface-hover": {
+      value: gray[4],
+      description: "The hover state color for elements with the highest level of prominence."
+    },
+    "color-bg-surface-active": {
+      value: gray[5],
+      description: "The active state (on press) color for elements with the highest level of prominence."
+    },
+    "color-bg-surface-selected": {
+      value: gray[6],
+      description: "The selected state color for elements with the highest level of prominence."
+    },
+    "color-bg-surface-disabled": {
+      value: blackAlpha[5],
+      description: "The disabled state color for elements."
+    },
+    "color-bg-surface-secondary": {
+      value: gray[4],
+      description: "The background color for elements with a secondary level of prominence."
+    },
+    "color-bg-surface-secondary-hover": {
+      value: gray[6],
+      description: "The hover state color for elements with a secondary level of prominence."
+    },
+    "color-bg-surface-secondary-active": {
+      value: gray[7],
+      description: "The active state (on press) color for elements with a secondary level of prominence."
+    },
+    "color-bg-surface-secondary-selected": {
+      value: gray[7],
+      description: "The selected state color for elements with a secondary level of prominence."
+    },
+    "color-bg-surface-tertiary": {
+      value: gray[5],
+      description: "The background color for elements with a third level of prominence."
+    },
+    "color-bg-surface-tertiary-hover": {
+      value: gray[7],
+      description: "The hover state color for elements with a third level of prominence."
+    },
+    "color-bg-surface-tertiary-active": {
+      value: gray[8],
+      description: "The active state (on press) color for elements with a third level of prominence."
+    },
+    "color-bg-surface-brand": {
+      value: gray[8],
+      description: "Use to apply the key color to elements."
+    },
+    "color-bg-surface-brand-hover": {
+      value: gray[7],
+      description: "The hover state color for key elements."
+    },
+    "color-bg-surface-brand-active": {
+      value: gray[6],
+      description: "The active state (on press) color for key elements."
+    },
+    "color-bg-surface-brand-selected": {
+      value: gray[6],
+      description: "The selected state color for key elements."
+    },
+    "color-bg-surface-info": {
+      value: azure[3],
+      description: "Use for backgrounds communicating important information, like banners."
+    },
+    "color-bg-surface-info-hover": {
+      value: azure[4],
+      description: "The hover state color for communicating important information."
+    },
+    "color-bg-surface-info-active": {
+      value: azure[6],
+      description: "The active state (on press) color for communicating important information."
+    },
+    "color-bg-surface-success": {
+      value: green[3],
+      description: "Use for backgrounds communicating success, like banners."
+    },
+    "color-bg-surface-success-hover": {
+      value: green[4],
+      description: "The hover state color for communicating success."
+    },
+    "color-bg-surface-success-active": {
+      value: green[5],
+      description: "The active state (on press) color for communicating success."
+    },
+    "color-bg-surface-caution": {
+      value: yellow[2],
+      description: "Use for backgrounds communicating caution, like banners."
+    },
+    "color-bg-surface-caution-hover": {
+      value: yellow[3],
+      description: "The hover state for communicating caution."
+    },
+    "color-bg-surface-caution-active": {
+      value: yellow[4],
+      description: "The active state (on press) color for communicating caution."
+    },
+    "color-bg-surface-warning": {
+      value: orange[3],
+      description: "Use for backgrounds communicating warning, like banners."
+    },
+    "color-bg-surface-warning-hover": {
+      value: orange[4],
+      description: "The hover state color for communicating warning."
+    },
+    "color-bg-surface-warning-active": {
+      value: orange[5],
+      description: "The active state (on press) color for communicating warning."
+    },
+    "color-bg-surface-critical": {
+      value: red[4],
+      description: "Use for backgrounds communicating critical information, like banners or input errors."
+    },
+    "color-bg-surface-critical-hover": {
+      value: red[5],
+      description: "The hover state color for communicating critical information."
+    },
+    "color-bg-surface-critical-active": {
+      value: red[6],
+      description: "The active state (on press) color for communicating critical information."
+    },
+    "color-bg-surface-emphasis": {
+      value: blue[3],
+      description: "Use for backgrounds indicating areas of focus in editors, such as the theme editor."
+    },
+    "color-bg-surface-emphasis-hover": {
+      value: blue[4],
+      description: "The hover state color for elements indicating areas of focus in editors."
+    },
+    "color-bg-surface-emphasis-active": {
+      value: blue[5],
+      description: "The active state (on press) color for elements indicating areas of focus in editors."
+    },
+    "color-bg-surface-magic": {
+      value: purple[2],
+      description: "Use for backgrounds of elements suggested by magic AI."
+    },
+    "color-bg-surface-magic-hover": {
+      value: purple[3],
+      description: "The hover state color for elements suggested by magic AI."
+    },
+    "color-bg-surface-magic-active": {
+      value: purple[5],
+      description: "The active state (on press) color for elements suggested by magic AI."
+    },
+    "color-bg-surface-inverse": {
+      value: gray[15],
+      description: "Use for elements on bg-inverse."
+    },
+    "color-bg-surface-transparent": {
+      value: blackAlpha[1],
+      description: "Use for elements that need a fully transparent background."
+    },
+    "color-bg-fill": {
+      value: gray[1],
+      description: "The background color of contained elements with a smaller surface area, like a button."
+    },
+    "color-bg-fill-hover": {
+      value: gray[3],
+      description: "The hover state color of contained elements with a smaller surface area, like a button."
+    },
+    "color-bg-fill-active": {
+      value: gray[4],
+      description: "The active state (on press) color of contained elements with a smaller surface area, like a button."
+    },
+    "color-bg-fill-selected": {
+      value: gray[10],
+      description: "The selected state color of contained elements with a smaller surface area, like a button or checkbox."
+    },
+    "color-bg-fill-disabled": {
+      value: blackAlpha[5],
+      description: "The disabled state color of contained elements with a smaller surface area, like a button."
+    },
+    "color-bg-fill-secondary": {
+      value: gray[6],
+      description: "The background color of elements with a smaller surface area and a secondary level of prominence."
+    },
+    "color-bg-fill-secondary-hover": {
+      value: gray[7],
+      description: "The hover state color of elements with a smaller surface area and a secondary level of prominence."
+    },
+    "color-bg-fill-secondary-active": {
+      value: gray[8],
+      description: "The active state (on press) color of elements with a smaller surface area and a secondary level of prominence."
+    },
+    "color-bg-fill-tertiary": {
+      value: gray[8],
+      description: "The background color of elements with a smaller surface area and a third level of prominence."
+    },
+    "color-bg-fill-tertiary-hover": {
+      value: gray[9],
+      description: "The hover state color of elements with a smaller surface area and a third level of prominence."
+    },
+    "color-bg-fill-tertiary-active": {
+      value: gray[10],
+      description: "The active state (on press) color of elements with a smaller surface area and a third level of prominence."
+    },
+    "color-bg-fill-brand": {
+      value: gray[15],
+      description: "The background color of main actions, like primary buttons."
+    },
+    "color-bg-fill-brand-hover": {
+      value: gray[16],
+      description: "The hover state color of main actions, like primary buttons."
+    },
+    "color-bg-fill-brand-active": {
+      value: gray[16],
+      description: "The active state (on press) color of main actions, like primary buttons."
+    },
+    "color-bg-fill-brand-selected": {
+      value: gray[15],
+      description: "The selected state color of main actions, like primary buttons."
+    },
+    "color-bg-fill-brand-disabled": {
+      value: blackAlpha[9],
+      description: "The disabled state color of main actions, like primary buttons."
+    },
+    "color-bg-fill-info": {
+      value: azure[9],
+      description: "Use for backgrounds communicating important information on elements with a smaller surface area, like a badge or button."
+    },
+    "color-bg-fill-info-hover": {
+      value: azure[10],
+      description: "The hover state color for communicating important information on elements with a smaller surface area."
+    },
+    "color-bg-fill-info-active": {
+      value: azure[11],
+      description: "The active state (on press) color for communicating important information on elements with a smaller surface area."
+    },
+    "color-bg-fill-info-secondary": {
+      value: azure[5],
+      description: "Use for backgrounds communicating important information on elements with a smaller surface area, with a secondary level of prominence."
+    },
+    "color-bg-fill-success": {
+      value: green[12],
+      description: "Use for backgrounds communicating success on elements with a smaller surface area, like a badge or a banner."
+    },
+    "color-bg-fill-success-hover": {
+      value: green[13],
+      description: "The hover state color for communicating success on elements with a smaller surface area."
+    },
+    "color-bg-fill-success-active": {
+      value: green[14],
+      description: "The active state (on press) color for communicating success on elements with a smaller surface area."
+    },
+    "color-bg-fill-success-secondary": {
+      value: green[4],
+      description: "Use for backgrounds communicating success on elements with a smaller surface area, with a secondary level of prominence."
+    },
+    "color-bg-fill-warning": {
+      value: orange[9],
+      description: "Use for backgrounds communicating warning on elements with a smaller surface area, like a badge or a banner."
+    },
+    "color-bg-fill-warning-hover": {
+      value: orange[10],
+      description: "The hover state color for communicating warning on elements with a smaller surface area."
+    },
+    "color-bg-fill-warning-active": {
+      value: orange[11],
+      description: "The active state (on press) color for communicating warning on elements with a smaller surface area."
+    },
+    "color-bg-fill-warning-secondary": {
+      value: orange[7],
+      description: "Use for backgrounds communicating warning on elements with a smaller surface area, with a secondary level of prominence."
+    },
+    "color-bg-fill-caution": {
+      value: yellow[6],
+      description: "Use for backgrounds communicating caution on elements with a smaller surface area, like a badge or a banner."
+    },
+    "color-bg-fill-caution-hover": {
+      value: yellow[8],
+      description: "The hover state color for communicating caution on elements with a smaller surface area."
+    },
+    "color-bg-fill-caution-active": {
+      value: yellow[9],
+      description: "The active state (on press) color for communicating caution on elements with a smaller surface area."
+    },
+    "color-bg-fill-caution-secondary": {
+      value: yellow[5],
+      description: "Use for backgrounds communicating caution on elements with a smaller surface area, with a secondary level of prominence."
+    },
+    "color-bg-fill-critical": {
+      value: red[12],
+      description: "Use for backgrounds communicating critical information on elements with a smaller surface area, like a badge or a banner."
+    },
+    "color-bg-fill-critical-hover": {
+      value: red[13],
+      description: "The hover state color for communicating critical information on elements with a smaller surface area."
+    },
+    "color-bg-fill-critical-active": {
+      value: red[14],
+      description: "The active state (on press) color for communicating critical information on elements with a smaller surface area."
+    },
+    "color-bg-fill-critical-selected": {
+      value: red[14],
+      description: "The selected state color for communicating critical information on elements with a smaller surface area."
+    },
+    "color-bg-fill-critical-secondary": {
+      value: red[7],
+      description: "Use for backgrounds communicating critical information on elements with a smaller surface area, with a secondary level of prominence."
+    },
+    "color-bg-fill-emphasis": {
+      value: blue[13],
+      description: "Use for backgrounds indicating areas of focus in editors on elements with a smaller surface area, like a button or a badge."
+    },
+    "color-bg-fill-emphasis-hover": {
+      value: blue[14],
+      description: "The hover state color for indicating areas of focus in editors on elements with a smaller surface area."
+    },
+    "color-bg-fill-emphasis-active": {
+      value: blue[15],
+      description: "The active state (on press) color for indicating areas of focus in editors on elements with a smaller surface area."
+    },
+    "color-bg-fill-magic": {
+      value: purple[12],
+      description: "The background color of elements suggested by magic AI, like a badge or a banner."
+    },
+    "color-bg-fill-magic-secondary": {
+      value: purple[5],
+      description: "The background color of elements suggested by magic AI, with a secondary level of prominence."
+    },
+    "color-bg-fill-magic-secondary-hover": {
+      value: purple[6],
+      description: "The hover state color of elements suggested by magic AI, with a secondary level of prominence."
+    },
+    "color-bg-fill-magic-secondary-active": {
+      value: purple[7],
+      description: "The active state (on press) color of elements suggested by magic AI, with a secondary level of prominence."
+    },
+    "color-bg-fill-inverse": {
+      value: gray[15],
+      description: "The background color of elements with a smaller surface area on an inverse background."
+    },
+    "color-bg-fill-inverse-hover": {
+      value: gray[14],
+      description: "The hover state color of elements with a smaller surface area on an inverse background."
+    },
+    "color-bg-fill-inverse-active": {
+      value: gray[13],
+      description: "The active state (on press) color of elements with a smaller surface area on an inverse background."
+    },
+    "color-bg-fill-transparent": {
+      value: blackAlpha[3],
+      description: "The background color of elements that need to sit on different background colors, like tabs."
+    },
+    "color-bg-fill-transparent-hover": {
+      value: blackAlpha[5],
+      description: "The hover state color of elements that need to sit on different background colors, like tabs."
+    },
+    "color-bg-fill-transparent-active": {
+      value: blackAlpha[7],
+      description: "The active state (on press) color of elements that need to sit on different background colors, like tabs."
+    },
+    "color-bg-fill-transparent-selected": {
+      value: blackAlpha[7],
+      description: "The selected state color of elements that need to sit on different background colors, like tabs."
+    },
+    "color-bg-fill-transparent-secondary": {
+      value: blackAlpha[6],
+      description: "The background color of elements that need to sit on different background colors, with a secondary level of prominence."
+    },
+    "color-bg-fill-transparent-secondary-hover": {
+      value: blackAlpha[7],
+      description: "The hover state color of elements that need to sit on different background colors, with a secondary level of prominence."
+    },
+    "color-bg-fill-transparent-secondary-active": {
+      value: blackAlpha[8],
+      description: "The active state (on press) color of elements that need to sit on different background colors, with a secondary level of prominence."
+    },
+    "color-text": {
+      value: gray[15],
+      description: "The default text color."
+    },
+    "color-text-secondary": {
+      value: gray[13],
+      description: "Use for text with a secondary level of prominence."
+    },
+    "color-text-disabled": {
+      value: gray[11],
+      description: "Use for text in a disabled state."
+    },
+    "color-text-link": {
+      value: blue[13],
+      description: "Use for text links."
+    },
+    "color-text-link-hover": {
+      value: blue[14],
+      description: "The hover state color for text links."
+    },
+    "color-text-link-active": {
+      value: blue[15],
+      description: "The active state (on press) color for text links."
+    },
+    "color-text-brand": {
+      value: gray[14],
+      description: "Use for text that needs to pull attention."
+    },
+    "color-text-brand-hover": {
+      value: gray[15],
+      description: "The hover state color for text that needs to pull attention."
+    },
+    "color-text-brand-on-bg-fill": {
+      value: gray[1],
+      description: "Use for text on bg-fill-brand, like primary buttons."
+    },
+    "color-text-brand-on-bg-fill-hover": {
+      value: gray[8],
+      description: "The hover state color for text on bg-fill-brand-hover."
+    },
+    "color-text-brand-on-bg-fill-active": {
+      value: gray[10],
+      description: "The active state (on press) color for text on bg-fill-brand."
+    },
+    "color-text-brand-on-bg-fill-disabled": {
+      value: gray[1],
+      description: "The disabled state color for text on bg-fill-brand-disabled."
+    },
+    "color-text-info": {
+      value: azure[15],
+      description: "Use for text communicating important information."
+    },
+    "color-text-info-hover": {
+      value: azure[15],
+      description: "The hover state color for text communicating important information."
+    },
+    "color-text-info-active": {
+      value: azure[16],
+      description: "The active state (on press) color for text communicating important information."
+    },
+    "color-text-info-secondary": {
+      value: azure[12],
+      description: "Use for text communicating important information with a secondary level of prominence."
+    },
+    "color-text-info-on-bg-fill": {
+      value: azure[16],
+      description: "Use for text and icons on bg-fill-info."
+    },
+    "color-text-success": {
+      value: green[14],
+      description: "Use for text communicating success."
+    },
+    "color-text-success-hover": {
+      value: green[15],
+      description: "The hover state color for text communicating success."
+    },
+    "color-text-success-active": {
+      value: green[16],
+      description: "The active state (on press) color for text communicating success."
+    },
+    "color-text-success-secondary": {
+      value: green[12],
+      description: "Use for text communicating success with a secondary level of prominence."
+    },
+    "color-text-success-on-bg-fill": {
+      value: green[1],
+      description: "Use for text and icons on bg-fill-success."
+    },
+    "color-text-caution": {
+      value: yellow[14],
+      description: "Use for text communicating caution."
+    },
+    "color-text-caution-hover": {
+      value: yellow[15],
+      description: "The hover state color for text communicating caution."
+    },
+    "color-text-caution-active": {
+      value: yellow[16],
+      description: "The active state (on press) color for text communicating caution."
+    },
+    "color-text-caution-secondary": {
+      value: yellow[12],
+      description: "Use for text communicating caution with a secondary level of prominence."
+    },
+    "color-text-caution-on-bg-fill": {
+      value: yellow[15],
+      description: "Use for text and icons on bg-fill-caution."
+    },
+    "color-text-warning": {
+      value: orange[14],
+      description: "Use for text communicating warning."
+    },
+    "color-text-warning-hover": {
+      value: orange[15],
+      description: "The hover state color for text communicating warning."
+    },
+    "color-text-warning-active": {
+      value: orange[16],
+      description: "The active state (on press) color for text communicating warning."
+    },
+    "color-text-warning-secondary": {
+      value: orange[12],
+      description: "Use for text communicating warning with a secondary level of prominence."
+    },
+    "color-text-warning-on-bg-fill": {
+      value: orange[16],
+      description: "Use for text and icons on bg-fill-warning."
+    },
+    "color-text-critical": {
+      value: red[14],
+      description: "Use for text communicating critical information."
+    },
+    "color-text-critical-hover": {
+      value: red[15],
+      description: "The hover state color for text communicating critical information."
+    },
+    "color-text-critical-active": {
+      value: red[16],
+      description: "The active state (on press) color for text communicating critical information."
+    },
+    "color-text-critical-secondary": {
+      value: red[12],
+      description: "Use for text communicating critical information with a secondary level of prominence."
+    },
+    "color-text-critical-on-bg-fill": {
+      value: red[1],
+      description: "Use for text and icons on bg-fill-critical."
+    },
+    "color-text-emphasis": {
+      value: blue[13],
+      description: "Use for text indicating areas of focus in editors, like the theme editor."
+    },
+    "color-text-emphasis-hover": {
+      value: blue[14],
+      description: "The hover state color for text indicating areas of focus."
+    },
+    "color-text-emphasis-active": {
+      value: blue[15],
+      description: "The active state (on press) color for text indicating areas of focus."
+    },
+    "color-text-emphasis-on-bg-fill": {
+      value: blue[1],
+      description: "Use for text and icons on bg-fill-emphasis."
+    },
+    "color-text-emphasis-on-bg-fill-hover": {
+      value: blue[5],
+      description: "Use for text and icons on bg-fill-emphasis-hover."
+    },
+    "color-text-emphasis-on-bg-fill-active": {
+      value: blue[7],
+      description: "Use for text and icons on bg-fill-emphasis-active."
+    },
+    "color-text-magic": {
+      value: purple[14],
+      description: "Use for text suggested by magic AI."
+    },
+    "color-text-magic-secondary": {
+      value: purple[13],
+      description: "Use for text suggested by magic AI with a secondary level of prominence."
+    },
+    "color-text-magic-on-bg-fill": {
+      value: purple[1],
+      description: "Use for text and icons on bg-fill-magic."
+    },
+    "color-text-inverse": {
+      value: gray[8],
+      description: "Use for text on an inverse background."
+    },
+    "color-text-inverse-secondary": {
+      value: gray[11],
+      description: "Use for secondary text on an inverse background."
+    },
+    "color-text-link-inverse": {
+      value: blue[8],
+      description: "Use for text links on an inverse background."
+    },
+    "color-border": {
+      value: gray[8],
+      description: "The default color for borders on any element."
+    },
+    "color-border-hover": {
+      value: gray[10],
+      description: "The hover color for borders on any element."
+    },
+    "color-border-disabled": {
+      value: gray[7],
+      description: "The disabled color for borders on any element."
+    },
+    "color-border-secondary": {
+      value: gray[7],
+      description: "The color for hr elements or any visual dividers."
+    },
+    "color-border-tertiary": {
+      value: gray[10],
+      description: "The border color on any element. Pair with bg-surface-tertiary or bg-fill-tertiary."
+    },
+    "color-border-focus": {
+      value: blue[13],
+      description: "The focus ring for any interactive element in a focused state."
+    },
+    "color-border-brand": {
+      value: gray[8],
+      description: "Use for borders paired with brand colors."
+    },
+    "color-border-info": {
+      value: azure[8],
+      description: "Use for borders communicating information."
+    },
+    "color-border-success": {
+      value: green[5],
+      description: "Use for borders communicating success."
+    },
+    "color-border-caution": {
+      value: yellow[5],
+      description: "Use for borders communicating caution."
+    },
+    "color-border-warning": {
+      value: orange[8],
+      description: "Use for borders communicating warning."
+    },
+    "color-border-critical": {
+      value: red[8],
+      description: "Use for borders communicating critical information."
+    },
+    "color-border-critical-secondary": {
+      value: red[14],
+      description: "Use for borders communicating critical information, such as borders on invalid text fields."
+    },
+    "color-border-emphasis": {
+      value: blue[13],
+      description: "Use for borders indicating areas of focus."
+    },
+    "color-border-emphasis-hover": {
+      value: blue[14],
+      description: "The hover state color for borders indicating areas of focus."
+    },
+    "color-border-emphasis-active": {
+      value: blue[15],
+      description: "The active state (on press) color for borders indicating areas of focus."
+    },
+    "color-border-magic": {
+      value: purple[6],
+      description: "Use for borders suggested by magic AI."
+    },
+    "color-border-magic-secondary": {
+      value: purple[11],
+      description: "Use for borders suggested by magic AI, such as borders on text fields."
+    },
+    "color-border-magic-secondary-hover": {
+      value: purple[12],
+      description: "Use for borders suggested by magic AI, such as borders on text fields."
+    },
+    "color-border-inverse": {
+      value: gray[13],
+      description: "Use for borders on an inverse background, such as borders on the global search."
+    },
+    "color-border-inverse-hover": {
+      value: gray[10],
+      description: "The hover state color for borders on an inverse background."
+    },
+    "color-border-inverse-active": {
+      value: gray[8],
+      description: "The active state (on press) color for borders on an inverse background."
+    },
+    "color-tooltip-tail-down-border-experimental": {
+      value: gray[9],
+      description: "The border color for tooltip tails pointing down."
+    },
+    "color-tooltip-tail-up-border-experimental": {
+      value: gray[8],
+      description: "The border color for tooltip tails pointing up."
+    },
+    "color-border-gradient-experimental": {
+      value: "linear-gradient(to bottom, " + gray[7] + ", " + gray[10] + " 78%, " + gray[11] + ")"
+    },
+    "color-border-gradient-hover-experimental": {
+      value: "linear-gradient(to bottom, " + gray[7] + ", " + gray[10] + " 78%, " + gray[11] + ")"
+    },
+    "color-border-gradient-selected-experimental": {
+      value: "linear-gradient(to bottom, " + gray[7] + ", " + gray[10] + " 78%, " + gray[11] + ")"
+    },
+    "color-border-gradient-active-experimental": {
+      value: "linear-gradient(to bottom, " + gray[7] + ", " + gray[10] + " 78%, " + gray[11] + ")"
+    },
+    "color-icon": {
+      value: gray[14],
+      description: "The default color for icons."
+    },
+    "color-icon-hover": {
+      value: gray[15],
+      description: "The hover state color for icons."
+    },
+    "color-icon-active": {
+      value: gray[16],
+      description: "The active state (on press) color for icons."
+    },
+    "color-icon-disabled": {
+      value: gray[10],
+      description: "The disabled state color for icons."
+    },
+    "color-icon-secondary": {
+      value: gray[12],
+      description: "Use for secondary icons."
+    },
+    "color-icon-secondary-hover": {
+      value: gray[13],
+      description: "The hover state color for secondary icons."
+    },
+    "color-icon-secondary-active": {
+      value: gray[14],
+      description: "The active state (on press) color for secondary icons."
+    },
+    "color-icon-brand": {
+      value: gray[16],
+      description: "Use for icons that need to pull more focus."
+    },
+    "color-icon-info": {
+      value: azure[11],
+      description: "Use for icons communicating information."
+    },
+    "color-icon-success": {
+      value: green[12],
+      description: "Use for icons communicating success."
+    },
+    "color-icon-caution": {
+      value: yellow[11],
+      description: "Use for icons communicating caution."
+    },
+    "color-icon-warning": {
+      value: orange[11],
+      description: "Use for icons communicating warning."
+    },
+    "color-icon-critical": {
+      value: red[11],
+      description: "Use for icons communicating critical information."
+    },
+    "color-icon-emphasis": {
+      value: blue[13],
+      description: "Use for icons indicating areas of focus in editors, like the theme editor."
+    },
+    "color-icon-emphasis-hover": {
+      value: blue[14],
+      description: "The hover color for icons indicating areas of focus in editors."
+    },
+    "color-icon-emphasis-active": {
+      value: blue[15],
+      description: "The active state (on press) color for icons indicating areas of focus in editors."
+    },
+    "color-icon-magic": {
+      value: purple[12],
+      description: "Use for icons suggested by magic AI."
+    },
+    "color-icon-inverse": {
+      value: gray[8],
+      description: "Use for icons on an inverse background."
+    },
+    "color-avatar-bg-fill": {
+      value: gray[11]
+    },
+    "color-avatar-five-bg-fill": {
+      value: rose[11]
+    },
+    "color-avatar-five-text-on-bg-fill": {
+      value: rose[2]
+    },
+    "color-avatar-four-bg-fill": {
+      value: azure[10]
+    },
+    "color-avatar-four-text-on-bg-fill": {
+      value: azure[16]
+    },
+    "color-avatar-one-bg-fill": {
+      value: magenta[12]
+    },
+    "color-avatar-one-text-on-bg-fill": {
+      value: magenta[3]
+    },
+    "color-avatar-seven-bg-fill": {
+      value: purple[11]
+    },
+    "color-avatar-seven-text-on-bg-fill": {
+      value: purple[2]
+    },
+    "color-avatar-six-bg-fill": {
+      value: lime[9]
+    },
+    "color-avatar-six-text-on-bg-fill": {
+      value: lime[15]
+    },
+    "color-avatar-text-on-bg-fill": {
+      value: gray[1]
+    },
+    "color-avatar-three-bg-fill": {
+      value: teal[9]
+    },
+    "color-avatar-three-text-on-bg-fill": {
+      value: teal[15]
+    },
+    "color-avatar-two-bg-fill": {
+      value: green[7]
+    },
+    "color-avatar-two-text-on-bg-fill": {
+      value: green[14]
+    },
+    "color-backdrop-bg": {
+      value: blackAlpha[14]
+    },
+    "color-button-gradient-bg-fill": {
+      value: "linear-gradient(180deg, rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%)"
+    },
+    "color-checkbox-bg-surface-disabled": {
+      value: blackAlpha[7]
+    },
+    "color-checkbox-icon-disabled": {
+      value: gray[1]
+    },
+    "color-input-bg-surface": {
+      value: gray[2]
+    },
+    "color-input-bg-surface-hover": {
+      value: gray[3]
+    },
+    "color-input-bg-surface-active": {
+      value: gray[4]
+    },
+    "color-input-border": {
+      value: gray[12]
+    },
+    "color-input-border-hover": {
+      value: gray[13]
+    },
+    "color-input-border-active": {
+      value: gray[16]
+    },
+    "color-nav-bg": {
+      value: gray[7]
+    },
+    "color-nav-bg-surface": {
+      value: blackAlpha[3]
+    },
+    "color-nav-bg-surface-hover": {
+      value: gray[6]
+    },
+    "color-nav-bg-surface-active": {
+      value: gray[3]
+    },
+    "color-nav-bg-surface-selected": {
+      value: gray[3]
+    },
+    "color-radio-button-bg-surface-disabled": {
+      value: blackAlpha[7]
+    },
+    "color-radio-button-icon-disabled": {
+      value: gray[1]
+    },
+    "color-video-thumbnail-play-button-bg-fill-hover": {
+      value: blackAlpha[15]
+    },
+    "color-video-thumbnail-play-button-bg-fill": {
+      value: blackAlpha[14]
+    },
+    "color-video-thumbnail-play-button-text-on-bg-fill": {
+      value: gray[1]
+    },
+    "color-scrollbar-thumb-bg-hover": {
+      value: gray[12]
+    }
+  };
+  var font = {
+    "font-family-sans": {
+      value: "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif"
+    },
+    "font-family-mono": {
+      value: "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace"
+    },
+    "font-size-275": {
+      value: size[275]
+    },
+    "font-size-300": {
+      value: size[300]
+    },
+    "font-size-325": {
+      value: size[325]
+    },
+    "font-size-350": {
+      value: size[350]
+    },
+    "font-size-400": {
+      value: size[400]
+    },
+    "font-size-450": {
+      value: size[450]
+    },
+    "font-size-500": {
+      value: size[500]
+    },
+    "font-size-550": {
+      value: size[550]
+    },
+    "font-size-600": {
+      value: size[600]
+    },
+    "font-size-750": {
+      value: size[750]
+    },
+    "font-size-800": {
+      value: size[800]
+    },
+    "font-size-900": {
+      value: size[900]
+    },
+    "font-size-1000": {
+      value: size[1e3]
+    },
+    "font-weight-regular": {
+      value: "450"
+    },
+    "font-weight-medium": {
+      value: "550"
+    },
+    "font-weight-semibold": {
+      value: "650"
+    },
+    "font-weight-bold": {
+      value: "700"
+    },
+    "font-letter-spacing-densest": {
+      value: "-0.54px"
+    },
+    "font-letter-spacing-denser": {
+      value: "-0.3px"
+    },
+    "font-letter-spacing-dense": {
+      value: "-0.2px"
+    },
+    "font-letter-spacing-normal": {
+      value: "0px"
+    },
+    "font-line-height-300": {
+      value: size[300]
+    },
+    "font-line-height-400": {
+      value: size[400]
+    },
+    "font-line-height-500": {
+      value: size[500]
+    },
+    "font-line-height-600": {
+      value: size[600]
+    },
+    "font-line-height-700": {
+      value: size[700]
+    },
+    "font-line-height-800": {
+      value: size[800]
+    },
+    "font-line-height-1000": {
+      value: size[1e3]
+    },
+    "font-line-height-1200": {
+      value: size[1200]
+    }
+  };
+  var height = {
+    "height-0": {
+      value: size[0]
+    },
+    "height-025": {
+      value: size["025"]
+    },
+    "height-050": {
+      value: size["050"]
+    },
+    "height-100": {
+      value: size[100]
+    },
+    "height-150": {
+      value: size[150]
+    },
+    "height-200": {
+      value: size[200]
+    },
+    "height-300": {
+      value: size[300]
+    },
+    "height-400": {
+      value: size[400]
+    },
+    "height-500": {
+      value: size[500]
+    },
+    "height-600": {
+      value: size[600]
+    },
+    "height-700": {
+      value: size[700]
+    },
+    "height-800": {
+      value: size[800]
+    },
+    "height-900": {
+      value: size[900]
+    },
+    "height-1000": {
+      value: size[1e3]
+    },
+    "height-1200": {
+      value: size[1200]
+    },
+    "height-1600": {
+      value: size[1600]
+    },
+    "height-2000": {
+      value: size[2e3]
+    },
+    "height-2400": {
+      value: size[2400]
+    },
+    "height-2800": {
+      value: size[2800]
+    },
+    "height-3200": {
+      value: size[3200]
+    }
+  };
+  var motion = {
+    "motion-duration-0": {
+      value: "0ms"
+    },
+    "motion-duration-50": {
+      value: "50ms"
+    },
+    "motion-duration-100": {
+      value: "100ms"
+    },
+    "motion-duration-150": {
+      value: "150ms"
+    },
+    "motion-duration-200": {
+      value: "200ms"
+    },
+    "motion-duration-250": {
+      value: "250ms"
+    },
+    "motion-duration-300": {
+      value: "300ms"
+    },
+    "motion-duration-350": {
+      value: "350ms"
+    },
+    "motion-duration-400": {
+      value: "400ms"
+    },
+    "motion-duration-450": {
+      value: "450ms"
+    },
+    "motion-duration-500": {
+      value: "500ms"
+    },
+    "motion-duration-5000": {
+      value: "5000ms"
+    },
+    "motion-ease": {
+      value: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      description: "Responds quickly and finishes with control. A great default for any user interaction."
+    },
+    "motion-ease-in": {
+      value: "cubic-bezier(0.42, 0, 1, 1)",
+      description: "Starts slowly and finishes at top speed. Use sparingly."
+    },
+    "motion-ease-out": {
+      value: "cubic-bezier(0.19, 0.91, 0.38, 1)",
+      description: "Starts at top speed and finishes slowly. Use sparingly."
+    },
+    "motion-ease-in-out": {
+      value: "cubic-bezier(0.42, 0, 0.58, 1)",
+      description: "Starts and finishes with equal speed. A good default for transitions triggered by the system."
+    },
+    "motion-linear": {
+      value: "cubic-bezier(0, 0, 1, 1)",
+      description: "Moves with constant speed. Use for continuous and mechanical animations, such as rotating spinners."
+    },
+    "motion-keyframes-bounce": {
+      value: "{ from, 65%, 85% { transform: scale(1) } 75% { transform: scale(0.85) } 82.5% { transform: scale(1.05) } }"
+    },
+    "motion-keyframes-fade-in": {
+      value: "{ to { opacity: 1 } }"
+    },
+    "motion-keyframes-pulse": {
+      value: "{ from, 75% { transform: scale(0.85); opacity: 1; } to { transform: scale(2.5); opacity: 0; } }"
+    },
+    "motion-keyframes-spin": {
+      value: "{ to { transform: rotate(1turn) } }"
+    },
+    "motion-keyframes-appear-above": {
+      value: "{ from { transform: translateY(var(--p-space-100)); opacity: 0; } to { transform: none; opacity: 1; } }"
+    },
+    "motion-keyframes-appear-below": {
+      value: "{ from { transform: translateY(calc(var(--p-space-100) * -1)); opacity: 0; } to { transform: none; opacity: 1; } }"
+    }
+  };
+  var shadow = {
+    "shadow-0": {
+      value: "none"
+    },
+    "shadow-100": {
+      value: "0px 1px 0px 0px rgba(26, 26, 26, 0.07)"
+    },
+    "shadow-200": {
+      value: "0px 3px 1px -1px rgba(26, 26, 26, 0.07)"
+    },
+    "shadow-300": {
+      value: "0px 4px 6px -2px rgba(26, 26, 26, 0.20)"
+    },
+    "shadow-400": {
+      value: "0px 8px 16px -4px rgba(26, 26, 26, 0.22)"
+    },
+    "shadow-500": {
+      value: "0px 12px 20px -8px rgba(26, 26, 26, 0.24)"
+    },
+    "shadow-600": {
+      value: "0px 20px 20px -8px rgba(26, 26, 26, 0.28)"
+    },
+    "shadow-bevel-100": {
+      value: "1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, -1px 0px 0px 0px rgba(0, 0, 0, 0.13) inset, 0px -1px 0px 0px rgba(0, 0, 0, 0.17) inset, 0px 1px 0px 0px rgba(204, 204, 204, 0.5) inset"
+    },
+    "shadow-inset-100": {
+      value: "0px 1px 2px 0px rgba(26, 26, 26, 0.15) inset, 0px 1px 1px 0px rgba(26, 26, 26, 0.15) inset"
+    },
+    "shadow-inset-200": {
+      value: "0px 2px 1px 0px rgba(26, 26, 26, 0.20) inset, 1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset, -1px 0px 1px 0px rgba(26, 26, 26, 0.12) inset"
+    },
+    "shadow-button": {
+      value: "0px -1px 0px 0px #b5b5b5 inset, 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset, 0px 0.5px 0px 1.5px #FFF inset"
+    },
+    "shadow-button-hover": {
+      value: "0px 1px 0px 0px #EBEBEB inset, -1px 0px 0px 0px #EBEBEB inset, 1px 0px 0px 0px #EBEBEB inset, 0px -1px 0px 0px #CCC inset"
+    },
+    "shadow-button-inset": {
+      value: "-1px 0px 1px 0px rgba(26, 26, 26, 0.122) inset, 1px 0px 1px 0px rgba(26, 26, 26, 0.122) inset, 0px 2px 1px 0px rgba(26, 26, 26, 0.2) inset"
+    },
+    "shadow-button-primary": {
+      value: "0px -1px 0px 1px rgba(0, 0, 0, 0.8) inset, 0px 0px 0px 1px rgba(48, 48, 48, 1) inset, 0px 0.5px 0px 1.5px rgba(255, 255, 255, 0.25) inset;"
+    },
+    "shadow-button-primary-hover": {
+      value: "0px 1px 0px 0px rgba(255, 255, 255, 0.24) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, -1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, 0px -1px 0px 0px #000 inset, 0px -1px 0px 1px #1A1A1A"
+    },
+    "shadow-button-primary-inset": {
+      value: "0px 3px 0px 0px rgb(0, 0, 0) inset"
+    },
+    "shadow-button-primary-critical": {
+      value: "0px -1px 0px 1px rgba(142, 31, 11, 0.8) inset, 0px 0px 0px 1px rgba(181, 38, 11, 0.8) inset, 0px 0.5px 0px 1.5px rgba(255, 255, 255, 0.349) inset"
+    },
+    "shadow-button-primary-critical-hover": {
+      value: "0px 1px 0px 0px rgba(255, 255, 255, 0.48) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, -1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, 0px -1.5px 0px 0px rgba(0, 0, 0, 0.25) inset"
+    },
+    "shadow-button-primary-critical-inset": {
+      value: "-1px 0px 1px 0px rgba(0, 0, 0, 0.2) inset, 1px 0px 1px 0px rgba(0, 0, 0, 0.2) inset, 0px 2px 0px 0px rgba(0, 0, 0, 0.6) inset"
+    },
+    "shadow-button-primary-success": {
+      value: "0px -1px 0px 1px rgba(12, 81, 50, 0.8) inset, 0px 0px 0px 1px rgba(19, 111, 69, 0.8) inset, 0px 0.5px 0px 1.5px rgba(255, 255, 255, 0.251) inset"
+    },
+    "shadow-button-primary-success-hover": {
+      value: "0px 1px 0px 0px rgba(255, 255, 255, 0.48) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, -1px 0px 0px 0px rgba(255, 255, 255, 0.20) inset, 0px -1.5px 0px 0px rgba(0, 0, 0, 0.25) inset"
+    },
+    "shadow-button-primary-success-inset": {
+      value: "-1px 0px 1px 0px rgba(0, 0, 0, 0.2) inset, 1px 0px 1px 0px rgba(0, 0, 0, 0.2) inset, 0px 2px 0px 0px rgba(0, 0, 0, 0.6) inset"
+    },
+    "shadow-border-inset": {
+      value: "0px 0px 0px 1px rgba(0, 0, 0, 0.08) inset"
+    }
+  };
+  var space = {
+    "space-0": {
+      value: size[0]
+    },
+    "space-025": {
+      value: size["025"]
+    },
+    "space-050": {
+      value: size["050"]
+    },
+    "space-100": {
+      value: size[100]
+    },
+    "space-150": {
+      value: size[150]
+    },
+    "space-200": {
+      value: size[200]
+    },
+    "space-300": {
+      value: size[300]
+    },
+    "space-400": {
+      value: size[400]
+    },
+    "space-500": {
+      value: size[500]
+    },
+    "space-600": {
+      value: size[600]
+    },
+    "space-800": {
+      value: size[800]
+    },
+    "space-1000": {
+      value: size[1e3]
+    },
+    "space-1200": {
+      value: size[1200]
+    },
+    "space-1600": {
+      value: size[1600]
+    },
+    "space-2000": {
+      value: size[2e3]
+    },
+    "space-2400": {
+      value: size[2400]
+    },
+    "space-2800": {
+      value: size[2800]
+    },
+    "space-3200": {
+      value: size[3200]
+    },
+    "space-button-group-gap": {
+      value: createVar("space-200")
+    },
+    "space-card-gap": {
+      value: createVar("space-400")
+    },
+    "space-card-padding": {
+      value: createVar("space-400")
+    },
+    "space-table-cell-padding": {
+      value: createVar("space-150")
+    }
+  };
+  function createVar(spaceTokenName) {
+    return "var(" + createVarName(spaceTokenName) + ")";
+  }
+  var text = {
+    // heading-3xl
+    "text-heading-3xl-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-3xl-font-size": {
+      value: createVar$1("font-size-900")
+    },
+    "text-heading-3xl-font-weight": {
+      value: createVar$1("font-weight-bold")
+    },
+    "text-heading-3xl-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-densest")
+    },
+    "text-heading-3xl-font-line-height": {
+      value: createVar$1("font-line-height-1200")
+    },
+    // heading-2xl
+    "text-heading-2xl-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-2xl-font-size": {
+      value: createVar$1("font-size-750")
+    },
+    "text-heading-2xl-font-weight": {
+      value: createVar$1("font-weight-bold")
+    },
+    "text-heading-2xl-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-denser")
+    },
+    "text-heading-2xl-font-line-height": {
+      value: createVar$1("font-line-height-1000")
+    },
+    // heading-xl
+    "text-heading-xl-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-xl-font-size": {
+      value: createVar$1("font-size-600")
+    },
+    "text-heading-xl-font-weight": {
+      value: createVar$1("font-weight-bold")
+    },
+    "text-heading-xl-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-dense")
+    },
+    "text-heading-xl-font-line-height": {
+      value: createVar$1("font-line-height-800")
+    },
+    // heading-lg
+    "text-heading-lg-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-lg-font-size": {
+      value: createVar$1("font-size-500")
+    },
+    "text-heading-lg-font-weight": {
+      value: createVar$1("font-weight-semibold")
+    },
+    "text-heading-lg-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-dense")
+    },
+    "text-heading-lg-font-line-height": {
+      value: createVar$1("font-line-height-600")
+    },
+    // heading-md
+    "text-heading-md-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-md-font-size": {
+      value: createVar$1("font-size-350")
+    },
+    "text-heading-md-font-weight": {
+      value: createVar$1("font-weight-semibold")
+    },
+    "text-heading-md-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-heading-md-font-line-height": {
+      value: createVar$1("font-line-height-500")
+    },
+    // heading-sm
+    "text-heading-sm-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-sm-font-size": {
+      value: createVar$1("font-size-325")
+    },
+    "text-heading-sm-font-weight": {
+      value: createVar$1("font-weight-semibold")
+    },
+    "text-heading-sm-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-heading-sm-font-line-height": {
+      value: createVar$1("font-line-height-500")
+    },
+    // heading-xs
+    "text-heading-xs-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-heading-xs-font-size": {
+      value: createVar$1("font-size-300")
+    },
+    "text-heading-xs-font-weight": {
+      value: createVar$1("font-weight-semibold")
+    },
+    "text-heading-xs-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-heading-xs-font-line-height": {
+      value: createVar$1("font-line-height-400")
+    },
+    // body-lg
+    "text-body-lg-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-body-lg-font-size": {
+      value: createVar$1("font-size-350")
+    },
+    "text-body-lg-font-weight": {
+      value: createVar$1("font-weight-regular")
+    },
+    "text-body-lg-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-body-lg-font-line-height": {
+      value: createVar$1("font-line-height-500")
+    },
+    // body-md
+    "text-body-md-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-body-md-font-size": {
+      value: createVar$1("font-size-325")
+    },
+    "text-body-md-font-weight": {
+      value: createVar$1("font-weight-regular")
+    },
+    "text-body-md-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-body-md-font-line-height": {
+      value: createVar$1("font-line-height-500")
+    },
+    // body-sm
+    "text-body-sm-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-body-sm-font-size": {
+      value: createVar$1("font-size-300")
+    },
+    "text-body-sm-font-weight": {
+      value: createVar$1("font-weight-regular")
+    },
+    "text-body-sm-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-body-sm-font-line-height": {
+      value: createVar$1("font-line-height-400")
+    },
+    // body-xs
+    "text-body-xs-font-family": {
+      value: createVar$1("font-family-sans")
+    },
+    "text-body-xs-font-size": {
+      value: createVar$1("font-size-275")
+    },
+    "text-body-xs-font-weight": {
+      value: createVar$1("font-weight-regular")
+    },
+    "text-body-xs-font-letter-spacing": {
+      value: createVar$1("font-letter-spacing-normal")
+    },
+    "text-body-xs-font-line-height": {
+      value: createVar$1("font-line-height-300")
+    }
+  };
+  var width = {
+    "width-0": {
+      value: size[0]
+    },
+    "width-025": {
+      value: size["025"]
+    },
+    "width-050": {
+      value: size["050"]
+    },
+    "width-100": {
+      value: size[100]
+    },
+    "width-150": {
+      value: size[150]
+    },
+    "width-200": {
+      value: size[200]
+    },
+    "width-300": {
+      value: size[300]
+    },
+    "width-400": {
+      value: size[400]
+    },
+    "width-500": {
+      value: size[500]
+    },
+    "width-600": {
+      value: size[600]
+    },
+    "width-700": {
+      value: size[700]
+    },
+    "width-800": {
+      value: size[800]
+    },
+    "width-900": {
+      value: size[900]
+    },
+    "width-1000": {
+      value: size[1e3]
+    },
+    "width-1200": {
+      value: size[1200]
+    },
+    "width-1600": {
+      value: size[1600]
+    },
+    "width-2000": {
+      value: size[2e3]
+    },
+    "width-2400": {
+      value: size[2400]
+    },
+    "width-2800": {
+      value: size[2800]
+    },
+    "width-3200": {
+      value: size[3200]
+    }
+  };
+  var zIndex = {
+    "z-index-0": {
+      value: "auto"
+    },
+    "z-index-1": {
+      value: "100"
+    },
+    "z-index-2": {
+      value: "400"
+    },
+    "z-index-3": {
+      value: "510"
+    },
+    "z-index-4": {
+      value: "512"
+    },
+    "z-index-5": {
+      value: "513"
+    },
+    "z-index-6": {
+      value: "514"
+    },
+    "z-index-7": {
+      value: "515"
+    },
+    "z-index-8": {
+      value: "516"
+    },
+    "z-index-9": {
+      value: "517"
+    },
+    "z-index-10": {
+      value: "518"
+    },
+    "z-index-11": {
+      value: "519"
+    },
+    "z-index-12": {
+      value: "520"
+    }
+  };
+  var metaThemeBase = createMetaThemeBase({
+    border,
+    breakpoints,
+    color,
+    font,
+    height,
+    motion,
+    shadow,
+    space,
+    text,
+    width,
+    zIndex
+  });
+  function createMetaThemePartial(metaThemePartial) {
+    return Object.fromEntries(Object.entries(metaThemePartial).map(function(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2), tokenGroupName = _ref2[0], tokenGroup = _ref2[1];
+      return [tokenGroupName, tokenGroup && tokenGroupNamesToRems.includes(tokenGroupName) ? tokenGroupToRems(tokenGroup) : tokenGroup];
+    }));
+  }
+  function createMetaTheme(metaThemePartial) {
+    return deepmerge(metaThemeBase, metaThemePartial);
+  }
+  function createThemeClassName(themeName) {
+    return "p-theme-" + themeName;
+  }
+  function createIsTokenName(theme) {
+    var tokenNames = new Set(getTokenNames(theme));
+    return function(tokenName) {
+      return tokenNames.has(tokenName);
+    };
+  }
+  createIsTokenName(metaThemeBase);
+  var themeNameLight = "light";
+  var themeNameDefault = themeNameLight;
+  var metaThemeLightPartial = createMetaThemePartial({});
+  createMetaTheme(metaThemeLightPartial);
+  var metaThemeLightHighContrastPartial = createMetaThemePartial({
+    color: {
+      "color-text": {
+        value: gray[16]
+      },
+      "color-text-secondary": {
+        value: gray[16]
+      },
+      "color-text-brand": {
+        value: gray[16]
+      },
+      "color-icon-secondary": {
+        value: gray[14]
+      },
+      "color-border": {
+        value: gray[12]
+      },
+      "color-input-border": {
+        value: gray[14]
+      },
+      "color-border-secondary": {
+        value: gray[12]
+      },
+      "color-bg-surface-secondary": {
+        value: gray[6]
+      }
+    },
+    shadow: {
+      "shadow-bevel-100": {
+        value: "0px 1px 0px 0px rgba(26, 26, 26, 0.07), 0px 1px 0px 0px rgba(208, 208, 208, 0.40) inset, 1px 0px 0px 0px #CCC inset, -1px 0px 0px 0px #CCC inset, 0px -1px 0px 0px #999 inset"
+      }
+    }
+  });
+  createMetaTheme(metaThemeLightHighContrastPartial);
+  var buttonShadow = "0 0 0 " + createVar$1("border-width-025") + " " + createVar$1("color-border") + " inset";
+  var metaThemeLightMobilePartial = createMetaThemePartial({
+    color: {
+      "color-button-gradient-bg-fill": {
+        value: "none"
+      }
+    },
+    shadow: {
+      "shadow-100": {
+        value: "none"
+      },
+      "shadow-bevel-100": {
+        value: "none"
+      },
+      "shadow-button": {
+        value: buttonShadow
+      },
+      "shadow-button-hover": {
+        value: buttonShadow
+      },
+      "shadow-button-inset": {
+        value: buttonShadow
+      },
+      "shadow-button-primary": {
+        value: "none"
+      },
+      "shadow-button-primary-hover": {
+        value: "none"
+      },
+      "shadow-button-primary-inset": {
+        value: "none"
+      },
+      "shadow-button-primary-critical": {
+        value: "none"
+      },
+      "shadow-button-primary-critical-hover": {
+        value: "none"
+      },
+      "shadow-button-primary-critical-inset": {
+        value: "none"
+      },
+      "shadow-button-primary-success": {
+        value: "none"
+      },
+      "shadow-button-primary-success-hover": {
+        value: "none"
+      },
+      "shadow-button-primary-success-inset": {
+        value: "none"
+      }
+    },
+    space: {
+      "space-card-gap": {
+        value: createVar$1("space-200")
+      }
+    },
+    text: {
+      // heading-2xl
+      "text-heading-2xl-font-size": {
+        value: createVar$1("font-size-800")
+      },
+      // heading-xl
+      "text-heading-xl-font-size": {
+        value: createVar$1("font-size-550")
+      },
+      "text-heading-xl-font-line-height": {
+        value: createVar$1("font-line-height-700")
+      },
+      // heading-lg
+      "text-heading-lg-font-size": {
+        value: createVar$1("font-size-450")
+      },
+      // heading-md
+      "text-heading-md-font-size": {
+        value: createVar$1("font-size-400")
+      },
+      // heading-sm
+      "text-heading-sm-font-size": {
+        value: createVar$1("font-size-350")
+      },
+      // body-lg
+      "text-body-lg-font-size": {
+        value: createVar$1("font-size-450")
+      },
+      "text-body-lg-font-line-height": {
+        value: createVar$1("font-line-height-700")
+      },
+      // body-md
+      "text-body-md-font-size": {
+        value: createVar$1("font-size-400")
+      },
+      "text-body-md-font-line-height": {
+        value: createVar$1("font-line-height-600")
+      },
+      // body-sm
+      "text-body-sm-font-size": {
+        value: createVar$1("font-size-350")
+      },
+      "text-body-sm-font-line-height": {
+        value: createVar$1("font-line-height-500")
+      },
+      // body-xs
+      "text-body-xs-font-size": {
+        value: createVar$1("font-size-300")
+      },
+      "text-body-xs-font-line-height": {
+        value: createVar$1("font-line-height-400")
+      }
+    }
+  });
+  createMetaTheme(metaThemeLightMobilePartial);
+  var metaThemeDarkPartial = createMetaThemePartial({
+    color: {
+      "color-scheme": {
+        value: "dark"
+      },
+      "color-bg": {
+        value: gray[16]
+      },
+      "color-bg-surface": {
+        value: gray[15]
+      },
+      "color-bg-fill": {
+        value: gray[15]
+      },
+      "color-icon": {
+        value: gray[8]
+      },
+      "color-icon-secondary": {
+        value: gray[12]
+      },
+      "color-text": {
+        value: gray[8]
+      },
+      "color-text-secondary": {
+        value: gray[11]
+      },
+      "color-bg-surface-secondary-active": {
+        value: gray[13]
+      },
+      "color-bg-surface-secondary-hover": {
+        value: gray[14]
+      },
+      "color-bg-fill-transparent": {
+        value: whiteAlpha[8]
+      },
+      "color-bg-fill-brand": {
+        value: gray[1]
+      },
+      "color-text-brand-on-bg-fill": {
+        value: gray[15]
+      },
+      "color-bg-surface-hover": {
+        value: gray[14]
+      },
+      "color-bg-fill-hover": {
+        value: gray[14]
+      },
+      "color-bg-fill-transparent-hover": {
+        value: whiteAlpha[9]
+      },
+      "color-bg-fill-brand-hover": {
+        value: gray[5]
+      },
+      "color-bg-surface-selected": {
+        value: gray[13]
+      },
+      "color-bg-fill-selected": {
+        value: gray[13]
+      },
+      "color-bg-fill-transparent-selected": {
+        value: whiteAlpha[11]
+      },
+      "color-bg-fill-brand-selected": {
+        value: gray[9]
+      },
+      "color-bg-surface-active": {
+        value: gray[13]
+      },
+      "color-bg-fill-active": {
+        value: gray[13]
+      },
+      "color-bg-fill-transparent-active": {
+        value: whiteAlpha[10]
+      },
+      "color-bg-fill-brand-active": {
+        value: gray[4]
+      },
+      "color-bg-surface-brand-selected": {
+        value: gray[14]
+      },
+      "color-border-secondary": {
+        value: gray[13]
+      },
+      "color-tooltip-tail-down-border-experimental": {
+        value: "rgba(60, 60, 60, 1)"
+      },
+      "color-tooltip-tail-up-border-experimental": {
+        value: "rgba(71, 71, 71, 1)"
+      },
+      "color-border-gradient-experimental": {
+        value: "linear-gradient(to bottom, " + whiteAlpha[9] + ", " + whiteAlpha[4] + ")"
+      },
+      "color-border-gradient-hover-experimental": {
+        value: "linear-gradient(to bottom, " + whiteAlpha[9] + ", " + whiteAlpha[4] + ")"
+      },
+      "color-border-gradient-selected-experimental": {
+        value: "linear-gradient(to bottom, " + blackAlpha[10] + ", " + whiteAlpha[10] + ")"
+      },
+      "color-border-gradient-active-experimental": {
+        value: "linear-gradient(to bottom, " + whiteAlpha[10] + ", " + whiteAlpha[4] + ")"
+      }
+    },
+    shadow: {
+      "shadow-bevel-100": {
+        value: "1px 0px 0px 0px rgba(204, 204, 204, 0.08) inset, -1px 0px 0px 0px rgba(204, 204, 204, 0.08) inset, 0px -1px 0px 0px rgba(204, 204, 204, 0.08) inset, 0px 1px 0px 0px rgba(204, 204, 204, 0.16) inset"
+      }
+    }
+  });
+  createMetaTheme(metaThemeDarkPartial);
+  var metaThemePartials = {
+    light: metaThemeLightPartial,
+    "light-mobile": metaThemeLightMobilePartial,
+    "light-high-contrast-experimental": metaThemeLightHighContrastPartial,
+    "dark-experimental": metaThemeDarkPartial
+  };
+  var metaThemeDefaultPartial = metaThemePartials[themeNameDefault];
+  createMetaTheme(metaThemeDefaultPartial);
+  var themes = {
+    "light": {
+      "border": {
+        "border-radius-0": "0rem",
+        "border-radius-050": "0.125rem",
+        "border-radius-100": "0.25rem",
+        "border-radius-150": "0.375rem",
+        "border-radius-200": "0.5rem",
+        "border-radius-300": "0.75rem",
+        "border-radius-400": "1rem",
+        "border-radius-500": "1.25rem",
+        "border-radius-750": "1.875rem",
+        "border-radius-full": "624.9375rem",
+        "border-width-0": "0rem",
+        "border-width-0165": "0.04125rem",
+        "border-width-025": "0.0625rem",
+        "border-width-050": "0.125rem",
+        "border-width-100": "0.25rem"
+      },
+      "breakpoints": {
+        "breakpoints-xs": "0rem",
+        "breakpoints-sm": "30.625rem",
+        "breakpoints-md": "48rem",
+        "breakpoints-lg": "65rem",
+        "breakpoints-xl": "90rem"
+      },
+      "color": {
+        "color-scheme": "light",
+        "color-bg": "rgba(241, 241, 241, 1)",
+        "color-bg-inverse": "rgba(26, 26, 26, 1)",
+        "color-bg-surface": "rgba(255, 255, 255, 1)",
+        "color-bg-surface-hover": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-active": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-surface-secondary": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-secondary-hover": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-secondary-active": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-secondary-selected": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-tertiary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-brand-active": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-brand-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-info": "rgba(234, 244, 255, 1)",
+        "color-bg-surface-info-hover": "rgba(224, 240, 255, 1)",
+        "color-bg-surface-info-active": "rgba(202, 230, 255, 1)",
+        "color-bg-surface-success": "rgba(205, 254, 225, 1)",
+        "color-bg-surface-success-hover": "rgba(180, 254, 210, 1)",
+        "color-bg-surface-success-active": "rgba(146, 254, 194, 1)",
+        "color-bg-surface-caution": "rgba(255, 248, 219, 1)",
+        "color-bg-surface-caution-hover": "rgba(255, 244, 191, 1)",
+        "color-bg-surface-caution-active": "rgba(255, 239, 157, 1)",
+        "color-bg-surface-warning": "rgba(255, 241, 227, 1)",
+        "color-bg-surface-warning-hover": "rgba(255, 235, 213, 1)",
+        "color-bg-surface-warning-active": "rgba(255, 228, 198, 1)",
+        "color-bg-surface-critical": "rgba(254, 233, 232, 1)",
+        "color-bg-surface-critical-hover": "rgba(254, 226, 225, 1)",
+        "color-bg-surface-critical-active": "rgba(254, 218, 217, 1)",
+        "color-bg-surface-emphasis": "rgba(240, 242, 255, 1)",
+        "color-bg-surface-emphasis-hover": "rgba(234, 237, 255, 1)",
+        "color-bg-surface-emphasis-active": "rgba(226, 231, 255, 1)",
+        "color-bg-surface-magic": "rgba(248, 247, 255, 1)",
+        "color-bg-surface-magic-hover": "rgba(243, 241, 255, 1)",
+        "color-bg-surface-magic-active": "rgba(233, 229, 255, 1)",
+        "color-bg-surface-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-surface-transparent": "rgba(0, 0, 0, 0)",
+        "color-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-bg-fill-hover": "rgba(250, 250, 250, 1)",
+        "color-bg-fill-active": "rgba(247, 247, 247, 1)",
+        "color-bg-fill-selected": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-secondary": "rgba(241, 241, 241, 1)",
+        "color-bg-fill-secondary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-fill-secondary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary-hover": "rgba(212, 212, 212, 1)",
+        "color-bg-fill-tertiary-active": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-brand": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-hover": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-active": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-selected": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-disabled": "rgba(0, 0, 0, 0.17)",
+        "color-bg-fill-info": "rgba(145, 208, 255, 1)",
+        "color-bg-fill-info-hover": "rgba(81, 192, 255, 1)",
+        "color-bg-fill-info-active": "rgba(0, 148, 213, 1)",
+        "color-bg-fill-info-secondary": "rgba(213, 235, 255, 1)",
+        "color-bg-fill-success": "rgba(41, 132, 90, 1)",
+        "color-bg-fill-success-hover": "rgba(19, 111, 69, 1)",
+        "color-bg-fill-success-active": "rgba(12, 81, 50, 1)",
+        "color-bg-fill-success-secondary": "rgba(180, 254, 210, 1)",
+        "color-bg-fill-warning": "rgba(255, 184, 0, 1)",
+        "color-bg-fill-warning-hover": "rgba(229, 165, 0, 1)",
+        "color-bg-fill-warning-active": "rgba(178, 132, 0, 1)",
+        "color-bg-fill-warning-secondary": "rgba(255, 214, 164, 1)",
+        "color-bg-fill-caution": "rgba(255, 230, 0, 1)",
+        "color-bg-fill-caution-hover": "rgba(234, 211, 0, 1)",
+        "color-bg-fill-caution-active": "rgba(225, 203, 0, 1)",
+        "color-bg-fill-caution-secondary": "rgba(255, 235, 120, 1)",
+        "color-bg-fill-critical": "rgba(229, 28, 0, 1)",
+        "color-bg-fill-critical-hover": "rgba(181, 38, 11, 1)",
+        "color-bg-fill-critical-active": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-selected": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-secondary": "rgba(254, 211, 209, 1)",
+        "color-bg-fill-emphasis": "rgba(0, 91, 211, 1)",
+        "color-bg-fill-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-bg-fill-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-bg-fill-magic": "rgba(128, 81, 255, 1)",
+        "color-bg-fill-magic-secondary": "rgba(233, 229, 255, 1)",
+        "color-bg-fill-magic-secondary-hover": "rgba(228, 222, 255, 1)",
+        "color-bg-fill-magic-secondary-active": "rgba(223, 217, 255, 1)",
+        "color-bg-fill-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-inverse-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-fill-inverse-active": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-transparent": "rgba(0, 0, 0, 0.02)",
+        "color-bg-fill-transparent-hover": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-transparent-active": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-selected": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary": "rgba(0, 0, 0, 0.06)",
+        "color-bg-fill-transparent-secondary-hover": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary-active": "rgba(0, 0, 0, 0.11)",
+        "color-text": "rgba(48, 48, 48, 1)",
+        "color-text-secondary": "rgba(97, 97, 97, 1)",
+        "color-text-disabled": "rgba(181, 181, 181, 1)",
+        "color-text-link": "rgba(0, 91, 211, 1)",
+        "color-text-link-hover": "rgba(0, 66, 153, 1)",
+        "color-text-link-active": "rgba(0, 46, 106, 1)",
+        "color-text-brand": "rgba(74, 74, 74, 1)",
+        "color-text-brand-hover": "rgba(48, 48, 48, 1)",
+        "color-text-brand-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-text-brand-on-bg-fill-hover": "rgba(227, 227, 227, 1)",
+        "color-text-brand-on-bg-fill-active": "rgba(204, 204, 204, 1)",
+        "color-text-brand-on-bg-fill-disabled": "rgba(255, 255, 255, 1)",
+        "color-text-info": "rgba(0, 58, 90, 1)",
+        "color-text-info-hover": "rgba(0, 58, 90, 1)",
+        "color-text-info-active": "rgba(0, 33, 51, 1)",
+        "color-text-info-secondary": "rgba(0, 124, 180, 1)",
+        "color-text-info-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-text-success": "rgba(12, 81, 50, 1)",
+        "color-text-success-hover": "rgba(8, 61, 37, 1)",
+        "color-text-success-active": "rgba(9, 42, 27, 1)",
+        "color-text-success-secondary": "rgba(41, 132, 90, 1)",
+        "color-text-success-on-bg-fill": "rgba(248, 255, 251, 1)",
+        "color-text-caution": "rgba(79, 71, 0, 1)",
+        "color-text-caution-hover": "rgba(51, 46, 0, 1)",
+        "color-text-caution-active": "rgba(31, 28, 0, 1)",
+        "color-text-caution-secondary": "rgba(130, 117, 0, 1)",
+        "color-text-caution-on-bg-fill": "rgba(51, 46, 0, 1)",
+        "color-text-warning": "rgba(94, 66, 0, 1)",
+        "color-text-warning-hover": "rgba(65, 45, 0, 1)",
+        "color-text-warning-active": "rgba(37, 26, 0, 1)",
+        "color-text-warning-secondary": "rgba(149, 111, 0, 1)",
+        "color-text-warning-on-bg-fill": "rgba(37, 26, 0, 1)",
+        "color-text-critical": "rgba(142, 31, 11, 1)",
+        "color-text-critical-hover": "rgba(95, 21, 7, 1)",
+        "color-text-critical-active": "rgba(47, 10, 4, 1)",
+        "color-text-critical-secondary": "rgba(229, 28, 0, 1)",
+        "color-text-critical-on-bg-fill": "rgba(255, 251, 251, 1)",
+        "color-text-emphasis": "rgba(0, 91, 211, 1)",
+        "color-text-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-text-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-text-emphasis-on-bg-fill": "rgba(252, 253, 255, 1)",
+        "color-text-emphasis-on-bg-fill-hover": "rgba(226, 231, 255, 1)",
+        "color-text-emphasis-on-bg-fill-active": "rgba(213, 220, 255, 1)",
+        "color-text-magic": "rgba(87, 0, 209, 1)",
+        "color-text-magic-secondary": "rgba(113, 38, 255, 1)",
+        "color-text-magic-on-bg-fill": "rgba(253, 253, 255, 1)",
+        "color-text-inverse": "rgba(227, 227, 227, 1)",
+        "color-text-inverse-secondary": "rgba(181, 181, 181, 1)",
+        "color-text-link-inverse": "rgba(197, 208, 255, 1)",
+        "color-border": "rgba(227, 227, 227, 1)",
+        "color-border-hover": "rgba(204, 204, 204, 1)",
+        "color-border-disabled": "rgba(235, 235, 235, 1)",
+        "color-border-secondary": "rgba(235, 235, 235, 1)",
+        "color-border-tertiary": "rgba(204, 204, 204, 1)",
+        "color-border-focus": "rgba(0, 91, 211, 1)",
+        "color-border-brand": "rgba(227, 227, 227, 1)",
+        "color-border-info": "rgba(168, 216, 255, 1)",
+        "color-border-success": "rgba(146, 254, 194, 1)",
+        "color-border-caution": "rgba(255, 235, 120, 1)",
+        "color-border-warning": "rgba(255, 200, 121, 1)",
+        "color-border-critical": "rgba(254, 195, 193, 1)",
+        "color-border-critical-secondary": "rgba(142, 31, 11, 1)",
+        "color-border-emphasis": "rgba(0, 91, 211, 1)",
+        "color-border-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-border-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-border-magic": "rgba(228, 222, 255, 1)",
+        "color-border-magic-secondary": "rgba(148, 116, 255, 1)",
+        "color-border-magic-secondary-hover": "rgba(128, 81, 255, 1)",
+        "color-border-inverse": "rgba(97, 97, 97, 1)",
+        "color-border-inverse-hover": "rgba(204, 204, 204, 1)",
+        "color-border-inverse-active": "rgba(227, 227, 227, 1)",
+        "color-tooltip-tail-down-border-experimental": "rgba(212, 212, 212, 1)",
+        "color-tooltip-tail-up-border-experimental": "rgba(227, 227, 227, 1)",
+        "color-border-gradient-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-hover-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-selected-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-active-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-icon": "rgba(74, 74, 74, 1)",
+        "color-icon-hover": "rgba(48, 48, 48, 1)",
+        "color-icon-active": "rgba(26, 26, 26, 1)",
+        "color-icon-disabled": "rgba(204, 204, 204, 1)",
+        "color-icon-secondary": "rgba(138, 138, 138, 1)",
+        "color-icon-secondary-hover": "rgba(97, 97, 97, 1)",
+        "color-icon-secondary-active": "rgba(74, 74, 74, 1)",
+        "color-icon-brand": "rgba(26, 26, 26, 1)",
+        "color-icon-info": "rgba(0, 148, 213, 1)",
+        "color-icon-success": "rgba(41, 132, 90, 1)",
+        "color-icon-caution": "rgba(153, 138, 0, 1)",
+        "color-icon-warning": "rgba(178, 132, 0, 1)",
+        "color-icon-critical": "rgba(239, 77, 47, 1)",
+        "color-icon-emphasis": "rgba(0, 91, 211, 1)",
+        "color-icon-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-icon-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-icon-magic": "rgba(128, 81, 255, 1)",
+        "color-icon-inverse": "rgba(227, 227, 227, 1)",
+        "color-avatar-bg-fill": "rgba(181, 181, 181, 1)",
+        "color-avatar-five-bg-fill": "rgba(253, 75, 146, 1)",
+        "color-avatar-five-text-on-bg-fill": "rgba(255, 246, 248, 1)",
+        "color-avatar-four-bg-fill": "rgba(81, 192, 255, 1)",
+        "color-avatar-four-text-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-avatar-one-bg-fill": "rgba(197, 48, 197, 1)",
+        "color-avatar-one-text-on-bg-fill": "rgba(253, 239, 253, 1)",
+        "color-avatar-seven-bg-fill": "rgba(148, 116, 255, 1)",
+        "color-avatar-seven-text-on-bg-fill": "rgba(248, 247, 255, 1)",
+        "color-avatar-six-bg-fill": "rgba(37, 232, 43, 1)",
+        "color-avatar-six-text-on-bg-fill": "rgba(3, 61, 5, 1)",
+        "color-avatar-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-avatar-three-bg-fill": "rgba(44, 224, 212, 1)",
+        "color-avatar-three-text-on-bg-fill": "rgba(3, 60, 57, 1)",
+        "color-avatar-two-bg-fill": "rgba(56, 250, 163, 1)",
+        "color-avatar-two-text-on-bg-fill": "rgba(12, 81, 50, 1)",
+        "color-backdrop-bg": "rgba(0, 0, 0, 0.71)",
+        "color-button-gradient-bg-fill": "linear-gradient(180deg, rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%)",
+        "color-checkbox-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-checkbox-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-input-bg-surface": "rgba(253, 253, 253, 1)",
+        "color-input-bg-surface-hover": "rgba(250, 250, 250, 1)",
+        "color-input-bg-surface-active": "rgba(247, 247, 247, 1)",
+        "color-input-border": "rgba(138, 138, 138, 1)",
+        "color-input-border-hover": "rgba(97, 97, 97, 1)",
+        "color-input-border-active": "rgba(26, 26, 26, 1)",
+        "color-nav-bg": "rgba(235, 235, 235, 1)",
+        "color-nav-bg-surface": "rgba(0, 0, 0, 0.02)",
+        "color-nav-bg-surface-hover": "rgba(241, 241, 241, 1)",
+        "color-nav-bg-surface-active": "rgba(250, 250, 250, 1)",
+        "color-nav-bg-surface-selected": "rgba(250, 250, 250, 1)",
+        "color-radio-button-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-radio-button-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-video-thumbnail-play-button-bg-fill-hover": "rgba(0, 0, 0, 0.81)",
+        "color-video-thumbnail-play-button-bg-fill": "rgba(0, 0, 0, 0.71)",
+        "color-video-thumbnail-play-button-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-scrollbar-thumb-bg-hover": "rgba(138, 138, 138, 1)"
+      },
+      "font": {
+        "font-family-sans": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "font-family-mono": "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace",
+        "font-size-275": "0.6875rem",
+        "font-size-300": "0.75rem",
+        "font-size-325": "0.8125rem",
+        "font-size-350": "0.875rem",
+        "font-size-400": "1rem",
+        "font-size-450": "1.125rem",
+        "font-size-500": "1.25rem",
+        "font-size-550": "1.375rem",
+        "font-size-600": "1.5rem",
+        "font-size-750": "1.875rem",
+        "font-size-800": "2rem",
+        "font-size-900": "2.25rem",
+        "font-size-1000": "2.5rem",
+        "font-weight-regular": "450",
+        "font-weight-medium": "550",
+        "font-weight-semibold": "650",
+        "font-weight-bold": "700",
+        "font-letter-spacing-densest": "-0.03375rem",
+        "font-letter-spacing-denser": "-0.01875rem",
+        "font-letter-spacing-dense": "-0.0125rem",
+        "font-letter-spacing-normal": "0rem",
+        "font-line-height-300": "0.75rem",
+        "font-line-height-400": "1rem",
+        "font-line-height-500": "1.25rem",
+        "font-line-height-600": "1.5rem",
+        "font-line-height-700": "1.75rem",
+        "font-line-height-800": "2rem",
+        "font-line-height-1000": "2.5rem",
+        "font-line-height-1200": "3rem"
+      },
+      "height": {
+        "height-0": "0rem",
+        "height-025": "0.0625rem",
+        "height-050": "0.125rem",
+        "height-100": "0.25rem",
+        "height-150": "0.375rem",
+        "height-200": "0.5rem",
+        "height-300": "0.75rem",
+        "height-400": "1rem",
+        "height-500": "1.25rem",
+        "height-600": "1.5rem",
+        "height-700": "1.75rem",
+        "height-800": "2rem",
+        "height-900": "2.25rem",
+        "height-1000": "2.5rem",
+        "height-1200": "3rem",
+        "height-1600": "4rem",
+        "height-2000": "5rem",
+        "height-2400": "6rem",
+        "height-2800": "7rem",
+        "height-3200": "8rem"
+      },
+      "motion": {
+        "motion-duration-0": "0ms",
+        "motion-duration-50": "50ms",
+        "motion-duration-100": "100ms",
+        "motion-duration-150": "150ms",
+        "motion-duration-200": "200ms",
+        "motion-duration-250": "250ms",
+        "motion-duration-300": "300ms",
+        "motion-duration-350": "350ms",
+        "motion-duration-400": "400ms",
+        "motion-duration-450": "450ms",
+        "motion-duration-500": "500ms",
+        "motion-duration-5000": "5000ms",
+        "motion-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "motion-ease-in": "cubic-bezier(0.42, 0, 1, 1)",
+        "motion-ease-out": "cubic-bezier(0.19, 0.91, 0.38, 1)",
+        "motion-ease-in-out": "cubic-bezier(0.42, 0, 0.58, 1)",
+        "motion-linear": "cubic-bezier(0, 0, 1, 1)",
+        "motion-keyframes-bounce": "{ from, 65%, 85% { transform: scale(1) } 75% { transform: scale(0.85) } 82.5% { transform: scale(1.05) } }",
+        "motion-keyframes-fade-in": "{ to { opacity: 1 } }",
+        "motion-keyframes-pulse": "{ from, 75% { transform: scale(0.85); opacity: 1; } to { transform: scale(2.5); opacity: 0; } }",
+        "motion-keyframes-spin": "{ to { transform: rotate(1turn) } }",
+        "motion-keyframes-appear-above": "{ from { transform: translateY(var(--p-space-100)); opacity: 0; } to { transform: none; opacity: 1; } }",
+        "motion-keyframes-appear-below": "{ from { transform: translateY(calc(var(--p-space-100) * -1)); opacity: 0; } to { transform: none; opacity: 1; } }"
+      },
+      "shadow": {
+        "shadow-0": "none",
+        "shadow-100": "0rem 0.0625rem 0rem 0rem rgba(26, 26, 26, 0.07)",
+        "shadow-200": "0rem 0.1875rem 0.0625rem -0.0625rem rgba(26, 26, 26, 0.07)",
+        "shadow-300": "0rem 0.25rem 0.375rem -0.125rem rgba(26, 26, 26, 0.20)",
+        "shadow-400": "0rem 0.5rem 1rem -0.25rem rgba(26, 26, 26, 0.22)",
+        "shadow-500": "0rem 0.75rem 1.25rem -0.5rem rgba(26, 26, 26, 0.24)",
+        "shadow-600": "0rem 1.25rem 1.25rem -0.5rem rgba(26, 26, 26, 0.28)",
+        "shadow-bevel-100": "0.0625rem 0rem 0rem 0rem rgba(0, 0, 0, 0.13) inset, -0.0625rem 0rem 0rem 0rem rgba(0, 0, 0, 0.13) inset, 0rem -0.0625rem 0rem 0rem rgba(0, 0, 0, 0.17) inset, 0rem 0.0625rem 0rem 0rem rgba(204, 204, 204, 0.5) inset",
+        "shadow-inset-100": "0rem 0.0625rem 0.125rem 0rem rgba(26, 26, 26, 0.15) inset, 0rem 0.0625rem 0.0625rem 0rem rgba(26, 26, 26, 0.15) inset",
+        "shadow-inset-200": "0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.20) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset, -0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset",
+        "shadow-button": "0rem -0.0625rem 0rem 0rem #b5b5b5 inset, 0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.1) inset, 0rem 0.03125rem 0rem 0.09375rem #FFF inset",
+        "shadow-button-hover": "0rem 0.0625rem 0rem 0rem #EBEBEB inset, -0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0rem -0.0625rem 0rem 0rem #CCC inset",
+        "shadow-button-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.2) inset",
+        "shadow-button-primary": "0rem -0.0625rem 0rem 0.0625rem rgba(0, 0, 0, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(48, 48, 48, 1) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.25) inset;",
+        "shadow-button-primary-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.24) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.0625rem 0rem 0rem #000 inset, 0rem -0.0625rem 0rem 0.0625rem #1A1A1A",
+        "shadow-button-primary-inset": "0rem 0.1875rem 0rem 0rem rgb(0, 0, 0) inset",
+        "shadow-button-primary-critical": "0rem -0.0625rem 0rem 0.0625rem rgba(142, 31, 11, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(181, 38, 11, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.349) inset",
+        "shadow-button-primary-critical-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-critical-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-button-primary-success": "0rem -0.0625rem 0rem 0.0625rem rgba(12, 81, 50, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(19, 111, 69, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.251) inset",
+        "shadow-button-primary-success-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-success-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-border-inset": "0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.08) inset"
+      },
+      "space": {
+        "space-0": "0rem",
+        "space-025": "0.0625rem",
+        "space-050": "0.125rem",
+        "space-100": "0.25rem",
+        "space-150": "0.375rem",
+        "space-200": "0.5rem",
+        "space-300": "0.75rem",
+        "space-400": "1rem",
+        "space-500": "1.25rem",
+        "space-600": "1.5rem",
+        "space-800": "2rem",
+        "space-1000": "2.5rem",
+        "space-1200": "3rem",
+        "space-1600": "4rem",
+        "space-2000": "5rem",
+        "space-2400": "6rem",
+        "space-2800": "7rem",
+        "space-3200": "8rem",
+        "space-button-group-gap": "0.5rem",
+        "space-card-gap": "1rem",
+        "space-card-padding": "1rem",
+        "space-table-cell-padding": "0.375rem"
+      },
+      "text": {
+        "text-heading-3xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-3xl-font-size": "2.25rem",
+        "text-heading-3xl-font-weight": "700",
+        "text-heading-3xl-font-letter-spacing": "-0.03375rem",
+        "text-heading-3xl-font-line-height": "3rem",
+        "text-heading-2xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-2xl-font-size": "1.875rem",
+        "text-heading-2xl-font-weight": "700",
+        "text-heading-2xl-font-letter-spacing": "-0.01875rem",
+        "text-heading-2xl-font-line-height": "2.5rem",
+        "text-heading-xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xl-font-size": "1.5rem",
+        "text-heading-xl-font-weight": "700",
+        "text-heading-xl-font-letter-spacing": "-0.0125rem",
+        "text-heading-xl-font-line-height": "2rem",
+        "text-heading-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-lg-font-size": "1.25rem",
+        "text-heading-lg-font-weight": "650",
+        "text-heading-lg-font-letter-spacing": "-0.0125rem",
+        "text-heading-lg-font-line-height": "1.5rem",
+        "text-heading-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-md-font-size": "0.875rem",
+        "text-heading-md-font-weight": "650",
+        "text-heading-md-font-letter-spacing": "0rem",
+        "text-heading-md-font-line-height": "1.25rem",
+        "text-heading-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-sm-font-size": "0.8125rem",
+        "text-heading-sm-font-weight": "650",
+        "text-heading-sm-font-letter-spacing": "0rem",
+        "text-heading-sm-font-line-height": "1.25rem",
+        "text-heading-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xs-font-size": "0.75rem",
+        "text-heading-xs-font-weight": "650",
+        "text-heading-xs-font-letter-spacing": "0rem",
+        "text-heading-xs-font-line-height": "1rem",
+        "text-body-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-lg-font-size": "0.875rem",
+        "text-body-lg-font-weight": "450",
+        "text-body-lg-font-letter-spacing": "0rem",
+        "text-body-lg-font-line-height": "1.25rem",
+        "text-body-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-md-font-size": "0.8125rem",
+        "text-body-md-font-weight": "450",
+        "text-body-md-font-letter-spacing": "0rem",
+        "text-body-md-font-line-height": "1.25rem",
+        "text-body-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-sm-font-size": "0.75rem",
+        "text-body-sm-font-weight": "450",
+        "text-body-sm-font-letter-spacing": "0rem",
+        "text-body-sm-font-line-height": "1rem",
+        "text-body-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-xs-font-size": "0.6875rem",
+        "text-body-xs-font-weight": "450",
+        "text-body-xs-font-letter-spacing": "0rem",
+        "text-body-xs-font-line-height": "0.75rem"
+      },
+      "width": {
+        "width-0": "0rem",
+        "width-025": "0.0625rem",
+        "width-050": "0.125rem",
+        "width-100": "0.25rem",
+        "width-150": "0.375rem",
+        "width-200": "0.5rem",
+        "width-300": "0.75rem",
+        "width-400": "1rem",
+        "width-500": "1.25rem",
+        "width-600": "1.5rem",
+        "width-700": "1.75rem",
+        "width-800": "2rem",
+        "width-900": "2.25rem",
+        "width-1000": "2.5rem",
+        "width-1200": "3rem",
+        "width-1600": "4rem",
+        "width-2000": "5rem",
+        "width-2400": "6rem",
+        "width-2800": "7rem",
+        "width-3200": "8rem"
+      },
+      "zIndex": {
+        "z-index-0": "auto",
+        "z-index-1": "100",
+        "z-index-2": "400",
+        "z-index-3": "510",
+        "z-index-4": "512",
+        "z-index-5": "513",
+        "z-index-6": "514",
+        "z-index-7": "515",
+        "z-index-8": "516",
+        "z-index-9": "517",
+        "z-index-10": "518",
+        "z-index-11": "519",
+        "z-index-12": "520"
+      }
+    },
+    "light-mobile": {
+      "border": {
+        "border-radius-0": "0rem",
+        "border-radius-050": "0.125rem",
+        "border-radius-100": "0.25rem",
+        "border-radius-150": "0.375rem",
+        "border-radius-200": "0.5rem",
+        "border-radius-300": "0.75rem",
+        "border-radius-400": "1rem",
+        "border-radius-500": "1.25rem",
+        "border-radius-750": "1.875rem",
+        "border-radius-full": "624.9375rem",
+        "border-width-0": "0rem",
+        "border-width-0165": "0.04125rem",
+        "border-width-025": "0.0625rem",
+        "border-width-050": "0.125rem",
+        "border-width-100": "0.25rem"
+      },
+      "breakpoints": {
+        "breakpoints-xs": "0rem",
+        "breakpoints-sm": "30.625rem",
+        "breakpoints-md": "48rem",
+        "breakpoints-lg": "65rem",
+        "breakpoints-xl": "90rem"
+      },
+      "color": {
+        "color-scheme": "light",
+        "color-bg": "rgba(241, 241, 241, 1)",
+        "color-bg-inverse": "rgba(26, 26, 26, 1)",
+        "color-bg-surface": "rgba(255, 255, 255, 1)",
+        "color-bg-surface-hover": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-active": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-surface-secondary": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-secondary-hover": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-secondary-active": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-secondary-selected": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-tertiary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-brand-active": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-brand-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-info": "rgba(234, 244, 255, 1)",
+        "color-bg-surface-info-hover": "rgba(224, 240, 255, 1)",
+        "color-bg-surface-info-active": "rgba(202, 230, 255, 1)",
+        "color-bg-surface-success": "rgba(205, 254, 225, 1)",
+        "color-bg-surface-success-hover": "rgba(180, 254, 210, 1)",
+        "color-bg-surface-success-active": "rgba(146, 254, 194, 1)",
+        "color-bg-surface-caution": "rgba(255, 248, 219, 1)",
+        "color-bg-surface-caution-hover": "rgba(255, 244, 191, 1)",
+        "color-bg-surface-caution-active": "rgba(255, 239, 157, 1)",
+        "color-bg-surface-warning": "rgba(255, 241, 227, 1)",
+        "color-bg-surface-warning-hover": "rgba(255, 235, 213, 1)",
+        "color-bg-surface-warning-active": "rgba(255, 228, 198, 1)",
+        "color-bg-surface-critical": "rgba(254, 233, 232, 1)",
+        "color-bg-surface-critical-hover": "rgba(254, 226, 225, 1)",
+        "color-bg-surface-critical-active": "rgba(254, 218, 217, 1)",
+        "color-bg-surface-emphasis": "rgba(240, 242, 255, 1)",
+        "color-bg-surface-emphasis-hover": "rgba(234, 237, 255, 1)",
+        "color-bg-surface-emphasis-active": "rgba(226, 231, 255, 1)",
+        "color-bg-surface-magic": "rgba(248, 247, 255, 1)",
+        "color-bg-surface-magic-hover": "rgba(243, 241, 255, 1)",
+        "color-bg-surface-magic-active": "rgba(233, 229, 255, 1)",
+        "color-bg-surface-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-surface-transparent": "rgba(0, 0, 0, 0)",
+        "color-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-bg-fill-hover": "rgba(250, 250, 250, 1)",
+        "color-bg-fill-active": "rgba(247, 247, 247, 1)",
+        "color-bg-fill-selected": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-secondary": "rgba(241, 241, 241, 1)",
+        "color-bg-fill-secondary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-fill-secondary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary-hover": "rgba(212, 212, 212, 1)",
+        "color-bg-fill-tertiary-active": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-brand": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-hover": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-active": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-selected": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-disabled": "rgba(0, 0, 0, 0.17)",
+        "color-bg-fill-info": "rgba(145, 208, 255, 1)",
+        "color-bg-fill-info-hover": "rgba(81, 192, 255, 1)",
+        "color-bg-fill-info-active": "rgba(0, 148, 213, 1)",
+        "color-bg-fill-info-secondary": "rgba(213, 235, 255, 1)",
+        "color-bg-fill-success": "rgba(41, 132, 90, 1)",
+        "color-bg-fill-success-hover": "rgba(19, 111, 69, 1)",
+        "color-bg-fill-success-active": "rgba(12, 81, 50, 1)",
+        "color-bg-fill-success-secondary": "rgba(180, 254, 210, 1)",
+        "color-bg-fill-warning": "rgba(255, 184, 0, 1)",
+        "color-bg-fill-warning-hover": "rgba(229, 165, 0, 1)",
+        "color-bg-fill-warning-active": "rgba(178, 132, 0, 1)",
+        "color-bg-fill-warning-secondary": "rgba(255, 214, 164, 1)",
+        "color-bg-fill-caution": "rgba(255, 230, 0, 1)",
+        "color-bg-fill-caution-hover": "rgba(234, 211, 0, 1)",
+        "color-bg-fill-caution-active": "rgba(225, 203, 0, 1)",
+        "color-bg-fill-caution-secondary": "rgba(255, 235, 120, 1)",
+        "color-bg-fill-critical": "rgba(229, 28, 0, 1)",
+        "color-bg-fill-critical-hover": "rgba(181, 38, 11, 1)",
+        "color-bg-fill-critical-active": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-selected": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-secondary": "rgba(254, 211, 209, 1)",
+        "color-bg-fill-emphasis": "rgba(0, 91, 211, 1)",
+        "color-bg-fill-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-bg-fill-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-bg-fill-magic": "rgba(128, 81, 255, 1)",
+        "color-bg-fill-magic-secondary": "rgba(233, 229, 255, 1)",
+        "color-bg-fill-magic-secondary-hover": "rgba(228, 222, 255, 1)",
+        "color-bg-fill-magic-secondary-active": "rgba(223, 217, 255, 1)",
+        "color-bg-fill-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-inverse-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-fill-inverse-active": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-transparent": "rgba(0, 0, 0, 0.02)",
+        "color-bg-fill-transparent-hover": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-transparent-active": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-selected": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary": "rgba(0, 0, 0, 0.06)",
+        "color-bg-fill-transparent-secondary-hover": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary-active": "rgba(0, 0, 0, 0.11)",
+        "color-text": "rgba(48, 48, 48, 1)",
+        "color-text-secondary": "rgba(97, 97, 97, 1)",
+        "color-text-disabled": "rgba(181, 181, 181, 1)",
+        "color-text-link": "rgba(0, 91, 211, 1)",
+        "color-text-link-hover": "rgba(0, 66, 153, 1)",
+        "color-text-link-active": "rgba(0, 46, 106, 1)",
+        "color-text-brand": "rgba(74, 74, 74, 1)",
+        "color-text-brand-hover": "rgba(48, 48, 48, 1)",
+        "color-text-brand-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-text-brand-on-bg-fill-hover": "rgba(227, 227, 227, 1)",
+        "color-text-brand-on-bg-fill-active": "rgba(204, 204, 204, 1)",
+        "color-text-brand-on-bg-fill-disabled": "rgba(255, 255, 255, 1)",
+        "color-text-info": "rgba(0, 58, 90, 1)",
+        "color-text-info-hover": "rgba(0, 58, 90, 1)",
+        "color-text-info-active": "rgba(0, 33, 51, 1)",
+        "color-text-info-secondary": "rgba(0, 124, 180, 1)",
+        "color-text-info-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-text-success": "rgba(12, 81, 50, 1)",
+        "color-text-success-hover": "rgba(8, 61, 37, 1)",
+        "color-text-success-active": "rgba(9, 42, 27, 1)",
+        "color-text-success-secondary": "rgba(41, 132, 90, 1)",
+        "color-text-success-on-bg-fill": "rgba(248, 255, 251, 1)",
+        "color-text-caution": "rgba(79, 71, 0, 1)",
+        "color-text-caution-hover": "rgba(51, 46, 0, 1)",
+        "color-text-caution-active": "rgba(31, 28, 0, 1)",
+        "color-text-caution-secondary": "rgba(130, 117, 0, 1)",
+        "color-text-caution-on-bg-fill": "rgba(51, 46, 0, 1)",
+        "color-text-warning": "rgba(94, 66, 0, 1)",
+        "color-text-warning-hover": "rgba(65, 45, 0, 1)",
+        "color-text-warning-active": "rgba(37, 26, 0, 1)",
+        "color-text-warning-secondary": "rgba(149, 111, 0, 1)",
+        "color-text-warning-on-bg-fill": "rgba(37, 26, 0, 1)",
+        "color-text-critical": "rgba(142, 31, 11, 1)",
+        "color-text-critical-hover": "rgba(95, 21, 7, 1)",
+        "color-text-critical-active": "rgba(47, 10, 4, 1)",
+        "color-text-critical-secondary": "rgba(229, 28, 0, 1)",
+        "color-text-critical-on-bg-fill": "rgba(255, 251, 251, 1)",
+        "color-text-emphasis": "rgba(0, 91, 211, 1)",
+        "color-text-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-text-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-text-emphasis-on-bg-fill": "rgba(252, 253, 255, 1)",
+        "color-text-emphasis-on-bg-fill-hover": "rgba(226, 231, 255, 1)",
+        "color-text-emphasis-on-bg-fill-active": "rgba(213, 220, 255, 1)",
+        "color-text-magic": "rgba(87, 0, 209, 1)",
+        "color-text-magic-secondary": "rgba(113, 38, 255, 1)",
+        "color-text-magic-on-bg-fill": "rgba(253, 253, 255, 1)",
+        "color-text-inverse": "rgba(227, 227, 227, 1)",
+        "color-text-inverse-secondary": "rgba(181, 181, 181, 1)",
+        "color-text-link-inverse": "rgba(197, 208, 255, 1)",
+        "color-border": "rgba(227, 227, 227, 1)",
+        "color-border-hover": "rgba(204, 204, 204, 1)",
+        "color-border-disabled": "rgba(235, 235, 235, 1)",
+        "color-border-secondary": "rgba(235, 235, 235, 1)",
+        "color-border-tertiary": "rgba(204, 204, 204, 1)",
+        "color-border-focus": "rgba(0, 91, 211, 1)",
+        "color-border-brand": "rgba(227, 227, 227, 1)",
+        "color-border-info": "rgba(168, 216, 255, 1)",
+        "color-border-success": "rgba(146, 254, 194, 1)",
+        "color-border-caution": "rgba(255, 235, 120, 1)",
+        "color-border-warning": "rgba(255, 200, 121, 1)",
+        "color-border-critical": "rgba(254, 195, 193, 1)",
+        "color-border-critical-secondary": "rgba(142, 31, 11, 1)",
+        "color-border-emphasis": "rgba(0, 91, 211, 1)",
+        "color-border-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-border-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-border-magic": "rgba(228, 222, 255, 1)",
+        "color-border-magic-secondary": "rgba(148, 116, 255, 1)",
+        "color-border-magic-secondary-hover": "rgba(128, 81, 255, 1)",
+        "color-border-inverse": "rgba(97, 97, 97, 1)",
+        "color-border-inverse-hover": "rgba(204, 204, 204, 1)",
+        "color-border-inverse-active": "rgba(227, 227, 227, 1)",
+        "color-tooltip-tail-down-border-experimental": "rgba(212, 212, 212, 1)",
+        "color-tooltip-tail-up-border-experimental": "rgba(227, 227, 227, 1)",
+        "color-border-gradient-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-hover-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-selected-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-active-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-icon": "rgba(74, 74, 74, 1)",
+        "color-icon-hover": "rgba(48, 48, 48, 1)",
+        "color-icon-active": "rgba(26, 26, 26, 1)",
+        "color-icon-disabled": "rgba(204, 204, 204, 1)",
+        "color-icon-secondary": "rgba(138, 138, 138, 1)",
+        "color-icon-secondary-hover": "rgba(97, 97, 97, 1)",
+        "color-icon-secondary-active": "rgba(74, 74, 74, 1)",
+        "color-icon-brand": "rgba(26, 26, 26, 1)",
+        "color-icon-info": "rgba(0, 148, 213, 1)",
+        "color-icon-success": "rgba(41, 132, 90, 1)",
+        "color-icon-caution": "rgba(153, 138, 0, 1)",
+        "color-icon-warning": "rgba(178, 132, 0, 1)",
+        "color-icon-critical": "rgba(239, 77, 47, 1)",
+        "color-icon-emphasis": "rgba(0, 91, 211, 1)",
+        "color-icon-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-icon-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-icon-magic": "rgba(128, 81, 255, 1)",
+        "color-icon-inverse": "rgba(227, 227, 227, 1)",
+        "color-avatar-bg-fill": "rgba(181, 181, 181, 1)",
+        "color-avatar-five-bg-fill": "rgba(253, 75, 146, 1)",
+        "color-avatar-five-text-on-bg-fill": "rgba(255, 246, 248, 1)",
+        "color-avatar-four-bg-fill": "rgba(81, 192, 255, 1)",
+        "color-avatar-four-text-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-avatar-one-bg-fill": "rgba(197, 48, 197, 1)",
+        "color-avatar-one-text-on-bg-fill": "rgba(253, 239, 253, 1)",
+        "color-avatar-seven-bg-fill": "rgba(148, 116, 255, 1)",
+        "color-avatar-seven-text-on-bg-fill": "rgba(248, 247, 255, 1)",
+        "color-avatar-six-bg-fill": "rgba(37, 232, 43, 1)",
+        "color-avatar-six-text-on-bg-fill": "rgba(3, 61, 5, 1)",
+        "color-avatar-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-avatar-three-bg-fill": "rgba(44, 224, 212, 1)",
+        "color-avatar-three-text-on-bg-fill": "rgba(3, 60, 57, 1)",
+        "color-avatar-two-bg-fill": "rgba(56, 250, 163, 1)",
+        "color-avatar-two-text-on-bg-fill": "rgba(12, 81, 50, 1)",
+        "color-backdrop-bg": "rgba(0, 0, 0, 0.71)",
+        "color-button-gradient-bg-fill": "none",
+        "color-checkbox-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-checkbox-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-input-bg-surface": "rgba(253, 253, 253, 1)",
+        "color-input-bg-surface-hover": "rgba(250, 250, 250, 1)",
+        "color-input-bg-surface-active": "rgba(247, 247, 247, 1)",
+        "color-input-border": "rgba(138, 138, 138, 1)",
+        "color-input-border-hover": "rgba(97, 97, 97, 1)",
+        "color-input-border-active": "rgba(26, 26, 26, 1)",
+        "color-nav-bg": "rgba(235, 235, 235, 1)",
+        "color-nav-bg-surface": "rgba(0, 0, 0, 0.02)",
+        "color-nav-bg-surface-hover": "rgba(241, 241, 241, 1)",
+        "color-nav-bg-surface-active": "rgba(250, 250, 250, 1)",
+        "color-nav-bg-surface-selected": "rgba(250, 250, 250, 1)",
+        "color-radio-button-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-radio-button-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-video-thumbnail-play-button-bg-fill-hover": "rgba(0, 0, 0, 0.81)",
+        "color-video-thumbnail-play-button-bg-fill": "rgba(0, 0, 0, 0.71)",
+        "color-video-thumbnail-play-button-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-scrollbar-thumb-bg-hover": "rgba(138, 138, 138, 1)"
+      },
+      "font": {
+        "font-family-sans": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "font-family-mono": "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace",
+        "font-size-275": "0.6875rem",
+        "font-size-300": "0.75rem",
+        "font-size-325": "0.8125rem",
+        "font-size-350": "0.875rem",
+        "font-size-400": "1rem",
+        "font-size-450": "1.125rem",
+        "font-size-500": "1.25rem",
+        "font-size-550": "1.375rem",
+        "font-size-600": "1.5rem",
+        "font-size-750": "1.875rem",
+        "font-size-800": "2rem",
+        "font-size-900": "2.25rem",
+        "font-size-1000": "2.5rem",
+        "font-weight-regular": "450",
+        "font-weight-medium": "550",
+        "font-weight-semibold": "650",
+        "font-weight-bold": "700",
+        "font-letter-spacing-densest": "-0.03375rem",
+        "font-letter-spacing-denser": "-0.01875rem",
+        "font-letter-spacing-dense": "-0.0125rem",
+        "font-letter-spacing-normal": "0rem",
+        "font-line-height-300": "0.75rem",
+        "font-line-height-400": "1rem",
+        "font-line-height-500": "1.25rem",
+        "font-line-height-600": "1.5rem",
+        "font-line-height-700": "1.75rem",
+        "font-line-height-800": "2rem",
+        "font-line-height-1000": "2.5rem",
+        "font-line-height-1200": "3rem"
+      },
+      "height": {
+        "height-0": "0rem",
+        "height-025": "0.0625rem",
+        "height-050": "0.125rem",
+        "height-100": "0.25rem",
+        "height-150": "0.375rem",
+        "height-200": "0.5rem",
+        "height-300": "0.75rem",
+        "height-400": "1rem",
+        "height-500": "1.25rem",
+        "height-600": "1.5rem",
+        "height-700": "1.75rem",
+        "height-800": "2rem",
+        "height-900": "2.25rem",
+        "height-1000": "2.5rem",
+        "height-1200": "3rem",
+        "height-1600": "4rem",
+        "height-2000": "5rem",
+        "height-2400": "6rem",
+        "height-2800": "7rem",
+        "height-3200": "8rem"
+      },
+      "motion": {
+        "motion-duration-0": "0ms",
+        "motion-duration-50": "50ms",
+        "motion-duration-100": "100ms",
+        "motion-duration-150": "150ms",
+        "motion-duration-200": "200ms",
+        "motion-duration-250": "250ms",
+        "motion-duration-300": "300ms",
+        "motion-duration-350": "350ms",
+        "motion-duration-400": "400ms",
+        "motion-duration-450": "450ms",
+        "motion-duration-500": "500ms",
+        "motion-duration-5000": "5000ms",
+        "motion-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "motion-ease-in": "cubic-bezier(0.42, 0, 1, 1)",
+        "motion-ease-out": "cubic-bezier(0.19, 0.91, 0.38, 1)",
+        "motion-ease-in-out": "cubic-bezier(0.42, 0, 0.58, 1)",
+        "motion-linear": "cubic-bezier(0, 0, 1, 1)",
+        "motion-keyframes-bounce": "{ from, 65%, 85% { transform: scale(1) } 75% { transform: scale(0.85) } 82.5% { transform: scale(1.05) } }",
+        "motion-keyframes-fade-in": "{ to { opacity: 1 } }",
+        "motion-keyframes-pulse": "{ from, 75% { transform: scale(0.85); opacity: 1; } to { transform: scale(2.5); opacity: 0; } }",
+        "motion-keyframes-spin": "{ to { transform: rotate(1turn) } }",
+        "motion-keyframes-appear-above": "{ from { transform: translateY(var(--p-space-100)); opacity: 0; } to { transform: none; opacity: 1; } }",
+        "motion-keyframes-appear-below": "{ from { transform: translateY(calc(var(--p-space-100) * -1)); opacity: 0; } to { transform: none; opacity: 1; } }"
+      },
+      "shadow": {
+        "shadow-0": "none",
+        "shadow-100": "none",
+        "shadow-200": "0rem 0.1875rem 0.0625rem -0.0625rem rgba(26, 26, 26, 0.07)",
+        "shadow-300": "0rem 0.25rem 0.375rem -0.125rem rgba(26, 26, 26, 0.20)",
+        "shadow-400": "0rem 0.5rem 1rem -0.25rem rgba(26, 26, 26, 0.22)",
+        "shadow-500": "0rem 0.75rem 1.25rem -0.5rem rgba(26, 26, 26, 0.24)",
+        "shadow-600": "0rem 1.25rem 1.25rem -0.5rem rgba(26, 26, 26, 0.28)",
+        "shadow-bevel-100": "none",
+        "shadow-inset-100": "0rem 0.0625rem 0.125rem 0rem rgba(26, 26, 26, 0.15) inset, 0rem 0.0625rem 0.0625rem 0rem rgba(26, 26, 26, 0.15) inset",
+        "shadow-inset-200": "0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.20) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset, -0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset",
+        "shadow-button": "0 0 0 var(--p-border-width-025) var(--p-color-border) inset",
+        "shadow-button-hover": "0 0 0 var(--p-border-width-025) var(--p-color-border) inset",
+        "shadow-button-inset": "0 0 0 var(--p-border-width-025) var(--p-color-border) inset",
+        "shadow-button-primary": "none",
+        "shadow-button-primary-hover": "none",
+        "shadow-button-primary-inset": "none",
+        "shadow-button-primary-critical": "none",
+        "shadow-button-primary-critical-hover": "none",
+        "shadow-button-primary-critical-inset": "none",
+        "shadow-button-primary-success": "none",
+        "shadow-button-primary-success-hover": "none",
+        "shadow-button-primary-success-inset": "none",
+        "shadow-border-inset": "0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.08) inset"
+      },
+      "space": {
+        "space-0": "0rem",
+        "space-025": "0.0625rem",
+        "space-050": "0.125rem",
+        "space-100": "0.25rem",
+        "space-150": "0.375rem",
+        "space-200": "0.5rem",
+        "space-300": "0.75rem",
+        "space-400": "1rem",
+        "space-500": "1.25rem",
+        "space-600": "1.5rem",
+        "space-800": "2rem",
+        "space-1000": "2.5rem",
+        "space-1200": "3rem",
+        "space-1600": "4rem",
+        "space-2000": "5rem",
+        "space-2400": "6rem",
+        "space-2800": "7rem",
+        "space-3200": "8rem",
+        "space-button-group-gap": "0.5rem",
+        "space-card-gap": "0.5rem",
+        "space-card-padding": "1rem",
+        "space-table-cell-padding": "0.375rem"
+      },
+      "text": {
+        "text-heading-3xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-3xl-font-size": "2.25rem",
+        "text-heading-3xl-font-weight": "700",
+        "text-heading-3xl-font-letter-spacing": "-0.03375rem",
+        "text-heading-3xl-font-line-height": "3rem",
+        "text-heading-2xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-2xl-font-size": "2rem",
+        "text-heading-2xl-font-weight": "700",
+        "text-heading-2xl-font-letter-spacing": "-0.01875rem",
+        "text-heading-2xl-font-line-height": "2.5rem",
+        "text-heading-xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xl-font-size": "1.375rem",
+        "text-heading-xl-font-weight": "700",
+        "text-heading-xl-font-letter-spacing": "-0.0125rem",
+        "text-heading-xl-font-line-height": "1.75rem",
+        "text-heading-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-lg-font-size": "1.125rem",
+        "text-heading-lg-font-weight": "650",
+        "text-heading-lg-font-letter-spacing": "-0.0125rem",
+        "text-heading-lg-font-line-height": "1.5rem",
+        "text-heading-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-md-font-size": "1rem",
+        "text-heading-md-font-weight": "650",
+        "text-heading-md-font-letter-spacing": "0rem",
+        "text-heading-md-font-line-height": "1.25rem",
+        "text-heading-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-sm-font-size": "0.875rem",
+        "text-heading-sm-font-weight": "650",
+        "text-heading-sm-font-letter-spacing": "0rem",
+        "text-heading-sm-font-line-height": "1.25rem",
+        "text-heading-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xs-font-size": "0.75rem",
+        "text-heading-xs-font-weight": "650",
+        "text-heading-xs-font-letter-spacing": "0rem",
+        "text-heading-xs-font-line-height": "1rem",
+        "text-body-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-lg-font-size": "1.125rem",
+        "text-body-lg-font-weight": "450",
+        "text-body-lg-font-letter-spacing": "0rem",
+        "text-body-lg-font-line-height": "1.75rem",
+        "text-body-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-md-font-size": "1rem",
+        "text-body-md-font-weight": "450",
+        "text-body-md-font-letter-spacing": "0rem",
+        "text-body-md-font-line-height": "1.5rem",
+        "text-body-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-sm-font-size": "0.875rem",
+        "text-body-sm-font-weight": "450",
+        "text-body-sm-font-letter-spacing": "0rem",
+        "text-body-sm-font-line-height": "1.25rem",
+        "text-body-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-xs-font-size": "0.75rem",
+        "text-body-xs-font-weight": "450",
+        "text-body-xs-font-letter-spacing": "0rem",
+        "text-body-xs-font-line-height": "1rem"
+      },
+      "width": {
+        "width-0": "0rem",
+        "width-025": "0.0625rem",
+        "width-050": "0.125rem",
+        "width-100": "0.25rem",
+        "width-150": "0.375rem",
+        "width-200": "0.5rem",
+        "width-300": "0.75rem",
+        "width-400": "1rem",
+        "width-500": "1.25rem",
+        "width-600": "1.5rem",
+        "width-700": "1.75rem",
+        "width-800": "2rem",
+        "width-900": "2.25rem",
+        "width-1000": "2.5rem",
+        "width-1200": "3rem",
+        "width-1600": "4rem",
+        "width-2000": "5rem",
+        "width-2400": "6rem",
+        "width-2800": "7rem",
+        "width-3200": "8rem"
+      },
+      "zIndex": {
+        "z-index-0": "auto",
+        "z-index-1": "100",
+        "z-index-2": "400",
+        "z-index-3": "510",
+        "z-index-4": "512",
+        "z-index-5": "513",
+        "z-index-6": "514",
+        "z-index-7": "515",
+        "z-index-8": "516",
+        "z-index-9": "517",
+        "z-index-10": "518",
+        "z-index-11": "519",
+        "z-index-12": "520"
+      }
+    },
+    "light-high-contrast-experimental": {
+      "border": {
+        "border-radius-0": "0rem",
+        "border-radius-050": "0.125rem",
+        "border-radius-100": "0.25rem",
+        "border-radius-150": "0.375rem",
+        "border-radius-200": "0.5rem",
+        "border-radius-300": "0.75rem",
+        "border-radius-400": "1rem",
+        "border-radius-500": "1.25rem",
+        "border-radius-750": "1.875rem",
+        "border-radius-full": "624.9375rem",
+        "border-width-0": "0rem",
+        "border-width-0165": "0.04125rem",
+        "border-width-025": "0.0625rem",
+        "border-width-050": "0.125rem",
+        "border-width-100": "0.25rem"
+      },
+      "breakpoints": {
+        "breakpoints-xs": "0rem",
+        "breakpoints-sm": "30.625rem",
+        "breakpoints-md": "48rem",
+        "breakpoints-lg": "65rem",
+        "breakpoints-xl": "90rem"
+      },
+      "color": {
+        "color-scheme": "light",
+        "color-bg": "rgba(241, 241, 241, 1)",
+        "color-bg-inverse": "rgba(26, 26, 26, 1)",
+        "color-bg-surface": "rgba(255, 255, 255, 1)",
+        "color-bg-surface-hover": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-active": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-surface-secondary": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-secondary-hover": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-secondary-active": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-secondary-selected": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-tertiary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-brand-active": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-brand-selected": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-info": "rgba(234, 244, 255, 1)",
+        "color-bg-surface-info-hover": "rgba(224, 240, 255, 1)",
+        "color-bg-surface-info-active": "rgba(202, 230, 255, 1)",
+        "color-bg-surface-success": "rgba(205, 254, 225, 1)",
+        "color-bg-surface-success-hover": "rgba(180, 254, 210, 1)",
+        "color-bg-surface-success-active": "rgba(146, 254, 194, 1)",
+        "color-bg-surface-caution": "rgba(255, 248, 219, 1)",
+        "color-bg-surface-caution-hover": "rgba(255, 244, 191, 1)",
+        "color-bg-surface-caution-active": "rgba(255, 239, 157, 1)",
+        "color-bg-surface-warning": "rgba(255, 241, 227, 1)",
+        "color-bg-surface-warning-hover": "rgba(255, 235, 213, 1)",
+        "color-bg-surface-warning-active": "rgba(255, 228, 198, 1)",
+        "color-bg-surface-critical": "rgba(254, 233, 232, 1)",
+        "color-bg-surface-critical-hover": "rgba(254, 226, 225, 1)",
+        "color-bg-surface-critical-active": "rgba(254, 218, 217, 1)",
+        "color-bg-surface-emphasis": "rgba(240, 242, 255, 1)",
+        "color-bg-surface-emphasis-hover": "rgba(234, 237, 255, 1)",
+        "color-bg-surface-emphasis-active": "rgba(226, 231, 255, 1)",
+        "color-bg-surface-magic": "rgba(248, 247, 255, 1)",
+        "color-bg-surface-magic-hover": "rgba(243, 241, 255, 1)",
+        "color-bg-surface-magic-active": "rgba(233, 229, 255, 1)",
+        "color-bg-surface-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-surface-transparent": "rgba(0, 0, 0, 0)",
+        "color-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-bg-fill-hover": "rgba(250, 250, 250, 1)",
+        "color-bg-fill-active": "rgba(247, 247, 247, 1)",
+        "color-bg-fill-selected": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-secondary": "rgba(241, 241, 241, 1)",
+        "color-bg-fill-secondary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-fill-secondary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary-hover": "rgba(212, 212, 212, 1)",
+        "color-bg-fill-tertiary-active": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-brand": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-hover": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-active": "rgba(26, 26, 26, 1)",
+        "color-bg-fill-brand-selected": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-brand-disabled": "rgba(0, 0, 0, 0.17)",
+        "color-bg-fill-info": "rgba(145, 208, 255, 1)",
+        "color-bg-fill-info-hover": "rgba(81, 192, 255, 1)",
+        "color-bg-fill-info-active": "rgba(0, 148, 213, 1)",
+        "color-bg-fill-info-secondary": "rgba(213, 235, 255, 1)",
+        "color-bg-fill-success": "rgba(41, 132, 90, 1)",
+        "color-bg-fill-success-hover": "rgba(19, 111, 69, 1)",
+        "color-bg-fill-success-active": "rgba(12, 81, 50, 1)",
+        "color-bg-fill-success-secondary": "rgba(180, 254, 210, 1)",
+        "color-bg-fill-warning": "rgba(255, 184, 0, 1)",
+        "color-bg-fill-warning-hover": "rgba(229, 165, 0, 1)",
+        "color-bg-fill-warning-active": "rgba(178, 132, 0, 1)",
+        "color-bg-fill-warning-secondary": "rgba(255, 214, 164, 1)",
+        "color-bg-fill-caution": "rgba(255, 230, 0, 1)",
+        "color-bg-fill-caution-hover": "rgba(234, 211, 0, 1)",
+        "color-bg-fill-caution-active": "rgba(225, 203, 0, 1)",
+        "color-bg-fill-caution-secondary": "rgba(255, 235, 120, 1)",
+        "color-bg-fill-critical": "rgba(229, 28, 0, 1)",
+        "color-bg-fill-critical-hover": "rgba(181, 38, 11, 1)",
+        "color-bg-fill-critical-active": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-selected": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-secondary": "rgba(254, 211, 209, 1)",
+        "color-bg-fill-emphasis": "rgba(0, 91, 211, 1)",
+        "color-bg-fill-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-bg-fill-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-bg-fill-magic": "rgba(128, 81, 255, 1)",
+        "color-bg-fill-magic-secondary": "rgba(233, 229, 255, 1)",
+        "color-bg-fill-magic-secondary-hover": "rgba(228, 222, 255, 1)",
+        "color-bg-fill-magic-secondary-active": "rgba(223, 217, 255, 1)",
+        "color-bg-fill-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-inverse-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-fill-inverse-active": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-transparent": "rgba(0, 0, 0, 0.02)",
+        "color-bg-fill-transparent-hover": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-transparent-active": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-selected": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary": "rgba(0, 0, 0, 0.06)",
+        "color-bg-fill-transparent-secondary-hover": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary-active": "rgba(0, 0, 0, 0.11)",
+        "color-text": "rgba(26, 26, 26, 1)",
+        "color-text-secondary": "rgba(26, 26, 26, 1)",
+        "color-text-disabled": "rgba(181, 181, 181, 1)",
+        "color-text-link": "rgba(0, 91, 211, 1)",
+        "color-text-link-hover": "rgba(0, 66, 153, 1)",
+        "color-text-link-active": "rgba(0, 46, 106, 1)",
+        "color-text-brand": "rgba(26, 26, 26, 1)",
+        "color-text-brand-hover": "rgba(48, 48, 48, 1)",
+        "color-text-brand-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-text-brand-on-bg-fill-hover": "rgba(227, 227, 227, 1)",
+        "color-text-brand-on-bg-fill-active": "rgba(204, 204, 204, 1)",
+        "color-text-brand-on-bg-fill-disabled": "rgba(255, 255, 255, 1)",
+        "color-text-info": "rgba(0, 58, 90, 1)",
+        "color-text-info-hover": "rgba(0, 58, 90, 1)",
+        "color-text-info-active": "rgba(0, 33, 51, 1)",
+        "color-text-info-secondary": "rgba(0, 124, 180, 1)",
+        "color-text-info-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-text-success": "rgba(12, 81, 50, 1)",
+        "color-text-success-hover": "rgba(8, 61, 37, 1)",
+        "color-text-success-active": "rgba(9, 42, 27, 1)",
+        "color-text-success-secondary": "rgba(41, 132, 90, 1)",
+        "color-text-success-on-bg-fill": "rgba(248, 255, 251, 1)",
+        "color-text-caution": "rgba(79, 71, 0, 1)",
+        "color-text-caution-hover": "rgba(51, 46, 0, 1)",
+        "color-text-caution-active": "rgba(31, 28, 0, 1)",
+        "color-text-caution-secondary": "rgba(130, 117, 0, 1)",
+        "color-text-caution-on-bg-fill": "rgba(51, 46, 0, 1)",
+        "color-text-warning": "rgba(94, 66, 0, 1)",
+        "color-text-warning-hover": "rgba(65, 45, 0, 1)",
+        "color-text-warning-active": "rgba(37, 26, 0, 1)",
+        "color-text-warning-secondary": "rgba(149, 111, 0, 1)",
+        "color-text-warning-on-bg-fill": "rgba(37, 26, 0, 1)",
+        "color-text-critical": "rgba(142, 31, 11, 1)",
+        "color-text-critical-hover": "rgba(95, 21, 7, 1)",
+        "color-text-critical-active": "rgba(47, 10, 4, 1)",
+        "color-text-critical-secondary": "rgba(229, 28, 0, 1)",
+        "color-text-critical-on-bg-fill": "rgba(255, 251, 251, 1)",
+        "color-text-emphasis": "rgba(0, 91, 211, 1)",
+        "color-text-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-text-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-text-emphasis-on-bg-fill": "rgba(252, 253, 255, 1)",
+        "color-text-emphasis-on-bg-fill-hover": "rgba(226, 231, 255, 1)",
+        "color-text-emphasis-on-bg-fill-active": "rgba(213, 220, 255, 1)",
+        "color-text-magic": "rgba(87, 0, 209, 1)",
+        "color-text-magic-secondary": "rgba(113, 38, 255, 1)",
+        "color-text-magic-on-bg-fill": "rgba(253, 253, 255, 1)",
+        "color-text-inverse": "rgba(227, 227, 227, 1)",
+        "color-text-inverse-secondary": "rgba(181, 181, 181, 1)",
+        "color-text-link-inverse": "rgba(197, 208, 255, 1)",
+        "color-border": "rgba(138, 138, 138, 1)",
+        "color-border-hover": "rgba(204, 204, 204, 1)",
+        "color-border-disabled": "rgba(235, 235, 235, 1)",
+        "color-border-secondary": "rgba(138, 138, 138, 1)",
+        "color-border-tertiary": "rgba(204, 204, 204, 1)",
+        "color-border-focus": "rgba(0, 91, 211, 1)",
+        "color-border-brand": "rgba(227, 227, 227, 1)",
+        "color-border-info": "rgba(168, 216, 255, 1)",
+        "color-border-success": "rgba(146, 254, 194, 1)",
+        "color-border-caution": "rgba(255, 235, 120, 1)",
+        "color-border-warning": "rgba(255, 200, 121, 1)",
+        "color-border-critical": "rgba(254, 195, 193, 1)",
+        "color-border-critical-secondary": "rgba(142, 31, 11, 1)",
+        "color-border-emphasis": "rgba(0, 91, 211, 1)",
+        "color-border-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-border-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-border-magic": "rgba(228, 222, 255, 1)",
+        "color-border-magic-secondary": "rgba(148, 116, 255, 1)",
+        "color-border-magic-secondary-hover": "rgba(128, 81, 255, 1)",
+        "color-border-inverse": "rgba(97, 97, 97, 1)",
+        "color-border-inverse-hover": "rgba(204, 204, 204, 1)",
+        "color-border-inverse-active": "rgba(227, 227, 227, 1)",
+        "color-tooltip-tail-down-border-experimental": "rgba(212, 212, 212, 1)",
+        "color-tooltip-tail-up-border-experimental": "rgba(227, 227, 227, 1)",
+        "color-border-gradient-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-hover-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-selected-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-border-gradient-active-experimental": "linear-gradient(to bottom, rgba(235, 235, 235, 1), rgba(204, 204, 204, 1) 78%, rgba(181, 181, 181, 1))",
+        "color-icon": "rgba(74, 74, 74, 1)",
+        "color-icon-hover": "rgba(48, 48, 48, 1)",
+        "color-icon-active": "rgba(26, 26, 26, 1)",
+        "color-icon-disabled": "rgba(204, 204, 204, 1)",
+        "color-icon-secondary": "rgba(74, 74, 74, 1)",
+        "color-icon-secondary-hover": "rgba(97, 97, 97, 1)",
+        "color-icon-secondary-active": "rgba(74, 74, 74, 1)",
+        "color-icon-brand": "rgba(26, 26, 26, 1)",
+        "color-icon-info": "rgba(0, 148, 213, 1)",
+        "color-icon-success": "rgba(41, 132, 90, 1)",
+        "color-icon-caution": "rgba(153, 138, 0, 1)",
+        "color-icon-warning": "rgba(178, 132, 0, 1)",
+        "color-icon-critical": "rgba(239, 77, 47, 1)",
+        "color-icon-emphasis": "rgba(0, 91, 211, 1)",
+        "color-icon-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-icon-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-icon-magic": "rgba(128, 81, 255, 1)",
+        "color-icon-inverse": "rgba(227, 227, 227, 1)",
+        "color-avatar-bg-fill": "rgba(181, 181, 181, 1)",
+        "color-avatar-five-bg-fill": "rgba(253, 75, 146, 1)",
+        "color-avatar-five-text-on-bg-fill": "rgba(255, 246, 248, 1)",
+        "color-avatar-four-bg-fill": "rgba(81, 192, 255, 1)",
+        "color-avatar-four-text-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-avatar-one-bg-fill": "rgba(197, 48, 197, 1)",
+        "color-avatar-one-text-on-bg-fill": "rgba(253, 239, 253, 1)",
+        "color-avatar-seven-bg-fill": "rgba(148, 116, 255, 1)",
+        "color-avatar-seven-text-on-bg-fill": "rgba(248, 247, 255, 1)",
+        "color-avatar-six-bg-fill": "rgba(37, 232, 43, 1)",
+        "color-avatar-six-text-on-bg-fill": "rgba(3, 61, 5, 1)",
+        "color-avatar-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-avatar-three-bg-fill": "rgba(44, 224, 212, 1)",
+        "color-avatar-three-text-on-bg-fill": "rgba(3, 60, 57, 1)",
+        "color-avatar-two-bg-fill": "rgba(56, 250, 163, 1)",
+        "color-avatar-two-text-on-bg-fill": "rgba(12, 81, 50, 1)",
+        "color-backdrop-bg": "rgba(0, 0, 0, 0.71)",
+        "color-button-gradient-bg-fill": "linear-gradient(180deg, rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%)",
+        "color-checkbox-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-checkbox-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-input-bg-surface": "rgba(253, 253, 253, 1)",
+        "color-input-bg-surface-hover": "rgba(250, 250, 250, 1)",
+        "color-input-bg-surface-active": "rgba(247, 247, 247, 1)",
+        "color-input-border": "rgba(74, 74, 74, 1)",
+        "color-input-border-hover": "rgba(97, 97, 97, 1)",
+        "color-input-border-active": "rgba(26, 26, 26, 1)",
+        "color-nav-bg": "rgba(235, 235, 235, 1)",
+        "color-nav-bg-surface": "rgba(0, 0, 0, 0.02)",
+        "color-nav-bg-surface-hover": "rgba(241, 241, 241, 1)",
+        "color-nav-bg-surface-active": "rgba(250, 250, 250, 1)",
+        "color-nav-bg-surface-selected": "rgba(250, 250, 250, 1)",
+        "color-radio-button-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-radio-button-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-video-thumbnail-play-button-bg-fill-hover": "rgba(0, 0, 0, 0.81)",
+        "color-video-thumbnail-play-button-bg-fill": "rgba(0, 0, 0, 0.71)",
+        "color-video-thumbnail-play-button-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-scrollbar-thumb-bg-hover": "rgba(138, 138, 138, 1)"
+      },
+      "font": {
+        "font-family-sans": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "font-family-mono": "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace",
+        "font-size-275": "0.6875rem",
+        "font-size-300": "0.75rem",
+        "font-size-325": "0.8125rem",
+        "font-size-350": "0.875rem",
+        "font-size-400": "1rem",
+        "font-size-450": "1.125rem",
+        "font-size-500": "1.25rem",
+        "font-size-550": "1.375rem",
+        "font-size-600": "1.5rem",
+        "font-size-750": "1.875rem",
+        "font-size-800": "2rem",
+        "font-size-900": "2.25rem",
+        "font-size-1000": "2.5rem",
+        "font-weight-regular": "450",
+        "font-weight-medium": "550",
+        "font-weight-semibold": "650",
+        "font-weight-bold": "700",
+        "font-letter-spacing-densest": "-0.03375rem",
+        "font-letter-spacing-denser": "-0.01875rem",
+        "font-letter-spacing-dense": "-0.0125rem",
+        "font-letter-spacing-normal": "0rem",
+        "font-line-height-300": "0.75rem",
+        "font-line-height-400": "1rem",
+        "font-line-height-500": "1.25rem",
+        "font-line-height-600": "1.5rem",
+        "font-line-height-700": "1.75rem",
+        "font-line-height-800": "2rem",
+        "font-line-height-1000": "2.5rem",
+        "font-line-height-1200": "3rem"
+      },
+      "height": {
+        "height-0": "0rem",
+        "height-025": "0.0625rem",
+        "height-050": "0.125rem",
+        "height-100": "0.25rem",
+        "height-150": "0.375rem",
+        "height-200": "0.5rem",
+        "height-300": "0.75rem",
+        "height-400": "1rem",
+        "height-500": "1.25rem",
+        "height-600": "1.5rem",
+        "height-700": "1.75rem",
+        "height-800": "2rem",
+        "height-900": "2.25rem",
+        "height-1000": "2.5rem",
+        "height-1200": "3rem",
+        "height-1600": "4rem",
+        "height-2000": "5rem",
+        "height-2400": "6rem",
+        "height-2800": "7rem",
+        "height-3200": "8rem"
+      },
+      "motion": {
+        "motion-duration-0": "0ms",
+        "motion-duration-50": "50ms",
+        "motion-duration-100": "100ms",
+        "motion-duration-150": "150ms",
+        "motion-duration-200": "200ms",
+        "motion-duration-250": "250ms",
+        "motion-duration-300": "300ms",
+        "motion-duration-350": "350ms",
+        "motion-duration-400": "400ms",
+        "motion-duration-450": "450ms",
+        "motion-duration-500": "500ms",
+        "motion-duration-5000": "5000ms",
+        "motion-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "motion-ease-in": "cubic-bezier(0.42, 0, 1, 1)",
+        "motion-ease-out": "cubic-bezier(0.19, 0.91, 0.38, 1)",
+        "motion-ease-in-out": "cubic-bezier(0.42, 0, 0.58, 1)",
+        "motion-linear": "cubic-bezier(0, 0, 1, 1)",
+        "motion-keyframes-bounce": "{ from, 65%, 85% { transform: scale(1) } 75% { transform: scale(0.85) } 82.5% { transform: scale(1.05) } }",
+        "motion-keyframes-fade-in": "{ to { opacity: 1 } }",
+        "motion-keyframes-pulse": "{ from, 75% { transform: scale(0.85); opacity: 1; } to { transform: scale(2.5); opacity: 0; } }",
+        "motion-keyframes-spin": "{ to { transform: rotate(1turn) } }",
+        "motion-keyframes-appear-above": "{ from { transform: translateY(var(--p-space-100)); opacity: 0; } to { transform: none; opacity: 1; } }",
+        "motion-keyframes-appear-below": "{ from { transform: translateY(calc(var(--p-space-100) * -1)); opacity: 0; } to { transform: none; opacity: 1; } }"
+      },
+      "shadow": {
+        "shadow-0": "none",
+        "shadow-100": "0rem 0.0625rem 0rem 0rem rgba(26, 26, 26, 0.07)",
+        "shadow-200": "0rem 0.1875rem 0.0625rem -0.0625rem rgba(26, 26, 26, 0.07)",
+        "shadow-300": "0rem 0.25rem 0.375rem -0.125rem rgba(26, 26, 26, 0.20)",
+        "shadow-400": "0rem 0.5rem 1rem -0.25rem rgba(26, 26, 26, 0.22)",
+        "shadow-500": "0rem 0.75rem 1.25rem -0.5rem rgba(26, 26, 26, 0.24)",
+        "shadow-600": "0rem 1.25rem 1.25rem -0.5rem rgba(26, 26, 26, 0.28)",
+        "shadow-bevel-100": "0rem 0.0625rem 0rem 0rem rgba(26, 26, 26, 0.07), 0rem 0.0625rem 0rem 0rem rgba(208, 208, 208, 0.40) inset, 0.0625rem 0rem 0rem 0rem #CCC inset, -0.0625rem 0rem 0rem 0rem #CCC inset, 0rem -0.0625rem 0rem 0rem #999 inset",
+        "shadow-inset-100": "0rem 0.0625rem 0.125rem 0rem rgba(26, 26, 26, 0.15) inset, 0rem 0.0625rem 0.0625rem 0rem rgba(26, 26, 26, 0.15) inset",
+        "shadow-inset-200": "0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.20) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset, -0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset",
+        "shadow-button": "0rem -0.0625rem 0rem 0rem #b5b5b5 inset, 0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.1) inset, 0rem 0.03125rem 0rem 0.09375rem #FFF inset",
+        "shadow-button-hover": "0rem 0.0625rem 0rem 0rem #EBEBEB inset, -0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0rem -0.0625rem 0rem 0rem #CCC inset",
+        "shadow-button-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.2) inset",
+        "shadow-button-primary": "0rem -0.0625rem 0rem 0.0625rem rgba(0, 0, 0, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(48, 48, 48, 1) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.25) inset;",
+        "shadow-button-primary-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.24) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.0625rem 0rem 0rem #000 inset, 0rem -0.0625rem 0rem 0.0625rem #1A1A1A",
+        "shadow-button-primary-inset": "0rem 0.1875rem 0rem 0rem rgb(0, 0, 0) inset",
+        "shadow-button-primary-critical": "0rem -0.0625rem 0rem 0.0625rem rgba(142, 31, 11, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(181, 38, 11, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.349) inset",
+        "shadow-button-primary-critical-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-critical-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-button-primary-success": "0rem -0.0625rem 0rem 0.0625rem rgba(12, 81, 50, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(19, 111, 69, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.251) inset",
+        "shadow-button-primary-success-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-success-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-border-inset": "0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.08) inset"
+      },
+      "space": {
+        "space-0": "0rem",
+        "space-025": "0.0625rem",
+        "space-050": "0.125rem",
+        "space-100": "0.25rem",
+        "space-150": "0.375rem",
+        "space-200": "0.5rem",
+        "space-300": "0.75rem",
+        "space-400": "1rem",
+        "space-500": "1.25rem",
+        "space-600": "1.5rem",
+        "space-800": "2rem",
+        "space-1000": "2.5rem",
+        "space-1200": "3rem",
+        "space-1600": "4rem",
+        "space-2000": "5rem",
+        "space-2400": "6rem",
+        "space-2800": "7rem",
+        "space-3200": "8rem",
+        "space-button-group-gap": "0.5rem",
+        "space-card-gap": "1rem",
+        "space-card-padding": "1rem",
+        "space-table-cell-padding": "0.375rem"
+      },
+      "text": {
+        "text-heading-3xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-3xl-font-size": "2.25rem",
+        "text-heading-3xl-font-weight": "700",
+        "text-heading-3xl-font-letter-spacing": "-0.03375rem",
+        "text-heading-3xl-font-line-height": "3rem",
+        "text-heading-2xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-2xl-font-size": "1.875rem",
+        "text-heading-2xl-font-weight": "700",
+        "text-heading-2xl-font-letter-spacing": "-0.01875rem",
+        "text-heading-2xl-font-line-height": "2.5rem",
+        "text-heading-xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xl-font-size": "1.5rem",
+        "text-heading-xl-font-weight": "700",
+        "text-heading-xl-font-letter-spacing": "-0.0125rem",
+        "text-heading-xl-font-line-height": "2rem",
+        "text-heading-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-lg-font-size": "1.25rem",
+        "text-heading-lg-font-weight": "650",
+        "text-heading-lg-font-letter-spacing": "-0.0125rem",
+        "text-heading-lg-font-line-height": "1.5rem",
+        "text-heading-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-md-font-size": "0.875rem",
+        "text-heading-md-font-weight": "650",
+        "text-heading-md-font-letter-spacing": "0rem",
+        "text-heading-md-font-line-height": "1.25rem",
+        "text-heading-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-sm-font-size": "0.8125rem",
+        "text-heading-sm-font-weight": "650",
+        "text-heading-sm-font-letter-spacing": "0rem",
+        "text-heading-sm-font-line-height": "1.25rem",
+        "text-heading-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xs-font-size": "0.75rem",
+        "text-heading-xs-font-weight": "650",
+        "text-heading-xs-font-letter-spacing": "0rem",
+        "text-heading-xs-font-line-height": "1rem",
+        "text-body-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-lg-font-size": "0.875rem",
+        "text-body-lg-font-weight": "450",
+        "text-body-lg-font-letter-spacing": "0rem",
+        "text-body-lg-font-line-height": "1.25rem",
+        "text-body-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-md-font-size": "0.8125rem",
+        "text-body-md-font-weight": "450",
+        "text-body-md-font-letter-spacing": "0rem",
+        "text-body-md-font-line-height": "1.25rem",
+        "text-body-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-sm-font-size": "0.75rem",
+        "text-body-sm-font-weight": "450",
+        "text-body-sm-font-letter-spacing": "0rem",
+        "text-body-sm-font-line-height": "1rem",
+        "text-body-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-xs-font-size": "0.6875rem",
+        "text-body-xs-font-weight": "450",
+        "text-body-xs-font-letter-spacing": "0rem",
+        "text-body-xs-font-line-height": "0.75rem"
+      },
+      "width": {
+        "width-0": "0rem",
+        "width-025": "0.0625rem",
+        "width-050": "0.125rem",
+        "width-100": "0.25rem",
+        "width-150": "0.375rem",
+        "width-200": "0.5rem",
+        "width-300": "0.75rem",
+        "width-400": "1rem",
+        "width-500": "1.25rem",
+        "width-600": "1.5rem",
+        "width-700": "1.75rem",
+        "width-800": "2rem",
+        "width-900": "2.25rem",
+        "width-1000": "2.5rem",
+        "width-1200": "3rem",
+        "width-1600": "4rem",
+        "width-2000": "5rem",
+        "width-2400": "6rem",
+        "width-2800": "7rem",
+        "width-3200": "8rem"
+      },
+      "zIndex": {
+        "z-index-0": "auto",
+        "z-index-1": "100",
+        "z-index-2": "400",
+        "z-index-3": "510",
+        "z-index-4": "512",
+        "z-index-5": "513",
+        "z-index-6": "514",
+        "z-index-7": "515",
+        "z-index-8": "516",
+        "z-index-9": "517",
+        "z-index-10": "518",
+        "z-index-11": "519",
+        "z-index-12": "520"
+      }
+    },
+    "dark-experimental": {
+      "border": {
+        "border-radius-0": "0rem",
+        "border-radius-050": "0.125rem",
+        "border-radius-100": "0.25rem",
+        "border-radius-150": "0.375rem",
+        "border-radius-200": "0.5rem",
+        "border-radius-300": "0.75rem",
+        "border-radius-400": "1rem",
+        "border-radius-500": "1.25rem",
+        "border-radius-750": "1.875rem",
+        "border-radius-full": "624.9375rem",
+        "border-width-0": "0rem",
+        "border-width-0165": "0.04125rem",
+        "border-width-025": "0.0625rem",
+        "border-width-050": "0.125rem",
+        "border-width-100": "0.25rem"
+      },
+      "breakpoints": {
+        "breakpoints-xs": "0rem",
+        "breakpoints-sm": "30.625rem",
+        "breakpoints-md": "48rem",
+        "breakpoints-lg": "65rem",
+        "breakpoints-xl": "90rem"
+      },
+      "color": {
+        "color-scheme": "dark",
+        "color-bg": "rgba(26, 26, 26, 1)",
+        "color-bg-inverse": "rgba(26, 26, 26, 1)",
+        "color-bg-surface": "rgba(48, 48, 48, 1)",
+        "color-bg-surface-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-surface-active": "rgba(97, 97, 97, 1)",
+        "color-bg-surface-selected": "rgba(97, 97, 97, 1)",
+        "color-bg-surface-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-surface-secondary": "rgba(247, 247, 247, 1)",
+        "color-bg-surface-secondary-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-surface-secondary-active": "rgba(97, 97, 97, 1)",
+        "color-bg-surface-secondary-selected": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary": "rgba(243, 243, 243, 1)",
+        "color-bg-surface-tertiary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-tertiary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand": "rgba(227, 227, 227, 1)",
+        "color-bg-surface-brand-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-surface-brand-active": "rgba(241, 241, 241, 1)",
+        "color-bg-surface-brand-selected": "rgba(74, 74, 74, 1)",
+        "color-bg-surface-info": "rgba(234, 244, 255, 1)",
+        "color-bg-surface-info-hover": "rgba(224, 240, 255, 1)",
+        "color-bg-surface-info-active": "rgba(202, 230, 255, 1)",
+        "color-bg-surface-success": "rgba(205, 254, 225, 1)",
+        "color-bg-surface-success-hover": "rgba(180, 254, 210, 1)",
+        "color-bg-surface-success-active": "rgba(146, 254, 194, 1)",
+        "color-bg-surface-caution": "rgba(255, 248, 219, 1)",
+        "color-bg-surface-caution-hover": "rgba(255, 244, 191, 1)",
+        "color-bg-surface-caution-active": "rgba(255, 239, 157, 1)",
+        "color-bg-surface-warning": "rgba(255, 241, 227, 1)",
+        "color-bg-surface-warning-hover": "rgba(255, 235, 213, 1)",
+        "color-bg-surface-warning-active": "rgba(255, 228, 198, 1)",
+        "color-bg-surface-critical": "rgba(254, 233, 232, 1)",
+        "color-bg-surface-critical-hover": "rgba(254, 226, 225, 1)",
+        "color-bg-surface-critical-active": "rgba(254, 218, 217, 1)",
+        "color-bg-surface-emphasis": "rgba(240, 242, 255, 1)",
+        "color-bg-surface-emphasis-hover": "rgba(234, 237, 255, 1)",
+        "color-bg-surface-emphasis-active": "rgba(226, 231, 255, 1)",
+        "color-bg-surface-magic": "rgba(248, 247, 255, 1)",
+        "color-bg-surface-magic-hover": "rgba(243, 241, 255, 1)",
+        "color-bg-surface-magic-active": "rgba(233, 229, 255, 1)",
+        "color-bg-surface-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-surface-transparent": "rgba(0, 0, 0, 0)",
+        "color-bg-fill": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-fill-active": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-selected": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-disabled": "rgba(0, 0, 0, 0.05)",
+        "color-bg-fill-secondary": "rgba(241, 241, 241, 1)",
+        "color-bg-fill-secondary-hover": "rgba(235, 235, 235, 1)",
+        "color-bg-fill-secondary-active": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary": "rgba(227, 227, 227, 1)",
+        "color-bg-fill-tertiary-hover": "rgba(212, 212, 212, 1)",
+        "color-bg-fill-tertiary-active": "rgba(204, 204, 204, 1)",
+        "color-bg-fill-brand": "rgba(255, 255, 255, 1)",
+        "color-bg-fill-brand-hover": "rgba(243, 243, 243, 1)",
+        "color-bg-fill-brand-active": "rgba(247, 247, 247, 1)",
+        "color-bg-fill-brand-selected": "rgba(212, 212, 212, 1)",
+        "color-bg-fill-brand-disabled": "rgba(0, 0, 0, 0.17)",
+        "color-bg-fill-info": "rgba(145, 208, 255, 1)",
+        "color-bg-fill-info-hover": "rgba(81, 192, 255, 1)",
+        "color-bg-fill-info-active": "rgba(0, 148, 213, 1)",
+        "color-bg-fill-info-secondary": "rgba(213, 235, 255, 1)",
+        "color-bg-fill-success": "rgba(41, 132, 90, 1)",
+        "color-bg-fill-success-hover": "rgba(19, 111, 69, 1)",
+        "color-bg-fill-success-active": "rgba(12, 81, 50, 1)",
+        "color-bg-fill-success-secondary": "rgba(180, 254, 210, 1)",
+        "color-bg-fill-warning": "rgba(255, 184, 0, 1)",
+        "color-bg-fill-warning-hover": "rgba(229, 165, 0, 1)",
+        "color-bg-fill-warning-active": "rgba(178, 132, 0, 1)",
+        "color-bg-fill-warning-secondary": "rgba(255, 214, 164, 1)",
+        "color-bg-fill-caution": "rgba(255, 230, 0, 1)",
+        "color-bg-fill-caution-hover": "rgba(234, 211, 0, 1)",
+        "color-bg-fill-caution-active": "rgba(225, 203, 0, 1)",
+        "color-bg-fill-caution-secondary": "rgba(255, 235, 120, 1)",
+        "color-bg-fill-critical": "rgba(229, 28, 0, 1)",
+        "color-bg-fill-critical-hover": "rgba(181, 38, 11, 1)",
+        "color-bg-fill-critical-active": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-selected": "rgba(142, 31, 11, 1)",
+        "color-bg-fill-critical-secondary": "rgba(254, 211, 209, 1)",
+        "color-bg-fill-emphasis": "rgba(0, 91, 211, 1)",
+        "color-bg-fill-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-bg-fill-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-bg-fill-magic": "rgba(128, 81, 255, 1)",
+        "color-bg-fill-magic-secondary": "rgba(233, 229, 255, 1)",
+        "color-bg-fill-magic-secondary-hover": "rgba(228, 222, 255, 1)",
+        "color-bg-fill-magic-secondary-active": "rgba(223, 217, 255, 1)",
+        "color-bg-fill-inverse": "rgba(48, 48, 48, 1)",
+        "color-bg-fill-inverse-hover": "rgba(74, 74, 74, 1)",
+        "color-bg-fill-inverse-active": "rgba(97, 97, 97, 1)",
+        "color-bg-fill-transparent": "rgba(255, 255, 255, 0.11)",
+        "color-bg-fill-transparent-hover": "rgba(255, 255, 255, 0.17)",
+        "color-bg-fill-transparent-active": "rgba(255, 255, 255, 0.20)",
+        "color-bg-fill-transparent-selected": "rgba(255, 255, 255, 0.28)",
+        "color-bg-fill-transparent-secondary": "rgba(0, 0, 0, 0.06)",
+        "color-bg-fill-transparent-secondary-hover": "rgba(0, 0, 0, 0.08)",
+        "color-bg-fill-transparent-secondary-active": "rgba(0, 0, 0, 0.11)",
+        "color-text": "rgba(227, 227, 227, 1)",
+        "color-text-secondary": "rgba(181, 181, 181, 1)",
+        "color-text-disabled": "rgba(181, 181, 181, 1)",
+        "color-text-link": "rgba(0, 91, 211, 1)",
+        "color-text-link-hover": "rgba(0, 66, 153, 1)",
+        "color-text-link-active": "rgba(0, 46, 106, 1)",
+        "color-text-brand": "rgba(74, 74, 74, 1)",
+        "color-text-brand-hover": "rgba(48, 48, 48, 1)",
+        "color-text-brand-on-bg-fill": "rgba(48, 48, 48, 1)",
+        "color-text-brand-on-bg-fill-hover": "rgba(227, 227, 227, 1)",
+        "color-text-brand-on-bg-fill-active": "rgba(204, 204, 204, 1)",
+        "color-text-brand-on-bg-fill-disabled": "rgba(255, 255, 255, 1)",
+        "color-text-info": "rgba(0, 58, 90, 1)",
+        "color-text-info-hover": "rgba(0, 58, 90, 1)",
+        "color-text-info-active": "rgba(0, 33, 51, 1)",
+        "color-text-info-secondary": "rgba(0, 124, 180, 1)",
+        "color-text-info-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-text-success": "rgba(12, 81, 50, 1)",
+        "color-text-success-hover": "rgba(8, 61, 37, 1)",
+        "color-text-success-active": "rgba(9, 42, 27, 1)",
+        "color-text-success-secondary": "rgba(41, 132, 90, 1)",
+        "color-text-success-on-bg-fill": "rgba(248, 255, 251, 1)",
+        "color-text-caution": "rgba(79, 71, 0, 1)",
+        "color-text-caution-hover": "rgba(51, 46, 0, 1)",
+        "color-text-caution-active": "rgba(31, 28, 0, 1)",
+        "color-text-caution-secondary": "rgba(130, 117, 0, 1)",
+        "color-text-caution-on-bg-fill": "rgba(51, 46, 0, 1)",
+        "color-text-warning": "rgba(94, 66, 0, 1)",
+        "color-text-warning-hover": "rgba(65, 45, 0, 1)",
+        "color-text-warning-active": "rgba(37, 26, 0, 1)",
+        "color-text-warning-secondary": "rgba(149, 111, 0, 1)",
+        "color-text-warning-on-bg-fill": "rgba(37, 26, 0, 1)",
+        "color-text-critical": "rgba(142, 31, 11, 1)",
+        "color-text-critical-hover": "rgba(95, 21, 7, 1)",
+        "color-text-critical-active": "rgba(47, 10, 4, 1)",
+        "color-text-critical-secondary": "rgba(229, 28, 0, 1)",
+        "color-text-critical-on-bg-fill": "rgba(255, 251, 251, 1)",
+        "color-text-emphasis": "rgba(0, 91, 211, 1)",
+        "color-text-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-text-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-text-emphasis-on-bg-fill": "rgba(252, 253, 255, 1)",
+        "color-text-emphasis-on-bg-fill-hover": "rgba(226, 231, 255, 1)",
+        "color-text-emphasis-on-bg-fill-active": "rgba(213, 220, 255, 1)",
+        "color-text-magic": "rgba(87, 0, 209, 1)",
+        "color-text-magic-secondary": "rgba(113, 38, 255, 1)",
+        "color-text-magic-on-bg-fill": "rgba(253, 253, 255, 1)",
+        "color-text-inverse": "rgba(227, 227, 227, 1)",
+        "color-text-inverse-secondary": "rgba(181, 181, 181, 1)",
+        "color-text-link-inverse": "rgba(197, 208, 255, 1)",
+        "color-border": "rgba(227, 227, 227, 1)",
+        "color-border-hover": "rgba(204, 204, 204, 1)",
+        "color-border-disabled": "rgba(235, 235, 235, 1)",
+        "color-border-secondary": "rgba(97, 97, 97, 1)",
+        "color-border-tertiary": "rgba(204, 204, 204, 1)",
+        "color-border-focus": "rgba(0, 91, 211, 1)",
+        "color-border-brand": "rgba(227, 227, 227, 1)",
+        "color-border-info": "rgba(168, 216, 255, 1)",
+        "color-border-success": "rgba(146, 254, 194, 1)",
+        "color-border-caution": "rgba(255, 235, 120, 1)",
+        "color-border-warning": "rgba(255, 200, 121, 1)",
+        "color-border-critical": "rgba(254, 195, 193, 1)",
+        "color-border-critical-secondary": "rgba(142, 31, 11, 1)",
+        "color-border-emphasis": "rgba(0, 91, 211, 1)",
+        "color-border-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-border-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-border-magic": "rgba(228, 222, 255, 1)",
+        "color-border-magic-secondary": "rgba(148, 116, 255, 1)",
+        "color-border-magic-secondary-hover": "rgba(128, 81, 255, 1)",
+        "color-border-inverse": "rgba(97, 97, 97, 1)",
+        "color-border-inverse-hover": "rgba(204, 204, 204, 1)",
+        "color-border-inverse-active": "rgba(227, 227, 227, 1)",
+        "color-tooltip-tail-down-border-experimental": "rgba(60, 60, 60, 1)",
+        "color-tooltip-tail-up-border-experimental": "rgba(71, 71, 71, 1)",
+        "color-border-gradient-experimental": "linear-gradient(to bottom, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.03))",
+        "color-border-gradient-hover-experimental": "linear-gradient(to bottom, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.03))",
+        "color-border-gradient-selected-experimental": "linear-gradient(to bottom, rgba(0, 0, 0, 0.20), rgba(255, 255, 255, 0.20))",
+        "color-border-gradient-active-experimental": "linear-gradient(to bottom, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.03))",
+        "color-icon": "rgba(227, 227, 227, 1)",
+        "color-icon-hover": "rgba(48, 48, 48, 1)",
+        "color-icon-active": "rgba(26, 26, 26, 1)",
+        "color-icon-disabled": "rgba(204, 204, 204, 1)",
+        "color-icon-secondary": "rgba(138, 138, 138, 1)",
+        "color-icon-secondary-hover": "rgba(97, 97, 97, 1)",
+        "color-icon-secondary-active": "rgba(74, 74, 74, 1)",
+        "color-icon-brand": "rgba(26, 26, 26, 1)",
+        "color-icon-info": "rgba(0, 148, 213, 1)",
+        "color-icon-success": "rgba(41, 132, 90, 1)",
+        "color-icon-caution": "rgba(153, 138, 0, 1)",
+        "color-icon-warning": "rgba(178, 132, 0, 1)",
+        "color-icon-critical": "rgba(239, 77, 47, 1)",
+        "color-icon-emphasis": "rgba(0, 91, 211, 1)",
+        "color-icon-emphasis-hover": "rgba(0, 66, 153, 1)",
+        "color-icon-emphasis-active": "rgba(0, 46, 106, 1)",
+        "color-icon-magic": "rgba(128, 81, 255, 1)",
+        "color-icon-inverse": "rgba(227, 227, 227, 1)",
+        "color-avatar-bg-fill": "rgba(181, 181, 181, 1)",
+        "color-avatar-five-bg-fill": "rgba(253, 75, 146, 1)",
+        "color-avatar-five-text-on-bg-fill": "rgba(255, 246, 248, 1)",
+        "color-avatar-four-bg-fill": "rgba(81, 192, 255, 1)",
+        "color-avatar-four-text-on-bg-fill": "rgba(0, 33, 51, 1)",
+        "color-avatar-one-bg-fill": "rgba(197, 48, 197, 1)",
+        "color-avatar-one-text-on-bg-fill": "rgba(253, 239, 253, 1)",
+        "color-avatar-seven-bg-fill": "rgba(148, 116, 255, 1)",
+        "color-avatar-seven-text-on-bg-fill": "rgba(248, 247, 255, 1)",
+        "color-avatar-six-bg-fill": "rgba(37, 232, 43, 1)",
+        "color-avatar-six-text-on-bg-fill": "rgba(3, 61, 5, 1)",
+        "color-avatar-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-avatar-three-bg-fill": "rgba(44, 224, 212, 1)",
+        "color-avatar-three-text-on-bg-fill": "rgba(3, 60, 57, 1)",
+        "color-avatar-two-bg-fill": "rgba(56, 250, 163, 1)",
+        "color-avatar-two-text-on-bg-fill": "rgba(12, 81, 50, 1)",
+        "color-backdrop-bg": "rgba(0, 0, 0, 0.71)",
+        "color-button-gradient-bg-fill": "linear-gradient(180deg, rgba(48, 48, 48, 0) 63.53%, rgba(255, 255, 255, 0.15) 100%)",
+        "color-checkbox-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-checkbox-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-input-bg-surface": "rgba(253, 253, 253, 1)",
+        "color-input-bg-surface-hover": "rgba(250, 250, 250, 1)",
+        "color-input-bg-surface-active": "rgba(247, 247, 247, 1)",
+        "color-input-border": "rgba(138, 138, 138, 1)",
+        "color-input-border-hover": "rgba(97, 97, 97, 1)",
+        "color-input-border-active": "rgba(26, 26, 26, 1)",
+        "color-nav-bg": "rgba(235, 235, 235, 1)",
+        "color-nav-bg-surface": "rgba(0, 0, 0, 0.02)",
+        "color-nav-bg-surface-hover": "rgba(241, 241, 241, 1)",
+        "color-nav-bg-surface-active": "rgba(250, 250, 250, 1)",
+        "color-nav-bg-surface-selected": "rgba(250, 250, 250, 1)",
+        "color-radio-button-bg-surface-disabled": "rgba(0, 0, 0, 0.08)",
+        "color-radio-button-icon-disabled": "rgba(255, 255, 255, 1)",
+        "color-video-thumbnail-play-button-bg-fill-hover": "rgba(0, 0, 0, 0.81)",
+        "color-video-thumbnail-play-button-bg-fill": "rgba(0, 0, 0, 0.71)",
+        "color-video-thumbnail-play-button-text-on-bg-fill": "rgba(255, 255, 255, 1)",
+        "color-scrollbar-thumb-bg-hover": "rgba(138, 138, 138, 1)"
+      },
+      "font": {
+        "font-family-sans": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "font-family-mono": "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace",
+        "font-size-275": "0.6875rem",
+        "font-size-300": "0.75rem",
+        "font-size-325": "0.8125rem",
+        "font-size-350": "0.875rem",
+        "font-size-400": "1rem",
+        "font-size-450": "1.125rem",
+        "font-size-500": "1.25rem",
+        "font-size-550": "1.375rem",
+        "font-size-600": "1.5rem",
+        "font-size-750": "1.875rem",
+        "font-size-800": "2rem",
+        "font-size-900": "2.25rem",
+        "font-size-1000": "2.5rem",
+        "font-weight-regular": "450",
+        "font-weight-medium": "550",
+        "font-weight-semibold": "650",
+        "font-weight-bold": "700",
+        "font-letter-spacing-densest": "-0.03375rem",
+        "font-letter-spacing-denser": "-0.01875rem",
+        "font-letter-spacing-dense": "-0.0125rem",
+        "font-letter-spacing-normal": "0rem",
+        "font-line-height-300": "0.75rem",
+        "font-line-height-400": "1rem",
+        "font-line-height-500": "1.25rem",
+        "font-line-height-600": "1.5rem",
+        "font-line-height-700": "1.75rem",
+        "font-line-height-800": "2rem",
+        "font-line-height-1000": "2.5rem",
+        "font-line-height-1200": "3rem"
+      },
+      "height": {
+        "height-0": "0rem",
+        "height-025": "0.0625rem",
+        "height-050": "0.125rem",
+        "height-100": "0.25rem",
+        "height-150": "0.375rem",
+        "height-200": "0.5rem",
+        "height-300": "0.75rem",
+        "height-400": "1rem",
+        "height-500": "1.25rem",
+        "height-600": "1.5rem",
+        "height-700": "1.75rem",
+        "height-800": "2rem",
+        "height-900": "2.25rem",
+        "height-1000": "2.5rem",
+        "height-1200": "3rem",
+        "height-1600": "4rem",
+        "height-2000": "5rem",
+        "height-2400": "6rem",
+        "height-2800": "7rem",
+        "height-3200": "8rem"
+      },
+      "motion": {
+        "motion-duration-0": "0ms",
+        "motion-duration-50": "50ms",
+        "motion-duration-100": "100ms",
+        "motion-duration-150": "150ms",
+        "motion-duration-200": "200ms",
+        "motion-duration-250": "250ms",
+        "motion-duration-300": "300ms",
+        "motion-duration-350": "350ms",
+        "motion-duration-400": "400ms",
+        "motion-duration-450": "450ms",
+        "motion-duration-500": "500ms",
+        "motion-duration-5000": "5000ms",
+        "motion-ease": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "motion-ease-in": "cubic-bezier(0.42, 0, 1, 1)",
+        "motion-ease-out": "cubic-bezier(0.19, 0.91, 0.38, 1)",
+        "motion-ease-in-out": "cubic-bezier(0.42, 0, 0.58, 1)",
+        "motion-linear": "cubic-bezier(0, 0, 1, 1)",
+        "motion-keyframes-bounce": "{ from, 65%, 85% { transform: scale(1) } 75% { transform: scale(0.85) } 82.5% { transform: scale(1.05) } }",
+        "motion-keyframes-fade-in": "{ to { opacity: 1 } }",
+        "motion-keyframes-pulse": "{ from, 75% { transform: scale(0.85); opacity: 1; } to { transform: scale(2.5); opacity: 0; } }",
+        "motion-keyframes-spin": "{ to { transform: rotate(1turn) } }",
+        "motion-keyframes-appear-above": "{ from { transform: translateY(var(--p-space-100)); opacity: 0; } to { transform: none; opacity: 1; } }",
+        "motion-keyframes-appear-below": "{ from { transform: translateY(calc(var(--p-space-100) * -1)); opacity: 0; } to { transform: none; opacity: 1; } }"
+      },
+      "shadow": {
+        "shadow-0": "none",
+        "shadow-100": "0rem 0.0625rem 0rem 0rem rgba(26, 26, 26, 0.07)",
+        "shadow-200": "0rem 0.1875rem 0.0625rem -0.0625rem rgba(26, 26, 26, 0.07)",
+        "shadow-300": "0rem 0.25rem 0.375rem -0.125rem rgba(26, 26, 26, 0.20)",
+        "shadow-400": "0rem 0.5rem 1rem -0.25rem rgba(26, 26, 26, 0.22)",
+        "shadow-500": "0rem 0.75rem 1.25rem -0.5rem rgba(26, 26, 26, 0.24)",
+        "shadow-600": "0rem 1.25rem 1.25rem -0.5rem rgba(26, 26, 26, 0.28)",
+        "shadow-bevel-100": "0.0625rem 0rem 0rem 0rem rgba(204, 204, 204, 0.08) inset, -0.0625rem 0rem 0rem 0rem rgba(204, 204, 204, 0.08) inset, 0rem -0.0625rem 0rem 0rem rgba(204, 204, 204, 0.08) inset, 0rem 0.0625rem 0rem 0rem rgba(204, 204, 204, 0.16) inset",
+        "shadow-inset-100": "0rem 0.0625rem 0.125rem 0rem rgba(26, 26, 26, 0.15) inset, 0rem 0.0625rem 0.0625rem 0rem rgba(26, 26, 26, 0.15) inset",
+        "shadow-inset-200": "0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.20) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset, -0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.12) inset",
+        "shadow-button": "0rem -0.0625rem 0rem 0rem #b5b5b5 inset, 0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.1) inset, 0rem 0.03125rem 0rem 0.09375rem #FFF inset",
+        "shadow-button-hover": "0rem 0.0625rem 0rem 0rem #EBEBEB inset, -0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0.0625rem 0rem 0rem 0rem #EBEBEB inset, 0rem -0.0625rem 0rem 0rem #CCC inset",
+        "shadow-button-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(26, 26, 26, 0.122) inset, 0rem 0.125rem 0.0625rem 0rem rgba(26, 26, 26, 0.2) inset",
+        "shadow-button-primary": "0rem -0.0625rem 0rem 0.0625rem rgba(0, 0, 0, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(48, 48, 48, 1) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.25) inset;",
+        "shadow-button-primary-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.24) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.0625rem 0rem 0rem #000 inset, 0rem -0.0625rem 0rem 0.0625rem #1A1A1A",
+        "shadow-button-primary-inset": "0rem 0.1875rem 0rem 0rem rgb(0, 0, 0) inset",
+        "shadow-button-primary-critical": "0rem -0.0625rem 0rem 0.0625rem rgba(142, 31, 11, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(181, 38, 11, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.349) inset",
+        "shadow-button-primary-critical-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-critical-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-button-primary-success": "0rem -0.0625rem 0rem 0.0625rem rgba(12, 81, 50, 0.8) inset, 0rem 0rem 0rem 0.0625rem rgba(19, 111, 69, 0.8) inset, 0rem 0.03125rem 0rem 0.09375rem rgba(255, 255, 255, 0.251) inset",
+        "shadow-button-primary-success-hover": "0rem 0.0625rem 0rem 0rem rgba(255, 255, 255, 0.48) inset, 0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, -0.0625rem 0rem 0rem 0rem rgba(255, 255, 255, 0.20) inset, 0rem -0.09375rem 0rem 0rem rgba(0, 0, 0, 0.25) inset",
+        "shadow-button-primary-success-inset": "-0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0.0625rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.2) inset, 0rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.6) inset",
+        "shadow-border-inset": "0rem 0rem 0rem 0.0625rem rgba(0, 0, 0, 0.08) inset"
+      },
+      "space": {
+        "space-0": "0rem",
+        "space-025": "0.0625rem",
+        "space-050": "0.125rem",
+        "space-100": "0.25rem",
+        "space-150": "0.375rem",
+        "space-200": "0.5rem",
+        "space-300": "0.75rem",
+        "space-400": "1rem",
+        "space-500": "1.25rem",
+        "space-600": "1.5rem",
+        "space-800": "2rem",
+        "space-1000": "2.5rem",
+        "space-1200": "3rem",
+        "space-1600": "4rem",
+        "space-2000": "5rem",
+        "space-2400": "6rem",
+        "space-2800": "7rem",
+        "space-3200": "8rem",
+        "space-button-group-gap": "0.5rem",
+        "space-card-gap": "1rem",
+        "space-card-padding": "1rem",
+        "space-table-cell-padding": "0.375rem"
+      },
+      "text": {
+        "text-heading-3xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-3xl-font-size": "2.25rem",
+        "text-heading-3xl-font-weight": "700",
+        "text-heading-3xl-font-letter-spacing": "-0.03375rem",
+        "text-heading-3xl-font-line-height": "3rem",
+        "text-heading-2xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-2xl-font-size": "1.875rem",
+        "text-heading-2xl-font-weight": "700",
+        "text-heading-2xl-font-letter-spacing": "-0.01875rem",
+        "text-heading-2xl-font-line-height": "2.5rem",
+        "text-heading-xl-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xl-font-size": "1.5rem",
+        "text-heading-xl-font-weight": "700",
+        "text-heading-xl-font-letter-spacing": "-0.0125rem",
+        "text-heading-xl-font-line-height": "2rem",
+        "text-heading-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-lg-font-size": "1.25rem",
+        "text-heading-lg-font-weight": "650",
+        "text-heading-lg-font-letter-spacing": "-0.0125rem",
+        "text-heading-lg-font-line-height": "1.5rem",
+        "text-heading-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-md-font-size": "0.875rem",
+        "text-heading-md-font-weight": "650",
+        "text-heading-md-font-letter-spacing": "0rem",
+        "text-heading-md-font-line-height": "1.25rem",
+        "text-heading-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-sm-font-size": "0.8125rem",
+        "text-heading-sm-font-weight": "650",
+        "text-heading-sm-font-letter-spacing": "0rem",
+        "text-heading-sm-font-line-height": "1.25rem",
+        "text-heading-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-heading-xs-font-size": "0.75rem",
+        "text-heading-xs-font-weight": "650",
+        "text-heading-xs-font-letter-spacing": "0rem",
+        "text-heading-xs-font-line-height": "1rem",
+        "text-body-lg-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-lg-font-size": "0.875rem",
+        "text-body-lg-font-weight": "450",
+        "text-body-lg-font-letter-spacing": "0rem",
+        "text-body-lg-font-line-height": "1.25rem",
+        "text-body-md-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-md-font-size": "0.8125rem",
+        "text-body-md-font-weight": "450",
+        "text-body-md-font-letter-spacing": "0rem",
+        "text-body-md-font-line-height": "1.25rem",
+        "text-body-sm-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-sm-font-size": "0.75rem",
+        "text-body-sm-font-weight": "450",
+        "text-body-sm-font-letter-spacing": "0rem",
+        "text-body-sm-font-line-height": "1rem",
+        "text-body-xs-font-family": "'Inter', -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
+        "text-body-xs-font-size": "0.6875rem",
+        "text-body-xs-font-weight": "450",
+        "text-body-xs-font-letter-spacing": "0rem",
+        "text-body-xs-font-line-height": "0.75rem"
+      },
+      "width": {
+        "width-0": "0rem",
+        "width-025": "0.0625rem",
+        "width-050": "0.125rem",
+        "width-100": "0.25rem",
+        "width-150": "0.375rem",
+        "width-200": "0.5rem",
+        "width-300": "0.75rem",
+        "width-400": "1rem",
+        "width-500": "1.25rem",
+        "width-600": "1.5rem",
+        "width-700": "1.75rem",
+        "width-800": "2rem",
+        "width-900": "2.25rem",
+        "width-1000": "2.5rem",
+        "width-1200": "3rem",
+        "width-1600": "4rem",
+        "width-2000": "5rem",
+        "width-2400": "6rem",
+        "width-2800": "7rem",
+        "width-3200": "8rem"
+      },
+      "zIndex": {
+        "z-index-0": "auto",
+        "z-index-1": "100",
+        "z-index-2": "400",
+        "z-index-3": "510",
+        "z-index-4": "512",
+        "z-index-5": "513",
+        "z-index-6": "514",
+        "z-index-7": "515",
+        "z-index-8": "516",
+        "z-index-9": "517",
+        "z-index-10": "518",
+        "z-index-11": "519",
+        "z-index-12": "520"
+      }
+    }
+  };
+  var themeDefault = themes[themeNameDefault];
+  createIsTokenName(themes[themeNameDefault]);
+  const ThemeContext = /* @__PURE__ */ React2.createContext(null);
+  const ThemeNameContext = /* @__PURE__ */ React2.createContext(null);
+  function getTheme(themeName) {
+    return themes[themeName];
+  }
+  function useTheme() {
+    const theme = React2.useContext(ThemeContext);
+    if (!theme) {
+      throw new Error("No theme was provided. Your application must be wrapped in an <AppProvider> or <ThemeProvider> component. See https://polaris.shopify.com/components/app-provider for implementation instructions.");
+    }
+    return theme;
+  }
+  function useThemeName() {
+    const themeName = React2.useContext(ThemeNameContext);
+    if (!themeName) {
+      throw new Error("No themeName was provided. Your application must be wrapped in an <AppProvider> or <ThemeProvider> component. See https://polaris.shopify.com/components/app-provider for implementation instructions.");
+    }
+    return themeName;
+  }
+  function isObject(value) {
+    const type = typeof value;
+    return value != null && (type === "object" || type === "function");
+  }
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
+  function variationName(name, value) {
+    return `${name}${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+  }
+  function sanitizeCustomProperties(styles2) {
+    const nonNullValues = Object.entries(styles2).filter(([_, value]) => value != null);
+    return nonNullValues.length ? Object.fromEntries(nonNullValues) : void 0;
+  }
+  function getResponsiveProps(componentName, componentProp, tokenSubgroup, responsiveProp) {
+    if (!responsiveProp) return {};
+    let result;
+    if (!isObject(responsiveProp)) {
+      result = {
+        [breakpointsAliases[0]]: `var(--p-${tokenSubgroup}-${responsiveProp})`
+      };
+    } else {
+      result = Object.fromEntries(Object.entries(responsiveProp).map(([breakpointAlias, aliasOrScale]) => [breakpointAlias, `var(--p-${tokenSubgroup}-${aliasOrScale})`]));
+    }
+    return Object.fromEntries(Object.entries(result).map(([breakpointAlias, value]) => [`--pc-${componentName}-${componentProp}-${breakpointAlias}`, value]));
+  }
+  function getResponsiveValue(componentName, componentProp, responsiveProp) {
+    if (!responsiveProp) return {};
+    if (!isObject(responsiveProp)) {
+      return {
+        [`--pc-${componentName}-${componentProp}-${breakpointsAliases[0]}`]: responsiveProp
+      };
+    }
+    return Object.fromEntries(Object.entries(responsiveProp).map(([breakpointAlias, responsiveValue]) => [`--pc-${componentName}-${componentProp}-${breakpointAlias}`, responsiveValue]));
+  }
+  var styles$f = {
+    "themeContainer": "Polaris-ThemeProvider--themeContainer"
+  };
+  const themeNamesLocal = ["light", "dark-experimental"];
+  const isThemeNameLocal = (name) => themeNamesLocal.includes(name);
+  function ThemeProvider(props) {
+    const {
+      as: ThemeContainer = "div",
+      children,
+      className,
+      theme: themeName = themeNameDefault
+    } = props;
+    return /* @__PURE__ */ React2.createElement(ThemeNameContext.Provider, {
+      value: themeName
+    }, /* @__PURE__ */ React2.createElement(ThemeContext.Provider, {
+      value: getTheme(themeName)
+    }, /* @__PURE__ */ React2.createElement(ThemeContainer, {
+      "data-portal-id": props["data-portal-id"],
+      className: classNames(createThemeClassName(themeName), styles$f.themeContainer, className)
+    }, children)));
+  }
+  const WithinContentContext = /* @__PURE__ */ React2.createContext(false);
+  const isServer = typeof window === "undefined" || typeof document === "undefined";
+  const useIsomorphicLayoutEffect = isServer ? React2.useEffect : React2.useLayoutEffect;
+  function useEventListener(eventName, handler, target, options) {
+    const handlerRef = React2.useRef(handler);
+    const optionsRef = React2.useRef(options);
+    useIsomorphicLayoutEffect(() => {
+      handlerRef.current = handler;
+    }, [handler]);
+    useIsomorphicLayoutEffect(() => {
+      optionsRef.current = options;
+    }, [options]);
+    React2.useEffect(() => {
+      let targetElement;
+      {
+        targetElement = window;
+      }
+      const eventOptions = optionsRef.current;
+      const eventListener = (event) => handlerRef.current(event);
+      targetElement.addEventListener(eventName, eventListener, eventOptions);
+      return () => {
+        targetElement.removeEventListener(eventName, eventListener, eventOptions);
+      };
+    }, [eventName, target]);
+  }
+  const Breakpoints = {
+    // TODO: Update to lgDown
+    stackedContent: "1039.95px"
+  };
+  const noWindowMatches = {
+    media: "",
+    addListener: noop$2,
+    removeListener: noop$2,
+    matches: false,
+    onchange: noop$2,
+    addEventListener: noop$2,
+    removeEventListener: noop$2,
+    dispatchEvent: (_) => true
+  };
+  function noop$2() {
+  }
+  function stackedContent() {
+    return typeof window === "undefined" ? noWindowMatches : window.matchMedia(`(max-width: ${Breakpoints.stackedContent})`);
+  }
+  const breakpointsQueryEntries = getBreakpointsQueryEntries(themeDefault.breakpoints);
+  function getMatches(defaults, forceDefaults) {
+    if (!isServer && !forceDefaults) {
+      return Object.fromEntries(breakpointsQueryEntries.map(([directionAlias, query]) => [directionAlias, window.matchMedia(query).matches]));
+    }
+    return Object.fromEntries(breakpointsQueryEntries.map(([directionAlias]) => [directionAlias, false]));
+  }
+  function useBreakpoints(options) {
+    const [breakpoints2, setBreakpoints] = React2.useState(getMatches(options?.defaults, true));
+    useIsomorphicLayoutEffect(() => {
+      const mediaQueryLists = breakpointsQueryEntries.map(([_, query]) => window.matchMedia(query));
+      const handler = () => setBreakpoints(getMatches());
+      mediaQueryLists.forEach((mql) => {
+        if (mql.addListener) {
+          mql.addListener(handler);
+        } else {
+          mql.addEventListener("change", handler);
+        }
+      });
+      handler();
+      return () => {
+        mediaQueryLists.forEach((mql) => {
+          if (mql.removeListener) {
+            mql.removeListener(handler);
+          } else {
+            mql.removeEventListener("change", handler);
+          }
+        });
+      };
+    }, []);
+    return breakpoints2;
+  }
+  function getBreakpointsQueryEntries(breakpoints2) {
+    const mediaConditionEntries = Object.entries(getMediaConditions(breakpoints2));
+    return mediaConditionEntries.map(([breakpointsToken, mediaConditions]) => Object.entries(mediaConditions).map(([direction, mediaCondition]) => {
+      const breakpointsAlias = breakpointsToken.split("-")[1];
+      const directionAlias = `${breakpointsAlias}${capitalize(direction)}`;
+      return [directionAlias, mediaCondition];
+    })).flat();
+  }
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+  function debounce(func, waitArg, options) {
+    let lastArgs;
+    let lastThis;
+    let maxWait;
+    let result;
+    let timerId;
+    let lastCallTime;
+    let lastInvokeTime = 0;
+    let leading = false;
+    let maxing = false;
+    let trailing = true;
+    const useRAF = !waitArg && waitArg !== 0;
+    if (typeof func !== "function") {
+      throw new TypeError("Expected a function");
+    }
+    const wait = waitArg || 0;
+    if (typeof options === "object") {
+      leading = Boolean(options.leading);
+      maxing = "maxWait" in options;
+      maxWait = maxing ? Math.max(Number(options.maxWait) || 0, wait) : void 0;
+      trailing = "trailing" in options ? Boolean(options.trailing) : trailing;
+    }
+    function invokeFunc(time) {
+      const args = lastArgs;
+      const thisArg = lastThis;
+      lastArgs = void 0;
+      lastThis = void 0;
+      lastInvokeTime = time;
+      result = func.apply(thisArg, args);
+      return result;
+    }
+    function startTimer(pendingFunc, wait2) {
+      if (useRAF) {
+        cancelAnimationFrame(timerId);
+        return requestAnimationFrame(pendingFunc);
+      }
+      return setTimeout(pendingFunc, wait2);
+    }
+    function cancelTimer(id) {
+      if (useRAF) {
+        return cancelAnimationFrame(id);
+      }
+      clearTimeout(id);
+    }
+    function leadingEdge(time) {
+      lastInvokeTime = time;
+      timerId = startTimer(timerExpired, wait);
+      return leading ? invokeFunc(time) : result;
+    }
+    function remainingWait(time) {
+      const timeSinceLastCall = time - lastCallTime;
+      const timeSinceLastInvoke = time - lastInvokeTime;
+      const timeWaiting = wait - timeSinceLastCall;
+      return maxing && maxWait ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+    }
+    function shouldInvoke(time) {
+      const timeSinceLastCall = time - lastCallTime;
+      const timeSinceLastInvoke = time - lastInvokeTime;
+      return lastCallTime === void 0 || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && maxWait && timeSinceLastInvoke >= maxWait;
+    }
+    function timerExpired() {
+      const time = Date.now();
+      if (shouldInvoke(time)) {
+        return trailingEdge(time);
+      }
+      timerId = startTimer(timerExpired, remainingWait(time));
+    }
+    function trailingEdge(time) {
+      timerId = void 0;
+      if (trailing && lastArgs) {
+        return invokeFunc(time);
+      }
+      lastArgs = lastThis = void 0;
+      return result;
+    }
+    function cancel() {
+      if (timerId !== void 0) {
+        cancelTimer(timerId);
+      }
+      lastInvokeTime = 0;
+      lastArgs = lastCallTime = lastThis = timerId = void 0;
+    }
+    function flush() {
+      return timerId === void 0 ? result : trailingEdge(Date.now());
+    }
+    function pending() {
+      return timerId !== void 0;
+    }
+    function debounced(...args) {
+      const time = Date.now();
+      const isInvoking = shouldInvoke(time);
+      lastArgs = args;
+      lastThis = this;
+      lastCallTime = time;
+      if (isInvoking) {
+        if (timerId === void 0) {
+          return leadingEdge(lastCallTime);
+        }
+        if (maxing) {
+          timerId = startTimer(timerExpired, wait);
+          return invokeFunc(lastCallTime);
+        }
+      }
+      if (timerId === void 0) {
+        timerId = startTimer(timerExpired, wait);
+      }
+      return result;
+    }
+    debounced.cancel = cancel;
+    debounced.flush = flush;
+    debounced.pending = pending;
+    return debounced;
+  }
+  class Rect {
+    static get zero() {
+      return new Rect();
+    }
+    constructor({
+      top = 0,
+      left = 0,
+      width: width2 = 0,
+      height: height2 = 0
+    } = {}) {
+      this.top = top;
+      this.left = left;
+      this.width = width2;
+      this.height = height2;
+    }
+    get center() {
+      return {
+        x: this.left + this.width / 2,
+        y: this.top + this.height / 2
+      };
+    }
+  }
+  function getRectForNode(node) {
+    if (!(node instanceof Element)) {
+      return new Rect({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    }
+    const rect = node.getBoundingClientRect();
+    return new Rect({
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height
+    });
+  }
+  const SIXTY_FPS = 1e3 / 60;
+  class StickyManager {
+    constructor(container) {
+      this.stickyItems = [];
+      this.stuckItems = [];
+      this.container = null;
+      this.topBarOffset = 0;
+      this.handleResize = debounce(() => {
+        this.manageStickyItems();
+      }, SIXTY_FPS, {
+        leading: true,
+        trailing: true,
+        maxWait: SIXTY_FPS
+      });
+      this.handleScroll = debounce(() => {
+        this.manageStickyItems();
+      }, SIXTY_FPS, {
+        leading: true,
+        trailing: true,
+        maxWait: SIXTY_FPS
+      });
+      if (container) {
+        this.setContainer(container);
+      }
+    }
+    registerStickyItem(stickyItem) {
+      this.stickyItems.push(stickyItem);
+    }
+    unregisterStickyItem(nodeToRemove) {
+      const nodeIndex = this.stickyItems.findIndex(({
+        stickyNode
+      }) => nodeToRemove === stickyNode);
+      this.stickyItems.splice(nodeIndex, 1);
+    }
+    setContainer(el) {
+      this.container = el;
+      if (isDocument(el)) {
+        this.setTopBarOffset(el);
+      }
+      this.container.addEventListener("scroll", this.handleScroll);
+      window.addEventListener("resize", this.handleResize);
+      this.manageStickyItems();
+    }
+    removeScrollListener() {
+      if (this.container) {
+        this.container.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener("resize", this.handleResize);
+      }
+    }
+    manageStickyItems() {
+      if (this.stickyItems.length <= 0) {
+        return;
+      }
+      const scrollTop = this.container ? scrollTopFor(this.container) : 0;
+      const containerTop = getRectForNode(this.container).top + this.topBarOffset;
+      this.stickyItems.forEach((stickyItem) => {
+        const {
+          handlePositioning
+        } = stickyItem;
+        const {
+          sticky,
+          top,
+          left,
+          width: width2
+        } = this.evaluateStickyItem(stickyItem, scrollTop, containerTop);
+        this.updateStuckItems(stickyItem, sticky);
+        handlePositioning(sticky, top, left, width2);
+      });
+    }
+    evaluateStickyItem(stickyItem, scrollTop, containerTop) {
+      const {
+        stickyNode,
+        placeHolderNode,
+        boundingElement,
+        offset,
+        disableWhenStacked
+      } = stickyItem;
+      if (disableWhenStacked && stackedContent().matches) {
+        return {
+          sticky: false,
+          top: 0,
+          left: 0,
+          width: "auto"
+        };
+      }
+      const stickyOffset = offset ? this.getOffset(stickyNode) + parseInt(
+        // Important: This will not update when the active theme changes.
+        // Update this to `useTheme` once converted to a function component.
+        themeDefault.space["space-500"],
+        10
+      ) : this.getOffset(stickyNode);
+      const scrollPosition = scrollTop + stickyOffset;
+      const placeHolderNodeCurrentTop = placeHolderNode.getBoundingClientRect().top - containerTop + scrollTop;
+      const top = containerTop + stickyOffset;
+      const width2 = placeHolderNode.getBoundingClientRect().width;
+      const left = placeHolderNode.getBoundingClientRect().left;
+      let sticky;
+      if (boundingElement == null) {
+        sticky = scrollPosition >= placeHolderNodeCurrentTop;
+      } else {
+        const stickyItemHeight = stickyNode.getBoundingClientRect().height || stickyNode.firstElementChild?.getBoundingClientRect().height || 0;
+        const stickyItemBottomPosition = boundingElement.getBoundingClientRect().bottom - stickyItemHeight + scrollTop - containerTop;
+        sticky = scrollPosition >= placeHolderNodeCurrentTop && scrollPosition < stickyItemBottomPosition;
+      }
+      return {
+        sticky,
+        top,
+        left,
+        width: width2
+      };
+    }
+    updateStuckItems(item, sticky) {
+      const {
+        stickyNode
+      } = item;
+      if (sticky && !this.isNodeStuck(stickyNode)) {
+        this.addStuckItem(item);
+      } else if (!sticky && this.isNodeStuck(stickyNode)) {
+        this.removeStuckItem(item);
+      }
+    }
+    addStuckItem(stickyItem) {
+      this.stuckItems.push(stickyItem);
+    }
+    removeStuckItem(stickyItem) {
+      const {
+        stickyNode: nodeToRemove
+      } = stickyItem;
+      const nodeIndex = this.stuckItems.findIndex(({
+        stickyNode
+      }) => nodeToRemove === stickyNode);
+      this.stuckItems.splice(nodeIndex, 1);
+    }
+    getOffset(node) {
+      if (this.stuckItems.length === 0) {
+        return 0;
+      }
+      let offset = 0;
+      let count = 0;
+      const stuckNodesLength = this.stuckItems.length;
+      const nodeRect = getRectForNode(node);
+      while (count < stuckNodesLength) {
+        const stuckNode = this.stuckItems[count].stickyNode;
+        if (stuckNode !== node) {
+          const stuckNodeRect = getRectForNode(stuckNode);
+          if (!horizontallyOverlaps(nodeRect, stuckNodeRect)) {
+            offset += getRectForNode(stuckNode).height;
+          }
+        } else {
+          break;
+        }
+        count++;
+      }
+      return offset;
+    }
+    isNodeStuck(node) {
+      const nodeFound = this.stuckItems.findIndex(({
+        stickyNode
+      }) => node === stickyNode);
+      return nodeFound >= 0;
+    }
+    setTopBarOffset(container) {
+      const topbarElement = container.querySelector(`:not(${scrollable.selector}) ${dataPolarisTopBar.selector}`);
+      this.topBarOffset = topbarElement ? topbarElement.clientHeight : 0;
+    }
+  }
+  function isDocument(node) {
+    return node === document;
+  }
+  function scrollTopFor(container) {
+    return isDocument(container) ? document.body.scrollTop || document.documentElement.scrollTop : container.scrollTop;
+  }
+  function horizontallyOverlaps(rect1, rect2) {
+    const rect1Left = rect1.left;
+    const rect1Right = rect1.left + rect1.width;
+    const rect2Left = rect2.left;
+    const rect2Right = rect2.left + rect2.width;
+    return rect2Right < rect1Left || rect1Right < rect2Left;
+  }
+  const I18nContext = /* @__PURE__ */ React2.createContext(void 0);
+  const ScrollLockManagerContext = /* @__PURE__ */ React2.createContext(void 0);
+  const StickyManagerContext = /* @__PURE__ */ React2.createContext(void 0);
+  const LinkContext = /* @__PURE__ */ React2.createContext(void 0);
+  class EventListener extends React2.PureComponent {
+    componentDidMount() {
+      this.attachListener();
+    }
+    componentDidUpdate({
+      passive,
+      ...detachProps
+    }) {
+      this.detachListener(detachProps);
+      this.attachListener();
+    }
+    componentWillUnmount() {
+      this.detachListener();
+    }
+    render() {
+      return null;
+    }
+    attachListener() {
+      const {
+        event,
+        handler,
+        capture,
+        passive
+      } = this.props;
+      window.addEventListener(event, handler, {
+        capture,
+        passive
+      });
+    }
+    detachListener(prevProps) {
+      const {
+        event,
+        handler,
+        capture
+      } = prevProps || this.props;
+      window.removeEventListener(event, handler, capture);
+    }
+  }
+  function useIsAfterInitialMount() {
+    const [isAfterInitialMount, setIsAfterInitialMount] = React2.useState(false);
+    React2.useEffect(() => {
+      setIsAfterInitialMount(true);
+    }, []);
+    return isAfterInitialMount;
+  }
+  const PortalsManagerContext = /* @__PURE__ */ React2.createContext(void 0);
+  const FocusManagerContext = /* @__PURE__ */ React2.createContext(void 0);
+  var SvgAlertDiamondIcon = function SvgAlertDiamondIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      d: "M10 6a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5a.75.75 0 0 1 .75-.75Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      d: "M11 13a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M11.237 3.177a1.75 1.75 0 0 0-2.474 0l-5.586 5.585a1.75 1.75 0 0 0 0 2.475l5.586 5.586a1.75 1.75 0 0 0 2.474 0l5.586-5.586a1.75 1.75 0 0 0 0-2.475l-5.586-5.585Zm-1.414 1.06a.25.25 0 0 1 .354 0l5.586 5.586a.25.25 0 0 1 0 .354l-5.586 5.585a.25.25 0 0 1-.354 0l-5.586-5.585a.25.25 0 0 1 0-.354l5.586-5.586Z"
+    }));
+  };
+  SvgAlertDiamondIcon.displayName = "AlertDiamondIcon";
+  var SvgAlertTriangleIcon = function SvgAlertTriangleIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      d: "M10 6.75a.75.75 0 0 1 .75.75v3.5a.75.75 0 1 1-1.5 0v-3.5a.75.75 0 0 1 .75-.75Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      d: "M11 13.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M10 3.5c-1.045 0-1.784.702-2.152 1.447a449.26 449.26 0 0 1-2.005 3.847l-.028.052a403.426 403.426 0 0 0-2.008 3.856c-.372.752-.478 1.75.093 2.614.57.863 1.542 1.184 2.464 1.184h7.272c.922 0 1.895-.32 2.464-1.184.57-.864.465-1.862.093-2.614-.21-.424-1.113-2.147-2.004-3.847l-.032-.061a429.497 429.497 0 0 1-2.005-3.847c-.368-.745-1.107-1.447-2.152-1.447Zm-.808 2.112c.404-.816 1.212-.816 1.616 0 .202.409 1.112 2.145 2.022 3.88a418.904 418.904 0 0 1 2.018 3.875c.404.817 0 1.633-1.212 1.633h-7.272c-1.212 0-1.617-.816-1.212-1.633.202-.408 1.113-2.147 2.023-3.883a421.932 421.932 0 0 0 2.017-3.872Z"
+    }));
+  };
+  SvgAlertTriangleIcon.displayName = "AlertTriangleIcon";
+  var SvgCheckIcon = function SvgCheckIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M15.78 5.97a.75.75 0 0 1 0 1.06l-6.5 6.5a.75.75 0 0 1-1.06 0l-3.25-3.25a.75.75 0 1 1 1.06-1.06l2.72 2.72 5.97-5.97a.75.75 0 0 1 1.06 0Z"
+    }));
+  };
+  SvgCheckIcon.displayName = "CheckIcon";
+  var SvgChevronDownIcon = function SvgChevronDownIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M5.72 8.47a.75.75 0 0 1 1.06 0l3.47 3.47 3.47-3.47a.75.75 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06Z"
+    }));
+  };
+  SvgChevronDownIcon.displayName = "ChevronDownIcon";
+  var SvgChevronUpIcon = function SvgChevronUpIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M14.53 12.28a.75.75 0 0 1-1.06 0l-3.47-3.47-3.47 3.47a.75.75 0 0 1-1.06-1.06l4-4a.75.75 0 0 1 1.06 0l4 4a.75.75 0 0 1 0 1.06Z"
+    }));
+  };
+  SvgChevronUpIcon.displayName = "ChevronUpIcon";
+  var SvgInfoIcon = function SvgInfoIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      d: "M10 14a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v3.5a.75.75 0 0 1-.75.75Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      d: "M9 7a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      fillRule: "evenodd",
+      d: "M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Zm-1.5 0a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"
+    }));
+  };
+  SvgInfoIcon.displayName = "InfoIcon";
+  var SvgSelectIcon = function SvgSelectIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      d: "M10.884 4.323a1.25 1.25 0 0 0-1.768 0l-2.646 2.647a.75.75 0 0 0 1.06 1.06l2.47-2.47 2.47 2.47a.75.75 0 1 0 1.06-1.06l-2.646-2.647Z"
+    }), /* @__PURE__ */ React2.createElement("path", {
+      d: "m13.53 13.03-2.646 2.647a1.25 1.25 0 0 1-1.768 0l-2.646-2.647a.75.75 0 0 1 1.06-1.06l2.47 2.47 2.47-2.47a.75.75 0 0 1 1.06 1.06Z"
+    }));
+  };
+  SvgSelectIcon.displayName = "SelectIcon";
+  var SvgXIcon = function SvgXIcon2(props) {
+    return /* @__PURE__ */ React2.createElement("svg", Object.assign({
+      viewBox: "0 0 20 20"
+    }, props), /* @__PURE__ */ React2.createElement("path", {
+      d: "M12.72 13.78a.75.75 0 1 0 1.06-1.06l-2.72-2.72 2.72-2.72a.75.75 0 0 0-1.06-1.06l-2.72 2.72-2.72-2.72a.75.75 0 0 0-1.06 1.06l2.72 2.72-2.72 2.72a.75.75 0 1 0 1.06 1.06l2.72-2.72 2.72 2.72Z"
+    }));
+  };
+  SvgXIcon.displayName = "XIcon";
+  const FOCUSABLE_SELECTOR = 'a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not([aria-disabled="true"]):not([tabindex="-1"]):not(:disabled),*[tabindex]';
+  const KEYBOARD_FOCUSABLE_SELECTORS = 'a,frame,iframe,input:not([type=hidden]):not(:disabled),select:not(:disabled),textarea:not(:disabled),button:not([aria-disabled="true"]):not([tabindex="-1"]):not(:disabled),*[tabindex]:not([tabindex="-1"])';
+  const handleMouseUpByBlurring = ({
+    currentTarget
+  }) => currentTarget.blur();
+  function findFirstFocusableNode(element, onlyDescendants = true) {
+    if (!onlyDescendants && matches(element, FOCUSABLE_SELECTOR)) {
+      return element;
+    }
+    return element.querySelector(FOCUSABLE_SELECTOR);
+  }
+  function focusFirstFocusableNode(element, onlyDescendants = true) {
+    findFirstFocusableNode(element, onlyDescendants)?.focus();
+  }
+  function findFirstKeyboardFocusableNode(element, onlyDescendants = true) {
+    if (!onlyDescendants && matches(element, KEYBOARD_FOCUSABLE_SELECTORS)) {
+      return element;
+    }
+    return element.querySelector(KEYBOARD_FOCUSABLE_SELECTORS);
+  }
+  function focusFirstKeyboardFocusableNode(element, onlyDescendants = true) {
+    const firstFocusable = findFirstKeyboardFocusableNode(element, onlyDescendants);
+    if (firstFocusable) {
+      firstFocusable.focus();
+      return true;
+    }
+    return false;
+  }
+  function findLastKeyboardFocusableNode(element, onlyDescendants = true) {
+    if (!onlyDescendants && matches(element, KEYBOARD_FOCUSABLE_SELECTORS)) {
+      return element;
+    }
+    const allFocusable = element.querySelectorAll(KEYBOARD_FOCUSABLE_SELECTORS);
+    return allFocusable[allFocusable.length - 1];
+  }
+  function focusLastKeyboardFocusableNode(element, onlyDescendants = true) {
+    const lastFocusable = findLastKeyboardFocusableNode(element, onlyDescendants);
+    if (lastFocusable) {
+      lastFocusable.focus();
+      return true;
+    }
+    return false;
+  }
+  function matches(node, selector) {
+    if (node.matches) {
+      return node.matches(selector);
+    }
+    const matches2 = (node.ownerDocument || document).querySelectorAll(selector);
+    let i = matches2.length;
+    while (--i >= 0 && matches2.item(i) !== node) return i > -1;
+  }
+  var styles$e = {
+    "Button": "Polaris-Button",
+    "disabled": "Polaris-Button--disabled",
+    "pressed": "Polaris-Button--pressed",
+    "variantPrimary": "Polaris-Button--variantPrimary",
+    "variantSecondary": "Polaris-Button--variantSecondary",
+    "variantTertiary": "Polaris-Button--variantTertiary",
+    "variantPlain": "Polaris-Button--variantPlain",
+    "removeUnderline": "Polaris-Button--removeUnderline",
+    "variantMonochromePlain": "Polaris-Button--variantMonochromePlain",
+    "toneSuccess": "Polaris-Button--toneSuccess",
+    "toneCritical": "Polaris-Button--toneCritical",
+    "sizeMicro": "Polaris-Button--sizeMicro",
+    "sizeSlim": "Polaris-Button--sizeSlim",
+    "sizeMedium": "Polaris-Button--sizeMedium",
+    "sizeLarge": "Polaris-Button--sizeLarge",
+    "textAlignCenter": "Polaris-Button--textAlignCenter",
+    "textAlignStart": "Polaris-Button--textAlignStart",
+    "textAlignLeft": "Polaris-Button--textAlignLeft",
+    "textAlignEnd": "Polaris-Button--textAlignEnd",
+    "textAlignRight": "Polaris-Button--textAlignRight",
+    "fullWidth": "Polaris-Button--fullWidth",
+    "iconOnly": "Polaris-Button--iconOnly",
+    "iconWithText": "Polaris-Button--iconWithText",
+    "disclosure": "Polaris-Button--disclosure",
+    "loading": "Polaris-Button--loading",
+    "pressable": "Polaris-Button--pressable",
+    "hidden": "Polaris-Button--hidden",
+    "Icon": "Polaris-Button__Icon",
+    "Spinner": "Polaris-Button__Spinner"
+  };
+  var styles$d = {
+    "Icon": "Polaris-Icon",
+    "toneInherit": "Polaris-Icon--toneInherit",
+    "toneBase": "Polaris-Icon--toneBase",
+    "toneSubdued": "Polaris-Icon--toneSubdued",
+    "toneCaution": "Polaris-Icon--toneCaution",
+    "toneWarning": "Polaris-Icon--toneWarning",
+    "toneCritical": "Polaris-Icon--toneCritical",
+    "toneInteractive": "Polaris-Icon--toneInteractive",
+    "toneInfo": "Polaris-Icon--toneInfo",
+    "toneSuccess": "Polaris-Icon--toneSuccess",
+    "tonePrimary": "Polaris-Icon--tonePrimary",
+    "toneEmphasis": "Polaris-Icon--toneEmphasis",
+    "toneMagic": "Polaris-Icon--toneMagic",
+    "toneTextCaution": "Polaris-Icon--toneTextCaution",
+    "toneTextWarning": "Polaris-Icon--toneTextWarning",
+    "toneTextCritical": "Polaris-Icon--toneTextCritical",
+    "toneTextInfo": "Polaris-Icon--toneTextInfo",
+    "toneTextPrimary": "Polaris-Icon--toneTextPrimary",
+    "toneTextSuccess": "Polaris-Icon--toneTextSuccess",
+    "toneTextMagic": "Polaris-Icon--toneTextMagic",
+    "Svg": "Polaris-Icon__Svg",
+    "Img": "Polaris-Icon__Img",
+    "Placeholder": "Polaris-Icon__Placeholder"
+  };
+  var styles$c = {
+    "root": "Polaris-Text--root",
+    "block": "Polaris-Text--block",
+    "truncate": "Polaris-Text--truncate",
+    "visuallyHidden": "Polaris-Text--visuallyHidden",
+    "start": "Polaris-Text--start",
+    "center": "Polaris-Text--center",
+    "end": "Polaris-Text--end",
+    "justify": "Polaris-Text--justify",
+    "base": "Polaris-Text--base",
+    "inherit": "Polaris-Text--inherit",
+    "disabled": "Polaris-Text--disabled",
+    "success": "Polaris-Text--success",
+    "critical": "Polaris-Text--critical",
+    "caution": "Polaris-Text--caution",
+    "subdued": "Polaris-Text--subdued",
+    "magic": "Polaris-Text--magic",
+    "magic-subdued": "Polaris-Text__magic--subdued",
+    "text-inverse": "Polaris-Text__text--inverse",
+    "text-inverse-secondary": "Polaris-Text--textInverseSecondary",
+    "headingXs": "Polaris-Text--headingXs",
+    "headingSm": "Polaris-Text--headingSm",
+    "headingMd": "Polaris-Text--headingMd",
+    "headingLg": "Polaris-Text--headingLg",
+    "headingXl": "Polaris-Text--headingXl",
+    "heading2xl": "Polaris-Text--heading2xl",
+    "heading3xl": "Polaris-Text--heading3xl",
+    "bodyXs": "Polaris-Text--bodyXs",
+    "bodySm": "Polaris-Text--bodySm",
+    "bodyMd": "Polaris-Text--bodyMd",
+    "bodyLg": "Polaris-Text--bodyLg",
+    "regular": "Polaris-Text--regular",
+    "medium": "Polaris-Text--medium",
+    "semibold": "Polaris-Text--semibold",
+    "bold": "Polaris-Text--bold",
+    "break": "Polaris-Text--break",
+    "numeric": "Polaris-Text--numeric",
+    "line-through": "Polaris-Text__line--through"
+  };
+  const Text = ({
+    alignment,
+    as,
+    breakWord,
+    children,
+    tone,
+    fontWeight,
+    id,
+    numeric = false,
+    truncate = false,
+    variant,
+    visuallyHidden = false,
+    textDecorationLine
+  }) => {
+    const Component = as || (visuallyHidden ? "span" : "p");
+    const className = classNames(styles$c.root, variant && styles$c[variant], fontWeight && styles$c[fontWeight], (alignment || truncate) && styles$c.block, alignment && styles$c[alignment], breakWord && styles$c.break, tone && styles$c[tone], numeric && styles$c.numeric, truncate && styles$c.truncate, visuallyHidden && styles$c.visuallyHidden, textDecorationLine && styles$c[textDecorationLine]);
+    return /* @__PURE__ */ React2.createElement(Component, Object.assign({
+      className
+    }, id && {
+      id
+    }), children);
+  };
+  function Icon({
+    source,
+    tone,
+    accessibilityLabel
+  }) {
+    let sourceType;
+    if (typeof source === "function") {
+      sourceType = "function";
+    } else if (source === "placeholder") {
+      sourceType = "placeholder";
+    } else {
+      sourceType = "external";
+    }
+    const className = classNames(styles$d.Icon, tone && styles$d[variationName("tone", tone)]);
+    const {
+      mdDown
+    } = useBreakpoints();
+    const SourceComponent = source;
+    const contentMarkup = {
+      function: /* @__PURE__ */ React2.createElement(SourceComponent, Object.assign({
+        className: styles$d.Svg,
+        focusable: "false",
+        "aria-hidden": "true"
+        // On Mobile we're scaling the viewBox to 18x18 to make the icons bigger
+        // Also, we're setting the viewport origin to 1x1 to center the icon
+        // We use this syntax so we don't override the existing viewBox value if we don't need to.
+      }, mdDown ? {
+        viewBox: "1 1 18 18"
+      } : {})),
+      placeholder: /* @__PURE__ */ React2.createElement("div", {
+        className: styles$d.Placeholder
+      }),
+      external: /* @__PURE__ */ React2.createElement("img", {
+        className: styles$d.Img,
+        src: `data:image/svg+xml;utf8,${source}`,
+        alt: "",
+        "aria-hidden": "true"
+      })
+    };
+    return /* @__PURE__ */ React2.createElement("span", {
+      className
+    }, accessibilityLabel && /* @__PURE__ */ React2.createElement(Text, {
+      as: "span",
+      visuallyHidden: true
+    }, accessibilityLabel), contentMarkup[sourceType]);
+  }
+  var styles$b = {
+    "Spinner": "Polaris-Spinner",
+    "sizeSmall": "Polaris-Spinner--sizeSmall",
+    "sizeLarge": "Polaris-Spinner--sizeLarge"
+  };
+  function Spinner({
+    size: size2 = "large",
+    accessibilityLabel,
+    hasFocusableParent
+  }) {
+    const isAfterInitialMount = useIsAfterInitialMount();
+    const className = classNames(styles$b.Spinner, size2 && styles$b[variationName("size", size2)]);
+    const spinnerSVGMarkup = size2 === "large" ? /* @__PURE__ */ React2.createElement("svg", {
+      viewBox: "0 0 44 44",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /* @__PURE__ */ React2.createElement("path", {
+      d: "M15.542 1.487A21.507 21.507 0 00.5 22c0 11.874 9.626 21.5 21.5 21.5 9.847 0 18.364-6.675 20.809-16.072a1.5 1.5 0 00-2.904-.756C37.803 34.755 30.473 40.5 22 40.5 11.783 40.5 3.5 32.217 3.5 22c0-8.137 5.3-15.247 12.942-17.65a1.5 1.5 0 10-.9-2.863z"
+    })) : /* @__PURE__ */ React2.createElement("svg", {
+      viewBox: "0 0 20 20",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /* @__PURE__ */ React2.createElement("path", {
+      d: "M7.229 1.173a9.25 9.25 0 1011.655 11.412 1.25 1.25 0 10-2.4-.698 6.75 6.75 0 11-8.506-8.329 1.25 1.25 0 10-.75-2.385z"
+    }));
+    const spanAttributes = {
+      ...!hasFocusableParent && {
+        role: "status"
+      }
+    };
+    const accessibilityLabelMarkup = (isAfterInitialMount || !hasFocusableParent) && /* @__PURE__ */ React2.createElement(Text, {
+      as: "span",
+      visuallyHidden: true
+    }, accessibilityLabel);
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("span", {
+      className
+    }, spinnerSVGMarkup), /* @__PURE__ */ React2.createElement("span", spanAttributes, accessibilityLabelMarkup));
+  }
+  function useDisableClick(disabled, handleClick) {
+    const handleClickWrapper = React2.useCallback((event) => {
+      if (disabled) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, [disabled]);
+    if (!disabled) {
+      return handleClick;
+    }
+    return handleClickWrapper;
+  }
+  function useLink() {
+    return React2.useContext(LinkContext);
+  }
+  const UnstyledLink = /* @__PURE__ */ React2.memo(/* @__PURE__ */ React2.forwardRef(function UnstyledLink2(props, _ref) {
+    const LinkComponent = useLink();
+    if (LinkComponent) {
+      return /* @__PURE__ */ React2.createElement(LinkComponent, Object.assign({}, unstyled.props, props, {
+        ref: _ref
+      }));
+    }
+    const {
+      external,
+      url,
+      target: targetProp,
+      ...rest
+    } = props;
+    let target;
+    if (external) {
+      target = "_blank";
+    } else {
+      target = targetProp ?? void 0;
+    }
+    const rel = target === "_blank" ? "noopener noreferrer" : void 0;
+    return /* @__PURE__ */ React2.createElement("a", Object.assign({
+      target
+    }, rest, {
+      href: url,
+      rel
+    }, unstyled.props, {
+      ref: _ref
+    }));
+  }));
+  function UnstyledButton({
+    id,
+    children,
+    className,
+    url,
+    external,
+    target,
+    download,
+    submit,
+    disabled,
+    loading,
+    pressed,
+    accessibilityLabel,
+    role,
+    ariaControls,
+    ariaExpanded,
+    ariaDescribedBy,
+    ariaChecked,
+    onClick,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    onKeyPress,
+    onKeyUp,
+    onMouseEnter,
+    onTouchStart,
+    ...rest
+  }) {
+    let buttonMarkup;
+    const commonProps = {
+      id,
+      className,
+      "aria-label": accessibilityLabel
+    };
+    const interactiveProps = {
+      ...commonProps,
+      role,
+      onClick,
+      onFocus,
+      onBlur,
+      onMouseUp: handleMouseUpByBlurring,
+      onMouseEnter,
+      onTouchStart
+    };
+    const handleClick = useDisableClick(disabled, onClick);
+    if (url) {
+      buttonMarkup = disabled ? (
+        // Render an `<a>` so toggling disabled/enabled state changes only the
+        // `href` attribute instead of replacing the whole element.
+        /* @__PURE__ */ React2.createElement("a", commonProps, children)
+      ) : /* @__PURE__ */ React2.createElement(UnstyledLink, Object.assign({}, interactiveProps, {
+        url,
+        external,
+        target,
+        download
+      }, rest), children);
+    } else {
+      buttonMarkup = /* @__PURE__ */ React2.createElement("button", Object.assign({}, interactiveProps, {
+        "aria-disabled": disabled,
+        type: submit ? "submit" : "button",
+        "aria-busy": loading ? true : void 0,
+        "aria-controls": ariaControls,
+        "aria-expanded": ariaExpanded,
+        "aria-describedby": ariaDescribedBy,
+        "aria-checked": ariaChecked,
+        "aria-pressed": pressed,
+        onKeyDown,
+        onKeyUp,
+        onKeyPress,
+        onClick: handleClick,
+        tabIndex: disabled ? -1 : void 0
+      }, rest), children);
+    }
+    return buttonMarkup;
+  }
+  class MissingAppProviderError extends Error {
+    constructor(message = "") {
+      super(`${message ? `${message} ` : message}Your application must be wrapped in an <AppProvider> component. See https://polaris.shopify.com/components/app-provider for implementation instructions.`);
+      this.name = "MissingAppProviderError";
+    }
+  }
+  function useI18n() {
+    const i18n = React2.useContext(I18nContext);
+    if (!i18n) {
+      throw new MissingAppProviderError("No i18n was provided.");
+    }
+    return i18n;
+  }
+  function Button({
+    id,
+    children,
+    url,
+    disabled,
+    external,
+    download,
+    target,
+    submit,
+    loading,
+    pressed,
+    accessibilityLabel,
+    role,
+    ariaControls,
+    ariaExpanded,
+    ariaDescribedBy,
+    ariaChecked,
+    onClick,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    onKeyPress,
+    onKeyUp,
+    onMouseEnter,
+    onTouchStart,
+    onPointerDown,
+    icon,
+    disclosure,
+    removeUnderline,
+    size: size2 = "medium",
+    textAlign = "center",
+    fullWidth,
+    dataPrimaryLink,
+    tone,
+    variant = "secondary"
+  }) {
+    const i18n = useI18n();
+    const isDisabled = disabled || loading;
+    const {
+      mdUp
+    } = useBreakpoints();
+    const className = classNames(styles$e.Button, styles$e.pressable, styles$e[variationName("variant", variant)], styles$e[variationName("size", size2)], styles$e[variationName("textAlign", textAlign)], fullWidth && styles$e.fullWidth, disclosure && styles$e.disclosure, icon && children && styles$e.iconWithText, icon && children == null && styles$e.iconOnly, isDisabled && styles$e.disabled, loading && styles$e.loading, pressed && !disabled && !url && styles$e.pressed, removeUnderline && styles$e.removeUnderline, tone && styles$e[variationName("tone", tone)]);
+    const disclosureMarkup = disclosure ? /* @__PURE__ */ React2.createElement("span", {
+      className: loading ? styles$e.hidden : styles$e.Icon
+    }, /* @__PURE__ */ React2.createElement(Icon, {
+      source: loading ? "placeholder" : getDisclosureIconSource(disclosure, SvgChevronUpIcon, SvgChevronDownIcon)
+    })) : null;
+    const iconSource = isIconSource(icon) ? /* @__PURE__ */ React2.createElement(Icon, {
+      source: loading ? "placeholder" : icon
+    }) : icon;
+    const iconMarkup = iconSource ? /* @__PURE__ */ React2.createElement("span", {
+      className: loading ? styles$e.hidden : styles$e.Icon
+    }, iconSource) : null;
+    const hasPlainText = ["plain", "monochromePlain"].includes(variant);
+    let textFontWeight = "medium";
+    if (hasPlainText) {
+      textFontWeight = "regular";
+    } else if (variant === "primary") {
+      textFontWeight = mdUp ? "medium" : "semibold";
+    }
+    let textVariant = "bodySm";
+    if (size2 === "large" || hasPlainText && size2 !== "micro") {
+      textVariant = "bodyMd";
+    }
+    const childMarkup = children ? /* @__PURE__ */ React2.createElement(Text, {
+      as: "span",
+      variant: textVariant,
+      fontWeight: textFontWeight,
+      key: disabled ? "text-disabled" : "text"
+    }, children) : null;
+    const spinnerSVGMarkup = loading ? /* @__PURE__ */ React2.createElement("span", {
+      className: styles$e.Spinner
+    }, /* @__PURE__ */ React2.createElement(Spinner, {
+      size: "small",
+      accessibilityLabel: i18n.translate("Polaris.Button.spinnerAccessibilityLabel")
+    })) : null;
+    const commonProps = {
+      id,
+      className,
+      accessibilityLabel,
+      ariaDescribedBy,
+      role,
+      onClick,
+      onFocus,
+      onBlur,
+      onMouseUp: handleMouseUpByBlurring,
+      onMouseEnter,
+      onTouchStart,
+      "data-primary-link": dataPrimaryLink
+    };
+    const linkProps = {
+      url,
+      external,
+      download,
+      target
+    };
+    const actionProps = {
+      submit,
+      disabled: isDisabled,
+      loading,
+      ariaControls,
+      ariaExpanded,
+      ariaChecked,
+      pressed,
+      onKeyDown,
+      onKeyUp,
+      onKeyPress,
+      onPointerDown
+    };
+    const buttonMarkup = /* @__PURE__ */ React2.createElement(UnstyledButton, Object.assign({}, commonProps, linkProps, actionProps), spinnerSVGMarkup, iconMarkup, childMarkup, disclosureMarkup);
+    return buttonMarkup;
+  }
+  function isIconSource(x) {
+    return typeof x === "string" || typeof x === "object" && x.body || typeof x === "function";
+  }
+  function getDisclosureIconSource(disclosure, upIcon, downIcon) {
+    if (disclosure === "select") {
+      return SvgSelectIcon;
+    }
+    return disclosure === "up" ? upIcon : downIcon;
+  }
+  function buttonsFrom(actions, overrides = {}) {
+    if (Array.isArray(actions)) {
+      return actions.map((action, index) => buttonFrom(action, overrides, index));
+    } else {
+      const action = actions;
+      return buttonFrom(action, overrides);
+    }
+  }
+  function buttonFrom({
+    content,
+    onAction,
+    plain,
+    destructive,
+    ...action
+  }, overrides, key) {
+    const plainVariant = plain ? "plain" : void 0;
+    const destructiveVariant = destructive ? "primary" : void 0;
+    const tone = !overrides?.tone && destructive ? "critical" : overrides?.tone;
+    return /* @__PURE__ */ React2.createElement(Button, Object.assign({
+      key,
+      onClick: onAction,
+      tone,
+      variant: plainVariant || destructiveVariant
+    }, action, overrides), content);
+  }
+  var styles$a = {
+    "listReset": "Polaris-Box--listReset",
+    "Box": "Polaris-Box",
+    "visuallyHidden": "Polaris-Box--visuallyHidden",
+    "printHidden": "Polaris-Box--printHidden"
+  };
+  const Box = /* @__PURE__ */ React2.forwardRef(({
+    as = "div",
+    background,
+    borderColor,
+    borderStyle,
+    borderWidth,
+    borderBlockStartWidth,
+    borderBlockEndWidth,
+    borderInlineStartWidth,
+    borderInlineEndWidth,
+    borderRadius,
+    borderEndStartRadius,
+    borderEndEndRadius,
+    borderStartStartRadius,
+    borderStartEndRadius,
+    children,
+    color: color2,
+    id,
+    minHeight,
+    minWidth,
+    maxWidth,
+    overflowX,
+    overflowY,
+    outlineColor,
+    outlineStyle,
+    outlineWidth,
+    padding,
+    paddingBlock,
+    paddingBlockStart,
+    paddingBlockEnd,
+    paddingInline,
+    paddingInlineStart,
+    paddingInlineEnd,
+    role,
+    shadow: shadow2,
+    tabIndex,
+    width: width2,
+    printHidden,
+    visuallyHidden,
+    position,
+    insetBlockStart,
+    insetBlockEnd,
+    insetInlineStart,
+    insetInlineEnd,
+    zIndex: zIndex2,
+    opacity,
+    ...restProps
+  }, ref) => {
+    const borderStyleValue = borderStyle ? borderStyle : borderColor || borderWidth || borderBlockStartWidth || borderBlockEndWidth || borderInlineStartWidth || borderInlineEndWidth ? "solid" : void 0;
+    const outlineStyleValue = outlineStyle ? outlineStyle : outlineColor || outlineWidth ? "solid" : void 0;
+    const style = {
+      "--pc-box-color": color2 ? `var(--p-color-${color2})` : void 0,
+      "--pc-box-background": background ? `var(--p-color-${background})` : void 0,
+      // eslint-disable-next-line no-nested-ternary
+      "--pc-box-border-color": borderColor ? borderColor === "transparent" ? "transparent" : `var(--p-color-${borderColor})` : void 0,
+      "--pc-box-border-style": borderStyleValue,
+      "--pc-box-border-radius": borderRadius ? `var(--p-border-radius-${borderRadius})` : void 0,
+      "--pc-box-border-end-start-radius": borderEndStartRadius ? `var(--p-border-radius-${borderEndStartRadius})` : void 0,
+      "--pc-box-border-end-end-radius": borderEndEndRadius ? `var(--p-border-radius-${borderEndEndRadius})` : void 0,
+      "--pc-box-border-start-start-radius": borderStartStartRadius ? `var(--p-border-radius-${borderStartStartRadius})` : void 0,
+      "--pc-box-border-start-end-radius": borderStartEndRadius ? `var(--p-border-radius-${borderStartEndRadius})` : void 0,
+      "--pc-box-border-width": borderWidth ? `var(--p-border-width-${borderWidth})` : void 0,
+      "--pc-box-border-block-start-width": borderBlockStartWidth ? `var(--p-border-width-${borderBlockStartWidth})` : void 0,
+      "--pc-box-border-block-end-width": borderBlockEndWidth ? `var(--p-border-width-${borderBlockEndWidth})` : void 0,
+      "--pc-box-border-inline-start-width": borderInlineStartWidth ? `var(--p-border-width-${borderInlineStartWidth})` : void 0,
+      "--pc-box-border-inline-end-width": borderInlineEndWidth ? `var(--p-border-width-${borderInlineEndWidth})` : void 0,
+      "--pc-box-min-height": minHeight,
+      "--pc-box-min-width": minWidth,
+      "--pc-box-max-width": maxWidth,
+      "--pc-box-outline-color": outlineColor ? `var(--p-color-${outlineColor})` : void 0,
+      "--pc-box-outline-style": outlineStyleValue,
+      "--pc-box-outline-width": outlineWidth ? `var(--p-border-width-${outlineWidth})` : void 0,
+      "--pc-box-overflow-x": overflowX,
+      "--pc-box-overflow-y": overflowY,
+      ...getResponsiveProps("box", "padding-block-start", "space", paddingBlockStart || paddingBlock || padding),
+      ...getResponsiveProps("box", "padding-block-end", "space", paddingBlockEnd || paddingBlock || padding),
+      ...getResponsiveProps("box", "padding-inline-start", "space", paddingInlineStart || paddingInline || padding),
+      ...getResponsiveProps("box", "padding-inline-end", "space", paddingInlineEnd || paddingInline || padding),
+      "--pc-box-shadow": shadow2 ? `var(--p-shadow-${shadow2})` : void 0,
+      "--pc-box-width": width2,
+      position,
+      "--pc-box-inset-block-start": insetBlockStart ? `var(--p-space-${insetBlockStart})` : void 0,
+      "--pc-box-inset-block-end": insetBlockEnd ? `var(--p-space-${insetBlockEnd})` : void 0,
+      "--pc-box-inset-inline-start": insetInlineStart ? `var(--p-space-${insetInlineStart})` : void 0,
+      "--pc-box-inset-inline-end": insetInlineEnd ? `var(--p-space-${insetInlineEnd})` : void 0,
+      zIndex: zIndex2,
+      opacity
+    };
+    const className = classNames(styles$a.Box, visuallyHidden && styles$a.visuallyHidden, printHidden && styles$a.printHidden, as === "ul" && styles$a.listReset);
+    return /* @__PURE__ */ React2.createElement(as, {
+      className,
+      id,
+      ref,
+      style: sanitizeCustomProperties(style),
+      role,
+      tabIndex,
+      ...restProps
+    }, children);
+  });
+  Box.displayName = "Box";
+  var styles$9 = {
+    "InlineStack": "Polaris-InlineStack"
+  };
+  const InlineStack = function InlineStack2({
+    as: Element2 = "div",
+    align,
+    direction = "row",
+    blockAlign,
+    gap,
+    wrap = true,
+    children
+  }) {
+    const style = {
+      "--pc-inline-stack-align": align,
+      "--pc-inline-stack-block-align": blockAlign,
+      "--pc-inline-stack-wrap": wrap ? "wrap" : "nowrap",
+      ...getResponsiveProps("inline-stack", "gap", "space", gap),
+      ...getResponsiveValue("inline-stack", "flex-direction", direction)
+    };
+    return /* @__PURE__ */ React2.createElement(Element2, {
+      className: styles$9.InlineStack,
+      style
+    }, children);
+  };
+  var styles$8 = {
+    "BlockStack": "Polaris-BlockStack",
+    "listReset": "Polaris-BlockStack--listReset",
+    "fieldsetReset": "Polaris-BlockStack--fieldsetReset"
+  };
+  const BlockStack = ({
+    as = "div",
+    children,
+    align,
+    inlineAlign,
+    gap,
+    id,
+    reverseOrder = false,
+    ...restProps
+  }) => {
+    const className = classNames(styles$8.BlockStack, (as === "ul" || as === "ol") && styles$8.listReset, as === "fieldset" && styles$8.fieldsetReset);
+    const style = {
+      "--pc-block-stack-align": align ? `${align}` : null,
+      "--pc-block-stack-inline-align": inlineAlign ? `${inlineAlign}` : null,
+      "--pc-block-stack-order": reverseOrder ? "column-reverse" : "column",
+      ...getResponsiveProps("block-stack", "gap", "space", gap)
+    };
+    return /* @__PURE__ */ React2.createElement(as, {
+      className,
+      id,
+      style: sanitizeCustomProperties(style),
+      ...restProps
+    }, children);
+  };
+  function useToggle(initialState) {
+    const [value, setState] = React2.useState(initialState);
+    return {
+      value,
+      toggle: React2.useCallback(() => setState((state) => !state), []),
+      setTrue: React2.useCallback(() => setState(true), []),
+      setFalse: React2.useCallback(() => setState(false), [])
+    };
+  }
+  function usePortalsManager() {
+    const portalsManager = React2.useContext(PortalsManagerContext);
+    if (!portalsManager) {
+      throw new Error("No portals manager was provided. Your application must be wrapped in an <AppProvider> component. See https://polaris.shopify.com/components/app-provider for implementation instructions.");
+    }
+    return portalsManager;
+  }
+  function Portal({
+    children,
+    idPrefix = "",
+    onPortalCreated = noop$1
+  }) {
+    const themeName = useThemeName();
+    const {
+      container
+    } = usePortalsManager();
+    const uniqueId = React2.useId();
+    const portalId = idPrefix !== "" ? `${idPrefix}-${uniqueId}` : uniqueId;
+    React2.useEffect(() => {
+      onPortalCreated();
+    }, [onPortalCreated]);
+    return container ? /* @__PURE__ */ ReactDOM2.createPortal(/* @__PURE__ */ React2.createElement(ThemeProvider, {
+      theme: isThemeNameLocal(themeName) ? themeName : themeNameDefault,
+      "data-portal-id": portalId
+    }, children), container) : null;
+  }
+  function noop$1() {
+  }
+  const UNIQUE_IDENTIFIER = Symbol("unique_identifier");
+  function useLazyRef(initialValue) {
+    const lazyRef = React2.useRef(UNIQUE_IDENTIFIER);
+    if (lazyRef.current === UNIQUE_IDENTIFIER) {
+      lazyRef.current = initialValue();
+    }
+    return lazyRef;
+  }
+  function useComponentDidMount(callback) {
+    const isAfterInitialMount = useIsAfterInitialMount();
+    const hasInvokedLifeCycle = React2.useRef(false);
+    if (isAfterInitialMount && !hasInvokedLifeCycle.current) {
+      hasInvokedLifeCycle.current = true;
+      return callback();
+    }
+  }
+  const ScrollableContext = /* @__PURE__ */ React2.createContext(void 0);
+  var styles$7 = {
+    "Scrollable": "Polaris-Scrollable",
+    "hasTopShadow": "Polaris-Scrollable--hasTopShadow",
+    "hasBottomShadow": "Polaris-Scrollable--hasBottomShadow",
+    "horizontal": "Polaris-Scrollable--horizontal",
+    "vertical": "Polaris-Scrollable--vertical",
+    "scrollbarWidthThin": "Polaris-Scrollable--scrollbarWidthThin",
+    "scrollbarWidthNone": "Polaris-Scrollable--scrollbarWidthNone",
+    "scrollbarWidthAuto": "Polaris-Scrollable--scrollbarWidthAuto",
+    "scrollbarGutterStable": "Polaris-Scrollable--scrollbarGutterStable",
+    "scrollbarGutterStableboth-edges": "Polaris-Scrollable__scrollbarGutterStableboth--edges"
+  };
+  function ScrollTo() {
+    const anchorNode = React2.useRef(null);
+    const scrollToPosition = React2.useContext(ScrollableContext);
+    React2.useEffect(() => {
+      if (!scrollToPosition || !anchorNode.current) {
+        return;
+      }
+      scrollToPosition(anchorNode.current.offsetTop);
+    }, [scrollToPosition]);
+    const id = React2.useId();
+    return /* @__PURE__ */ React2.createElement("a", {
+      id,
+      ref: anchorNode
+    });
+  }
+  const MAX_SCROLL_HINT_DISTANCE = 100;
+  const LOW_RES_BUFFER = 2;
+  const ScrollableComponent = /* @__PURE__ */ React2.forwardRef(({
+    children,
+    className,
+    horizontal = true,
+    vertical = true,
+    shadow: shadow2,
+    hint,
+    focusable,
+    scrollbarWidth = "thin",
+    scrollbarGutter,
+    onScrolledToBottom,
+    ...rest
+  }, forwardedRef) => {
+    const [topShadow, setTopShadow] = React2.useState(false);
+    const [bottomShadow, setBottomShadow] = React2.useState(false);
+    const stickyManager = useLazyRef(() => new StickyManager());
+    const scrollArea = React2.useRef(null);
+    const scrollTo = React2.useCallback((scrollY, options = {}) => {
+      const optionsBehavior = options.behavior || "smooth";
+      const behavior = prefersReducedMotion() ? "auto" : optionsBehavior;
+      scrollArea.current?.scrollTo({
+        top: scrollY,
+        behavior
+      });
+    }, []);
+    const defaultRef = React2.useRef();
+    React2.useImperativeHandle(forwardedRef || defaultRef, () => ({
+      scrollTo
+    }));
+    const handleScroll = React2.useCallback(() => {
+      const currentScrollArea = scrollArea.current;
+      if (!currentScrollArea) {
+        return;
+      }
+      requestAnimationFrame(() => {
+        const {
+          scrollTop,
+          clientHeight,
+          scrollHeight
+        } = currentScrollArea;
+        const canScroll = Boolean(scrollHeight > clientHeight);
+        const isBelowTopOfScroll = Boolean(scrollTop > 0);
+        const isAtBottomOfScroll = Boolean(scrollTop + clientHeight >= scrollHeight - LOW_RES_BUFFER);
+        setTopShadow(isBelowTopOfScroll);
+        setBottomShadow(!isAtBottomOfScroll);
+        if (canScroll && isAtBottomOfScroll && onScrolledToBottom) {
+          onScrolledToBottom();
+        }
+      });
+    }, [onScrolledToBottom]);
+    useComponentDidMount(() => {
+      handleScroll();
+      if (hint) {
+        requestAnimationFrame(() => performScrollHint(scrollArea.current));
+      }
+    });
+    React2.useEffect(() => {
+      const currentScrollArea = scrollArea.current;
+      if (!currentScrollArea) {
+        return;
+      }
+      const handleResize = debounce(handleScroll, 50, {
+        trailing: true
+      });
+      stickyManager.current?.setContainer(currentScrollArea);
+      currentScrollArea.addEventListener("scroll", handleScroll);
+      globalThis.addEventListener("resize", handleResize);
+      return () => {
+        currentScrollArea.removeEventListener("scroll", handleScroll);
+        globalThis.removeEventListener("resize", handleResize);
+      };
+    }, [stickyManager, handleScroll]);
+    const finalClassName = classNames(className, styles$7.Scrollable, vertical && styles$7.vertical, horizontal && styles$7.horizontal, shadow2 && topShadow && styles$7.hasTopShadow, shadow2 && bottomShadow && styles$7.hasBottomShadow, scrollbarWidth && styles$7[variationName("scrollbarWidth", scrollbarWidth)], scrollbarGutter && styles$7[variationName("scrollbarGutter", scrollbarGutter.replace(" ", ""))]);
+    return /* @__PURE__ */ React2.createElement(ScrollableContext.Provider, {
+      value: scrollTo
+    }, /* @__PURE__ */ React2.createElement(StickyManagerContext.Provider, {
+      value: stickyManager.current
+    }, /* @__PURE__ */ React2.createElement("div", Object.assign({
+      className: finalClassName
+    }, scrollable.props, rest, {
+      ref: scrollArea,
+      tabIndex: focusable ? 0 : void 0
+    }), children)));
+  });
+  ScrollableComponent.displayName = "Scrollable";
+  function prefersReducedMotion() {
+    try {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (err) {
+      return false;
+    }
+  }
+  function performScrollHint(elem) {
+    if (!elem || prefersReducedMotion()) {
+      return;
+    }
+    const scrollableDistance = elem.scrollHeight - elem.clientHeight;
+    const distanceToPeek = Math.min(MAX_SCROLL_HINT_DISTANCE, scrollableDistance) - LOW_RES_BUFFER;
+    const goBackToTop = () => {
+      requestAnimationFrame(() => {
+        if (elem.scrollTop >= distanceToPeek) {
+          elem.removeEventListener("scroll", goBackToTop);
+          elem.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }
+      });
+    };
+    elem.addEventListener("scroll", goBackToTop);
+    elem.scrollTo({
+      top: MAX_SCROLL_HINT_DISTANCE,
+      behavior: "smooth"
+    });
+  }
+  const forNode = (node) => {
+    const closestElement = node.closest(scrollable.selector);
+    return closestElement instanceof HTMLElement ? closestElement : document;
+  };
+  const Scrollable = ScrollableComponent;
+  Scrollable.ScrollTo = ScrollTo;
+  Scrollable.forNode = forNode;
+  function KeypressListener({
+    keyCode,
+    handler,
+    keyEvent = "keyup",
+    options,
+    useCapture
+  }) {
+    const tracked = React2.useRef({
+      handler,
+      keyCode
+    });
+    useIsomorphicLayoutEffect(() => {
+      tracked.current = {
+        handler,
+        keyCode
+      };
+    }, [handler, keyCode]);
+    const handleKeyEvent = React2.useCallback((event) => {
+      const {
+        handler: handler2,
+        keyCode: keyCode2
+      } = tracked.current;
+      if (event.keyCode === keyCode2) {
+        handler2(event);
+      }
+    }, []);
+    React2.useEffect(() => {
+      document.addEventListener(keyEvent, handleKeyEvent, useCapture || options);
+      return () => {
+        document.removeEventListener(keyEvent, handleKeyEvent, useCapture || options);
+      };
+    }, [keyEvent, handleKeyEvent, useCapture, options]);
+    return null;
+  }
+  function wrapWithComponent(element, Component, props) {
+    if (element == null) {
+      return null;
+    }
+    return isElementOfType(element, Component) ? element : /* @__PURE__ */ React2.createElement(Component, props, element);
+  }
+  const isComponent = (AComponent, AnotherComponent) => AComponent === AnotherComponent;
+  function isElementOfType(element, Component) {
+    if (element == null || !/* @__PURE__ */ React2.isValidElement(element) || typeof element.type === "string") {
+      return false;
+    }
+    const {
+      type: defaultType
+    } = element;
+    const overrideType = element.props?.__type__;
+    const type = overrideType || defaultType;
+    const Components = Array.isArray(Component) ? Component : [Component];
+    return Components.some((AComponent) => typeof type !== "string" && isComponent(AComponent, type));
+  }
+  function elementChildren(children, predicate = () => true) {
+    return React2.Children.toArray(children).filter((child) => /* @__PURE__ */ React2.isValidElement(child) && predicate(child));
+  }
+  var styles$6 = {
+    "Backdrop": "Polaris-Backdrop",
+    "transparent": "Polaris-Backdrop--transparent",
+    "belowNavigation": "Polaris-Backdrop--belowNavigation"
+  };
+  function useScrollLockManager() {
+    const scrollLockManager = React2.useContext(ScrollLockManagerContext);
+    if (!scrollLockManager) {
+      throw new MissingAppProviderError("No ScrollLockManager was provided.");
+    }
+    return scrollLockManager;
+  }
+  function ScrollLock(_) {
+    const scrollLockManager = useScrollLockManager();
+    React2.useEffect(() => {
+      scrollLockManager.registerScrollLock();
+      return () => {
+        scrollLockManager.unregisterScrollLock();
+      };
+    }, [scrollLockManager]);
+    return null;
+  }
+  function Backdrop(props) {
+    const {
+      onClick,
+      onTouchStart,
+      belowNavigation,
+      transparent,
+      setClosing
+    } = props;
+    const className = classNames(styles$6.Backdrop, belowNavigation && styles$6.belowNavigation, transparent && styles$6.transparent);
+    const handleMouseDown = () => {
+      if (setClosing) {
+        setClosing(true);
+      }
+    };
+    const handleClick = () => {
+      if (setClosing) {
+        setClosing(false);
+      }
+      if (onClick) {
+        onClick();
+      }
+    };
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement(ScrollLock, null), /* @__PURE__ */ React2.createElement("div", {
+      className,
+      onClick: handleClick,
+      onTouchStart,
+      onMouseDown: handleMouseDown
+    }));
+  }
+  const BannerContext = /* @__PURE__ */ React2.createContext(false);
+  var styles$5 = {
+    "Banner": "Polaris-Banner",
+    "keyFocused": "Polaris-Banner--keyFocused",
+    "withinContentContainer": "Polaris-Banner--withinContentContainer",
+    "withinPage": "Polaris-Banner--withinPage",
+    "DismissIcon": "Polaris-Banner__DismissIcon",
+    "text-success-on-bg-fill": "Polaris-Banner--textSuccessOnBgFill",
+    "text-success": "Polaris-Banner__text--success",
+    "text-warning-on-bg-fill": "Polaris-Banner--textWarningOnBgFill",
+    "text-warning": "Polaris-Banner__text--warning",
+    "text-critical-on-bg-fill": "Polaris-Banner--textCriticalOnBgFill",
+    "text-critical": "Polaris-Banner__text--critical",
+    "text-info-on-bg-fill": "Polaris-Banner--textInfoOnBgFill",
+    "text-info": "Polaris-Banner__text--info",
+    "icon-secondary": "Polaris-Banner__icon--secondary"
+  };
+  const bannerAttributes = {
+    success: {
+      withinPage: {
+        background: "bg-fill-success",
+        text: "text-success-on-bg-fill",
+        icon: "text-success-on-bg-fill"
+      },
+      withinContentContainer: {
+        background: "bg-surface-success",
+        text: "text-success",
+        icon: "text-success"
+      },
+      icon: SvgCheckIcon
+    },
+    warning: {
+      withinPage: {
+        background: "bg-fill-warning",
+        text: "text-warning-on-bg-fill",
+        icon: "text-warning-on-bg-fill"
+      },
+      withinContentContainer: {
+        background: "bg-surface-warning",
+        text: "text-warning",
+        icon: "text-warning"
+      },
+      icon: SvgAlertTriangleIcon
+    },
+    critical: {
+      withinPage: {
+        background: "bg-fill-critical",
+        text: "text-critical-on-bg-fill",
+        icon: "text-critical-on-bg-fill"
+      },
+      withinContentContainer: {
+        background: "bg-surface-critical",
+        text: "text-critical",
+        icon: "text-critical"
+      },
+      icon: SvgAlertDiamondIcon
+    },
+    info: {
+      withinPage: {
+        background: "bg-fill-info",
+        text: "text-info-on-bg-fill",
+        icon: "text-info-on-bg-fill"
+      },
+      withinContentContainer: {
+        background: "bg-surface-info",
+        text: "text-info",
+        icon: "text-info"
+      },
+      icon: SvgInfoIcon
+    }
+  };
+  function useBannerFocus(bannerRef) {
+    const wrapperRef = React2.useRef(null);
+    const [shouldShowFocus, setShouldShowFocus] = React2.useState(false);
+    React2.useImperativeHandle(bannerRef, () => ({
+      focus: () => {
+        wrapperRef.current?.focus();
+        setShouldShowFocus(true);
+      }
+    }), []);
+    const handleKeyUp = (event) => {
+      if (event.target === wrapperRef.current) {
+        setShouldShowFocus(true);
+      }
+    };
+    const handleBlur = () => setShouldShowFocus(false);
+    const handleMouseUp = (event) => {
+      event.currentTarget.blur();
+      setShouldShowFocus(false);
+    };
+    return {
+      wrapperRef,
+      handleKeyUp,
+      handleBlur,
+      handleMouseUp,
+      shouldShowFocus
+    };
+  }
+  var styles$4 = {
+    "ButtonGroup": "Polaris-ButtonGroup",
+    "Item": "Polaris-ButtonGroup__Item",
+    "Item-plain": "Polaris-ButtonGroup__Item--plain",
+    "variantSegmented": "Polaris-ButtonGroup--variantSegmented",
+    "Item-focused": "Polaris-ButtonGroup__Item--focused",
+    "fullWidth": "Polaris-ButtonGroup--fullWidth",
+    "extraTight": "Polaris-ButtonGroup--extraTight",
+    "tight": "Polaris-ButtonGroup--tight",
+    "loose": "Polaris-ButtonGroup--loose",
+    "noWrap": "Polaris-ButtonGroup--noWrap"
+  };
+  function Item({
+    button
+  }) {
+    const {
+      value: focused,
+      setTrue: forceTrueFocused,
+      setFalse: forceFalseFocused
+    } = useToggle(false);
+    const className = classNames(styles$4.Item, focused && styles$4["Item-focused"], button.props.variant === "plain" && styles$4["Item-plain"]);
+    return /* @__PURE__ */ React2.createElement("div", {
+      className,
+      onFocus: forceTrueFocused,
+      onBlur: forceFalseFocused
+    }, button);
+  }
+  function ButtonGroup({
+    children,
+    gap,
+    variant,
+    fullWidth,
+    connectedTop,
+    noWrap
+  }) {
+    const className = classNames(styles$4.ButtonGroup, gap && styles$4[gap], variant && styles$4[variationName("variant", variant)], fullWidth && styles$4.fullWidth, noWrap && styles$4.noWrap);
+    const contents = elementChildren(children).map((child, index) => /* @__PURE__ */ React2.createElement(Item, {
+      button: child,
+      key: index
+    }));
+    return /* @__PURE__ */ React2.createElement("div", {
+      className,
+      "data-buttongroup-variant": variant,
+      "data-buttongroup-connected-top": connectedTop,
+      "data-buttongroup-full-width": fullWidth,
+      "data-buttongroup-no-wrap": noWrap
+    }, contents);
+  }
+  const Banner = /* @__PURE__ */ React2.forwardRef(function Banner2(props, bannerRef) {
+    const {
+      tone,
+      stopAnnouncements
+    } = props;
+    const withinContentContainer = React2.useContext(WithinContentContext);
+    const {
+      wrapperRef,
+      handleKeyUp,
+      handleBlur,
+      handleMouseUp,
+      shouldShowFocus
+    } = useBannerFocus(bannerRef);
+    const className = classNames(styles$5.Banner, shouldShowFocus && styles$5.keyFocused, withinContentContainer ? styles$5.withinContentContainer : styles$5.withinPage);
+    return /* @__PURE__ */ React2.createElement(BannerContext.Provider, {
+      value: true
+    }, /* @__PURE__ */ React2.createElement("div", {
+      className,
+      tabIndex: 0,
+      ref: wrapperRef,
+      role: tone === "warning" || tone === "critical" ? "alert" : "status",
+      "aria-live": stopAnnouncements ? "off" : "polite",
+      onMouseUp: handleMouseUp,
+      onKeyUp: handleKeyUp,
+      onBlur: handleBlur
+    }, /* @__PURE__ */ React2.createElement(BannerLayout, props)));
+  });
+  function BannerLayout({
+    tone = "info",
+    icon,
+    hideIcon,
+    onDismiss,
+    action,
+    secondaryAction,
+    title,
+    children
+  }) {
+    const i18n = useI18n();
+    const withinContentContainer = React2.useContext(WithinContentContext);
+    const isInlineIconBanner = !title && !withinContentContainer;
+    const bannerTone = Object.keys(bannerAttributes).includes(tone) ? tone : "info";
+    const bannerColors = bannerAttributes[bannerTone][withinContentContainer ? "withinContentContainer" : "withinPage"];
+    const sharedBannerProps = {
+      backgroundColor: bannerColors.background,
+      textColor: bannerColors.text,
+      bannerTitle: title ? /* @__PURE__ */ React2.createElement(Text, {
+        as: "h2",
+        variant: "headingSm",
+        breakWord: true
+      }, title) : null,
+      bannerIcon: hideIcon ? null : /* @__PURE__ */ React2.createElement("span", {
+        className: styles$5[bannerColors.icon]
+      }, /* @__PURE__ */ React2.createElement(Icon, {
+        source: icon ?? bannerAttributes[bannerTone].icon
+      })),
+      actionButtons: action || secondaryAction ? /* @__PURE__ */ React2.createElement(ButtonGroup, null, action && /* @__PURE__ */ React2.createElement(Button, Object.assign({
+        onClick: action.onAction
+      }, action), action.content), secondaryAction && /* @__PURE__ */ React2.createElement(Button, Object.assign({
+        onClick: secondaryAction.onAction
+      }, secondaryAction), secondaryAction.content)) : null,
+      dismissButton: onDismiss ? /* @__PURE__ */ React2.createElement(Button, {
+        variant: "tertiary",
+        icon: /* @__PURE__ */ React2.createElement("span", {
+          className: styles$5[isInlineIconBanner ? "icon-secondary" : bannerColors.icon]
+        }, /* @__PURE__ */ React2.createElement(Icon, {
+          source: SvgXIcon
+        })),
+        onClick: onDismiss,
+        accessibilityLabel: i18n.translate("Polaris.Banner.dismissButton")
+      }) : null
+    };
+    const childrenMarkup = children ? /* @__PURE__ */ React2.createElement(Text, {
+      as: "span",
+      variant: "bodyMd"
+    }, children) : null;
+    if (withinContentContainer) {
+      return /* @__PURE__ */ React2.createElement(WithinContentContainerBanner, sharedBannerProps, childrenMarkup);
+    }
+    if (isInlineIconBanner) {
+      return /* @__PURE__ */ React2.createElement(InlineIconBanner, sharedBannerProps, childrenMarkup);
+    }
+    return /* @__PURE__ */ React2.createElement(DefaultBanner, sharedBannerProps, childrenMarkup);
+  }
+  function DefaultBanner({
+    backgroundColor,
+    textColor,
+    bannerTitle,
+    bannerIcon,
+    actionButtons,
+    dismissButton,
+    children
+  }) {
+    const {
+      smUp
+    } = useBreakpoints();
+    const hasContent = children || actionButtons;
+    return /* @__PURE__ */ React2.createElement(Box, {
+      width: "100%"
+    }, /* @__PURE__ */ React2.createElement(BlockStack, {
+      align: "space-between"
+    }, /* @__PURE__ */ React2.createElement(Box, {
+      background: backgroundColor,
+      color: textColor,
+      borderStartStartRadius: smUp ? "300" : void 0,
+      borderStartEndRadius: smUp ? "300" : void 0,
+      borderEndStartRadius: !hasContent && smUp ? "300" : void 0,
+      borderEndEndRadius: !hasContent && smUp ? "300" : void 0,
+      padding: "300"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      align: "space-between",
+      blockAlign: "center",
+      gap: "200",
+      wrap: false
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "100",
+      wrap: false
+    }, bannerIcon, bannerTitle), dismissButton)), hasContent && /* @__PURE__ */ React2.createElement(Box, {
+      padding: {
+        xs: "300",
+        md: "400"
+      },
+      paddingBlockStart: "300"
+    }, /* @__PURE__ */ React2.createElement(BlockStack, {
+      gap: "200"
+    }, /* @__PURE__ */ React2.createElement("div", null, children), actionButtons))));
+  }
+  function InlineIconBanner({
+    backgroundColor,
+    bannerIcon,
+    actionButtons,
+    dismissButton,
+    children
+  }) {
+    const [blockAlign, setBlockAlign] = React2.useState("center");
+    const contentNode = React2.useRef(null);
+    const iconNode = React2.useRef(null);
+    const dismissIconNode = React2.useRef(null);
+    const handleResize = React2.useCallback(() => {
+      const contentHeight = contentNode.current?.offsetHeight;
+      const iconBoxHeight = iconNode.current?.offsetHeight || dismissIconNode.current?.offsetHeight;
+      if (!contentHeight || !iconBoxHeight) return;
+      contentHeight > iconBoxHeight ? setBlockAlign("start") : setBlockAlign("center");
+    }, []);
+    React2.useEffect(() => handleResize(), [handleResize]);
+    useEventListener("resize", handleResize);
+    return /* @__PURE__ */ React2.createElement(Box, {
+      width: "100%",
+      padding: "300",
+      borderRadius: "300"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      align: "space-between",
+      blockAlign,
+      wrap: false
+    }, /* @__PURE__ */ React2.createElement(Box, {
+      width: "100%"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "200",
+      wrap: false,
+      blockAlign
+    }, bannerIcon ? /* @__PURE__ */ React2.createElement("div", {
+      ref: iconNode
+    }, /* @__PURE__ */ React2.createElement(Box, {
+      background: backgroundColor,
+      borderRadius: "200",
+      padding: "100"
+    }, bannerIcon)) : null, /* @__PURE__ */ React2.createElement(Box, {
+      ref: contentNode,
+      width: "100%"
+    }, /* @__PURE__ */ React2.createElement(BlockStack, {
+      gap: "200"
+    }, /* @__PURE__ */ React2.createElement("div", null, children), actionButtons)))), /* @__PURE__ */ React2.createElement("div", {
+      ref: dismissIconNode,
+      className: styles$5.DismissIcon
+    }, dismissButton)));
+  }
+  function WithinContentContainerBanner({
+    backgroundColor,
+    textColor,
+    bannerTitle,
+    bannerIcon,
+    actionButtons,
+    dismissButton,
+    children
+  }) {
+    return /* @__PURE__ */ React2.createElement(Box, {
+      width: "100%",
+      background: backgroundColor,
+      padding: "200",
+      borderRadius: "200",
+      color: textColor
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      align: "space-between",
+      blockAlign: "start",
+      wrap: false,
+      gap: "200"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "150",
+      wrap: false
+    }, bannerIcon, /* @__PURE__ */ React2.createElement(Box, {
+      width: "100%"
+    }, /* @__PURE__ */ React2.createElement(BlockStack, {
+      gap: "200"
+    }, /* @__PURE__ */ React2.createElement(BlockStack, {
+      gap: "050"
+    }, bannerTitle, /* @__PURE__ */ React2.createElement("div", null, children)), actionButtons))), dismissButton));
+  }
+  var styles$3 = {
+    "InlineGrid": "Polaris-InlineGrid"
+  };
+  function InlineGrid({
+    children,
+    columns,
+    gap,
+    alignItems
+  }) {
+    const style = {
+      ...getResponsiveValue("inline-grid", "grid-template-columns", formatInlineGrid(columns)),
+      ...getResponsiveProps("inline-grid", "gap", "space", gap),
+      "--pc-inline-grid-align-items": alignItems
+    };
+    return /* @__PURE__ */ React2.createElement("div", {
+      className: styles$3.InlineGrid,
+      style: sanitizeCustomProperties(style)
+    }, children);
+  }
+  function formatInlineGrid(columns) {
+    if (typeof columns === "object" && columns !== null && !Array.isArray(columns)) {
+      return Object.fromEntries(Object.entries(columns).map(([breakpointAlias, breakpointInlineGrid]) => [breakpointAlias, getColumnValue(breakpointInlineGrid)]));
+    }
+    return getColumnValue(columns);
+  }
+  function getColumnValue(columns) {
+    if (!columns) return void 0;
+    if (typeof columns === "number" || !isNaN(Number(columns))) {
+      return `repeat(${Number(columns)}, minmax(0, 1fr))`;
+    }
+    if (typeof columns === "string") return columns;
+    return columns.map((column) => {
+      switch (column) {
+        case "oneThird":
+          return "minmax(0, 1fr)";
+        case "oneHalf":
+          return "minmax(0, 1fr)";
+        case "twoThirds":
+          return "minmax(0, 2fr)";
+      }
+    }).join(" ");
+  }
+  const FrameContext = /* @__PURE__ */ React2.createContext(void 0);
+  const Focus = /* @__PURE__ */ React2.memo(function Focus2({
+    children,
+    disabled,
+    root
+  }) {
+    React2.useEffect(() => {
+      if (disabled || !root) {
+        return;
+      }
+      const node = isRef$1(root) ? root.current : root;
+      if (!node || node.querySelector("[autofocus]")) {
+        return;
+      }
+      focusFirstFocusableNode(node, false);
+    }, [disabled, root]);
+    return /* @__PURE__ */ React2.createElement(React2.Fragment, null, children);
+  });
+  function isRef$1(ref) {
+    return ref.current !== void 0;
+  }
+  function _extends() {
+    return _extends = Object.assign ? Object.assign.bind() : function(n) {
+      for (var e = 1; e < arguments.length; e++) {
+        var t = arguments[e];
+        for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
+      }
+      return n;
+    }, _extends.apply(null, arguments);
+  }
+  function _objectWithoutPropertiesLoose(r, e) {
+    if (null == r) return {};
+    var t = {};
+    for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+      if (-1 !== e.indexOf(n)) continue;
+      t[n] = r[n];
+    }
+    return t;
+  }
+  function _setPrototypeOf(t, e) {
+    return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(t2, e2) {
+      return t2.__proto__ = e2, t2;
+    }, _setPrototypeOf(t, e);
+  }
+  function _inheritsLoose(t, o) {
+    t.prototype = Object.create(o.prototype), t.prototype.constructor = t, _setPrototypeOf(t, o);
+  }
+  function hasClass(element, className) {
+    if (element.classList) return !!className && element.classList.contains(className);
+    return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
+  }
+  function addClass(element, className) {
+    if (element.classList) element.classList.add(className);
+    else if (!hasClass(element, className)) if (typeof element.className === "string") element.className = element.className + " " + className;
+    else element.setAttribute("class", (element.className && element.className.baseVal || "") + " " + className);
+  }
+  function replaceClassName(origClass, classToRemove) {
+    return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", "g"), "$1").replace(/\s+/g, " ").replace(/^\s*|\s*$/g, "");
+  }
+  function removeClass$1(element, className) {
+    if (element.classList) {
+      element.classList.remove(className);
+    } else if (typeof element.className === "string") {
+      element.className = replaceClassName(element.className, className);
+    } else {
+      element.setAttribute("class", replaceClassName(element.className && element.className.baseVal || "", className));
+    }
+  }
+  const config = {
+    disabled: false
+  };
+  const TransitionGroupContext = React2.createContext(null);
+  var forceReflow = function forceReflow2(node) {
+    return node.scrollTop;
+  };
+  var UNMOUNTED = "unmounted";
+  var EXITED = "exited";
+  var ENTERING = "entering";
+  var ENTERED = "entered";
+  var EXITING = "exiting";
+  var Transition = /* @__PURE__ */ function(_React$Component) {
+    _inheritsLoose(Transition2, _React$Component);
+    function Transition2(props, context) {
+      var _this;
+      _this = _React$Component.call(this, props, context) || this;
+      var parentGroup = context;
+      var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+      var initialStatus;
+      _this.appearStatus = null;
+      if (props.in) {
+        if (appear) {
+          initialStatus = EXITED;
+          _this.appearStatus = ENTERING;
+        } else {
+          initialStatus = ENTERED;
+        }
+      } else {
+        if (props.unmountOnExit || props.mountOnEnter) {
+          initialStatus = UNMOUNTED;
+        } else {
+          initialStatus = EXITED;
+        }
+      }
+      _this.state = {
+        status: initialStatus
+      };
+      _this.nextCallback = null;
+      return _this;
+    }
+    Transition2.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+      var nextIn = _ref.in;
+      if (nextIn && prevState.status === UNMOUNTED) {
+        return {
+          status: EXITED
+        };
+      }
+      return null;
+    };
+    var _proto = Transition2.prototype;
+    _proto.componentDidMount = function componentDidMount() {
+      this.updateStatus(true, this.appearStatus);
+    };
+    _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+      var nextStatus = null;
+      if (prevProps !== this.props) {
+        var status = this.state.status;
+        if (this.props.in) {
+          if (status !== ENTERING && status !== ENTERED) {
+            nextStatus = ENTERING;
+          }
+        } else {
+          if (status === ENTERING || status === ENTERED) {
+            nextStatus = EXITING;
+          }
+        }
+      }
+      this.updateStatus(false, nextStatus);
+    };
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this.cancelNextCallback();
+    };
+    _proto.getTimeouts = function getTimeouts() {
+      var timeout2 = this.props.timeout;
+      var exit, enter, appear;
+      exit = enter = appear = timeout2;
+      if (timeout2 != null && typeof timeout2 !== "number") {
+        exit = timeout2.exit;
+        enter = timeout2.enter;
+        appear = timeout2.appear !== void 0 ? timeout2.appear : enter;
+      }
+      return {
+        exit,
+        enter,
+        appear
+      };
+    };
+    _proto.updateStatus = function updateStatus(mounting, nextStatus) {
+      if (mounting === void 0) {
+        mounting = false;
+      }
+      if (nextStatus !== null) {
+        this.cancelNextCallback();
+        if (nextStatus === ENTERING) {
+          if (this.props.unmountOnExit || this.props.mountOnEnter) {
+            var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM2.findDOMNode(this);
+            if (node) forceReflow(node);
+          }
+          this.performEnter(mounting);
+        } else {
+          this.performExit();
+        }
+      } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+        this.setState({
+          status: UNMOUNTED
+        });
+      }
+    };
+    _proto.performEnter = function performEnter(mounting) {
+      var _this2 = this;
+      var enter = this.props.enter;
+      var appearing = this.context ? this.context.isMounting : mounting;
+      var _ref2 = this.props.nodeRef ? [appearing] : [ReactDOM2.findDOMNode(this), appearing], maybeNode = _ref2[0], maybeAppearing = _ref2[1];
+      var timeouts = this.getTimeouts();
+      var enterTimeout = appearing ? timeouts.appear : timeouts.enter;
+      if (!mounting && !enter || config.disabled) {
+        this.safeSetState({
+          status: ENTERED
+        }, function() {
+          _this2.props.onEntered(maybeNode);
+        });
+        return;
+      }
+      this.props.onEnter(maybeNode, maybeAppearing);
+      this.safeSetState({
+        status: ENTERING
+      }, function() {
+        _this2.props.onEntering(maybeNode, maybeAppearing);
+        _this2.onTransitionEnd(enterTimeout, function() {
+          _this2.safeSetState({
+            status: ENTERED
+          }, function() {
+            _this2.props.onEntered(maybeNode, maybeAppearing);
+          });
+        });
+      });
+    };
+    _proto.performExit = function performExit() {
+      var _this3 = this;
+      var exit = this.props.exit;
+      var timeouts = this.getTimeouts();
+      var maybeNode = this.props.nodeRef ? void 0 : ReactDOM2.findDOMNode(this);
+      if (!exit || config.disabled) {
+        this.safeSetState({
+          status: EXITED
+        }, function() {
+          _this3.props.onExited(maybeNode);
+        });
+        return;
+      }
+      this.props.onExit(maybeNode);
+      this.safeSetState({
+        status: EXITING
+      }, function() {
+        _this3.props.onExiting(maybeNode);
+        _this3.onTransitionEnd(timeouts.exit, function() {
+          _this3.safeSetState({
+            status: EXITED
+          }, function() {
+            _this3.props.onExited(maybeNode);
+          });
+        });
+      });
+    };
+    _proto.cancelNextCallback = function cancelNextCallback() {
+      if (this.nextCallback !== null) {
+        this.nextCallback.cancel();
+        this.nextCallback = null;
+      }
+    };
+    _proto.safeSetState = function safeSetState(nextState, callback) {
+      callback = this.setNextCallback(callback);
+      this.setState(nextState, callback);
+    };
+    _proto.setNextCallback = function setNextCallback(callback) {
+      var _this4 = this;
+      var active = true;
+      this.nextCallback = function(event) {
+        if (active) {
+          active = false;
+          _this4.nextCallback = null;
+          callback(event);
+        }
+      };
+      this.nextCallback.cancel = function() {
+        active = false;
+      };
+      return this.nextCallback;
+    };
+    _proto.onTransitionEnd = function onTransitionEnd(timeout2, handler) {
+      this.setNextCallback(handler);
+      var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM2.findDOMNode(this);
+      var doesNotHaveTimeoutOrListener = timeout2 == null && !this.props.addEndListener;
+      if (!node || doesNotHaveTimeoutOrListener) {
+        setTimeout(this.nextCallback, 0);
+        return;
+      }
+      if (this.props.addEndListener) {
+        var _ref3 = this.props.nodeRef ? [this.nextCallback] : [node, this.nextCallback], maybeNode = _ref3[0], maybeNextCallback = _ref3[1];
+        this.props.addEndListener(maybeNode, maybeNextCallback);
+      }
+      if (timeout2 != null) {
+        setTimeout(this.nextCallback, timeout2);
+      }
+    };
+    _proto.render = function render() {
+      var status = this.state.status;
+      if (status === UNMOUNTED) {
+        return null;
+      }
+      var _this$props = this.props, children = _this$props.children;
+      _this$props.in;
+      _this$props.mountOnEnter;
+      _this$props.unmountOnExit;
+      _this$props.appear;
+      _this$props.enter;
+      _this$props.exit;
+      _this$props.timeout;
+      _this$props.addEndListener;
+      _this$props.onEnter;
+      _this$props.onEntering;
+      _this$props.onEntered;
+      _this$props.onExit;
+      _this$props.onExiting;
+      _this$props.onExited;
+      _this$props.nodeRef;
+      var childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+      return (
+        // allows for nested Transitions
+        /* @__PURE__ */ React2.createElement(TransitionGroupContext.Provider, {
+          value: null
+        }, typeof children === "function" ? children(status, childProps) : React2.cloneElement(React2.Children.only(children), childProps))
+      );
+    };
+    return Transition2;
+  }(React2.Component);
+  Transition.contextType = TransitionGroupContext;
+  Transition.propTypes = {};
+  function noop() {
+  }
+  Transition.defaultProps = {
+    in: false,
+    mountOnEnter: false,
+    unmountOnExit: false,
+    appear: false,
+    enter: true,
+    exit: true,
+    onEnter: noop,
+    onEntering: noop,
+    onEntered: noop,
+    onExit: noop,
+    onExiting: noop,
+    onExited: noop
+  };
+  Transition.UNMOUNTED = UNMOUNTED;
+  Transition.EXITED = EXITED;
+  Transition.ENTERING = ENTERING;
+  Transition.ENTERED = ENTERED;
+  Transition.EXITING = EXITING;
+  var _addClass = function addClass$1(node, classes) {
+    return node && classes && classes.split(" ").forEach(function(c) {
+      return addClass(node, c);
+    });
+  };
+  var removeClass = function removeClass2(node, classes) {
+    return node && classes && classes.split(" ").forEach(function(c) {
+      return removeClass$1(node, c);
+    });
+  };
+  var CSSTransition = /* @__PURE__ */ function(_React$Component) {
+    _inheritsLoose(CSSTransition2, _React$Component);
+    function CSSTransition2() {
+      var _this;
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+      _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+      _this.appliedClasses = {
+        appear: {},
+        enter: {},
+        exit: {}
+      };
+      _this.onEnter = function(maybeNode, maybeAppearing) {
+        var _this$resolveArgument = _this.resolveArguments(maybeNode, maybeAppearing), node = _this$resolveArgument[0], appearing = _this$resolveArgument[1];
+        _this.removeClasses(node, "exit");
+        _this.addClass(node, appearing ? "appear" : "enter", "base");
+        if (_this.props.onEnter) {
+          _this.props.onEnter(maybeNode, maybeAppearing);
+        }
+      };
+      _this.onEntering = function(maybeNode, maybeAppearing) {
+        var _this$resolveArgument2 = _this.resolveArguments(maybeNode, maybeAppearing), node = _this$resolveArgument2[0], appearing = _this$resolveArgument2[1];
+        var type = appearing ? "appear" : "enter";
+        _this.addClass(node, type, "active");
+        if (_this.props.onEntering) {
+          _this.props.onEntering(maybeNode, maybeAppearing);
+        }
+      };
+      _this.onEntered = function(maybeNode, maybeAppearing) {
+        var _this$resolveArgument3 = _this.resolveArguments(maybeNode, maybeAppearing), node = _this$resolveArgument3[0], appearing = _this$resolveArgument3[1];
+        var type = appearing ? "appear" : "enter";
+        _this.removeClasses(node, type);
+        _this.addClass(node, type, "done");
+        if (_this.props.onEntered) {
+          _this.props.onEntered(maybeNode, maybeAppearing);
+        }
+      };
+      _this.onExit = function(maybeNode) {
+        var _this$resolveArgument4 = _this.resolveArguments(maybeNode), node = _this$resolveArgument4[0];
+        _this.removeClasses(node, "appear");
+        _this.removeClasses(node, "enter");
+        _this.addClass(node, "exit", "base");
+        if (_this.props.onExit) {
+          _this.props.onExit(maybeNode);
+        }
+      };
+      _this.onExiting = function(maybeNode) {
+        var _this$resolveArgument5 = _this.resolveArguments(maybeNode), node = _this$resolveArgument5[0];
+        _this.addClass(node, "exit", "active");
+        if (_this.props.onExiting) {
+          _this.props.onExiting(maybeNode);
+        }
+      };
+      _this.onExited = function(maybeNode) {
+        var _this$resolveArgument6 = _this.resolveArguments(maybeNode), node = _this$resolveArgument6[0];
+        _this.removeClasses(node, "exit");
+        _this.addClass(node, "exit", "done");
+        if (_this.props.onExited) {
+          _this.props.onExited(maybeNode);
+        }
+      };
+      _this.resolveArguments = function(maybeNode, maybeAppearing) {
+        return _this.props.nodeRef ? [_this.props.nodeRef.current, maybeNode] : [maybeNode, maybeAppearing];
+      };
+      _this.getClassNames = function(type) {
+        var classNames2 = _this.props.classNames;
+        var isStringClassNames = typeof classNames2 === "string";
+        var prefix = isStringClassNames && classNames2 ? classNames2 + "-" : "";
+        var baseClassName = isStringClassNames ? "" + prefix + type : classNames2[type];
+        var activeClassName = isStringClassNames ? baseClassName + "-active" : classNames2[type + "Active"];
+        var doneClassName = isStringClassNames ? baseClassName + "-done" : classNames2[type + "Done"];
+        return {
+          baseClassName,
+          activeClassName,
+          doneClassName
+        };
+      };
+      return _this;
+    }
+    var _proto = CSSTransition2.prototype;
+    _proto.addClass = function addClass2(node, type, phase) {
+      var className = this.getClassNames(type)[phase + "ClassName"];
+      var _this$getClassNames = this.getClassNames("enter"), doneClassName = _this$getClassNames.doneClassName;
+      if (type === "appear" && phase === "done" && doneClassName) {
+        className += " " + doneClassName;
+      }
+      if (phase === "active") {
+        if (node) forceReflow(node);
+      }
+      if (className) {
+        this.appliedClasses[type][phase] = className;
+        _addClass(node, className);
+      }
+    };
+    _proto.removeClasses = function removeClasses(node, type) {
+      var _this$appliedClasses$ = this.appliedClasses[type], baseClassName = _this$appliedClasses$.base, activeClassName = _this$appliedClasses$.active, doneClassName = _this$appliedClasses$.done;
+      this.appliedClasses[type] = {};
+      if (baseClassName) {
+        removeClass(node, baseClassName);
+      }
+      if (activeClassName) {
+        removeClass(node, activeClassName);
+      }
+      if (doneClassName) {
+        removeClass(node, doneClassName);
+      }
+    };
+    _proto.render = function render() {
+      var _this$props = this.props;
+      _this$props.classNames;
+      var props = _objectWithoutPropertiesLoose(_this$props, ["classNames"]);
+      return /* @__PURE__ */ React2.createElement(Transition, _extends({}, props, {
+        onEnter: this.onEnter,
+        onEntered: this.onEntered,
+        onEntering: this.onEntering,
+        onExit: this.onExit,
+        onExiting: this.onExiting,
+        onExited: this.onExited
+      }));
+    };
+    return CSSTransition2;
+  }(React2.Component);
+  CSSTransition.defaultProps = {
+    classNames: ""
+  };
+  CSSTransition.propTypes = {};
+  function _assertThisInitialized(e) {
+    if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    return e;
+  }
+  function getChildMapping(children, mapFn) {
+    var mapper = function mapper2(child) {
+      return mapFn && React2.isValidElement(child) ? mapFn(child) : child;
+    };
+    var result = /* @__PURE__ */ Object.create(null);
+    if (children) React2.Children.map(children, function(c) {
+      return c;
+    }).forEach(function(child) {
+      result[child.key] = mapper(child);
+    });
+    return result;
+  }
+  function mergeChildMappings(prev, next) {
+    prev = prev || {};
+    next = next || {};
+    function getValueForKey(key) {
+      return key in next ? next[key] : prev[key];
+    }
+    var nextKeysPending = /* @__PURE__ */ Object.create(null);
+    var pendingKeys = [];
+    for (var prevKey in prev) {
+      if (prevKey in next) {
+        if (pendingKeys.length) {
+          nextKeysPending[prevKey] = pendingKeys;
+          pendingKeys = [];
+        }
+      } else {
+        pendingKeys.push(prevKey);
+      }
+    }
+    var i;
+    var childMapping = {};
+    for (var nextKey in next) {
+      if (nextKeysPending[nextKey]) {
+        for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+          var pendingNextKey = nextKeysPending[nextKey][i];
+          childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+        }
+      }
+      childMapping[nextKey] = getValueForKey(nextKey);
+    }
+    for (i = 0; i < pendingKeys.length; i++) {
+      childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+    }
+    return childMapping;
+  }
+  function getProp(child, prop, props) {
+    return props[prop] != null ? props[prop] : child.props[prop];
+  }
+  function getInitialChildMapping(props, onExited) {
+    return getChildMapping(props.children, function(child) {
+      return React2.cloneElement(child, {
+        onExited: onExited.bind(null, child),
+        in: true,
+        appear: getProp(child, "appear", props),
+        enter: getProp(child, "enter", props),
+        exit: getProp(child, "exit", props)
+      });
+    });
+  }
+  function getNextChildMapping(nextProps, prevChildMapping, onExited) {
+    var nextChildMapping = getChildMapping(nextProps.children);
+    var children = mergeChildMappings(prevChildMapping, nextChildMapping);
+    Object.keys(children).forEach(function(key) {
+      var child = children[key];
+      if (!React2.isValidElement(child)) return;
+      var hasPrev = key in prevChildMapping;
+      var hasNext = key in nextChildMapping;
+      var prevChild = prevChildMapping[key];
+      var isLeaving = React2.isValidElement(prevChild) && !prevChild.props.in;
+      if (hasNext && (!hasPrev || isLeaving)) {
+        children[key] = React2.cloneElement(child, {
+          onExited: onExited.bind(null, child),
+          in: true,
+          exit: getProp(child, "exit", nextProps),
+          enter: getProp(child, "enter", nextProps)
+        });
+      } else if (!hasNext && hasPrev && !isLeaving) {
+        children[key] = React2.cloneElement(child, {
+          in: false
+        });
+      } else if (hasNext && hasPrev && React2.isValidElement(prevChild)) {
+        children[key] = React2.cloneElement(child, {
+          onExited: onExited.bind(null, child),
+          in: prevChild.props.in,
+          exit: getProp(child, "exit", nextProps),
+          enter: getProp(child, "enter", nextProps)
+        });
+      }
+    });
+    return children;
+  }
+  var values = Object.values || function(obj) {
+    return Object.keys(obj).map(function(k) {
+      return obj[k];
+    });
+  };
+  var defaultProps = {
+    component: "div",
+    childFactory: function childFactory(child) {
+      return child;
+    }
+  };
+  var TransitionGroup = /* @__PURE__ */ function(_React$Component) {
+    _inheritsLoose(TransitionGroup2, _React$Component);
+    function TransitionGroup2(props, context) {
+      var _this;
+      _this = _React$Component.call(this, props, context) || this;
+      var handleExited = _this.handleExited.bind(_assertThisInitialized(_this));
+      _this.state = {
+        contextValue: {
+          isMounting: true
+        },
+        handleExited,
+        firstRender: true
+      };
+      return _this;
+    }
+    var _proto = TransitionGroup2.prototype;
+    _proto.componentDidMount = function componentDidMount() {
+      this.mounted = true;
+      this.setState({
+        contextValue: {
+          isMounting: false
+        }
+      });
+    };
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this.mounted = false;
+    };
+    TransitionGroup2.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, _ref) {
+      var prevChildMapping = _ref.children, handleExited = _ref.handleExited, firstRender = _ref.firstRender;
+      return {
+        children: firstRender ? getInitialChildMapping(nextProps, handleExited) : getNextChildMapping(nextProps, prevChildMapping, handleExited),
+        firstRender: false
+      };
+    };
+    _proto.handleExited = function handleExited(child, node) {
+      var currentChildMapping = getChildMapping(this.props.children);
+      if (child.key in currentChildMapping) return;
+      if (child.props.onExited) {
+        child.props.onExited(node);
+      }
+      if (this.mounted) {
+        this.setState(function(state) {
+          var children = _extends({}, state.children);
+          delete children[child.key];
+          return {
+            children
+          };
+        });
+      }
+    };
+    _proto.render = function render() {
+      var _this$props = this.props, Component = _this$props.component, childFactory2 = _this$props.childFactory, props = _objectWithoutPropertiesLoose(_this$props, ["component", "childFactory"]);
+      var contextValue = this.state.contextValue;
+      var children = values(this.state.children).map(childFactory2);
+      delete props.appear;
+      delete props.enter;
+      delete props.exit;
+      if (Component === null) {
+        return /* @__PURE__ */ React2.createElement(TransitionGroupContext.Provider, {
+          value: contextValue
+        }, children);
+      }
+      return /* @__PURE__ */ React2.createElement(TransitionGroupContext.Provider, {
+        value: contextValue
+      }, /* @__PURE__ */ React2.createElement(Component, props, children));
+    };
+    return TransitionGroup2;
+  }(React2.Component);
+  TransitionGroup.propTypes = {};
+  TransitionGroup.defaultProps = defaultProps;
+  var styles$2 = {
+    "Body": "Polaris-Modal__Body",
+    "NoScrollBody": "Polaris-Modal__NoScrollBody",
+    "IFrame": "Polaris-Modal__IFrame"
+  };
+  var styles$1 = {
+    "Section": "Polaris-Modal-Section",
+    "titleHidden": "Polaris-Modal-Section--titleHidden"
+  };
+  function Section({
+    children,
+    flush = false,
+    subdued = false,
+    titleHidden = false
+  }) {
+    const className = classNames(styles$1.Section, titleHidden && styles$1.titleHidden);
+    return /* @__PURE__ */ React2.createElement("div", {
+      className
+    }, /* @__PURE__ */ React2.createElement(Box, Object.assign({
+      as: "section",
+      padding: flush ? "0" : "400"
+    }, titleHidden && {
+      paddingInlineEnd: "0"
+    }, subdued && {
+      background: "bg-surface-tertiary"
+    }), children));
+  }
+  var styles = {
+    "Container": "Polaris-Modal-Dialog__Container",
+    "Dialog": "Polaris-Modal-Dialog",
+    "Modal": "Polaris-Modal-Dialog__Modal",
+    "limitHeight": "Polaris-Modal-Dialog--limitHeight",
+    "sizeSmall": "Polaris-Modal-Dialog--sizeSmall",
+    "sizeLarge": "Polaris-Modal-Dialog--sizeLarge",
+    "sizeFullScreen": "Polaris-Modal-Dialog--sizeFullScreen",
+    "animateFadeUp": "Polaris-Modal-Dialog--animateFadeUp",
+    "entering": "Polaris-Modal-Dialog--entering",
+    "exiting": "Polaris-Modal-Dialog--exiting",
+    "exited": "Polaris-Modal-Dialog--exited",
+    "entered": "Polaris-Modal-Dialog--entered"
+  };
+  function useFocusManager({
+    trapping
+  }) {
+    const focusManager = React2.useContext(FocusManagerContext);
+    const id = React2.useId();
+    if (!focusManager) {
+      throw new MissingAppProviderError("No FocusManager was provided.");
+    }
+    const {
+      trapFocusList,
+      add: addFocusItem,
+      remove: removeFocusItem
+    } = focusManager;
+    const canSafelyFocus = trapFocusList[0] === id;
+    const value = React2.useMemo(() => ({
+      canSafelyFocus
+    }), [canSafelyFocus]);
+    React2.useEffect(() => {
+      if (!trapping) return;
+      addFocusItem(id);
+      return () => {
+        removeFocusItem(id);
+      };
+    }, [addFocusItem, id, removeFocusItem, trapping]);
+    return value;
+  }
+  function TrapFocus({
+    trapping = true,
+    children
+  }) {
+    const {
+      canSafelyFocus
+    } = useFocusManager({
+      trapping
+    });
+    const focusTrapWrapper = React2.useRef(null);
+    const [disableFocus, setDisableFocus] = React2.useState(true);
+    React2.useEffect(() => {
+      const disable = canSafelyFocus && !(focusTrapWrapper.current && focusTrapWrapper.current.contains(document.activeElement)) ? !trapping : true;
+      setDisableFocus(disable);
+    }, [canSafelyFocus, trapping]);
+    const handleFocusIn = (event) => {
+      const containerContentsHaveFocus = focusTrapWrapper.current && focusTrapWrapper.current.contains(document.activeElement);
+      if (trapping === false || !focusTrapWrapper.current || containerContentsHaveFocus || event.target instanceof Element && event.target.matches(`${portal.selector} *`)) {
+        return;
+      }
+      if (canSafelyFocus && event.target instanceof HTMLElement && focusTrapWrapper.current !== event.target && !focusTrapWrapper.current.contains(event.target)) {
+        focusFirstFocusableNode(focusTrapWrapper.current);
+      }
+    };
+    const handleTab = (event) => {
+      if (trapping === false || !focusTrapWrapper.current) {
+        return;
+      }
+      const firstFocusableNode = findFirstKeyboardFocusableNode(focusTrapWrapper.current);
+      const lastFocusableNode = findLastKeyboardFocusableNode(focusTrapWrapper.current);
+      if (event.target === lastFocusableNode && !event.shiftKey) {
+        event.preventDefault();
+        focusFirstKeyboardFocusableNode(focusTrapWrapper.current);
+      }
+      if (event.target === firstFocusableNode && event.shiftKey) {
+        event.preventDefault();
+        focusLastKeyboardFocusableNode(focusTrapWrapper.current);
+      }
+    };
+    return /* @__PURE__ */ React2.createElement(Focus, {
+      disabled: disableFocus,
+      root: focusTrapWrapper.current
+    }, /* @__PURE__ */ React2.createElement("div", {
+      ref: focusTrapWrapper
+    }, /* @__PURE__ */ React2.createElement(EventListener, {
+      event: "focusin",
+      handler: handleFocusIn
+    }), /* @__PURE__ */ React2.createElement(KeypressListener, {
+      keyCode: Key.Tab,
+      keyEvent: "keydown",
+      handler: handleTab
+    }), children));
+  }
+  function Dialog({
+    instant,
+    labelledBy,
+    children,
+    limitHeight,
+    size: size2,
+    onClose,
+    onExited,
+    onEntered,
+    setClosing,
+    hasToasts,
+    ...props
+  }) {
+    const theme = useTheme();
+    const containerNode = React2.useRef(null);
+    const frameContext = React2.useContext(FrameContext);
+    let toastMessages;
+    if (frameContext) {
+      toastMessages = frameContext.toastMessages;
+    }
+    const classes = classNames(styles.Modal, size2 && styles[variationName("size", size2)], limitHeight && styles.limitHeight);
+    const TransitionChild = instant ? Transition : FadeUp;
+    React2.useEffect(() => {
+      containerNode.current && !containerNode.current.contains(document.activeElement) && focusFirstFocusableNode(containerNode.current);
+    }, []);
+    const handleKeyDown = () => {
+      if (setClosing) {
+        setClosing(true);
+      }
+    };
+    const handleKeyUp = () => {
+      if (setClosing) {
+        setClosing(false);
+      }
+      onClose();
+    };
+    const ariaLiveAnnouncements = /* @__PURE__ */ React2.createElement("div", {
+      "aria-live": "assertive"
+    }, toastMessages ? toastMessages.map((toastMessage) => /* @__PURE__ */ React2.createElement(Text, {
+      visuallyHidden: true,
+      as: "p",
+      key: toastMessage.id
+    }, toastMessage.content)) : null);
+    return /* @__PURE__ */ React2.createElement(TransitionChild, Object.assign({}, props, {
+      nodeRef: containerNode,
+      mountOnEnter: true,
+      unmountOnExit: true,
+      timeout: parseInt(theme.motion["motion-duration-200"], 10),
+      onEntered,
+      onExited
+    }), /* @__PURE__ */ React2.createElement("div", {
+      className: styles.Container,
+      "data-polaris-layer": true,
+      "data-polaris-overlay": true,
+      ref: containerNode
+    }, /* @__PURE__ */ React2.createElement(TrapFocus, null, /* @__PURE__ */ React2.createElement("div", {
+      role: "dialog",
+      "aria-modal": true,
+      "aria-label": labelledBy,
+      "aria-labelledby": labelledBy,
+      tabIndex: -1,
+      className: styles.Dialog
+    }, /* @__PURE__ */ React2.createElement("div", {
+      className: classes
+    }, /* @__PURE__ */ React2.createElement(KeypressListener, {
+      keyCode: Key.Escape,
+      keyEvent: "keydown",
+      handler: handleKeyDown
+    }), /* @__PURE__ */ React2.createElement(KeypressListener, {
+      keyCode: Key.Escape,
+      handler: handleKeyUp
+    }), children), ariaLiveAnnouncements))));
+  }
+  const fadeUpClasses = {
+    appear: classNames(styles.animateFadeUp, styles.entering),
+    appearActive: classNames(styles.animateFadeUp, styles.entered),
+    enter: classNames(styles.animateFadeUp, styles.entering),
+    enterActive: classNames(styles.animateFadeUp, styles.entered),
+    exit: classNames(styles.animateFadeUp, styles.exiting),
+    exitActive: classNames(styles.animateFadeUp, styles.exited)
+  };
+  function FadeUp({
+    children,
+    ...props
+  }) {
+    return /* @__PURE__ */ React2.createElement(CSSTransition, Object.assign({}, props, {
+      classNames: fadeUpClasses
+    }), children);
+  }
+  function CloseButton({
+    pressed,
+    onClick
+  }) {
+    const i18n = useI18n();
+    return /* @__PURE__ */ React2.createElement(Button, {
+      variant: "tertiary",
+      pressed,
+      icon: SvgXIcon,
+      onClick,
+      accessibilityLabel: i18n.translate("Polaris.Common.close")
+    });
+  }
+  function Header({
+    id,
+    children,
+    closing,
+    titleHidden,
+    onClose
+  }) {
+    const headerPaddingInline = "400";
+    const headerPaddingBlock = "400";
+    if (titleHidden || !children) {
+      return /* @__PURE__ */ React2.createElement(Box, {
+        position: "absolute",
+        insetInlineEnd: headerPaddingInline,
+        insetBlockStart: headerPaddingBlock,
+        zIndex: "1"
+      }, /* @__PURE__ */ React2.createElement(CloseButton, {
+        onClick: onClose
+      }));
+    }
+    return /* @__PURE__ */ React2.createElement(Box, {
+      paddingBlockStart: "400",
+      paddingBlockEnd: "400",
+      paddingInlineStart: headerPaddingInline,
+      paddingInlineEnd: headerPaddingInline,
+      borderBlockEndWidth: "025",
+      borderColor: "border",
+      background: "bg-surface-tertiary"
+    }, /* @__PURE__ */ React2.createElement(InlineGrid, {
+      columns: {
+        xs: "1fr auto"
+      },
+      gap: "400"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "400",
+      blockAlign: "center"
+    }, /* @__PURE__ */ React2.createElement(Text, {
+      id,
+      as: "h2",
+      variant: "headingMd",
+      breakWord: true
+    }, children)), /* @__PURE__ */ React2.createElement(CloseButton, {
+      pressed: closing,
+      onClick: onClose
+    })));
+  }
+  function Footer({
+    primaryAction,
+    secondaryActions,
+    children
+  }) {
+    const primaryActionButton = primaryAction && buttonsFrom(primaryAction, {
+      variant: "primary"
+    }) || null;
+    const secondaryActionButtons = secondaryActions && buttonsFrom(secondaryActions) || null;
+    const actions = primaryActionButton || secondaryActionButtons ? /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "200"
+    }, secondaryActionButtons, primaryActionButton) : null;
+    return /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "400",
+      blockAlign: "center"
+    }, /* @__PURE__ */ React2.createElement(Box, {
+      borderColor: "border",
+      borderBlockStartWidth: "025",
+      padding: "400",
+      width: "100%"
+    }, /* @__PURE__ */ React2.createElement(InlineStack, {
+      gap: "400",
+      blockAlign: "center",
+      align: "space-between"
+    }, /* @__PURE__ */ React2.createElement(Box, null, children), actions)));
+  }
+  const IFRAME_LOADING_HEIGHT = 200;
+  const DEFAULT_IFRAME_CONTENT_HEIGHT = 400;
+  const Modal = function Modal2({
+    children,
+    title,
+    titleHidden = false,
+    src,
+    iFrameName,
+    open,
+    instant,
+    sectioned,
+    loading,
+    size: size2,
+    limitHeight,
+    footer,
+    primaryAction,
+    secondaryActions,
+    onScrolledToBottom,
+    activator,
+    activatorWrapper = "div",
+    onClose,
+    onIFrameLoad,
+    onTransitionEnd,
+    noScroll
+  }) {
+    const [iframeHeight, setIframeHeight] = React2.useState(IFRAME_LOADING_HEIGHT);
+    const [closing, setClosing] = React2.useState(false);
+    const headerId = React2.useId();
+    const activatorRef = React2.useRef(null);
+    const i18n = useI18n();
+    const iframeTitle = i18n.translate("Polaris.Modal.iFrameTitle");
+    let dialog;
+    let backdrop;
+    const handleEntered = React2.useCallback(() => {
+      if (onTransitionEnd) {
+        onTransitionEnd();
+      }
+    }, [onTransitionEnd]);
+    const handleExited = React2.useCallback(() => {
+      setIframeHeight(IFRAME_LOADING_HEIGHT);
+      const activatorElement = activator && isRef(activator) ? activator && activator.current : activatorRef.current;
+      if (activatorElement) {
+        requestAnimationFrame(() => focusFirstFocusableNode(activatorElement));
+      }
+    }, [activator]);
+    const handleIFrameLoad = React2.useCallback((evt) => {
+      const iframe = evt.target;
+      if (iframe && iframe.contentWindow) {
+        try {
+          setIframeHeight(iframe.contentWindow.document.body.scrollHeight);
+        } catch (_error) {
+          setIframeHeight(DEFAULT_IFRAME_CONTENT_HEIGHT);
+        }
+      }
+      if (onIFrameLoad != null) {
+        onIFrameLoad(evt);
+      }
+    }, [onIFrameLoad]);
+    if (open) {
+      const footerMarkup = !footer && !primaryAction && !secondaryActions ? null : /* @__PURE__ */ React2.createElement(Footer, {
+        primaryAction,
+        secondaryActions
+      }, footer);
+      const content = sectioned ? wrapWithComponent(children, Section, {
+        titleHidden
+      }) : children;
+      const body = loading ? /* @__PURE__ */ React2.createElement(Box, {
+        padding: "400"
+      }, /* @__PURE__ */ React2.createElement(InlineStack, {
+        gap: "400",
+        align: "center",
+        blockAlign: "center"
+      }, /* @__PURE__ */ React2.createElement(Spinner, null))) : content;
+      const scrollContainerMarkup = noScroll ? /* @__PURE__ */ React2.createElement("div", {
+        className: styles$2.NoScrollBody
+      }, /* @__PURE__ */ React2.createElement(Box, {
+        width: "100%",
+        overflowX: "hidden",
+        overflowY: "hidden"
+      }, body)) : /* @__PURE__ */ React2.createElement(Scrollable, {
+        shadow: true,
+        className: styles$2.Body,
+        onScrolledToBottom
+      }, body);
+      const bodyMarkup = src ? /* @__PURE__ */ React2.createElement("iframe", {
+        name: iFrameName,
+        title: iframeTitle,
+        src,
+        className: styles$2.IFrame,
+        onLoad: handleIFrameLoad,
+        style: {
+          height: `${iframeHeight}px`
+        }
+      }) : scrollContainerMarkup;
+      dialog = /* @__PURE__ */ React2.createElement(Dialog, {
+        instant,
+        labelledBy: headerId,
+        onClose,
+        onEntered: handleEntered,
+        onExited: handleExited,
+        size: size2,
+        limitHeight,
+        setClosing
+      }, /* @__PURE__ */ React2.createElement(Header, {
+        titleHidden,
+        id: headerId,
+        closing,
+        onClose
+      }, title), bodyMarkup, footerMarkup);
+      backdrop = /* @__PURE__ */ React2.createElement(Backdrop, {
+        setClosing,
+        onClick: onClose
+      });
+    }
+    const animated = !instant;
+    const activatorMarkup = activator && !isRef(activator) ? /* @__PURE__ */ React2.createElement(Box, {
+      ref: activatorRef,
+      as: activatorWrapper
+    }, activator) : null;
+    return /* @__PURE__ */ React2.createElement(WithinContentContext.Provider, {
+      value: true
+    }, activatorMarkup, /* @__PURE__ */ React2.createElement(Portal, {
+      idPrefix: "modal"
+    }, /* @__PURE__ */ React2.createElement(TransitionGroup, {
+      appear: animated,
+      enter: animated,
+      exit: animated
+    }, dialog), backdrop));
+  };
+  function isRef(ref) {
+    return Object.prototype.hasOwnProperty.call(ref, "current");
+  }
+  Modal.Section = Section;
+  const VoiceChatBubble = () => {
+    const [isListening, setIsListening] = React2.useState(false);
+    const [showModal, setShowModal] = React2.useState(false);
+    const [errorMessage, setErrorMessage] = React2.useState("");
+    const [recognition, setRecognition] = React2.useState(null);
+    const [audioStream, setAudioStream] = React2.useState(null);
+    React2.useEffect(() => {
+      console.log("[DEBUG] Initializing voice chat bubble...");
+      if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
+        console.error("[ERROR] Speech recognition not supported in this browser");
+        return;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognitionInstance = new SpeechRecognition();
+      recognitionInstance.continuous = false;
+      recognitionInstance.interimResults = false;
+      recognitionInstance.lang = "en-US";
+      recognitionInstance.maxAlternatives = 1;
+      recognitionInstance.onstart = () => {
+        console.log("[DEBUG] Voice recognition started");
+        setIsListening(true);
+      };
+      recognitionInstance.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        console.log("[DEBUG] Voice recognized:", transcript);
+        processVoiceInput(transcript);
+      };
+      recognitionInstance.onerror = (event) => {
+        console.error("[DEBUG] Speech recognition error:", event.error);
+        handleRecognitionError(event.error);
+      };
+      recognitionInstance.onend = () => {
+        console.log("[DEBUG] Voice recognition ended");
+        setIsListening(false);
+      };
+      setRecognition(recognitionInstance);
+    }, []);
+    const startListening = React2.useCallback(async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true
+          }
+        });
+        setAudioStream(stream);
+        if (recognition) {
+          recognition.start();
+        }
+      } catch (error) {
+        console.error("[DEBUG] Microphone access error:", error);
+        handleRecognitionError("audio-capture");
+      }
+    }, [recognition]);
+    const stopListening = React2.useCallback(() => {
+      if (recognition) {
+        recognition.stop();
+      }
+      if (audioStream) {
+        audioStream.getTracks().forEach((track) => track.stop());
+        setAudioStream(null);
+      }
+    }, [recognition, audioStream]);
+    const handleRecognitionError = React2.useCallback((error) => {
+      console.error("[DEBUG] Recognition error:", error);
+      let message = "Sorry, I couldn't understand your voice. Please try again.";
+      switch (error) {
+        case "audio-capture":
+          message = "Please allow microphone access to use voice search.";
+          break;
+        case "not-allowed":
+          message = "Microphone access denied. Please enable it in your browser settings.";
+          break;
+        case "no-speech":
+          message = "No speech detected. Please try speaking again.";
+          break;
+        case "network":
+          message = "Network error. Please check your connection and try again.";
+          break;
+      }
+      setErrorMessage(message);
+      setShowModal(true);
+    }, []);
+    const processVoiceInput = React2.useCallback(async (transcript) => {
+      try {
+        console.log("[DEBUG] Processing voice input:", transcript);
+        const response = await fetch("/api/voice-search", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            voiceInput: transcript,
+            timestamp: Date.now()
+          })
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("[DEBUG] Voice search result:", result);
+        if (result.success && result.searchQuery) {
+          window.location.href = `/search?q=${encodeURIComponent(result.searchQuery)}`;
+        }
+      } catch (error) {
+        console.error("[DEBUG] Error processing voice input:", error);
+        setErrorMessage("Sorry, there was an error processing your voice input. Please try again.");
+        setShowModal(true);
+      }
+    }, []);
+    const handleBubbleClick = React2.useCallback(() => {
+      if (isListening) {
+        stopListening();
+      } else {
+        startListening();
+      }
+    }, [isListening, startListening, stopListening]);
+    const closeModal = React2.useCallback(() => {
+      setShowModal(false);
+      setErrorMessage("");
+    }, []);
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "div",
+        {
+          style: {
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            width: "60px",
+            height: "60px",
+            borderRadius: "50%",
+            background: isListening ? "linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)" : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+            cursor: "pointer",
+            zIndex: 1e4,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            transition: "all 0.3s ease",
+            border: "3px solid white",
+            animation: isListening ? "pulse 1s infinite" : "none"
+          },
+          onClick: handleBubbleClick,
+          onMouseEnter: (e) => {
+            e.target.style.transform = "scale(1.1)";
+            e.target.style.boxShadow = "0 6px 20px rgba(0,0,0,0.3)";
+          },
+          onMouseLeave: (e) => {
+            e.target.style.transform = "scale(1)";
+            e.target.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: {
+            fontSize: "24px",
+            color: "white",
+            userSelect: "none"
+          }, children: isListening ? "🔴" : "🎤" })
+        }
+      ),
+      showModal && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Modal,
+        {
+          open: showModal,
+          onClose: closeModal,
+          title: "Voice Product Search",
+          primaryAction: {
+            content: "Close",
+            onAction: closeModal
+          },
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Modal.Section, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(BlockStack, { gap: "400", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Banner, { status: "critical", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: errorMessage }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { textAlign: "center", fontSize: "40px", margin: "20px 0" }, children: "🎤" })
+          ] }) })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+          }
+        ` })
+    ] });
+  };
+  const initVoiceChatBubble = () => {
+    if (document.getElementById("voice-chat-bubble-root")) {
+      return;
+    }
+    const root = document.createElement("div");
+    root.id = "voice-chat-bubble-root";
+    document.body.appendChild(root);
+    const reactRoot = clientExports.createRoot(root);
+    reactRoot.render(/* @__PURE__ */ jsxRuntimeExports.jsx(VoiceChatBubble, {}));
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVoiceChatBubble);
+  } else {
+    initVoiceChatBubble();
+  }
+})(React, ReactDOM);
